@@ -1,0 +1,50 @@
+﻿<Window x:Class="Agrin.Windows.UI.Views.WindowLayouts.Asuda.BasketReceiverDataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Agrin.Windows.UI.Views.WindowLayouts.Asuda"
+        mc:Ignorable="d"
+        Title="آسودا" Width="470" Height="290" WindowStyle="None" WindowStartupLocation="CenterScreen" WindowState="Normal" Topmost="True" ResizeMode="NoResize" AllowsTransparency="True" ShowInTaskbar="False" Background="Transparent" VerticalContentAlignment="Bottom" Icon="/Agrin.Windows.UI;component/Resources/Images/AgrinLogo.png" DragEnter="Window_DragEnter" DragOver="Window_DragOver" Drop="Window_Drop" AllowDrop="True">
+    <Grid >
+        <Grid x:Name="positionGrid" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Margin" Value="0,0,0,0"/>
+                    <!--<Setter Property="Margin" Value="40,220,400,45"/>-->
+                    <Setter Property="Width" Value="0"/>
+                    <Setter Property="Height" Value="0"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsShowList}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <!--<ThicknessAnimation DecelerationRatio="1" Storyboard.TargetProperty="Margin" To="40,30,30,45" Duration="0:0:0.2"/>-->
+                                        <DoubleAnimation BeginTime="0" Storyboard.TargetProperty="Width" To="470" Duration="0:0:0.2" />
+                                        <DoubleAnimation BeginTime="0" Storyboard.TargetProperty="Height" To="290" Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <!--<ThicknessAnimation DecelerationRatio="1" Storyboard.TargetProperty="Margin" To="40,220,400,45" Duration="0:0:0.2"/>-->
+                                        <DoubleAnimation BeginTime="0" Storyboard.TargetProperty="Width" To="0" Duration="0:0:0.2" />
+                                        <DoubleAnimation BeginTime="0" Storyboard.TargetProperty="Height" To="0" Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                        <!--<DataTrigger Binding="{Binding IsShowList}" Value="False">
+                        <Setter Property="Width" Value="100"/>
+                        <Setter Property="Height" Value="100"/>
+                    </DataTrigger>-->
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Border Background="#f4f4f4" BorderBrush="#b7b7b7" BorderThickness="1"  CornerRadius="10">
+                <local:BasketReceiverDataControl/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

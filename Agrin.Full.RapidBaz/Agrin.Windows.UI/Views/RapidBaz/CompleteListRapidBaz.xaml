@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="Agrin.Windows.UI.Views.RapidBaz.CompleteListRapidBaz"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:Agrin.Windows.UI.ViewModels.RapidBaz"
+             xmlns:toolVM="clr-namespace:Agrin.ViewModels.Toolbox;assembly=RapidbazPlus.ViewModels"
+             xmlns:conv="clr-namespace:Agrin.ViewModels.Converters;assembly=RapidbazPlus.ViewModels"
+             xmlns:tool="clr-namespace:Agrin.Windows.UI.Views.Toolbox"
+             xmlns:busy="clr-namespace:Agrin.Windows.UI.Views.WindowLayouts"
+             xmlns:helper="clr-namespace:Agrin.Windows.UI.Helpers"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="700">
+    <UserControl.Resources>
+        <vm:CompleteListRapidBazViewModel x:Key="CompleteListRapidBazViewModel"/>
+        <conv:FileNameToIconConverter x:Key="FileNameToIconConverter"/>
+        <conv:DateTimeConverter x:Key="DateTimeConverterString" IsString="False" ShowTime="True"  IsTextMode="False" IsPersian="True"/>
+        <conv:DateTimeConverter x:Key="DateTimeConverter"/>
+        <conv:SizeToStringConverter IsEnglish="True" x:Key="SizeToStringConverter"/>
+        <conv:SizeToStringConverter IsEnglish="True" Digits="0"  x:Key="SizeToStringConverterSpeed"/>
+        <conv:StringToLanguageConverter x:Key="StringToLanguageConverter"/>
+        <conv:BytesToImageConverter x:Key="BytesToImageConverter"/>
+        <!--<toolVM:RapidbazToolbarViewModel x:Key="RapidbazToolbarViewModel" IsCompleteList="True"/>-->
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource CompleteListRapidBazViewModel}"/>
+    </UserControl.DataContext>
+
+    <busy:BusyMessageBox IsBusy="{Binding IsMessageBoxBusy}" Title="{Binding MessageBoxTitle}" Message="{Binding Message}" Command="{Binding DeleteOkCommand}">
+        <busy:BusyIndicator IsBusy="{Binding IsBusy}" Message="{Binding RapidTextStatus}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <tool:LinksToolbar AddCommand="{Binding AddCommand}" RefreshCommand="{Binding RefreshCommand}" DeleteCommand="{Binding DeleteCommand}" DownloadCommand="{Binding AddToListAndDownloadCommand}" Height="27" Margin="0,5,0,10"/>
+                <DataGrid helper:UserControlHelper.Name="MainDataGrid,Agrin.Windows.UI.Views.RapidBaz.CompleteListRapidBaz" FlowDirection="LeftToRight" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" RowDetailsVisibilityMode="Visible" ItemsSource="{Binding Items}"  SelectedItem="{Binding SelectedItem,UpdateSourceTrigger=PropertyChanged}" GridLinesVisibility="Vertical" EnableRowVirtualization="True" Grid.Row="1">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow" BasedOn="{StaticResource datagridRow}">
+                            <Setter Property="ContextMenu">
+                                <Setter.Value>
+                                    <ContextMenu FlowDirection="{DynamicResource RightToLeftStyle}">
+                                        <MenuItem Header="درج در لیست" Command="{Binding AddToListCommand,Source={StaticResource CompleteListRapidBazViewModel}}"/>
+                                        <MenuItem Header="درج در لیست و دانلود" Command="{Binding AddToListAndDownloadCommand,Source={StaticResource CompleteListRapidBazViewModel}}"/>
+                                        <!--<MenuItem Header="درج در صف اصلی" Command="{Binding AddToMainQueueCommand,Source={StaticResource CompleteListRapidBazViewModel}}"/>-->
+                                        <MenuItem Header="درج..." Command="{Binding AddLinkCommand,Source={StaticResource CompleteListRapidBazViewModel}}"/>
+                                        <MenuItem Header="حذف" Command="{Binding DeleteCommand,Source={StaticResource CompleteListRapidBazViewModel}}"/>
+                                        <Separator/>
+                                        <MenuItem Header="کپی آدرس لینک" Command="{Binding CopyLinkLocationCommand,Source={StaticResource CompleteListRapidBazViewModel}}"/>
+                                    </ContextMenu>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Resources>
+                        <Style TargetType="TextBlock" x:Key="textElementStyle">
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <Grid >
+                                <ProgressBar Style="{DynamicResource rapidBazProgressbarStyle}" Width="{Binding ActualWidth,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollContentPresenter}}}" HorizontalAlignment="Left" Maximum="100" Value="{Binding Progress}">
+
+                                </ProgressBar>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="نام فایل" IsReadOnly="True" SortMemberPath="Name">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Margin="5,0,0,0" FontSize="14px" VerticalAlignment="Center" Grid.Column="1" FontFamily="{DynamicResource EnglishFontFamilyStyle}" Text="{Binding Name}"/>
+                                        <Image VerticalAlignment="Center" Source="{Binding Name,Converter={StaticResource FileNameToIconConverter}}" Width="24" Height="24"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="دانلود" >
+                            <!--<DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="FlowDirection" Value="{DynamicResource RightToLeftStyle}" />
+                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>-->
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Command="{Binding AddToListAndDownloadOneCommand,Source={StaticResource CompleteListRapidBazViewModel}}" CommandParameter="{Binding}" Content="دانلود" Style="{DynamicResource busyButton}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="تاریخ درخواست" ElementStyle="{StaticResource textElementStyle}" Binding="{Binding Ts,Converter={StaticResource DateTimeConverterString}}">
+
+                        </DataGridTextColumn>
+                        <DataGridTextColumn ElementStyle="{StaticResource textElementStyle}" Header="سایز" Binding="{Binding Size,Converter={StaticResource SizeToStringConverter}}">
+
+                        </DataGridTextColumn>
+                        <DataGridTemplateColumn Header="سرور">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Image ToolTip="{Binding Cc}" Width="16" Height="11" Source="{Binding CountryFlag,Converter={StaticResource BytesToImageConverter}}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="آدرس" ElementStyle="{StaticResource textElementStyle}" Binding="{Binding Link}" >
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </busy:BusyIndicator>
+    </busy:BusyMessageBox>
+</UserControl>

@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Agrin.UI.Views.UserControls.NumbericUpDown"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="48" d:DesignWidth="300" FlowDirection="{DynamicResource RightToLeftStyle}" PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="UserControl_PreviewMouseLeftButtonUp">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="txtMain" Text="0" MinWidth="0" Style="{DynamicResource LargTextBoxStyle}" LostFocus="TextBox_LostFocus" PreviewKeyDown="TextBox_PreviewKeyDown" PreviewMouseWheel="txtMain_PreviewMouseWheel" />
+        <StackPanel Grid.Column="1">
+            <Button Style="{DynamicResource IconButtonStyle}" PreviewMouseLeftButtonDown="Button_MouseLeftButtonDown" BorderThickness="0,2,2,1" Padding="5" Height="24" Width="40" Content="{DynamicResource UPArrow_TemplateStyle}"/>
+            <Button Style="{DynamicResource IconButtonStyle}" PreviewMouseLeftButtonDown="Button_MouseLeftButtonDown_1" BorderThickness="0,1,2,2" Padding="5" Height="24" Width="40" Content="{DynamicResource DownArrow_TemplateStyle}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

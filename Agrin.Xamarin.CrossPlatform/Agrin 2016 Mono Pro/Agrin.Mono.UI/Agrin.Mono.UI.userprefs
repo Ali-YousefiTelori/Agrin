@@ -1,0 +1,24 @@
+﻿<Properties StartupItem="Agrin.Mono.UI\Agrin.Mono.UI.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="D:\BaseProjects\Agrin Download Manager\Agrin.Xamarin.CrossPlatform\Agrin 2016 Mono Pro\Agrin.Mono.UI\Agrin.Mono.UI\Views\Lists\Links.cs" line="258" column="1" />
+      <Breakpoint file="D:\BaseProjects\Agrin Download Manager\Agrin.Xamarin.CrossPlatform\Agrin 2016 Mono Pro\Agrin.Mono.UI\Agrin.Mono.UI\gtk-gui\MainWindow.cs" line="84" column="1" />
+      <Breakpoint file="C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets" line="3813" column="5" />
+      <Breakpoint file="D:\BaseProjects\Agrin Download Manager\Agrin.Xamarin.CrossPlatform\Agrin 2016 Mono Pro\Agrin.Mono.UI\Agrin.Mono.UI\Views\Toolbox\AgrinToolbar.cs" line="92" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Agrin.Mono.UI\Properties\AssemblyInfo.cs">
+    <Files>
+      <File FileName="Agrin.Mono.UI\Views\About\ReportWindow.cs" Line="1" Column="1" />
+      <File FileName="Agrin.Mono.UI\MainWindow.cs" Line="1" Column="1" />
+      <File FileName="d:\BaseProjects\Agrin Download Manager\Agrin.Xamarin.CrossPlatform\Agrin 2016 Mono Pro\Agrin.Mono.UI\Agrin.Mono.UI\Views\Toolbox\AgrinToolbar.cs" Line="1" Column="1" />
+      <File FileName="Agrin.Mono.UI\Views\About\AboutDialog.cs" Line="1" Column="1" />
+      <File FileName="Agrin.Mono.UI\Helpers\BindingHelper.cs" Line="1" Column="1" />
+      <File FileName="Agrin.Mono.UI\Program.cs" Line="1" Column="1" />
+      <File FileName="d:\BaseProjects\Agrin Download Manager\Agrin.Xamarin.CrossPlatform\Agrin 2016 Mono Pro\Agrin.Mono.UI\Agrin.Mono.UI\Views\Lists\LinksList.cs" Line="1" Column="1" />
+      <File FileName="Agrin.Mono.UI\Properties\AssemblyInfo.cs" Line="7" Column="43" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+</Properties>

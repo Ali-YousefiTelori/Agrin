@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+NoticesToolBox/linearLayoutReverse"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+        <Button
+            android:text="SendMessage_Language"
+            android:background="@drawable/normalbuttonshape"
+            android:id="@+NoticesToolBox/btnSendMessage"
+            style="@style/btn_stand" />
+        <Button
+            android:text="Refresh_Language"
+            android:background="@drawable/normalbuttonshape"
+            android:id="@+NoticesToolBox/btnRefresh"
+            android:layout_marginLeft="5dp"
+            style="@style/btn_stand" />
+    </LinearLayout>
+</LinearLayout>

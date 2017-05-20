@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="10dip">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+LinkInfoPropertiesGeneral/LinearLayoutRightToLeft">
+            <TextView
+                android:text="SaveLinkPathTitle_Language"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+LinkInfoPropertiesGeneral/txtSaveLinkPathTitle" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+LinkInfoPropertiesGeneral/txt_SaveLinkPath"
+                    android:layout_weight="1" />
+                <Button
+                    android:text="Browse_Language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+LinkInfoPropertiesGeneral/btn_browseSaveLinkPath" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+LinkInfoPropertiesGeneral/LinearLayoutReverce1">
+                <Button
+                    android:text="SaveSetting_Language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:id="@+LinkInfoPropertiesGeneral/btnSaveSetting" />
+                <Button
+                    android:text="Cancel_Language"
+                    android:layout_width="120dp"
+                    android:layout_height="fill_parent"
+                    android:id="@+LinkInfoPropertiesGeneral/btnCancel" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

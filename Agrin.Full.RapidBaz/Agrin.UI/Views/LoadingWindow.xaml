@@ -1,0 +1,11 @@
+﻿<Window x:Class="Agrin.UI.Views.LoadingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Agrin Download Manager" Height="265" Width="265" ShowInTaskbar="False" WindowStyle="None" FontFamily="{DynamicResource EnglishFontFamilyStyle}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Border Height="265" Width="265" BorderThickness="2" BorderBrush="#FF00A9EC" Background="#FFE2E2E2">
+        <Grid>
+            <Image Width="240" Height="250" VerticalAlignment="Center" HorizontalAlignment="Center" Source="/Agrin.UI;component/Resources/Image/AgrinLogo.png"/>
+            <TextBlock Text="Loading..." VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,30" Foreground="#FF6A6A6A"/>
+        </Grid>
+    </Border>
+</Window>

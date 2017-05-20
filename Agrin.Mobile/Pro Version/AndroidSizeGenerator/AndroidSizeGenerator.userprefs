@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="AndroidSizeGenerator\AndroidSizeGenerator.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.AVD_for_5_4_FWVGA" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AndroidSizeGenerator\MainActivity.cs">
+    <Files>
+      <File FileName="AndroidSizeGenerator\MainActivity.cs" Line="65" Column="26" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="D:\BaseProjects\Agrin Download Manager\Agrin.Mobile\Pro Version\AndroidSizeGenerator\AndroidSizeGenerator\MainActivity.cs" line="34" column="1" />
+      <Breakpoint file="D:\BaseProjects\Agrin Download Manager\Agrin.Mobile\Pro Version\AndroidSizeGenerator\AndroidSizeGenerator\MainActivity.cs" line="24" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

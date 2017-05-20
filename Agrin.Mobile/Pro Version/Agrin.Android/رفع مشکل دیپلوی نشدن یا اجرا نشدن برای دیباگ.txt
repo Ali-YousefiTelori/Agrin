@@ -1,0 +1,8 @@
+﻿توی کامند پرومت بزن:
+
+adb uninstall Agrin.Android
+adb uninstall Agrin.MonoAndroid.UI
+adb uninstall Agrin.Android2
+adb uninstall QuranPod.Android
+پوشه ی adb
+j:\Program Files\Android\android-sdk\platform-tools

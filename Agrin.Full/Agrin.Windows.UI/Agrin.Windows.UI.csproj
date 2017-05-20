@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{87266981-07E9-4D29-B07C-D186D9DC4122}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Agrin.Windows.UI</RootNamespace>
+    <AssemblyName>Agrin.Windows.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Project1.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MobileApp|AnyCPU'">
+    <OutputPath>bin\MobileApp\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'XamarinApp|AnyCPU'">
+    <OutputPath>bin\XamarinApp\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BasicFormatsForCore, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FiddlerCore.4.6.2.0\lib\net40\BasicFormatsForCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BCMakeCert, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FiddlerCore.4.6.2.0\lib\net40\BCMakeCert.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CertMaker, Version=4.5.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FiddlerCore.4.6.2.0\lib\net40\CertMaker.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FiddlerCore4, Version=4.6.2.0, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FiddlerCore.4.6.2.0\lib\net40\FiddlerCore4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Helpers\UserControlNameHelper.cs" />
+    <Compile Include="ViewModels\Lists\GroupsViewModel.cs" />
+    <Compile Include="ViewModels\Lists\LinksViewModel.cs" />
+    <Compile Include="ViewModels\Pages\PagesManagerViewModel.cs" />
+    <Compile Include="ViewModels\Popups\CompleteLinksBalloonViewModel.cs" />
+    <Compile Include="ViewModels\Settings\ApplicationSettingPageViewModel.cs" />
+    <Compile Include="ViewModels\Toolbox\TabMenuControlViewModel.cs" />
+    <Compile Include="ViewModels\Toolbox\TasksToolbarViewModel.cs" />
+    <Compile Include="Views\Controls\AutoCompleteTextBox.xaml.cs">
+      <DependentUpon>AutoCompleteTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ClippingBorder.cs" />
+    <Compile Include="Views\Controls\NumbericUpDown.xaml.cs">
+      <DependentUpon>NumbericUpDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ProgressIconRender.xaml.cs">
+      <DependentUpon>ProgressIconRender.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\test.xaml.cs">
+      <DependentUpon>test.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Group\AddGroup.xaml.cs">
+      <DependentUpon>AddGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Help\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Help\FeedBack.xaml.cs">
+      <DependentUpon>FeedBack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Link\AddLinks.xaml.cs">
+      <DependentUpon>AddLinks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lists\Groups.xaml.cs">
+      <DependentUpon>Groups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Popups\CompleteLinksBalloon.xaml.cs">
+      <DependentUpon>CompleteLinksBalloon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\ApplicationSettingPage.xaml.cs">
+      <DependentUpon>ApplicationSettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SpeedSetting.xaml.cs">
+      <DependentUpon>SpeedSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\AddTask.xaml.cs">
+      <DependentUpon>AddTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\TasksList.xaml.cs">
+      <DependentUpon>TasksList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Toolbox\LinksToolbar.xaml.cs">
+      <DependentUpon>LinksToolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lists\Links.xaml.cs">
+      <DependentUpon>Links.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Managers\PagesManager.xaml.cs">
+      <DependentUpon>PagesManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Toolbox\StatusBar.xaml.cs">
+      <DependentUpon>StatusBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Toolbox\TabMenuControl.xaml.cs">
+      <DependentUpon>TabMenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Toolbox\TasksToolbar.xaml.cs">
+      <DependentUpon>TasksToolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowLayouts\Asuda\AsudaPopup.xaml.cs">
+      <DependentUpon>AsudaPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowLayouts\Asuda\BasketReceiverControl.xaml.cs">
+      <DependentUpon>BasketReceiverControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowLayouts\Asuda\BasketReceiverDataControl.xaml.cs">
+      <DependentUpon>BasketReceiverDataControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowLayouts\Asuda\BasketReceiverDataWindow.xaml.cs">
+      <DependentUpon>BasketReceiverDataWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowLayouts\Asuda\BasketReceiverPinnedWindow.xaml.cs">
+      <DependentUpon>BasketReceiverPinnedWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowLayouts\Asuda\BasketReceiverSettingPage.xaml.cs">
+      <DependentUpon>BasketReceiverSettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowLayouts\Asuda\BasketReceiverWindow.xaml.cs">
+      <DependentUpon>BasketReceiverWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowLayouts\BusyIndicator.xaml.cs">
+      <DependentUpon>BusyIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowLayouts\BusyMessageBox.xaml.cs">
+      <DependentUpon>BusyMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowLayouts\LoadingWindow.xaml.cs">
+      <DependentUpon>LoadingWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AppResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="MergedResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <Page Include="Resources\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Themes\AsudaDataGridTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Themes\Brushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Themes\ColorsResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Themes\ControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Themes\LanguageAndFonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Themes\VectorStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Themes\WpfDataGridTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\AutoCompleteTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\NumbericUpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ProgressIconRender.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Group\AddGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Help\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Help\FeedBack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Link\AddLinks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Lists\Groups.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Popups\CompleteLinksBalloon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\ApplicationSettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\SpeedSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\AddTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\TasksList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Toolbox\LinksToolbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Lists\Links.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Managers\PagesManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Toolbox\StatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Toolbox\TabMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Toolbox\TasksToolbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowLayouts\Asuda\AsudaPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowLayouts\Asuda\BasketReceiverControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowLayouts\Asuda\BasketReceiverDataControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowLayouts\Asuda\BasketReceiverDataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowLayouts\Asuda\BasketReceiverPinnedWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowLayouts\Asuda\BasketReceiverSettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowLayouts\Asuda\BasketReceiverWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowLayouts\BusyIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowLayouts\BusyMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowLayouts\LoadingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Fonts\aliyekan.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Project1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\AgrinLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\Link\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agrin.About\Agrin.About.csproj">
+      <Project>{46b3dae1-9b04-42b7-90ae-5ea045f81454}</Project>
+      <Name>Agrin.About</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.BaseViewModels\Agrin.BaseViewModels.csproj">
+      <Project>{0e4c822f-2540-4dbf-a956-3e655728e5bc}</Project>
+      <Name>Agrin.BaseViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Data\Agrin.Data.csproj">
+      <Project>{74f61d18-08e4-4509-8256-b5ce6442dc12}</Project>
+      <Name>Agrin.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Download\Agrin.Download.csproj">
+      <Project>{93d045fb-5a87-4f07-94ff-9754531c2549}</Project>
+      <Name>Agrin.Download</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Drawing\Agrin.Drawing.csproj">
+      <Project>{63341cb2-1d87-4554-82c9-d83b3d341380}</Project>
+      <Name>Agrin.Drawing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Helper\Agrin.Helper.csproj">
+      <Project>{93676062-4e74-4edb-af8f-92a4edcfbcab}</Project>
+      <Name>Agrin.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj">
+      <Project>{ee7fd998-1cc1-47c9-af1b-546675210e5b}</Project>
+      <Name>Agrin.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.LinkExtractor\Agrin.LinkExtractor.csproj">
+      <Project>{17d30aaa-2bad-48ee-adca-49d87a8860dc}</Project>
+      <Name>Agrin.LinkExtractor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Log\Agrin.Log.csproj">
+      <Project>{4c518ec4-1897-47b7-9433-05db59d9cce5}</Project>
+      <Name>Agrin.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Network\Agrin.Network.csproj">
+      <Project>{f3489541-3ad4-43c8-9426-da93ad113af7}</Project>
+      <Name>Agrin.Network</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.NotifyIcon\Agrin.NotifyIcon.csproj">
+      <Project>{7ac63864-7638-41c4-969c-d3197ef2bed9}</Project>
+      <Name>Agrin.NotifyIcon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.System\Agrin.OS.csproj">
+      <Project>{248a855c-9207-48ab-b447-b74086d5240c}</Project>
+      <Name>Agrin.OS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.ViewModels\Agrin.ViewModels.csproj">
+      <Project>{6f60aac1-0961-4f84-bd9f-0e41348484a9}</Project>
+      <Name>Agrin.ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\bevelEffectForLogin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\AgrinLogo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

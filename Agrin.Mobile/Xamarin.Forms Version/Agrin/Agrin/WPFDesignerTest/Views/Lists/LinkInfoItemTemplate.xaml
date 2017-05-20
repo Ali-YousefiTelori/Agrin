@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="WPFDesignerTest.Views.Lists.LinkInfoItemTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFDesignerTest.Views.Lists"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="800" Background="#e1e1e1">
+    <Grid Height="65" Width="690">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition  Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Background="#331A7F96" CornerRadius="5" Grid.ColumnSpan="2">
+
+        </Border>
+        <Border Background="#1a7f96" CornerRadius="5" Width="300" HorizontalAlignment="Left" Grid.ColumnSpan="2">
+
+        </Border>
+
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Image Width="32" Height="32" VerticalAlignment="Top"/>
+            <TextBlock Text="موسیقی" Grid.Row="1" FontSize="10"/>
+        </Grid>
+        <Border Margin="5" Grid.Column="1" CornerRadius="5" Background="#e1e1e1">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="3D lynda.com tutorial(part1-2)(www.p30skill.ir).mp4" Grid.ColumnSpan="3" FontSize="14"/>
+                <TextBlock FontSize="10" Foreground="#1a7f96" Text="1 گیگابایت" Grid.Row="1"/>
+                <TextBlock FontSize="10" Foreground="#1a7f96" Text="500 مگابایت" Grid.Row="1" HorizontalAlignment="Center" Grid.Column="1"/>
+                <TextBlock FontSize="10" Foreground="#1a7f96" Text="در حال دانلود..." Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right"/>
+                <TextBlock FontSize="10" Foreground="#1a7f96" Text="1 گیگابایت" Grid.Row="2"/>
+                <TextBlock FontSize="10" Foreground="#1a7f96" Text="500 مگابایت" Grid.Row="2" HorizontalAlignment="Center" Grid.Column="1"/>
+                <TextBlock FontSize="10" Foreground="#1a7f96" Text="در حال دانلود..." Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

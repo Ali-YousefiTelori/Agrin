@@ -1,0 +1,140 @@
+﻿<UserControl x:Class="Agrin.UI.Views.Lists.RapidBazGetList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:conv="clr-namespace:Agrin.ViewModels.Converters;assembly=Agrin.ViewModels"
+             xmlns:vm="clr-namespace:Agrin.UI.ViewModels.Lists"
+             xmlns:ctrl="clr-namespace:Agrin.UI.Views.UserControls"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="1100" x:Name="mainControl" FlowDirection="{DynamicResource RightToLeftStyle}">
+    <UserControl.Resources>
+        <conv:FileNameToIconConverter x:Key="FileNameToIconConverter"/>
+        <conv:SizeToStringConverter IsEnglish="True" x:Key="SizeToStringConverter"/>
+        <conv:StringToLanguageConverter x:Key="StringToLanguageConverter"/>
+        <conv:DateTimeConverter x:Key="DateTimeConverterString" IsString="True"/>
+        <conv:DateTimeConverter x:Key="DateTimeConverter"/>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <conv:BoolToVisibilityConverter IsInverse="True"  x:Key="BoolToVisibilityInverseConverter"/>
+        <vm:RapidBazGetListViewModel x:Key="RapidBazGetListViewModel"/>
+        
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource RapidBazGetListViewModel}"/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="1" RowStyle="{DynamicResource DataGridRowStyle2}" Visibility="{Binding IsShowComplete,Converter={StaticResource BoolToVisibilityConverter}}" FlowDirection="LeftToRight" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem,UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="نام فایل" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Margin="5,0,0,0" Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock FontSize="20px"  Text="{Binding Name}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="Segoe UI"  Opacity="0.6" FontSize="12px" Text="Type: "/>
+                                        <TextBlock FontFamily="Segoe UI"  Opacity="0.6" FontSize="12px" Text="{Binding FileType,Mode=OneWay}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <Image VerticalAlignment="Top" Source="{Binding Name,Converter={StaticResource FileNameToIconConverter}}" Width="32" Height="32"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="حجم" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{DynamicResource LargTextBlockStyle}" Margin="5,0,5,0" VerticalAlignment="Center" Height="auto" Text="{Binding Size,Converter={StaticResource SizeToStringConverter}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="دانلود" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Button Foreground="{DynamicResource WhiteForeground_ApplicationColors}" Content="دانلود فایل" Command="{Binding DownloadCommand,Source={StaticResource RapidBazGetListViewModel}}" FontSize="{DynamicResource NormalFontSizeStyle}" CommandParameter="{Binding}" Width="auto" Margin="5" Padding="20,10,20,10" VerticalAlignment="Center" HorizontalAlignment="Center" Height="auto" Cursor="Hand"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="آدرس" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{DynamicResource LargTextBlockStyle}" Margin="5,0,5,0" VerticalAlignment="Center" Height="auto"  Text="{Binding Link}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="1" RowDetailsVisibilityMode="Visible" RowStyle="{DynamicResource DataGridRowStyle2}" Visibility="{Binding IsShowComplete,Converter={StaticResource BoolToVisibilityInverseConverter}}" FlowDirection="LeftToRight" ItemsSource="{Binding QueueItems}" SelectedItem="{Binding SelectedItem,UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="نام فایل" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Margin="5,0,0,0" Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock FontSize="20px"  Text="{Binding Name}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="Segoe UI"  Opacity="0.6" FontSize="12px" Text="Type: "/>
+                                        <TextBlock FontFamily="Segoe UI"  Opacity="0.6" FontSize="12px" Text="{Binding FileType,Mode=OneWay}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <Image VerticalAlignment="Top" Source="{Binding Name,Converter={StaticResource FileNameToIconConverter}}" Width="32" Height="32"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="حجم" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{DynamicResource LargTextBlockStyle}" Margin="5,0,5,0" VerticalAlignment="Center" Height="auto" Text="{Binding Size,Converter={StaticResource SizeToStringConverter}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="وضعیت">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{DynamicResource NormalPersianTextBlockStyle}" Margin="5,0,5,0" VerticalAlignment="Center" Height="auto"  Text="{Binding StatusString}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="آدرس" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{DynamicResource NormalPersianTextBlockStyle}" Margin="5,0,5,0" VerticalAlignment="Center" Height="auto"  Text="{Binding Url}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <ProgressBar Height="6" VerticalAlignment="Bottom" Maximum="100" Value="{Binding Progress}">
+
+                    </ProgressBar>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <Grid Grid.Row="1" Background="#B2383838" Visibility="{Binding  IsBusy,Converter={StaticResource BoolToVisibilityConverter}}">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource LargTextBlockStyle}" Text="{Binding RapidTextStatus}"/>
+        </Grid>
+        <Grid>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="3">
+                <ctrl:DownloadToolbarButton Command="{Binding RefreshCommand}" Background="{DynamicResource DarkBlue_ApplicationColors}" IconTemplate="{DynamicResource Refresh_TemplateStyle}" Margin="5,0,0,0" Height="30"/>
+                <ctrl:DownloadToolbarButton Command="{Binding CompleteListCommand}" Background="{DynamicResource DarkBlue_ApplicationColors}" IconTemplate="{DynamicResource CheckList_TemplateStyle}" Margin="5,0,0,0" Height="30"/>
+                <ctrl:DownloadToolbarButton Command="{Binding QueueListCommand}" Background="{DynamicResource DarkBlue_ApplicationColors}" IconTemplate="{DynamicResource Time_TemplateStyle}" Margin="5,0,0,0" Height="30"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

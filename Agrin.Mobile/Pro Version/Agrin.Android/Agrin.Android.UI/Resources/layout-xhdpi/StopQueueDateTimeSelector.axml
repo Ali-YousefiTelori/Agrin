@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:id="@+StopQueueDateTimeSelector/mainLayout"
+    android:background="@color/background"
+    android:padding="5dp">
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+StopQueueDateTimeSelector/radiosLayout"
+        android:visibility="visible">
+        <RadioButton
+            android:text="StopLinkInTask_Language"
+            style="@style/RadioButton"
+            android:id="@+StopQueueDateTimeSelector/rdoStopLink"
+            android:checked="false" />
+        <RadioButton
+            android:text="StopTaskInTask_Language"
+            style="@style/RadioButton"
+            android:id="@+StopQueueDateTimeSelector/rdoStopTask"
+            android:checked="true"
+            android:layout_marginTop="5dp" />
+    </RadioGroup>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+StopQueueDateTimeSelector/settingLayout"
+        android:enabled="false"
+        android:visibility="gone"
+        android:layout_marginTop="5dp">
+        <CheckBox
+            android:text="WiFiOffWhenEnd_Language"
+            style="@style/CheckBox"
+            android:id="@+StopQueueDateTimeSelector/chkWiFiOffAfterComplete"
+            android:checked="false"
+            android:layout_marginTop="5dp" />
+        <CheckBox
+            android:text="DataOffWhenEnd_Language"
+            style="@style/CheckBox"
+            android:id="@+StopQueueDateTimeSelector/chkDataOffAfterComplete"
+            android:checked="false"
+            android:layout_marginTop="5dp" />
+    <!--<RadioButton
+                android:text="Nothing_Language"
+                style="@style/RadioButton"
+                android:id="@+StopQueueDateTimeSelector/rdoNothing"
+                android:checked="true"
+                android:layout_marginTop="5dp" />-->
+    <!--</RadioGroup>-->
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+StopQueueDateTimeSelector/enableLayout"
+        android:visibility="visible">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+StopQueueDateTimeSelector/rightToLeftlayout1">
+            <TextView
+                android:text="TimeTitle_Language"
+                style="@style/TextView"
+                android:id="@+StopQueueDateTimeSelector/txtTime" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="@dimen/NumericUpDownWidth"
+                android:layout_height="match_parent">
+                <include
+                    android:id="@+StopQueueDateTimeSelector/hourNumeric"
+                    layout="@layout/CustomNumericUpDown" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="@dimen/NumericUpDownWidth"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text=":"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/NumericUpDownTextHeight"
+                    android:background="@color/NumericUpDownTextSelectedBackground"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/NumericUpDownTextSelectedForeground"
+                    android:gravity="center_vertical" />
+                <include
+                    layout="@layout/CustomNumericUpDown"
+                    android:id="@+StopQueueDateTimeSelector/minuteNumeric" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+StopQueueDateTimeSelector/rightToLeftlayout2">
+            <TextView
+                android:id="@+StopQueueDateTimeSelector/txtDate"
+                android:text="DateTitle_Language"
+                style="@style/TextView" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+StopQueueDateTimeSelector/timeLayout"
+            android:layout_gravity="center_horizontal">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="100dp"
+                android:layout_height="match_parent">
+                <include
+                    layout="@layout/CustomNumericUpDown"
+                    android:id="@+StopQueueDateTimeSelector/yearNumeric" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="@dimen/NumericUpDownWidth"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="/"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/NumericUpDownTextHeight"
+                    android:background="@color/NumericUpDownTextSelectedBackground"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/NumericUpDownTextSelectedForeground"
+                    android:gravity="center_vertical" />
+                <include
+                    layout="@layout/CustomNumericUpDown"
+                    android:id="@+StopQueueDateTimeSelector/monthNumeric" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="@dimen/NumericUpDownWidth"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="/"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/NumericUpDownTextHeight"
+                    android:background="@color/NumericUpDownTextSelectedBackground"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/NumericUpDownTextSelectedForeground"
+                    android:gravity="center_vertical" />
+                <include
+                    layout="@layout/CustomNumericUpDown"
+                    android:id="@+StopQueueDateTimeSelector/dayNumeric" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <ToggleButton
+            android:text="Setting_Language"
+            android:textOff="Setting_Language"
+            android:textOn="Setting_Language"
+            android:id="@+StopQueueDateTimeSelector/btnSetting"
+            style="@style/ToggleButton" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+StopQueueDateTimeSelector/LinearLayoutReverce2"
+        android:layout_marginTop="10dp">
+        <Button
+            android:text="Add_Language"
+            android:id="@+StopQueueDateTimeSelector/btnAdd"
+            android:layout_marginRight="5dp"
+            style="@style/btn_stand" />
+        <Button
+            android:text="Cancel_Language"
+            android:layout_height="fill_parent"
+            android:id="@+StopQueueDateTimeSelector/btnCancel"
+            android:layout_marginLeft="5dp"
+            style="@style/btn_stand"
+            android:background="@drawable/cancelbuttonshape" />
+    </LinearLayout>
+</LinearLayout>

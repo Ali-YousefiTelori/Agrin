@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Agrin.UI.Views.UserControls.DateTime.TimePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ctrl="clr-namespace:Agrin.UI.Views.UserControls"
+             mc:Ignorable="d"  Width="200" Height="48"
+             d:DesignHeight="48">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ctrl:NumbericUpDown x:Name="numHour" Minimum="0" Maximum="23" />
+        <TextBlock Style="{DynamicResource LargTextBlockStyle}" Text=" : " Grid.Column="1" Height="48"/>
+        <ctrl:NumbericUpDown SumNumbricUpDown="{Binding numHour,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="59" Grid.Column="2"/>
+    </Grid>
+</UserControl>

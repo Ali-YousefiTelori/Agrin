@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="Agrin.UI.Views.Downloads.LinkInfoDownloadDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:converters="clr-namespace:Agrin.ViewModels.Converters;assembly=Agrin.ViewModels"
+             xmlns:vm="clr-namespace:Agrin.UI.ViewModels.Downloads"
+             xmlns:ctrl="clr-namespace:Agrin.UI.Views.UserControls"
+             xmlns:download="clr-namespace:Agrin.UI.Views.Downloads"
+             d:DesignHeight="400" d:DesignWidth="700"  x:Name="mainControl">
+    <UserControl.Resources>
+        <converters:FileNameToIconConverter x:Key="FileNameToIconConverter"/>
+        <converters:SizeToStringConverter x:Key="SizeToStringConverter"/>
+        <converters:TimeRemainingConverter x:Key="TimeRemainingConverter"/>
+        <converters:StringToLanguageConverter x:Key="StringToLanguageConverter"/>
+        <vm:LinkInfoDownloadDetailViewModel x:Key="LinkInfoDownloadDetailViewModel"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource LinkInfoDownloadDetailViewModel}"/>
+    </UserControl.DataContext>
+
+    <UserControl.Template>
+        <ControlTemplate>
+            <Border BorderThickness="1" BorderBrush="{DynamicResource Border_ApplicationColors}" Background="{DynamicResource DarkBlue_ApplicationColors}">
+                <Grid Margin="5" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="32" Height="32" Source="{Binding CurrentLinkInfo.PathInfo.FileName,Converter={StaticResource FileNameToIconConverter}}"/>
+                        <TextBlock  Foreground="{DynamicResource WhiteForeground_ApplicationColors}" VerticalAlignment="Center" Text="{Binding CurrentLinkInfo.PathInfo.Address}" Margin="5,0,0,0"/>
+                    </StackPanel>
+                    <Grid Grid.Row="1" VerticalAlignment="Top" FlowDirection="RightToLeft">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Style="{DynamicResource WhiteNormalPersianTextBlockStyle}" Text="وضعیت:"/>
+                        <TextBlock Style="{DynamicResource GreenNormalPersianTextBlockStyle}" Text="{Binding CurrentLinkInfo.DownloadingProperty.State,Converter={StaticResource StringToLanguageConverter}}" Grid.Column="1" Margin="5,0,0,0"/>
+                        <TextBlock Style="{DynamicResource WhiteNormalPersianTextBlockStyle}" Text="حجم:" Grid.Column="2"/>
+                        <TextBlock Style="{DynamicResource GreenNormalPersianTextBlockStyle}" Text="{Binding CurrentLinkInfo.DownloadingProperty.Size,Converter={StaticResource SizeToStringConverter}}" Grid.Column="3" Margin="5,0,0,0"/>
+                        <TextBlock Style="{DynamicResource WhiteNormalPersianTextBlockStyle}" Text="قابلیت توقف:" Grid.Column="4"/>
+                        <TextBlock Style="{DynamicResource GreenNormalPersianTextBlockStyle}" Text="{Binding CurrentLinkInfo.DownloadingProperty.ResumeCapability,Converter={StaticResource StringToLanguageConverter}}" Grid.Column="5" Margin="5,0,0,0"/>
+                        <TextBlock Style="{DynamicResource WhiteNormalPersianTextBlockStyle}" Text="دریافت شده:" Grid.Row="1"/>
+                        <TextBlock Style="{DynamicResource GreenNormalPersianTextBlockStyle}" Text="{Binding CurrentLinkInfo.DownloadingProperty.DownloadedSize,Converter={StaticResource SizeToStringConverter}}" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0"/>
+                        <TextBlock Style="{DynamicResource WhiteNormalPersianTextBlockStyle}" Text="زمان مانده:" Grid.Row="1" Grid.Column="2"/>
+                        <TextBlock Style="{DynamicResource GreenNormalPersianTextBlockStyle}" Text="{Binding CurrentLinkInfo.DownloadingProperty.TimeRemaining,Converter={StaticResource TimeRemainingConverter}}" Grid.Row="1" Grid.Column="3" Margin="5,0,0,0"/>
+
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <ctrl:ChartProgressbar AddPointValue="{Binding CurrentLinkInfo.DownloadingProperty.SpeedByteDownloaded,UpdateSourceTrigger=PropertyChanged}" ListPointValues="{Binding CurrentLinkInfo.DownloadingProperty.ListSpeedByteDownloaded,UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0" Height="100" Value="{Binding CurrentLinkInfo.DownloadingProperty.DownloadedSize,UpdateSourceTrigger=PropertyChanged}" MaximumProgressbar="{Binding CurrentLinkInfo.DownloadingProperty.Size,UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                    <Border Grid.Row="3" Margin="0,10,0,0" Background="{DynamicResource GlowBackground_ApplicationColors}" BorderBrush="{DynamicResource Border_ApplicationColors}" BorderThickness="1">
+                        <Grid x:Name="gridA">
+                            <Grid.Style>
+                                <Style TargetType="{x:Type Grid}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsShowList,ElementName=mainControl}" Value="True">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <Storyboard>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <ScrollViewer  Focusable="false" VerticalScrollBarVisibility="Auto">
+                                <WrapPanel Loaded="WrapPanel_Loaded" Margin="10"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                                </WrapPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </UserControl.Template>
+</UserControl>

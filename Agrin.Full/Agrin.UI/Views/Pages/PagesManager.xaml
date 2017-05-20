@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Agrin.UI.Views.Pages.PagesManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             xmlns:buttons="clr-namespace:Agrin.UI.Views.UserControls"
+             xmlns:vm="clr-namespace:Agrin.UI.ViewModels.Pages"
+             d:DesignHeight="400" d:DesignWidth="700" Background="{DynamicResource Blue_ApplicationColors}">
+    <UserControl.Resources>
+        <vm:PagesManagerViewModel x:Key="PagesManagerViewModel"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource PagesManagerViewModel}"/>
+    </UserControl.DataContext>
+    <Grid ClipToBounds="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Border Background="{DynamicResource DarkBlue_ApplicationColors}" BorderBrush="{DynamicResource Border_ApplicationColors}" BorderThickness="1">
+            <Grid>
+                <ContentControl x:Name="currentControlCollapsed" Content="{Binding CurrentControlCollapsed}" Padding="0" Opacity="0" Visibility="Collapsed"/>
+                <ContentControl x:Name="currentControl" Content="{Binding CurrentControl}" Padding="0"/>
+            </Grid>
+        </Border>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" Margin="0,5,0,5" HorizontalAlignment="Left">
+            <buttons:DownloadToolbarButton Command="{Binding BackCommand}"  Background="{DynamicResource Blue_ApplicationColors}" IconTemplate="{DynamicResource Bottom_TemplateStyle}" Margin="2,0,0,0" Height="30" RenderTransformOrigin="0.5,0.5">
+                <buttons:DownloadToolbarButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </buttons:DownloadToolbarButton.RenderTransform>
+            </buttons:DownloadToolbarButton>
+        </StackPanel>
+    </Grid>
+</UserControl>

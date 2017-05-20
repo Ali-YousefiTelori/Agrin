@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <Button
+                android:text="ServerDownloads_Language"
+                android:layout_column="0"
+                android:id="@+VIPToolbar/btn_Downloads"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp" />
+            <Button
+                android:text="BuyStorage_Language"
+                android:id="@+VIPToolbar/btn_BuyStorage"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp" />
+            <Button
+                android:text="UserPermission_Language"
+                android:id="@+VIPToolbar/btn_UserPermission"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp" />
+            <Button
+                android:text="RegisterUser_Language"
+                android:id="@+VIPToolbar/btn_Register"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp" />
+            <Button
+                android:text="LoginUser_Language"
+                android:id="@+VIPToolbar/btn_Login"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp" />
+            <Button
+                android:text="LogoutUser_Language"
+                android:id="@+VIPToolbar/btn_Logout"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+VIPToolbar/ReverceLinearLayout1">
+                <TextView
+                    android:text="UserNameTitle_Language"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+VIPToolbar/txtUserNameTitle" />
+                <TextView
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+VIPToolbar/txtUserName"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_margin="10dp"
+                android:id="@+VIPToolbar/ReverceLinearLayout2">
+                <TextView
+                    android:text="SizeTitle_Language"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+VIPToolbar/txtSizeTitle" />
+                <TextView
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+VIPToolbar/txtSize"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

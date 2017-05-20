@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!-- disabled state -->
+  <item android:state_enabled="false">
+    <shape>
+      <solid android:color="#e1e1e1" />
+    </shape>
+  </item>
+
+  <!-- enabled and pressed state -->
+  <item android:state_enabled="true" android:state_pressed="true">
+    <shape>
+      <solid android:color="#97bed5" />
+    </shape>
+  </item>
+
+  <!-- enabled state -->
+  <item android:state_enabled="true">
+    <shape>
+      <solid android:color="#e1e1e1" />
+    </shape>
+  </item>
+
+</selector>

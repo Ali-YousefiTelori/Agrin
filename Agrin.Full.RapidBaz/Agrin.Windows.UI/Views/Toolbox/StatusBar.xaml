@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Agrin.Windows.UI.Views.Toolbox.StatusBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:Agrin.ViewModels.Toolbox;assembly=RapidbazPlus.ViewModels"
+             xmlns:conv="clr-namespace:Agrin.ViewModels.Converters;assembly=RapidbazPlus.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated" TextOptions.TextRenderingMode="Auto"  d:DesignWidth="1024" FontFamily="{DynamicResource PersianFontFamilyStyle}" FlowDirection="{DynamicResource RightToLeftStyle}">
+    <UserControl.Resources>
+        <vm:StatusBarViewModel x:Key="StatusBarViewModel"/>
+        <conv:SizeToStringConverter x:Key="SizeToStringConverter"/>
+        <conv:SizeToStringConverter Digits="2" x:Key="SizeToStringConverter2"/>
+
+        <conv:BytesToImageConverter x:Key="BytesToImageConverter"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource StatusBarViewModel}"/>
+    </UserControl.DataContext>
+    <Border Background="#e1e1e1" BorderBrush="#b7b7b7" BorderThickness="0,1,0,0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="محدودیت" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <ComboBox IsEnabled="{Binding CanUserChanged}" VerticalAlignment="Center" ItemsSource="{Binding SpeedLimiterItems}" DisplayMemberPath="Text" SelectedItem="{Binding SpeedLimiterSelectedItem}" SelectedIndex="0" Margin="5,0,0,0" Width="100">
+
+                </ComboBox>
+                <TextBlock Text="تعداد اتصال ها:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <ComboBox IsEnabled="{Binding CanUserChanged}" VerticalAlignment="Center" ItemsSource="{Binding ConnectionCountItems}" DisplayMemberPath="Text" SelectedItem="{Binding ConnectionSelectedItem}" SelectedIndex="0" Margin="5,0,0,0" Width="40">
+
+                </ComboBox>
+
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                <TextBlock Text="کل حجم دانلود شده:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock Text="{Binding DownloadedSize,Converter={StaticResource SizeToStringConverter}}" MinWidth="100" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock Visibility="Collapsed" Text="حجم باقی مانده رپیدباز:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock Visibility="Collapsed" Text="{Binding RapidBazRemainingSize,Converter={StaticResource SizeToStringConverter2}}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <!--<TextBlock Text="مگابایت" VerticalAlignment="Center" Margin="5,0,0,0"/>-->
+                <TextBlock Text="سرعت دانلود کل:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock Text="{Binding TotalApplicationSpeed,Converter={StaticResource SizeToStringConverter}}" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                <!--<TextBlock Text="محل شما:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <Image ToolTip="{Binding HostInfoProperties.Country}" Margin="5,0,0,0" Width="16" Height="11" Source="{Binding HostFlag,Converter={StaticResource BytesToImageConverter}}"/>-->
+
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

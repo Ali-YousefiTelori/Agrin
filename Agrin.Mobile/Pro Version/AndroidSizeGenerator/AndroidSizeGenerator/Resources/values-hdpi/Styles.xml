@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="Theme.Splash" parent="android:Theme">
+    <item name="android:windowBackground">@drawable/splashscreen</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowIsTranslucent">false</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:backgroundDimEnabled">true</item>
+  </style>
+  <style name="Theme.IconSplash" parent="android:Theme">
+    <item name="android:windowBackground">@drawable/iconsplashscreen</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowIsFloating">true</item>
+    <item name="android:backgroundDimEnabled">false</item>
+  </style>
+  <style name="btn_stand" parent="android:Theme">
+    <item name="android:background">@drawable/normalbuttonshape</item>
+    <item name="android:textColor">#434343</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:paddingRight">@dimen/ButtonPaddingRight</item>
+    <item name="android:paddingLeft">@dimen/ButtonPaddingLeft</item>
+    <item name="android:gravity">center</item>
+    <item name="android:minHeight">40dp</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:textSize">@dimen/ButtonTextSize</item>
+  </style>
+  <style name="editText" parent="android:Theme">
+    <item name="android:background">@drawable/editboxshape</item>
+    <item name="android:textColor">#434343</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">center_vertical</item>
+    <item name="android:inputType">textUri</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:textSize">@dimen/ButtonTextSize</item>
+  </style>
+  <style name="TextView" parent="android:Theme">
+    <item name="android:textColor">@color/foreground</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">@dimen/TextViewTextSize</item>
+  </style>
+  <style name="MenuTextView" parent="android:Theme">
+    <item name="android:textColor">@color/foreground</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">@dimen/MenuItemHeight</item>
+    <item name="android:textSize">@dimen/MenuItemTextSize</item>
+    <item name="android:gravity">center_vertical</item>
+  </style>
+  <style name="TextView_LinkInfoItem" parent="android:Theme">
+    <item name="android:textColor">@color/LinkStateForeground</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">@dimen/folderTextSize</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:layout_gravity">center_vertical</item>
+  </style>
+  <style name="TextView_TaskInfoItem" parent="android:Theme">
+    <item name="android:textColor">@color/LinkStateForeground</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">@dimen/TaskInfoTextSize</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:layout_gravity">center_vertical</item>
+  </style>
+  <style name="ProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+    <item name="android:progressDrawable">@drawable/ProgressBarShape_Downloading</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:max">100</item>
+    <item name="android:progress">0</item>
+  </style>
+
+  <style name="ToggleButton" parent="android:Theme">
+    <item name="android:background">@drawable/ToggleButtonShapeBackground</item>
+    <item name="android:textColor">#434343</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:paddingRight">@dimen/ButtonPaddingRight</item>
+    <item name="android:paddingLeft">@dimen/ButtonPaddingLeft</item>
+    <item name="android:gravity">center</item>
+    <item name="android:minHeight">40dp</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:textSize">@dimen/ButtonTextSize</item>
+  </style>
+
+  <style name="RadioButton" parent="android:Theme">
+    <item name="android:button">@null</item>
+    <item name="android:drawableRight">@drawable/RadioButton_Background</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:textColor">@color/foreground</item>
+    <item name="android:textSize">@dimen/TextViewTextSize</item>
+    <item name="android:paddingRight">10dp</item>
+    <item name="android:paddingLeft">10dp</item>
+  </style>
+</resources>
