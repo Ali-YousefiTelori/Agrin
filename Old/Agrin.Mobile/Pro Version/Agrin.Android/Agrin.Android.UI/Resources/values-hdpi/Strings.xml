@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!--Persian Language-->
+  <string name="App_Name_Language_fa">دانلود منیجر آگرین</string>
+  <string name="Yes_Language_fa">بلی</string>
+  <string name="No_Language_fa">خیر</string>
+  <string name="OK_Language_fa">قبول</string>
+  <string name="Add_Language_fa">درج</string>
+  <string name="Play_Language_fa">شروع</string>
+  <string name="PlayLink_Language_fa">شروع لینک</string>
+  <string name="ActiveQueue_Language_fa">فعال سازی صف</string>
+
+  <string name="DownloadByQueue_Language_fa">شروع در زمان مشخص...</string>
+  <string name="StopByQueue_Language_fa">ایست در زمان مشخص...</string>
+  <string name="ForceStart_Language_fa">شروع و رفع مشکل ISP</string>
+
+  <string name="Cancel_Language_fa">انصراف</string>
+  <string name="Delete_Language_fa">حذف</string>
+  <string name="GenerateAutoMixerReport_Language_fa">مشاهده ی گزارش</string>
+  <string name="Stop_Language_fa">ایست</string>
+  <string name="DeleteComplete_Language_fa">حذف تکمیل ها</string>
+  <string name="SelectAll_Language_fa">انتخاب همه</string>
+  <string name="Developer_Language_fa">علی یوسفی</string>
+  <string name="DeveloperTitle_Language_fa"> برنامه نویس:</string>
+  <string name="SiteTitle_Language_fa"> سایت:</string>
+  <string name="Site_Language_fa">http://framesoft.ir</string>
+  <string name="Version_Language_fa"> نسخه:</string>
+  <string name="About_Language_fa">درباره ی ما</string>
+  <string name="GroupName_Language_fa">نام گروه:</string>
+  <string name="SaveAddress_Language_fa">محل ذخیره:</string>
+  <string name="Extentions_Language_fa">پسوند ها:</string>
+  <string name="AddGroup_Language_fa">درج گروه</string>
+  <string name="GroupList_Language_fa">مدیریت گروه ها</string>
+  <string name="LinkAddressTitle_Language_fa">آدرس لینک:</string>
+  <string name="LinkAddress_Language_fa">آدرس لینک جدید</string>
+  <string name="ExtractUrls_Language_fa">استخراج لینک</string>
+  <string name="AddLink_Language_fa">درج لینک</string>
+  <string name="FindVideos_Language_fa">جستجوی ویدئو ها...</string>
+  <string name="VideoFormatTitle_Language_fa">کیفیت ویدئو:</string>
+  <string name="Select_Language_fa">انتخاب</string>
+  <string name="AddYoutubeLink_Language_fa">یافتن لینک یوتیوب</string>
+  <string name="DownloadsLink_Language_fa">لیست دانلود ها</string>
+  <string name="Downloads_Language_fa">دانلود ها</string>
+  <string name="GroupManager_Language_fa">مدیریت گروه ها</string>
+  <string name="Exit_Language_fa">خروج</string>
+  <string name="GoToHome_Language_fa">کار در پیش زمینه</string>
+  <string name="AgrinDownloadManager_Language_fa">مدیریت دانلود آگرین</string>
+  <string name="AgrinDownloadManagerWorkingForDownload_Language_fa">آگرین در حال انجام عملیات دانلود</string>
+  <string name="AgrinDownloadManagerWaitingForDownload_Language_fa">آگرین در صف انتظار برای دانلود</string>
+  <string name="DownloadingCount_Language_fa">تعداد : </string>
+
+  <string name="AgrinApplicationMessageTitle_Language_fa">پیام جدید از سایت دریافت شد</string>
+  <string name="WariningYourLinkNotSupportResumable_Language_fa">اخطار: لینک مورد نظر شما قابلیت توقف ندارد.لطفاً کلیک کنید.</string>
+  <string name="YourLinkNotSupportResumable_Language_fa">کاربر گرامی لینکی که در حال دانلود آن بودید قابلیت توقف ندارد.یعنی سرور سایتی که از ان دانلود می کنید این امکان را به ما نمی دهد که از ادامه فایل شما را دانلود کنیم.چنانچه مایل هستید فایل شما از ابتدا دانلود شود روی گزینه ی قبول کلیک کنید.در غیر این صورت اگر فکر می کنید میتوانید با تغییر لینک آن را از ادامه دانلود کنید اینکار را انجام دهید.اگر مطمئن هستید که سایتی که از آن دانلود میکنید قابلیت توقف دارد لینک را برای ما ارسال کنید و گزارش دهید تا بررسی کنیم.</string>
+  <string name="AgrinApplicationMessageMessage_Language_fa">برای خواندن پیام کلیک کنید</string>
+
+  <string name="AgrinApplicationNewVersionTitle_Language_fa">نسخه ی جدید نرم افزار موجود است</string>
+  <string name="AgrinApplicationNewVersionMessage_Language_fa">برای دانلود نسخه ی جدید کلیک کنید</string>
+
+  <string name="AgrinApplicationUserMessageTitle_Language_fa">ما به درخواست شما پاسخ دادیم</string>
+  <string name="AboutQuestion_Language_fa">آموزش، سوال، پیشنهاد و مشکل</string>
+  <string name="AboutQuestion2_Language_fa">ارائه ی سوال، پیشنهاد و مشکل</string>
+  <string name="AboutLearning_Language_fa">مشاهده ی آموزش نرم افزار</string>
+
+  <string name="SendFeedBackMesage_Language_fa">شما میتوانید سوالات و پیشنهادات و مشکلات و انتقادات خودتان را برای ما ارسال کنید ما به پیشنهادات شما پاسخ میدهیم.پاسخ را نرم افزار به شما به صورت رویداد در بالای صفحه گزارش خواهد کرد.با ما تماس بگیرید</string>
+  <string name="TypeYourMessage_Language_fa">نظر خودتان را بنویسید</string>
+  <string name="Send_Language_fa">ارسال</string>
+  <string name="Sending_Language_fa">در حال ارسال... لطفاً منتظر بمانید...</string>
+  <string name="SendSuccess_Language_fa">پیام شما با موفقیت ارسال شد</string>
+  <string name="SendError_Language_fa">خطا در ارسال پیام رخ داده است</string>
+
+
+  <string name="OpenFile_Language_fa">بازکردن فایل</string>
+  <string name="CouldNotOpenThisFile_Language_fa">نرم افزاری برای اجرای این فایل یافت نشد</string>
+  <string name="Filedoesnotexist_Language_fa">فایل موجود نیست</string>
+
+  <string name="OpenFileLocation_Language_fa">باز کردن محل ذخیره ی فایل</string>
+  <string name="Folderdoesnotexist_Language_fa">مسیر موجود نیست</string>
+  <string name="CouldNotOpenThisLocation_Language_fa">نرم افزار قادر به بازکردن این مسیر نیست.لطفاً نرم افزار ES File Explorer را نصب کنید</string>
+  <string name="ChangeFileLocation_Language_fa">تغییر محل ذخیره...</string>
+
+  <string name="Selectyourlink_Language_fa">لینک مورد نظر را انتخاب کنید</string>
+  <string name="Areyousureyouwanttodeleteselectedgroups_Language_fa">آیا می خواهید گروه های انتخاب شده را حذف کنید؟</string>
+  <string name="Areyousureyouwanttodeleteselectedlinks_Language_fa">آیا می خواهید لینک های انتخاب شده را حذف کنید؟</string>
+  <string name="AreyousureyouwanttodeleteselectedlinksafterDelete_Language_fa">بعد از حذف، لینک ها قابل بازگشت نیستند</string>
+  <string name="CreatingRequest_Language_fa">درحال ساخت...</string>
+  <string name="Stoped_Language_fa">ایست</string>
+  <string name="ApplicationIsDownloading_Language_fa">در حال دانلود...</string>
+  <string name="Downloading_Language_fa">در حال دریافت...</string>
+  <string name="Pausing_Language_fa">در حال توقف...</string>
+  <string name="Paused_Language_fa">متوقف شده</string>
+  <string name="GetingData_Language_fa">در حال دریافت و پردازش</string>
+  <string name="Complete_Language_fa">تکمیل شده</string>
+  <string name="Error_Language_fa">خطا</string>
+  <string name="ErrorNotify_Language_fa">مواجه با خطا</string>
+  <string name="Connecting_Language_fa">در حال اتصال...</string>
+  <string name="BrokenLink_Language_fa">لینک خراب شده است!</string>
+  <string name="CheckForSupportResumable_Language_fa">بررسی برای قابلیت متوقف شدن...</string>
+  <string name="CopyingFile_Language_fa">در حال ساخت فایل...</string>
+  <string name="Waiting_Language_fa">لطفاً منتظر بمانید</string>
+  <string name="Disposed_Language_fa">بسته شده</string>
+  <string name="ConnectingToSharing_Language_fa">در حال اتصال به شیر...</string>
+  <string name="LoginToSharing_Language_fa">در حال ورود به سایت...</string>
+  <string name="GetAddressFromSharing_Language_fa">در حال پیدا کردن آدرس...</string>
+  <string name="FindingAddressFromSharing_Language_fa">در حال پیدا کردن لینک فایل...</string>
+  <string name="SharingTimer_Language_fa">در حال انتظار برای پاسخ...</string>
+  <string name="Uploading_Language_fa">در حال ارسال</string>
+  <string name="WaitForTick_Language_fa">در حال انتظار</string>
+  <string name="FileNotFound_Language_fa">فایل یافت نشد</string>
+  <string name="TypeTitle_Language_fa"> پسوند ویدئو:</string>
+  <string name="ResolutionTitle_Language_fa"> کیفیت:</string>
+  <string name="NoVideo_Language_fa">(بدون تصویر)</string>
+  <string name="NoSound_Language_fa">(بدون صدا)</string>
+
+  <string name="Byte_Language_fa">بایت</string>
+  <string name="KB_Language_fa">کیلوبایت</string>
+  <string name="MB_Language_fa">مگابایت</string>
+  <string name="GB_Language_fa">گیگابایت</string>
+  <string name="TB_Language_fa">ترابایت</string>
+  <string name="EB_Language_fa">اگزابایت</string>
+
+  <string name="Size_Language_fa">حجم:</string>
+  <string name="Downloaded_Language_fa">دانلود شده:</string>
+  <string name="QueueManager_Language_fa">زمان بندی</string>
+  <string name="Setting_Language_fa">تنظیمات</string>
+
+  <string name="Unknown_Language_fa">نامشخص</string>
+  <string name="Secound_Language_fa">ثانیه</string>
+  <string name="Minute_Language_fa">دقیقه</string>
+  <string name="Hour_Language_fa">ساعت</string>
+  <string name="Day_Language_fa">روز</string>
+  <string name="And_Language_fa">و</string>
+  <string name="PerSecound_Language_fa"> بر ثانیه</string>
+  <string name="StatusTitle_Language_fa"> وضعیت:</string>
+  <string name="ResumeCapabilityTitle_Language_fa"> قابلیت توقف:</string>
+  <string name="TimeRemainingTitle_Language_fa">زمان باقی مانده:</string>
+  <string name="SpeedTitle_Language_fa"> سرعت دانلود:</string>
+  <string name="Reconnect_Language_fa">اتصال مجدد</string>
+  <string name="ShowDetail_Language_fa">نمایش جزئیات</string>
+  <string name="LinkDetail_Language_fa">جزئیات لینک</string>
+  <string name="Browse_Language_fa">انتخاب</string>
+  <string name="ExitApplicationQuestion_Language_fa">آیا میخواهید از نرم افزار خارج شوید؟ در صورت خروج تمامی دانلود ها متوقف خواهد شد</string>
+  <string name="BrowseFolder_Language_fa">انتخاب مسیر</string>
+  <string name="Go_Language_fa">برو</string>
+  <string name="DataPath_Language_fa">مسیر دیتا</string>
+  <string name="NewFolder_Language_fa">پوشه جدید</string>
+  <string name="Back_Language_fa">بازگشت</string>
+  <string name="ApplicationLogs_Language_fa">خطای پردازش اطلاعات</string>
+  <string name="CreateFolderTitle_Language_fa">ساخت پوشه</string>
+  <string name="NameValidation_Language_fa">لطفاً نام را وارد کنید</string>
+  <string name="ErrorCreateFolder_Language_fa">خطا در ساخت پوشه رخ داده است</string>
+
+
+  <string name="DownloadsPathTitle_Language_fa">محل پیشفرض ذخیره دانلود ها:</string>
+  <string name="MaximumConnectionCountTitle_Language_fa">تعداد اتصال های هر لینک:</string>
+
+  <string name="LimitSpeedTitle_Language_fa">محدودیت سرعت:</string>
+  <string name="SelectLanguage_Language_fa">انتخاب زبان</string>
+  <string name="SaveSetting_Language_fa">ذخیره تنظیمات</string>
+  <string name="AppSetting_Language_fa">تنظیمات نرم افزار</string>
+  <string name="InvalidAddress_Language_fa">آدرس محل دانلود ها وجود ندارد</string>
+  <string name="UserAuthorization_Language_fa">مجوز کاربری</string>
+
+  <string name="NoVideoFormatFound_Language_fa">فرمت ویدئو انتخاب نشده است لطفاً از بخش درج لینک از یوتیوب اقدام به درج لینک کنید</string>
+  <string name="AddUserAuthorization_Language_fa">درج مجوز</string>
+  <string name="ServerAddressExample_Language_fa">آدرس سرور-مثال: *framesoft.ir*</string>
+  <string name="UserName_Language_fa">نام کاربری</string>
+  <string name="Password_Language_fa">رمز عبور</string>
+  <string name="EmptyValidation_Language_fa">لطفاً همه ی کادرها را پر کنید</string>
+  <string name="AreyousureyouwanttodeleteselectedItems_Language_fa">آیا می خواهید گزینه های انتخاب شده را حذف کنید؟</string>
+  <string name="UserAuthorizationListTitle_Language_fa">مدیریت مجوز ها</string>
+  <string name="UserAuthorizationDeleted_Language_fa">مجوز لینک حذف شد</string>
+  <string name="CompleteDownloadNotify_Language_fa">لینک دانلود شما تکمیل شد</string>
+  <string name="EnableNotifyTitle_Language_fa">نمایش رویداد ها فعال باشد</string>
+  <string name="Loading_Language_fa">در حال بارگزاری...</string>
+  <string name="ShareFile_Language_fa">اشتراک گذاری فایل...</string>
+  <string name="ShareFileUsing_Language_fa">اشتراک گذاری به...</string>
+  <string name="ErrorShareFile_Language_fa">خطا در اشتراک گذاری فایل رخ داده است</string>
+  <string name="Checking_Language_fa">در حال بررسی...</string>
+  <string name="CheckCompleteMessageYouInNotification_Language_fa">بررسی انجام شد در صورت وجود داشتن نسخه ی جدید پیغام به صورت رویداد در بالای صفحه گزارش خواهد شد.</string>
+  <string name="ErrorChecking_Language_fa">خطا در بررسی رخ داده است.</string>
+  <string name="CheckForUpdate_Language_fa">بررسی برای نسخه ی جدید</string>
+  <string name="CheckForUpdateAutomatic_Language_fa">بررسی نسخه ی جدید به صورت اتوماتیک</string>
+  <string name="CheckForGetApplicationMessage_Language_fa">نمایش پیام های دریافتی از طرف مدیریت</string>
+  <string name="ChangeLinkAddress_Language_fa">تغییر آدرس لینک</string>
+  <string name="ChangeFileName_Language_fa">تغییر نام فایل...</string>
+  <string name="FileNameInvariable_Language_fa">نام فایل نا معتبر است</string>
+  
+  <string name="Save_Language_fa">ذخیره</string>
+  <string name="LinkInvariable_Language_fa">لینک نا معتبر است</string>
+  <string name="SaveSuccess_Language_fa">ذخیره با موفقیت انجام شد</string>
+  <string name="ShowLastError_Language_fa">مشاهده ی آخرین خطا</string>
+  <string name="NoErrorFound_Language_fa">هیچ خطایی یافت نشد!</string>
+  <string name="DownloadQueueList_Language_fa">دانلود ترتیبی</string>
+  <string name="DoYouDownloadQueueList_Language_fa">آیا میخواهید لینک های انتخاب شده را به ترتیب دانلود کنید؟ لطفاً از صحت سالم بودن لینک ها اطمینان حاصل کنید زیرا نرم افزار پس از مواجه با خطا در هر لینکی سعی میکند آن را دانلود کند و تا دانلود یک لینک تمام نشود لینک بعدی شروع نمی شود.</string>
+  <string name="DoYouWantToStopDownloadQueueList_Language_fa">آیا میخواهید دانلود ترتیبی را متوقف کنید؟</string>
+  <string name="StopDownloadQueueList_Language_fa">توقف دانلود ترتیبی</string>
+  <string name="CopyLinkAddress_Language_fa">کپی آدرس لینک</string>
+
+  <string name="RepairLink_Language_fa">ترمیم لینک</string>
+  <string name="CompleteFileForRepairNotFound_Language_fa">فایل تکمیل شده موجود نمی باشد</string>
+  <string name="StartRepairLink_Language_fa">شروع ترمیم</string>
+  <string name="FindConnectionProblems_Language_fa">در حال پیدا کردن اتصال ها</string>
+  <string name="FindPositionOfProblems_Language_fa">در حال پیدا کردن محل خرابی</string>
+  <string name="DownloadingProblems_Language_fa">در حال دانلود محل های خراب</string>
+  <string name="FixingProblems_Language_fa">در حال ترمیم فایل</string>
+  <string name="SuccessRepairLink_Language_fa">ترمیم فایل موفقیت آمیز بود</string>
+
+  <string name="LinksSearchAll_Language_fa">همه ی لینک ها</string>
+  <string name="LinksSearchComplete_Language_fa">تکمیل شده</string>
+  <string name="LinksSearchDownloading_Language_fa">در حال دانلود</string>
+  <string name="LinksSearchNotComplete_Language_fa">ناتمام</string>
+  <string name="LinksSearchError_Language_fa">خطا داده شده</string>
+  <string name="LinksSearchQueue_Language_fa">در صف دانلود</string>
+
+  <string name="VIPAccount_Language_fa">حساب ویژه</string>
+  <string name="PermisionFirstMessage_Language_fa">کاربر گرامی، شما برای اولین بار وارد این بخش از نرم افزار می شوید لطفاً اینترنت گوشی خود را روشن بگذارید تا قوانین و امکانات استفاده از این بخش برای شما نمایش داده شود و پس از مطالعه ی مطالب با دقت کافی در صورت پذیرش قوانین آن را تایید کنید تا وارد بخش مربوطه برای استفاده شوید.</string>
+  <string name="FindingYoutubeVideos_Language_fa">دریافت ویدئو ها</string>
+  <string name="AgreePermissions_Language_fa">خواندم و قبول می کنم</string>
+  <string name="LoginIn_Language_fa">در حال بارگزاری اطلاعات کاربر...</string>
+  <string name="LoginSuccess_Language_fa">ورود با موفقیت انجام شد</string>
+  <string name="LoginError_Language_fa">خطا در ورود رخ داده است:</string>
+  <string name="EmptyUserPass_Language_fa">نام کاربری یا رمز را وارد نکرده اید</string>
+  <string name="Login_Language_fa">ورود</string>
+  <string name="ServerDownloads_Language_fa">لینک های دانلود</string>
+  <string name="BuyStorage_Language_fa">خرید حجم</string>
+  <string name="UserPermission_Language_fa">امکانات ، قوانین و آموزش</string>
+  <string name="RegisterUser_Language_fa">ثبت نام</string>
+  <string name="LoginUser_Language_fa">ورود کاربر</string>
+  <string name="LogoutUser_Language_fa">خروج کاربر</string>
+  <string name="UserNameTitle_Language_fa">نام کاربری:</string>
+  <string name="SizeTitle_Language_fa">حجم باقی مانده:</string>
+  <string name="Email_Language_fa">ایمیل</string>
+  <string name="Registering_Language_fa">در حال ثبت نام...</string>
+  <string name="RegisterError_Language_fa">خطا در ثبت نام رخ داده است:</string>
+  <string name="EmptyUserPassEmail_Language_fa">نام کاربری، رمز یا ایمیل را وارد نکرده اید</string>
+  <string name="RegisterSuccess_Language_fa">ثبت نام با موفقیت انجام شد</string>
+  <string name="InvalidEmail_Language_fa">ایمیل را درست وارد نکرده اید</string>
+  <string name="buystorage100mb_Language_fa">100 مگابایت حجم، قیمت: 100 تومان</string>
+  <string name="buystorage500mb_Language_fa">500 مگابایت حجم، قیمت: 250 تومان</string>
+  <string name="buystorage1gb_Language_fa">1 گیگابایت حجم، قیمت: 500 تومان</string>
+  <string name="buystorage2gb_Language_fa">2 گیگابایت حجم، قیمت: 1000 تومان</string>
+  <string name="buystorage5gb_Language_fa">5 گیگابایت حجم، قیمت: 2500 تومان</string>
+  <string name="buystorage10gb_Language_fa">10 گیگابایت حجم، قیمت: 5000 تومان</string>
+  <string name="buystorage20gb_Language_fa">20 گیگابایت حجم، قیمت: 9000 تومان</string>
+  <string name="BuyPurchase_Language_fa">خرید محصول</string>
+  <string name="BuyingPurchase_Language_fa">در حال خرید...</string>
+  <string name="BuyPurchaseError_Language_fa">خطا در خرید محصول رخ داده است: </string>
+  <string name="BuyStorageSuccess_Language_fa">خرید محصول با موفقیت انجام شد</string>
+  <string name="GettingUserInfo_Language_fa">در حال دریافت اطلاعات کاربر...</string>
+  <string name="Download_Language_fa">دانلود</string>
+  <string name="DeleteFromServer_Language_fa">حذف از سرور</string>
+  <string name="ServerLinks_Language_fa">لینک های ارسال شده</string>
+  <string name="RefreshList_Language_fa">بارگزاری مجدد لیست</string>
+  <string name="Refreshing_Language_fa">در حال بارگزاری...</string>
+  <string name="RefreshListError_Language_fa">خطا در بارگزاری رخ داده است</string>
+  <string name="UploadToServer_Language_fa">ارسال به حساب ویژه</string>
+  <string name="SendFile_Language_fa">ارسال فایل</string>
+  <string name="SendingFile_Language_fa">در حال ارسال فایل...</string>
+  <string name="SendingFileError_Language_fa">خطا در ارسال فایل</string>
+  <string name="SendingFileSuccess_Language_fa">فایل با موفقیت ارسال شد</string>
+  <string name="CafeBazaarErrorConnection_Language_fa">خطا در ارتباط با نرم افزار کافه بازار رخ داده است لطفاً بررسی کنید که به اینترنت متصل هستید و نرم افزار بازار روی سیستم شما نصب است و سرویس آن اجرا می باشد.</string>
+  <string name="DeleteFilesFromServer_Language_fa">حذف فایل</string>
+  <string name="DeletingFilesFromServer_Language_fa">در حال حذف فایل...</string>
+  <string name="DeletingFilesError_Language_fa">خطا در حذف فایل رخ داده است</string>
+  <string name="QuestionDeleteFilesError_Language_fa">آیا میخواهید فایل مورد نظر را از سرور حذف کنید؟ در صورتی که فایل تکمیل نشده باشد حجم باقی مانده به شما بازگردانده خواهد شد و فایل از لیست حذف میشود و دیگر قابل دانلود نیست</string>
+  <string name="QuestionServerFileUpload_Language_fa">آیا می خواهید لینک مورد نظر را به سرور سایت منتقل کنید؟</string>
+  <string name="FileNotComplete_Language_fa">لینک هنوز برای دانلود آماده و تکمیل نشده است.اگر لینک شما با خطا مواجه شده است و یا بعد از مدت طولانی ای دیگر دانلود نمی شود از منوی اصلی نرم افزار با ما تماس بگیرید</string>
+
+  <string name="PleaseFillAllItems_Language_fa">لطفاً همه ی گزینه ها را پر کنید برای مثال: نام کاربری، رمز عبور، ایمیل و ...</string>
+  <string name="UserNameExist_Language_fa">نام کاربری تکراری می باشد</string>
+  <string name="EmailExist_Language_fa">ایمیل وارد شده تکراری می باشد</string>
+  <string name="NoStorage_Language_fa">حجمی خریداری نشده است</string>
+  <string name="StorageBackContactMe_Language_fa">خطا در انجام عملیات رخ داده است لطفاً با ما تماس بگیرید.</string>
+  <string name="NoStorageFileSize_Language_fa">حجم فایل شما بیشتر از حجم باقی مانده ی شماست</string>
+  <string name="NoFileSize_Language_fa">لینک شما دارای حجم مشخصی نیست</string>
+  <string name="CannotDownload_Language_fa">سرور نمی تواند این فایل را دانلود کند لطفاً از سالم بودن لینک خود اطمینان حاصل کنید</string>
+  <string name="InvalidUserPurchase_Language_fa">خرید شما ثبت شد اما از سوی سرور معتبر اعلام نشد لطفاً با ما تماس بگیرید</string>
+  <string name="LoginUserPassError_Language_fa">نام کاربری یا رمز عبور اشتباه است</string>
+
+  <string name="MultiSelectionMode_Language_fa">تغییر به حالت انتخاب</string>
+  <string name="MenuSelectionMode_Language_fa">تغییر به حالت منو</string>
+  <string name="DeSelectAll_Language_fa">عدم انتخاب همه</string>
+  <string name="StopAll_Language_fa">توقف همه</string>
+  <string name="StopAllLinks_Language_fa">توقف همه لینک ها</string>
+  <string name="StopAllQueues_Language_fa">توقف همه صف ها</string>
+
+  <string name="Areyousureyouwanttodeletecompletelinks_Language_fa">آیا میخواهید لینک های تکمیل شده را حذف کنید؟</string>
+  <string name="Areyousureyouwanttostoplinksandqueues_Language_fa">آیا میخواهید لینک ها را همراه با زمانبندی آنها متوقف کنید؟ برخی لینک های انتخاب شده دارای زمانبندی می باشند.</string>
+  <string name="Areyousureyouwanttostopnotsupportlinks_Language_fa">برخی از لینک های شما قابلیت توقف ندارند، در صورت توقف ممکن است لینک شما از ابتدا دانلود شود آیا میخواهید ادامه دهید؟</string>
+  <string name="Areyouwanttoplaylinksqueues_Language_fa">لینک مورد نظر شما دارای صف زمانبندی است، در صورتی میخواهید صف شما فعال شود، روی فعال سازی صف کلیک کنید، در غیر این صورت شروع لینک را بزنید.</string>
+
+  <string name="TimeTitle_Language_fa">زمان:</string>
+  <string name="DateTitle_Language_fa">تاریخ:</string>
+  <string name="StartQueueNow_Language_fa">شروع ترتیبی در همین لحظه</string>
+  <string name="DeleteLinkInfoQueue_Language_fa">حذف از صف</string>
+
+  <string name="WiFiOnWhenStart_Language_fa">روشن کردن WiFi زمان شروع</string>
+  <string name="WiFiOffWhenEnd_Language_fa">خاموش کردن WiFi زمان تکمیل</string>
+  <string name="DataOnWhenStart_Language_fa">روشن کردن Data زمان شروع</string>
+  <string name="DataOffWhenEnd_Language_fa">خاموش کردن Data زمان تکمیل</string>
+  <string name="Nothing_Language_fa">هیچکدام</string>
+  <string name="Queue_Language_fa">زمانبندی</string>
+  <string name="StopTaskInTask_Language_fa">ایست صف برای لینک انتخاب شده</string>
+  <string name="StopLinkInTask_Language_fa">فقط ایست لینک</string>
+  <string name="Refresh_Language_fa">بارگزاری...</string>
+  <string name="SendMessage_Language_fa">ارسال پرسش...</string>
+  <string name="SendFeedBackDefaultMessage_Language_fa">ما به هر گونه سوال، پیشنهاد، انتقاد شما عزیزان پاسخ میدهیم.پاسخ های ما در همین بخش رویداد ها به شما اطلاع رسانی می شود</string>
+  <string name="Learning_Language_fa">آموزش</string>
+  <string name="TaskInfoesManagement_Language_fa">مدیریت زمانبندی...</string>
+
+  <string name="StartTimeTitle_Language_fa">زمان شروع:</string>
+  <string name="StateTitle_Language_fa">وضعیت:</string>
+  <string name="ActiveDeactiveTitle_Language_fa">فعال/غیرفعال:</string>
+  <string name="StartTasksTitle_Language_fa">وظایف شروع:</string>
+  <string name="EndTasksTitle_Language_fa">وظایف پایان:</string>
+
+  <string name="TaskStateStarted_Language_fa">شروع شده</string>
+  <string name="TaskStateStoped_Language_fa">متوقف شده</string>
+  <string name="TaskStateWaitingForWork_Language_fa">منتظر برای انجام کار...</string>
+  <string name="TaskStateWorking_Language_fa">در حال کار...</string>
+  <string name="TaskActive_Language_fa">فعال</string>
+  <string name="TaskDeActive_Language_fa">غیر فعال</string>
+
+  <string name="TaskUtilityStartLink_Language_fa">شروع لینک</string>
+  <string name="TaskUtilityStopLink_Language_fa">توقف لینک</string>
+  <string name="TaskUtilityStopTasks_Language_fa">توقف وظیفه</string>
+  <string name="TaskUtilityDeactiveTasks_Language_fa">غیرفعال کردن وظیفه</string>
+  <string name="TaskUtilityActiveTasks_Language_fa">فعال کردن وظیفه</string>
+  <string name="TaskUtilityCloseApplication_Language_fa">بستن نرم افزار</string>
+  <string name="TaskUtilityWiFiOn_Language_fa">روشن کردن WiFi</string>
+  <string name="TaskUtilityWiFiOff_Language_fa">خاموش کردن WiFi</string>
+  <string name="TaskUtilityInternetOn_Language_fa">روشن کردن اینترنت</string>
+  <string name="TaskUtilityInternetOff_Language_fa">خاموش کردن اینترنت</string>
+  <string name="TaskUtilityTurrnOff_Language_fa">خاموش کردن</string>
+  <string name="TaskUtilitySleep_Language_fa">رفتن به حالت خواب</string>
+
+  <string name="SetTaskActive_Language_fa">فعال کردن</string>
+  <string name="SetTaskDeActive_Language_fa">غیر فعال کردن</string>
+  <string name="DeleteCompleteFile_Language_fa">همراه حذف فایل تکمیل شده</string>
+
+  <string name="IsScreenOnWhenDownloading_Language_fa">روشن نگه داشتن صفحه هنگام دانلود</string>
+  <string name="IsShowErrorOnScreen_Language_fa">نمایش خطا ها روی صفحه ی گوشی</string>
+  <string name="QualityTitle_Language_fa">انتخاب کیفیت:</string>
+  <string name="DataDownloadsPathTitle_Language_fa">محل موقتی ذخیره دانلود ها:</string>
+  <string name="IsForceScreenOnWhenQueueActive_Language_fa">روشن نگه داشتن صفحه هنگامی که در صف می باشد</string>
+  <string name="IsAutoClipboard_Language_fa">روشن کردن درج لینک هنگام کپی لینک</string>
+  <string name="AgrinBrowser_Language_fa">مرورگر داخلی</string>
+  <string name="Google_Language_fa">گوگل</string>
+
+
+
+
+
+
+
+  <!--English Language-->
+  <string name="App_Name_Language_en">Agrin Download Manager</string>
+  <string name="Yes_Language_en">Yes</string>
+  <string name="No_Language_en">No</string>
+  <string name="OK_Language_en">OK</string>
+  <string name="Add_Language_en">Add</string>
+  <string name="Play_Language_en">Play</string>
+  <string name="Cancel_Language_en">Cancel</string>
+  <string name="DownloadByQueue_Language_en">ِDownload Queue...</string>
+  <string name="StopByQueue_Language_en">Stop Queue...</string>
+  <string name="ForceStart_Language_en">شروع و رفع مشکل ISP</string>
+
+  <string name="Delete_Language_en">Delete</string>
+  <string name="GenerateAutoMixerReport_Language_en">مشاهده ی گزارش</string>
+  <string name="Stop_Language_en">Stop</string>
+  <string name="DeleteComplete_Language_en">Delete Complete</string>
+  <string name="SelectAll_Language_en">Select All</string>
+  <string name="Developer_Language_en">Ali Yousefi</string>
+  <string name="DeveloperTitle_Language_en">Programmer: </string>
+  <string name="SiteTitle_Language_en">Site: </string>
+  <string name="Site_Language_en">http://framesoft.ir</string>
+  <string name="Version_Language_en">Version: </string>
+  <string name="About_Language_en">About</string>
+  <string name="GroupName_Language_en">Group Name:</string>
+  <string name="SaveAddress_Language_en">Save Address:</string>
+  <string name="Extentions_Language_en">Extentions:</string>
+  <string name="AddGroup_Language_en">Add Group</string>
+  <string name="GroupList_Language_en">Group List</string>
+  <string name="LinkAddressTitle_Language_en">Link Address:</string>
+  <string name="LinkAddress_Language_en">New Link Address</string>
+  <string name="ExtractUrls_Language_en">Extract Urls</string>
+  <string name="AddLink_Language_en">Add Link</string>
+  <string name="FindVideos_Language_en">Find Videos...</string>
+  <string name="VideoFormatTitle_Language_en">Video Format:</string>
+  <string name="Select_Language_en">Select</string>
+  <string name="AddYoutubeLink_Language_en">Add Youtube Link</string>
+  <string name="DownloadsLink_Language_en">Downloads Link</string>
+  <string name="Downloads_Language_en">Downloads</string>
+  <string name="GroupManager_Language_en">Group Manager</string>
+  <string name="Exit_Language_en">Exit</string>
+  <string name="GoToHome_Language_en">Work in background</string>
+  <string name="AgrinDownloadManager_Language_en">Agrin Download Manager</string>
+  <string name="OpenFile_Language_en">Open File</string>
+  <string name="CouldNotOpenThisFile_Language_en">Could Not Open This File!</string>
+
+  <string name="Filedoesnotexist_Language_en">File does not exist!</string>
+  <string name="Selectyourlink_Language_en">Select your link:</string>
+  <string name="Areyousureyouwanttodeleteselectedgroups_Language_en">Are you sure you want to delete selected groups?</string>
+  <string name="AreyousureyouwanttodeleteselectedlinksafterDelete_Language_en"></string>
+  <string name="Areyousureyouwanttodeleteselectedlinks_Language_en">Are you sure you want to delete selected links?</string>
+  <string name="Stoped_Language_en">Stoped</string>
+  <string name="ApplicationIsDownloading_Language_en">Application Is Downloading...</string>
+  <string name="Downloading_Language_en">ِDownloading...</string>
+  <string name="CreatingRequest_Language_en">Initializing...</string>
+  <string name="Pausing_Language_en">Pausing...</string>
+  <string name="Paused_Language_en">Paused</string>
+  <string name="GetingData_Language_en">Geting Data...</string>
+  <string name="Complete_Language_en">Complete</string>
+  <string name="Error_Language_en">Error</string>
+  <string name="ErrorNotify_Language_en">ErrorNotify</string>
+  <string name="Connecting_Language_en">Connecting...</string>
+  <string name="BrokenLink_Language_en">Broken Link</string>
+  <string name="CheckForSupportResumable_Language_en">Check for support resumable...</string>
+  <string name="CopyingFile_Language_en">CopyingFile...</string>
+  <string name="Waiting_Language_en">Waiting...</string>
+  <string name="Disposed_Language_en">Disposed</string>
+  <string name="ConnectingToSharing_Language_en">Connecting To Sharing...</string>
+  <string name="LoginToSharing_Language_en">Login To Sharing...</string>
+  <string name="GetAddressFromSharing_Language_en">Get Address From Sharing...</string>
+  <string name="FindingAddressFromSharing_Language_en">Finding Address From Sharing...</string>
+  <string name="SharingTimer_Language_en">Sharing Timer...</string>
+  <string name="Uploading_Language_en">Uploading...</string>
+  <string name="WaitForTick_Language_en">Wait For Tick...</string>
+  <string name="FileNotFound_Language_en">File Not Found...</string>
+  <string name="TypeTitle_Language_en">Video Type:</string>
+  <string name="ResolutionTitle_Language_en">Resolution:</string>
+
+  <string name="Byte_Language_en">Byte</string>
+  <string name="KB_Language_en">KB</string>
+  <string name="MB_Language_en">MB</string>
+  <string name="GB_Language_en">GB</string>
+  <string name="TB_Language_en">TB</string>
+  <string name="EB_Language_en">EB</string>
+  <string name="Size_Language_en">Size:</string>
+  <string name="Downloaded_Language_en">Downloaded:</string>
+  <string name="QueueManager_Language_en">Queue Manager</string>
+  <string name="Setting_Language_en">Setting</string>
+
+  <string name="Unknown_Language_en">Unknown</string>
+  <string name="Secound_Language_en">Secound</string>
+  <string name="Minute_Language_en">Minute</string>
+  <string name="Hour_Language_en">Hour</string>
+  <string name="Day_Language_en">Day</string>
+  <string name="And_Language_en">And</string>
+
+  <string name="PerSecound_Language_en"> Per Secound</string>
+
+  <string name="StatusTitle_Language_en">Status: </string>
+  <string name="ResumeCapabilityTitle_Language_en">Resume Capability: </string>
+  <string name="TimeRemainingTitle_Language_en">Time Remaining: </string>
+  <string name="SpeedTitle_Language_en">Speed: </string>
+  <string name="Reconnect_Language_en">ReConnect</string>
+  <string name="ShowDetail_Language_en">Show Detail</string>
+  <string name="LinkDetail_Language_en">Link Detail</string>
+  <string name="Browse_Language_en">Browse</string>
+  <string name="ExitApplicationQuestion_Language_en">Are you sure you want to exit the application?</string>
+  <string name="BrowseFolder_Language_en">Browse Folder</string>
+  <string name="Go_Language_en">Gow</string>
+  <string name="DataPath_Language_en">Data Path</string>
+
+  <string name="NewFolder_Language_en">New Folder</string>
+  <string name="Back_Language_en">Back</string>
+  <string name="ApplicationLogs_Language_en">Application Crash</string>
+  <string name="DownloadsPathTitle_Language_en">Downloads Path:</string>
+  <string name="MaximumConnectionCountTitle_Language_en">Maximum Connection Count:</string>
+
+  <string name="LimitSpeedTitle_Language_en">Limit Speed:</string>
+  <string name="SelectLanguage_Language_en">Select Language</string>
+  <string name="SaveSetting_Language_en">Save Setting</string>
+  <string name="AppSetting_Language_en">Application Setting</string>
+  <string name="InvalidAddress_Language_en">Invalid Downloads Address</string>
+  <string name="UserAuthorization_Language_en">User Authorization</string>
+  <string name="NoVideoFormatFound_Language_en">No video format selected! please insert link from "Add YouTube Link" in ToolBar</string>
+  <string name="AddUserAuthorization_Language_en">Add User Authorization</string>
+
+  <string name="ServerAddressExample_Language_en">Server Address-Example: *framesoft.ir*</string>
+  <string name="UserName_Language_en">User Name</string>
+  <string name="Password_Language_en">Password</string>
+  <string name="EmptyValidation_Language_en">Please fill in all fields</string>
+  <string name="AreyousureyouwanttodeleteselectedItems_Language_en">Are you sure you want to delete selected items?</string>
+  <string name="UserAuthorizationListTitle_Language_en">User Authorization Management</string>
+  <string name="UserAuthorizationDeleted_Language_en">User Authorization Deleted</string>
+  <string name="CompleteDownloadNotify_Language_en">Download Complete</string>
+  <string name="EnableNotifyTitle_Language_en">Enable Agrin Notifications</string>
+
+  <string name="AgrinApplicationMessageTitle_Language_en">Received new message from site</string>
+  <string name="AgrinApplicationMessageMessage_Language_en">For read message click notification</string>
+
+  <string name="AgrinApplicationNewVersionTitle_Language_en">New version available</string>
+  <string name="AgrinApplicationNewVersionMessage_Language_en">For download click notification</string>
+
+  <string name="AgrinApplicationUserMessageTitle_Language_en">We will respond to your request</string>
+  <string name="AboutQuestion_Language_en">Learning/ Questions/ Suggestions/ Problems</string>
+  <string name="AboutQuestion2_Language_en">Questions/ Suggestions/ Problems</string>
+
+  <string name="SendFeedBackMesage_Language_en"></string>
+  <string name="TypeYourMessage_Language_en">Please type your message</string>
+  <string name="Send_Language_en">Send</string>
+  <string name="Sending_Language_en">Sending... Please wait...</string>
+  <string name="SendSuccess_Language_en">Send Success</string>
+  <string name="SendError_Language_en">Error Sending Message</string>
+
+  <string name="AboutLearning_Language_en">Learning...</string>
+  <string name="Loading_Language_en">Loading...</string>
+  <string name="ShareFile_Language_en">Share File</string>
+  <string name="ShareFileUsing_Language_en">Share file using...</string>
+  <string name="ErrorShareFile_Language_en">Error Sharing File...</string>
+
+  <string name="Checking_Language_en">Checking...</string>
+  <string name="CheckCompleteMessageYouInNotification_Language_en">Check complete, if new version is available notification sent to you</string>
+  <string name="ErrorChecking_Language_en">Error!</string>
+  <string name="CheckForUpdate_Language_en">Check new version is available</string>
+  <string name="CheckForUpdateAutomatic_Language_en">Check update automatically</string>
+  <string name="CheckForGetApplicationMessage_Language_en">Automatically check Agrin message</string>
+  <string name="ChangeLinkAddress_Language_en">Change Download Link Address</string>
+  <string name="Save_Language_en">Save</string>
+  <string name="LinkInvariable_Language_en">Link Invariable</string>
+  <string name="SaveSuccess_Language_en">Save Success</string>
+  <string name="ShowLastError_Language_en">Show Last Error</string>
+  <string name="NoErrorFound_Language_en">No Error Found!</string>
+
+  <string name="Folderdoesnotexist_Language_en">Folder does not exist</string>
+  <string name="CouldNotOpenThisLocation_Language_en">Could not open this location</string>
+  <string name="OpenFileLocation_Language_en">Open File Location</string>
+  <string name="ChangeFileLocation_Language_en">Change File Location...</string>
+  <string name="WariningYourLinkNotSupportResumable_Language_en">Warining your link not support resumable</string>
+  <string name="YourLinkNotSupportResumable_Language_en">Your link not support resumable. Do you want to download this file from the beginning</string>
+  <string name="DownloadQueueList_Language_en">Download Queue</string>
+  <string name="DoYouDownloadQueueList_Language_en">Do you want to download queue selected Links?</string>
+  <string name="DoYouWantToStopDownloadQueueList_Language_en">Do you want to stop download queue?</string>
+  <string name="StopDownloadQueueList_Language_en">Stop Download Queue</string>
+  <string name="CopyLinkAddress_Language_en">Copy Link Address</string>
+
+  <string name="RepairLink_Language_en">Repair Link</string>
+  <string name="CompleteFileForRepairNotFound_Language_en">Complete file for repair not found!</string>
+  <string name="StartRepairLink_Language_en">Start Repair</string>
+  <string name="FindConnectionProblems_Language_en">Finding connections</string>
+  <string name="FindPositionOfProblems_Language_en">Finding positions</string>
+  <string name="DownloadingProblems_Language_en">Downloading positions</string>
+  <string name="FixingProblems_Language_en">Fixing file</string>
+  <string name="SuccessRepairLink_Language_en">Success Repair Link</string>
+
+  <string name="NoVideo_Language_en">(only Sound)</string>
+  <string name="NoSound_Language_en">(only Video)</string>
+
+  <string name="VIPAccount_Language_en">VIP</string>
+  <string name="PermisionFirstMessage_Language_en">Please read license agreement</string>
+  <string name="FindingYoutubeVideos_Language_en">Finding Youtube Videos</string>
+  <string name="AgreePermissions_Language_en">I Agree</string>
+  <string name="LoginIn_Language_en">Loading User Data...</string>
+  <string name="LoginSuccess_Language_en">Login Successfully</string>
+  <string name="LoginError_Language_en">Error Login:</string>
+  <string name="EmptyUserPass_Language_en">Please fill the username and password</string>
+  <string name="Login_Language_en">Login</string>
+  <string name="ServerDownloads_Language_en">Download Links</string>
+  <string name="BuyStorage_Language_en">Buy Storage</string>
+  <string name="UserPermission_Language_en">Facilities, Law and Learning</string>
+  <string name="RegisterUser_Language_en">Register User</string>
+  <string name="LoginUser_Language_en">Login User</string>
+  <string name="LogoutUser_Language_en">Logout</string>
+  <string name="UserNameTitle_Language_en">User Name:</string>
+  <string name="SizeTitle_Language_en">Available Storage:</string>
+  <string name="Email_Language_en">Email</string>
+  <string name="Registering_Language_en">Registring...</string>
+  <string name="RegisterError_Language_en">Error Register:</string>
+  <string name="EmptyUserPassEmail_Language_en">UserName, Pasword or Email is not fill</string>
+  <string name="RegisterSuccess_Language_en">Register Successfully</string>
+  <string name="InvalidEmail_Language_en">Invalid Email Address</string>
+  <string name="buystorage100mb_Language_en">100 مگابایت حجم، قیمت: 100 تومان</string>
+  <string name="buystorage500mb_Language_en">500 مگابایت حجم، قیمت: 250 تومان</string>
+  <string name="buystorage1gb_Language_en">1 گیگابایت حجم، قیمت: 500 تومان</string>
+  <string name="buystorage2gb_Language_en">2 گیگابایت حجم، قیمت: 1000 تومان</string>
+  <string name="buystorage5gb_Language_en">5 گیگابایت حجم، قیمت: 2500 تومان</string>
+  <string name="buystorage10gb_Language_en">10 گیگابایت حجم، قیمت: 5000 تومان</string>
+  <string name="buystorage20gb_Language_en">20 گیگابایت حجم، قیمت: 9000 تومان</string>
+  <string name="BuyPurchase_Language_en">Buy Purchase</string>
+  <string name="BuyingPurchase_Language_en">Buying...</string>
+  <string name="BuyPurchaseError_Language_en">Error Buy: </string>
+  <string name="BuyStorageSuccess_Language_en">Buy Storage Successfully</string>
+  <string name="GettingUserInfo_Language_en">Getting User Data...</string>
+  <string name="Download_Language_en">Download</string>
+  <string name="DeleteFromServer_Language_en">Delete from server</string>
+  <string name="ServerLinks_Language_en">Server Links</string>
+  <string name="RefreshList_Language_en">Refresh List</string>
+  <string name="Refreshing_Language_en">Refreshing...</string>
+  <string name="RefreshListError_Language_en">Refreshing Error</string>
+  <string name="UploadToServer_Language_en">Send to Server (VIP)</string>
+  <string name="SendFile_Language_en">Send File</string>
+  <string name="SendingFile_Language_en">Sending File...</string>
+  <string name="SendingFileError_Language_en">Error Sending File</string>
+  <string name="SendingFileSuccess_Language_en">Send Successfully</string>
+  <string name="CafeBazaarErrorConnection_Language_en">Error in connecting Cafebazaar</string>
+  <string name="DeleteFilesFromServer_Language_en">Delete File</string>
+  <string name="DeletingFilesFromServer_Language_en">Deleting File...</string>
+  <string name="DeletingFilesError_Language_en">Delete File Error:</string>
+  <string name="QuestionDeleteFilesError_Language_en">Are you sure you want to delete file from server?</string>
+  <string name="QuestionServerFileUpload_Language_en">Are you sure you want to send file to server?</string>
+  <string name="FileNotComplete_Language_en">Link is not complete</string>
+
+  <string name="PleaseFillAllItems_Language_en">Please fill all items</string>
+  <string name="UserNameExist_Language_en">UserName is exist</string>
+  <string name="EmailExist_Language_en">Email is exist</string>
+  <string name="NoStorage_Language_en">No Storage</string>
+  <string name="StorageBackContactMe_Language_en">Error</string>
+  <string name="NoStorageFileSize_Language_en">File size larger than remaining storage</string>
+  <string name="NoFileSize_Language_en">Link is not have Size</string>
+  <string name="CannotDownload_Language_en">Server cannot download this file, please check your link is valid</string>
+  <string name="InvalidUserPurchase_Language_en">Invalid Purchase</string>
+  <string name="LoginUserPassError_Language_en">Invalid UserName or Password</string>
+
+  <string name="MultiSelectionMode_Language_en">Enable Multi Selection</string>
+  <string name="MenuSelectionMode_Language_en">Enable Context Menu Selection</string>
+  <string name="DeSelectAll_Language_en">UnSelect All</string>
+  <string name="StopAllLinks_Language_en">Stop All</string>
+  <string name="StopAll_Language_en">Stop All</string>
+  <string name="Areyousureyouwanttodeletecompletelinks_Language_en">Are you sure you want to delete complete links?</string>
+  <string name="Areyousureyouwanttostoplinksandqueues_Language_en">Are you sure you want to links and queues?</string>
+  <string name="Areyousureyouwanttostopnotsupportlinks_Language_en">Are you sure you want to stop not support resumable links?</string>
+  <string name="Areyouwanttoplaylinksqueues_Language_en">Are you want to play links by queues?</string>
+  <string name="PlayLink_Language_en">Play Link</string>
+  <string name="ActiveQueue_Language_en">Active Queue</string>
+
+  <string name="TimeTitle_Language_en">Time:</string>
+  <string name="DateTitle_Language_en">Date:</string>
+  <string name="StartQueueNow_Language_en">Start Queue Now</string>
+  <string name="DeleteLinkInfoQueue_Language_en">Delete From Queue</string>
+  <string name="AgrinDownloadManagerWorkingForDownload_Language_en">Agrin, Downloading...</string>
+  <string name="AgrinDownloadManagerWaitingForDownload_Language_en">Agrin, Waiting for download...</string>
+
+</resources>

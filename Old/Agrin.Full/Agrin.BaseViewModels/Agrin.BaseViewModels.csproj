@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0E4C822F-2540-4DBF-A956-3E655728E5BC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Agrin.BaseViewModels</RootNamespace>
+    <AssemblyName>Agrin.BaseViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MobileApp|AnyCPU'">
+    <OutputPath>bin\MobileApp\</OutputPath>
+    <DefineConstants>MobileApp</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'XamarinApp|AnyCPU'">
+    <OutputPath>bin\XamarinApp\</OutputPath>
+    <DefineConstants>XamarinApp</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationLoader.cs" />
+    <Compile Include="Group\AddGroupBaseViewModel.cs" />
+    <Compile Include="Help\FeedBackBaseViewModel.cs" />
+    <Compile Include="Link\AddLinksBaseViewModel.cs" />
+    <Compile Include="Lists\GroupsBaseViewModel.cs" />
+    <Compile Include="Lists\LinkInfoesDownloadingManagerBaseViewModel.cs" />
+    <Compile Include="Lists\LinksBaseViewModel.cs" />
+    <Compile Include="Lists\ListBaseViewModel.cs" />
+    <Compile Include="MenuToolbar\ContextMenuBaseViewModel.cs" />
+    <Compile Include="MenuToolbar\MenuBaseViewModel.cs" />
+    <Compile Include="MenuToolbar\ToolbarBaseViewModel.cs" />
+    <Compile Include="Models\AsudaWebResponseData.cs" />
+    <Compile Include="Models\LinkStatusInfo.cs" />
+    <Compile Include="Popups\CompleteLinksBalloonBaseViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\ApplicationSettingPageBaseViewModel.cs" />
+    <Compile Include="Tasks\AddTaskBaseViewModel.cs" />
+    <Compile Include="Tasks\TasksListBaseViewModel.cs" />
+    <Compile Include="Toolbox\StatusBarBaseViewModel.cs" />
+    <Compile Include="Toolbox\TasksToolbarBaseViewModel.cs" />
+    <Compile Include="WindowLayouts\Asuda\AsudaDataOptimizerBaseViewModel.cs" />
+    <Compile Include="WindowLayouts\Asuda\BasketReceiverBaseViewModel.cs" />
+    <Compile Include="WindowLayouts\Asuda\BasketReceiverSettingPageBaseViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agrin.About\Agrin.About.csproj">
+      <Project>{46b3dae1-9b04-42b7-90ae-5ea045f81454}</Project>
+      <Name>Agrin.About</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Download\Agrin.Download.csproj">
+      <Project>{93d045fb-5a87-4f07-94ff-9754531c2549}</Project>
+      <Name>Agrin.Download</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Helper\Agrin.Helper.csproj">
+      <Project>{93676062-4e74-4edb-af8f-92a4edcfbcab}</Project>
+      <Name>Agrin.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj">
+      <Project>{ee7fd998-1cc1-47c9-af1b-546675210e5b}</Project>
+      <Name>Agrin.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.LinkExtractor\Agrin.LinkExtractor.csproj">
+      <Project>{17d30aaa-2bad-48ee-adca-49d87a8860dc}</Project>
+      <Name>Agrin.LinkExtractor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Log\Agrin.Log.csproj">
+      <Project>{4c518ec4-1897-47b7-9433-05db59d9cce5}</Project>
+      <Name>Agrin.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Network\Agrin.Network.csproj">
+      <Project>{f3489541-3ad4-43c8-9426-da93ad113af7}</Project>
+      <Name>Agrin.Network</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,82 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--BackGrounds-->
+    <SolidColorBrush x:Key="Light_ApplicationColors" Color="#e1e1e1"/>
+    
+    <SolidColorBrush x:Key="Blue_ApplicationColors" Color="#FF2e4a79"/>
+    <SolidColorBrush x:Key="DarkBlue_ApplicationColors" Color="#FF0a113e"/>
+    <SolidColorBrush x:Key="ToolbarButtonBackground_ApplicationColors" Color="Black"/>
+    <SolidColorBrush x:Key="GlowBackground_ApplicationColors" Color="#FF232323"/>
+    <SolidColorBrush x:Key="DarkGlowBackground_ApplicationColors" Color="#ff0f0f0f"/>
+    <SolidColorBrush x:Key="MenuBackground_ApplicationColors" Color="#ff444479"/>
+    <SolidColorBrush x:Key="GreenBackground_ApplicationColors" Color="#ff2e793e"/>
+    <SolidColorBrush x:Key="RedBackground_ApplicationColors" Color="#ff792e2e"/>
+    <SolidColorBrush x:Key="GreenConnectionBackground_ApplicationColors" Color="#ff011b02"/>
+    <SolidColorBrush x:Key="RedConnectionBackground_ApplicationColors" Color="#ff380505"/>
+    <SolidColorBrush x:Key="Scroll_Background" Color="#ff030512"/>
+    <SolidColorBrush x:Key="ScrollMove_Background" Color="#ff667ea7"/>
+    
+    <Color x:Key="DarkBlueMouseOver_ApplicationColors" A="255" R="0" G="0" B="0"/>
+    <Color x:Key="DarkBlueMousePress_ApplicationColors" A="255" R="29" G="29" B="29"/>
+    <Color x:Key="ButtonGreenBlueMouseOver_ApplicationColors" A="255" R="1" G="103" B="66"/>
+
+    <SolidColorBrush x:Key="MouseOverGrid_ApplicationColors" Color="#b7bdc2"/>
+    <SolidColorBrush x:Key="SelectedGrid_ApplicationColors" Color="#797e81"/>
+    <!--<LinearGradientBrush x:Key="SelectedGrid_ApplicationColors" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#d4d9dd" Offset="0.333"/>
+        <GradientStop Color="#b7bdc2" Offset="1"/>
+    </LinearGradientBrush>-->
+    
+    <!--Foregrounds-->
+    <SolidColorBrush x:Key="DarkForeground_ApplicationColors" Color="#6d6d6d"/>
+    <SolidColorBrush x:Key="BlackForeground_ApplicationColors" Color="Black"/>
+    <SolidColorBrush x:Key="RedForeground_ApplicationColors" Color="#c84747"/>
+    
+    <SolidColorBrush x:Key="WhiteForeground_ApplicationColors" Color="White"/>
+    <SolidColorBrush x:Key="ToolbarButtonForeground_ApplicationColors" Color="White"/>
+    <SolidColorBrush x:Key="GreenForeground_ApplicationColors" Color="#ffd2ff00"/>
+    <!--<SolidColorBrush x:Key="RedForeground_ApplicationColors" Color="#ffff9000"/>-->
+    <SolidColorBrush x:Key="YellowForeground_ApplicationColors" Color="#ffffe323"/>
+    <SolidColorBrush x:Key="GreenNotifyForeground_ApplicationColors" Color="#ff41ad49"/>
+    <SolidColorBrush x:Key="RedNotifyForeground_ApplicationColors" Color="#ffff4f4f"/>
+    <SolidColorBrush x:Key="BlueForeground_ApplicationColors" Color="#ff00a9ec"/>
+    <SolidColorBrush x:Key="OrangeForeground_ApplicationColors" Color="#fff3821e"/>
+    
+    <Color x:Key="ToolbarButtonForegroundMouseOver_ApplicationColors" A="255" R="255" G="128" B="4"/>
+    <Color x:Key="ToolbarButtonForegroundMousePress_ApplicationColors" A="255" R="255" G="255" B="255"/>
+    
+    <!--Borders-->
+    <Color x:Key="Border_ApplicationColor" A="255" R="146" G="161" B="185"/>
+    <SolidColorBrush x:Key="Border_ApplicationColors" Color="{StaticResource Border_ApplicationColor}"/>
+    <SolidColorBrush x:Key="GreenSelectedBorder_ApplicationColors" Color="#FF77b900"/>
+    <SolidColorBrush x:Key="WhiteCheckPath_ApplicationColors" Color="White"/>
+    <SolidColorBrush x:Key="WhiteBorder_ApplicationColors" Color="White"/>
+    
+    <!--Lines-->
+    <SolidColorBrush x:Key="MarkCheckBox_ApplicationColors" Color="#ff41ae49"/>
+    <LinearGradientBrush x:Key="WhiteLine_ApplicationColors" EndPoint="0.5,1" StartPoint="0.5,0">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                <RotateTransform Angle="-90" CenterY="0.5" CenterX="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="White" Offset="0.333"/>
+        <GradientStop Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BorderLine_ApplicationColors" EndPoint="0.5,1" StartPoint="0.5,0">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#0192A1B9" Offset="0"/>
+        <GradientStop Color="#FF92A1B9" Offset="1"/>
+    </LinearGradientBrush>
+</ResourceDictionary>

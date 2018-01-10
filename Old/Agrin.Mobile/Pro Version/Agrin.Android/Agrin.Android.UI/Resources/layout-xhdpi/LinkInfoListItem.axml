@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:id="@+LinkInfoListItem/layoutMain"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:id="@+LinkInfoListItem/layoutTop">
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="27dp"
+                android:layout_height="match_parent"
+                android:id="@+LinkInfoListItem/linearImage">
+                <ImageView
+                    android:src="@drawable/icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+LinkInfoListItem/imgIcon" />
+                <ImageView
+                    android:src="@drawable/checkicon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+LinkInfoListItem/imgCheck"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="27dp"
+                android:layout_height="match_parent"
+                android:id="@+LinkInfoListItem/linearNameAndQueueNumber"
+                android:layout_weight="1">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+LinkInfoListItem/layoutLinkName"
+                    android:layout_weight="1"
+                    android:layout_marginRight="2dp">
+                    <ProgressBar
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+LinkInfoListItem/prgDownload"
+                        style="@style/ProgressBar" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+LinkInfoListItem/txtFileName"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="vsd"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/white"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textStyle="bold"
+                        android:layout_marginRight="5dp" />
+                    <RelativeLayout
+                        android:layout_height="match_parent"
+                        android:id="@+LinkInfoListItem/layoutQueue"
+                        android:layout_weight="1"
+                        android:layout_width="30dp"
+                        android:layout_alignParentRight="true"
+                        android:visibility="invisible">
+                        <ImageView
+                            android:src="@drawable/numbercycleicon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+LinkInfoListItem/txtQueueNumber"
+                            android:gravity="center"
+                            android:text=".."
+                            android:textColor="@color/ProgressErrorBackground"
+                            android:textStyle="bold"
+                            android:layout_margin="3dp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:id="@+LinkInfoListItem/layoutStateMain">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+LinkInfoListItem/layoutStateTop"
+                android:layout_marginTop="3dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+LinkInfoListItem/layoutStateTopLeft"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:text="Medium Text"
+                        android:id="@+LinkInfoListItem/txtDownloadedSize"
+                        style="@style/TextView_LinkInfoItem"
+                        android:maxLines="1" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+LinkInfoListItem/layoutStateTopCenter"
+                    android:layout_centerInParent="true">
+                    <TextView
+                        android:text="Medium Text"
+                        android:id="@+LinkInfoListItem/txtSize"
+                        style="@style/TextView_LinkInfoItem"
+                        android:gravity="center"
+                        android:maxLines="1" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+LinkInfoListItem/layoutStateTopRight"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:text="Medium Text"
+                        android:id="@+LinkInfoListItem/txtState"
+                        style="@style/TextView_LinkInfoItem"
+                        android:gravity="right"
+                        android:maxLines="1" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+LinkInfoListItem/layoutStateBottom"
+                android:visibility="gone"
+                android:layout_marginTop="3dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+LinkInfoListItem/layoutStateBottonLeft">
+                    <TextView
+                        android:text="Medium Text"
+                        android:id="@+LinkInfoListItem/txtTimeRemaning"
+                        style="@style/TextView_LinkInfoItem"
+                        android:gravity="left" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:id="@+LinkInfoListItem/layoutStateBottonCenter">
+                    <TextView
+                        android:text="Medium Text"
+                        android:id="@+LinkInfoListItem/txtPercent"
+                        style="@style/TextView_LinkInfoItem"
+                        android:gravity="center" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+LinkInfoListItem/layoutStateErrorTime"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    android:background="@drawable/reconnecttimerbackground">
+                    <TextView
+                        android:text="0:0"
+                        android:id="@+LinkInfoListItem/txtErrorReconnectTimer"
+                        style="@style/TextView_LinkInfoItem"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+LinkInfoListItem/layoutStateBottonRight">
+                    <TextView
+                        android:text="Medium Text"
+                        android:id="@+LinkInfoListItem/txtSpeed"
+                        style="@style/TextView_LinkInfoItem"
+                        android:gravity="right" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

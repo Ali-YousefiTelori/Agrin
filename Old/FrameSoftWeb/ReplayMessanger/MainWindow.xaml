@@ -1,0 +1,74 @@
+﻿<Window x:Class="ReplayMessanger.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <TabControl>
+        <TabItem Header="نسخه ی جدید">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btn_newGetLastMessage" Click="btn_newGetLastMessage_Click" Content="Get Last Message"/>
+                    <Button x:Name="btn_newGetAllAnswer" Content="Get All Answered" Grid.Column="1" Click="btn_newGetAllAnswer_Click"/>
+                </Grid>
+                <TextBox x:Name="txtNewUserMesages" TextWrapping="Wrap" FlowDirection="RightToLeft" Margin="5" Grid.Row="1" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                <TextBox x:Name="txtNewReplay" TextWrapping="Wrap" FlowDirection="RightToLeft" Grid.Row="2" Margin="5" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                <StackPanel Grid.Row="3"  Margin="5">
+                    <TextBlock Text="لینک:" HorizontalAlignment="Right" FlowDirection="RightToLeft"/>
+                    <TextBox x:Name="txtLink" TextWrapping="Wrap" FlowDirection="RightToLeft" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btn_newReplay" Content="Replay" Click="btn_newReplay_Click" />
+                    <Button x:Name="btn_newSkeep" Click="btn_newSkeep_Click" Content="Skeep This Question" Grid.Column="1"/>
+                    <Button x:Name="btn_newBlackList" IsEnabled="False" Content="Send To Black List" Grid.Column="2"/>
+                    <Button x:Name="btn_SendForAll" Grid.Column="3" Content="Send For All Users" Click="btn_SendForAll_Click"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="نسخه ی قدیمی">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Get Last Message" Click="Button_Click"/>
+                    <Button Content="Get All Answered" Click="Button_Click_2"  Grid.Column="1"/>
+                </Grid>
+                <TextBox x:Name="txtUserMesages" TextWrapping="Wrap" FlowDirection="RightToLeft" Margin="5" Grid.Row="1" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                <TextBox x:Name="txtReplay" TextWrapping="Wrap" FlowDirection="RightToLeft" Grid.Row="2" Margin="5" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Replay" Click="Button_Click_1" />
+                    <Button Content="Skeep This Question" Click="Button_Click_3" Grid.Column="1"/>
+                    <Button Content="Send To Black List" Click="Button_Click_4" Grid.Column="2"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>

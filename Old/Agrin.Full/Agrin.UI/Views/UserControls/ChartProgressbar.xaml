@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Agrin.UI.Views.UserControls.ChartProgressbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:converters="clr-namespace:Agrin.ViewModels.Converters;assembly=Agrin.ViewModels"
+             d:DesignHeight="100" Focusable="False" d:DesignWidth="300" SizeChanged="UserControl_SizeChanged" x:Name="mainControl">
+    <UserControl.Resources>
+        <converters:SizeToStringConverter IsPerSecound="True"  x:Key="SizeToStringConverter"/>
+        <VisualBrush x:Key="mainBrush" TileMode="Tile" Viewport="0,0,40,15" ViewportUnits="Absolute">
+            <VisualBrush.Visual>
+                <Grid  Background="{DynamicResource Blue_ApplicationColors}" Width="400" Height="100">
+                    <Line X2="400" Y1="5" Y2="5" Stroke="White" Opacity="0.2" StrokeThickness="10" StrokeDashArray="5"/>
+                    <Line Margin="5,25,0,0" Y2="50" Stroke="White" Opacity="0.2" StrokeThickness="10" StrokeDashArray="5"/>
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </UserControl.Resources>
+    <Grid x:Name="mainGrid"  Background="{StaticResource mainBrush}" >
+        <Grid x:Name="gridProgress" Background="#af452b2f" HorizontalAlignment="Left">
+            <Border BorderBrush="#FFff7117" BorderThickness="1,1,3,1" />
+            <Path Stroke="#FFff7117" StrokeThickness="2" Fill="#eFa95125">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathGeometry.Figures>
+                            <PathFigure x:Name="mainLines" StartPoint="0,200" IsClosed="True" >
+                            </PathFigure>
+                        </PathGeometry.Figures>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+            <Grid x:Name="gridEllipses">
+            </Grid>
+        </Grid>
+       
+        <Control Focusable="False" Foreground="White" Opacity="0.1" Template="{DynamicResource ChartProgressBarTriangle_TemplateStyle}">
+            
+        </Control>
+        <Line X1="{Binding ElementName=currentPoint,Path=X1}" X2="{Binding ElementName=currentPoint,Path=X2}" Y1="{Binding ElementName=currentPoint,Path=Y1}" Y2="{Binding ElementName=currentPoint,Path=Y2}" StrokeThickness="2.5" Stroke="White">
+            <Line.Effect>
+                <BlurEffect/>
+            </Line.Effect>
+        </Line>
+        <Line x:Name="currentPoint" X2="{Binding ElementName=mainGrid,Path=ActualWidth}" Stroke="#FF50FFF6" Y1="0" Y2="{Binding ElementName=currentPoint,Path=Y1}"/>
+        <Border BorderThickness="1" BorderBrush="#FFff7117"/>
+        <TextBlock Visibility="Collapsed" x:Name="txt_currentPoint" VerticalAlignment="Top" Foreground="#FF00fcff" HorizontalAlignment="Center" Text="{Binding ElementName=mainControl,Path=AddPointValue,Converter={StaticResource SizeToStringConverter}}" FlowDirection="RightToLeft" Style="{DynamicResource WhiteNormalPersianTextBlockStyle}">
+            <TextBlock.Effect>
+                <DropShadowEffect Opacity="0.3"/>
+            </TextBlock.Effect>
+        </TextBlock>
+    </Grid>
+</UserControl>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+<ItemGroup>
+    <EmbeddedResource Include="Resources\file1.txt" />
+    <EmbeddedResource Include="Resources\file2.txt" />
+  </ItemGroup>
+</root>

@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{49F8F223-EDEA-4311-AA69-D50E2D450245}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FrameSoftWeb</RootNamespace>
+    <AssemblyName>FrameSoftWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Agrin.IO, Version=1.2.5703.41521, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Agrin.Full\Agrin.LinkExtractor\bin\Release\Agrin.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Agrin.Log, Version=1.1.5703.41521, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Agrin.Full\Agrin.LinkExtractor\bin\Release\Agrin.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\Agrin\Learning\LearningController.cs" />
+    <Compile Include="Controllers\Agrin\Update\GetUpdateController.cs" />
+    <Compile Include="Controllers\AmarGiriController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\DesignController.cs" />
+    <Compile Include="Controllers\DownloadController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuranPod\QuranPodController.cs" />
+    <Compile Include="Controllers\ReporterController.cs" />
+    <Compile Include="Controllers\UserManagerController.cs" />
+    <Compile Include="Engine\Amar\AmarGiriUpdater.cs" />
+    <Compile Include="Engine\SmallDownloadManager.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\ControllerHelper.cs" />
+    <Compile Include="Helper\SerializationData.cs" />
+    <Compile Include="Helper\Streams\StreamDecryption.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Global.asax" />
+    <Content Include="Resources\Agrin\Learning\Android.html" />
+    <Content Include="Resources\Agrin\Learning\AndroidPro.html" />
+    <Content Include="Resources\Agrin\Learning\AndroidPro1.html" />
+    <Content Include="Resources\Agrin\Learning\AndroidPro2.html" />
+    <Content Include="Resources\Agrin\Learning\AndroidPro3.html" />
+    <Content Include="Resources\Agrin\Learning\AndroidPro4.html" />
+    <Content Include="Resources\Agrin\Learning\AndroidPro5.html" />
+    <Content Include="Resources\Agrin\Learning\AndroidPro6.html" />
+    <Content Include="Resources\Agrin\Learning\AndroidPro7.html" />
+    <Content Include="Resources\Agrin\Learning\AndroidPro8.html" />
+    <Content Include="Resources\Agrin\Learning\AndroidPro9.html" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\0.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\1.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\10.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\11.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\12.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\13.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\14.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\2.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\3.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\4.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\5.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\6.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\7.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\8.jpg" />
+    <Content Include="Resources\Agrin\Learning\Images\Android\9.jpg" />
+    <Content Include="Resources\Agrin\Update\Android.txt" />
+    <Content Include="Resources\Agrin\Update\Windows.txt" />
+    <Content Include="Resources\Agrin\Update\Xamarin.txt" />
+    <Content Include="Resources\Images\Design\check.png" />
+    <Content Include="Resources\Images\Flags\ad.gif" />
+    <Content Include="Resources\Images\Flags\ae.gif" />
+    <Content Include="Resources\Images\Flags\af.gif" />
+    <Content Include="Resources\Images\Flags\ag.gif" />
+    <Content Include="Resources\Images\Flags\ai.gif" />
+    <Content Include="Resources\Images\Flags\al.gif" />
+    <Content Include="Resources\Images\Flags\am.gif" />
+    <Content Include="Resources\Images\Flags\an.gif" />
+    <Content Include="Resources\Images\Flags\ao.gif" />
+    <Content Include="Resources\Images\Flags\ar.gif" />
+    <Content Include="Resources\Images\Flags\as.gif" />
+    <Content Include="Resources\Images\Flags\at.gif" />
+    <Content Include="Resources\Images\Flags\au.gif" />
+    <Content Include="Resources\Images\Flags\aw.gif" />
+    <Content Include="Resources\Images\Flags\ax.gif" />
+    <Content Include="Resources\Images\Flags\az.gif" />
+    <Content Include="Resources\Images\Flags\ba.gif" />
+    <Content Include="Resources\Images\Flags\bb.gif" />
+    <Content Include="Resources\Images\Flags\bd.gif" />
+    <Content Include="Resources\Images\Flags\be.gif" />
+    <Content Include="Resources\Images\Flags\bf.gif" />
+    <Content Include="Resources\Images\Flags\bg.gif" />
+    <Content Include="Resources\Images\Flags\bh.gif" />
+    <Content Include="Resources\Images\Flags\bi.gif" />
+    <Content Include="Resources\Images\Flags\bj.gif" />
+    <Content Include="Resources\Images\Flags\bm.gif" />
+    <Content Include="Resources\Images\Flags\bn.gif" />
+    <Content Include="Resources\Images\Flags\bo.gif" />
+    <Content Include="Resources\Images\Flags\br.gif" />
+    <Content Include="Resources\Images\Flags\bs.gif" />
+    <Content Include="Resources\Images\Flags\bt.gif" />
+    <Content Include="Resources\Images\Flags\bv.gif" />
+    <Content Include="Resources\Images\Flags\bw.gif" />
+    <Content Include="Resources\Images\Flags\by.gif" />
+    <Content Include="Resources\Images\Flags\bz.gif" />
+    <Content Include="Resources\Images\Flags\ca.gif" />
+    <Content Include="Resources\Images\Flags\catalonia.gif" />
+    <Content Include="Resources\Images\Flags\cc.gif" />
+    <Content Include="Resources\Images\Flags\cd.gif" />
+    <Content Include="Resources\Images\Flags\cf.gif" />
+    <Content Include="Resources\Images\Flags\cg.gif" />
+    <Content Include="Resources\Images\Flags\ch.gif" />
+    <Content Include="Resources\Images\Flags\ci.gif" />
+    <Content Include="Resources\Images\Flags\ck.gif" />
+    <Content Include="Resources\Images\Flags\cl.gif" />
+    <Content Include="Resources\Images\Flags\cm.gif" />
+    <Content Include="Resources\Images\Flags\cn.gif" />
+    <Content Include="Resources\Images\Flags\co.gif" />
+    <Content Include="Resources\Images\Flags\cr.gif" />
+    <Content Include="Resources\Images\Flags\cs.gif" />
+    <Content Include="Resources\Images\Flags\cu.gif" />
+    <Content Include="Resources\Images\Flags\cv.gif" />
+    <Content Include="Resources\Images\Flags\cx.gif" />
+    <Content Include="Resources\Images\Flags\cy.gif" />
+    <Content Include="Resources\Images\Flags\cz.gif" />
+    <Content Include="Resources\Images\Flags\de.gif" />
+    <Content Include="Resources\Images\Flags\dj.gif" />
+    <Content Include="Resources\Images\Flags\dk.gif" />
+    <Content Include="Resources\Images\Flags\dm.gif" />
+    <Content Include="Resources\Images\Flags\do.gif" />
+    <Content Include="Resources\Images\Flags\dz.gif" />
+    <Content Include="Resources\Images\Flags\ec.gif" />
+    <Content Include="Resources\Images\Flags\ee.gif" />
+    <Content Include="Resources\Images\Flags\eg.gif" />
+    <Content Include="Resources\Images\Flags\eh.gif" />
+    <Content Include="Resources\Images\Flags\england.gif" />
+    <Content Include="Resources\Images\Flags\er.gif" />
+    <Content Include="Resources\Images\Flags\es.gif" />
+    <Content Include="Resources\Images\Flags\et.gif" />
+    <Content Include="Resources\Images\Flags\europeanunion.gif" />
+    <Content Include="Resources\Images\Flags\fam.gif" />
+    <Content Include="Resources\Images\Flags\fi.gif" />
+    <Content Include="Resources\Images\Flags\fj.gif" />
+    <Content Include="Resources\Images\Flags\fk.gif" />
+    <Content Include="Resources\Images\Flags\fm.gif" />
+    <Content Include="Resources\Images\Flags\fo.gif" />
+    <Content Include="Resources\Images\Flags\fr.gif" />
+    <Content Include="Resources\Images\Flags\ga.gif" />
+    <Content Include="Resources\Images\Flags\gb.gif" />
+    <Content Include="Resources\Images\Flags\gd.gif" />
+    <Content Include="Resources\Images\Flags\ge.gif" />
+    <Content Include="Resources\Images\Flags\gf.gif" />
+    <Content Include="Resources\Images\Flags\gh.gif" />
+    <Content Include="Resources\Images\Flags\gi.gif" />
+    <Content Include="Resources\Images\Flags\gl.gif" />
+    <Content Include="Resources\Images\Flags\gm.gif" />
+    <Content Include="Resources\Images\Flags\gn.gif" />
+    <Content Include="Resources\Images\Flags\gp.gif" />
+    <Content Include="Resources\Images\Flags\gq.gif" />
+    <Content Include="Resources\Images\Flags\gr.gif" />
+    <Content Include="Resources\Images\Flags\gs.gif" />
+    <Content Include="Resources\Images\Flags\gt.gif" />
+    <Content Include="Resources\Images\Flags\gu.gif" />
+    <Content Include="Resources\Images\Flags\gw.gif" />
+    <Content Include="Resources\Images\Flags\gy.gif" />
+    <Content Include="Resources\Images\Flags\hk.gif" />
+    <Content Include="Resources\Images\Flags\hm.gif" />
+    <Content Include="Resources\Images\Flags\hn.gif" />
+    <Content Include="Resources\Images\Flags\hr.gif" />
+    <Content Include="Resources\Images\Flags\ht.gif" />
+    <Content Include="Resources\Images\Flags\hu.gif" />
+    <Content Include="Resources\Images\Flags\id.gif" />
+    <Content Include="Resources\Images\Flags\ie.gif" />
+    <Content Include="Resources\Images\Flags\il.gif" />
+    <Content Include="Resources\Images\Flags\in.gif" />
+    <Content Include="Resources\Images\Flags\io.gif" />
+    <Content Include="Resources\Images\Flags\iq.gif" />
+    <Content Include="Resources\Images\Flags\ir.gif" />
+    <Content Include="Resources\Images\Flags\is.gif" />
+    <Content Include="Resources\Images\Flags\it.gif" />
+    <Content Include="Resources\Images\Flags\jm.gif" />
+    <Content Include="Resources\Images\Flags\jo.gif" />
+    <Content Include="Resources\Images\Flags\jp.gif" />
+    <Content Include="Resources\Images\Flags\ke.gif" />
+    <Content Include="Resources\Images\Flags\kg.gif" />
+    <Content Include="Resources\Images\Flags\kh.gif" />
+    <Content Include="Resources\Images\Flags\ki.gif" />
+    <Content Include="Resources\Images\Flags\km.gif" />
+    <Content Include="Resources\Images\Flags\kn.gif" />
+    <Content Include="Resources\Images\Flags\kp.gif" />
+    <Content Include="Resources\Images\Flags\kr.gif" />
+    <Content Include="Resources\Images\Flags\kw.gif" />
+    <Content Include="Resources\Images\Flags\ky.gif" />
+    <Content Include="Resources\Images\Flags\kz.gif" />
+    <Content Include="Resources\Images\Flags\la.gif" />
+    <Content Include="Resources\Images\Flags\lb.gif" />
+    <Content Include="Resources\Images\Flags\lc.gif" />
+    <Content Include="Resources\Images\Flags\li.gif" />
+    <Content Include="Resources\Images\Flags\lk.gif" />
+    <Content Include="Resources\Images\Flags\lr.gif" />
+    <Content Include="Resources\Images\Flags\ls.gif" />
+    <Content Include="Resources\Images\Flags\lt.gif" />
+    <Content Include="Resources\Images\Flags\lu.gif" />
+    <Content Include="Resources\Images\Flags\lv.gif" />
+    <Content Include="Resources\Images\Flags\ly.gif" />
+    <Content Include="Resources\Images\Flags\ma.gif" />
+    <Content Include="Resources\Images\Flags\mc.gif" />
+    <Content Include="Resources\Images\Flags\md.gif" />
+    <Content Include="Resources\Images\Flags\me.gif" />
+    <Content Include="Resources\Images\Flags\mg.gif" />
+    <Content Include="Resources\Images\Flags\mh.gif" />
+    <Content Include="Resources\Images\Flags\mk.gif" />
+    <Content Include="Resources\Images\Flags\ml.gif" />
+    <Content Include="Resources\Images\Flags\mm.gif" />
+    <Content Include="Resources\Images\Flags\mn.gif" />
+    <Content Include="Resources\Images\Flags\mo.gif" />
+    <Content Include="Resources\Images\Flags\mp.gif" />
+    <Content Include="Resources\Images\Flags\mq.gif" />
+    <Content Include="Resources\Images\Flags\mr.gif" />
+    <Content Include="Resources\Images\Flags\ms.gif" />
+    <Content Include="Resources\Images\Flags\mt.gif" />
+    <Content Include="Resources\Images\Flags\mu.gif" />
+    <Content Include="Resources\Images\Flags\mv.gif" />
+    <Content Include="Resources\Images\Flags\mw.gif" />
+    <Content Include="Resources\Images\Flags\mx.gif" />
+    <Content Include="Resources\Images\Flags\my.gif" />
+    <Content Include="Resources\Images\Flags\mz.gif" />
+    <Content Include="Resources\Images\Flags\na.gif" />
+    <Content Include="Resources\Images\Flags\nc.gif" />
+    <Content Include="Resources\Images\Flags\ne.gif" />
+    <Content Include="Resources\Images\Flags\nf.gif" />
+    <Content Include="Resources\Images\Flags\ng.gif" />
+    <Content Include="Resources\Images\Flags\ni.gif" />
+    <Content Include="Resources\Images\Flags\nl.gif" />
+    <Content Include="Resources\Images\Flags\no.gif" />
+    <Content Include="Resources\Images\Flags\np.gif" />
+    <Content Include="Resources\Images\Flags\nr.gif" />
+    <Content Include="Resources\Images\Flags\nu.gif" />
+    <Content Include="Resources\Images\Flags\nz.gif" />
+    <Content Include="Resources\Images\Flags\om.gif" />
+    <Content Include="Resources\Images\Flags\pa.gif" />
+    <Content Include="Resources\Images\Flags\pe.gif" />
+    <Content Include="Resources\Images\Flags\pf.gif" />
+    <Content Include="Resources\Images\Flags\pg.gif" />
+    <Content Include="Resources\Images\Flags\ph.gif" />
+    <Content Include="Resources\Images\Flags\pk.gif" />
+    <Content Include="Resources\Images\Flags\pl.gif" />
+    <Content Include="Resources\Images\Flags\pm.gif" />
+    <Content Include="Resources\Images\Flags\pn.gif" />
+    <Content Include="Resources\Images\Flags\pr.gif" />
+    <Content Include="Resources\Images\Flags\ps.gif" />
+    <Content Include="Resources\Images\Flags\pt.gif" />
+    <Content Include="Resources\Images\Flags\pw.gif" />
+    <Content Include="Resources\Images\Flags\py.gif" />
+    <Content Include="Resources\Images\Flags\qa.gif" />
+    <Content Include="Resources\Images\Flags\re.gif" />
+    <Content Include="Resources\Images\Flags\ro.gif" />
+    <Content Include="Resources\Images\Flags\rs.gif" />
+    <Content Include="Resources\Images\Flags\ru.gif" />
+    <Content Include="Resources\Images\Flags\rw.gif" />
+    <Content Include="Resources\Images\Flags\sa.gif" />
+    <Content Include="Resources\Images\Flags\sb.gif" />
+    <Content Include="Resources\Images\Flags\sc.gif" />
+    <Content Include="Resources\Images\Flags\scotland.gif" />
+    <Content Include="Resources\Images\Flags\sd.gif" />
+    <Content Include="Resources\Images\Flags\se.gif" />
+    <Content Include="Resources\Images\Flags\sg.gif" />
+    <Content Include="Resources\Images\Flags\sh.gif" />
+    <Content Include="Resources\Images\Flags\si.gif" />
+    <Content Include="Resources\Images\Flags\sj.gif" />
+    <Content Include="Resources\Images\Flags\sk.gif" />
+    <Content Include="Resources\Images\Flags\sl.gif" />
+    <Content Include="Resources\Images\Flags\sm.gif" />
+    <Content Include="Resources\Images\Flags\sn.gif" />
+    <Content Include="Resources\Images\Flags\so.gif" />
+    <Content Include="Resources\Images\Flags\sr.gif" />
+    <Content Include="Resources\Images\Flags\st.gif" />
+    <Content Include="Resources\Images\Flags\sv.gif" />
+    <Content Include="Resources\Images\Flags\sy.gif" />
+    <Content Include="Resources\Images\Flags\sz.gif" />
+    <Content Include="Resources\Images\Flags\tc.gif" />
+    <Content Include="Resources\Images\Flags\td.gif" />
+    <Content Include="Resources\Images\Flags\tf.gif" />
+    <Content Include="Resources\Images\Flags\tg.gif" />
+    <Content Include="Resources\Images\Flags\th.gif" />
+    <Content Include="Resources\Images\Flags\tj.gif" />
+    <Content Include="Resources\Images\Flags\tk.gif" />
+    <Content Include="Resources\Images\Flags\tl.gif" />
+    <Content Include="Resources\Images\Flags\tm.gif" />
+    <Content Include="Resources\Images\Flags\tn.gif" />
+    <Content Include="Resources\Images\Flags\to.gif" />
+    <Content Include="Resources\Images\Flags\tr.gif" />
+    <Content Include="Resources\Images\Flags\tt.gif" />
+    <Content Include="Resources\Images\Flags\tv.gif" />
+    <Content Include="Resources\Images\Flags\tw.gif" />
+    <Content Include="Resources\Images\Flags\tz.gif" />
+    <Content Include="Resources\Images\Flags\ua.gif" />
+    <Content Include="Resources\Images\Flags\ug.gif" />
+    <Content Include="Resources\Images\Flags\um.gif" />
+    <Content Include="Resources\Images\Flags\us.gif" />
+    <Content Include="Resources\Images\Flags\uy.gif" />
+    <Content Include="Resources\Images\Flags\uz.gif" />
+    <Content Include="Resources\Images\Flags\va.gif" />
+    <Content Include="Resources\Images\Flags\vc.gif" />
+    <Content Include="Resources\Images\Flags\ve.gif" />
+    <Content Include="Resources\Images\Flags\vg.gif" />
+    <Content Include="Resources\Images\Flags\vi.gif" />
+    <Content Include="Resources\Images\Flags\vn.gif" />
+    <Content Include="Resources\Images\Flags\vu.gif" />
+    <Content Include="Resources\Images\Flags\wales.gif" />
+    <Content Include="Resources\Images\Flags\wf.gif" />
+    <Content Include="Resources\Images\Flags\ws.gif" />
+    <Content Include="Resources\Images\Flags\ye.gif" />
+    <Content Include="Resources\Images\Flags\yt.gif" />
+    <Content Include="Resources\Images\Flags\za.gif" />
+    <Content Include="Resources\Images\Flags\zm.gif" />
+    <Content Include="Resources\Images\Flags\zw.gif" />
+    <Content Include="Views\Agrin\Index.aspx" />
+    <Content Include="Views\Agrin\Post.aspx" />
+    <Content Include="Views\Agrin\Update\GetAndroidUpdate.aspx" />
+    <Content Include="Views\AmarGiri\Insert.aspx" />
+    <Content Include="Views\AmarGiri\GetAmar.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
+    <Folder Include="DataBase\" />
+    <Folder Include="Design\" />
+    <Folder Include="Files\Agrin\" />
+    <Folder Include="Models\" />
+    <Folder Include="Resources\Agrin\Design\Windows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Agrin\AgrinMasterPager.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\SignalGo\Main\SignalGo\SignalGo.Client\SignalGo.Client.csproj">
+      <Project>{da4f99a9-69e4-48f1-8850-5298f7762ab9}</Project>
+      <Name>SignalGo.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\SignalGo\Main\SignalGo\SignalGo.Shared\SignalGo.Shared.csproj">
+      <Project>{78D8601B-E331-47B7-A4A8-46B7460D82A4}</Project>
+      <Name>SignalGo.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Agrin.Full\Agrin.Framesoft\Agrin.Framesoft.csproj">
+      <Project>{a3ccf331-cdd9-47cc-ac0e-55b1c80b0531}</Project>
+      <Name>Agrin.Framesoft</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Agrin.Full\Agrin.LinkExtractor\Agrin.LinkExtractor.csproj">
+      <Project>{17d30aaa-2bad-48ee-adca-49d87a8860dc}</Project>
+      <Name>Agrin.LinkExtractor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FrameSoft.Agrin.DataBase\FrameSoft.Agrin.DataBase.csproj">
+      <Project>{7CBFF213-653B-4FD0-9964-48EB9C4D5780}</Project>
+      <Name>FrameSoft.Agrin.DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FrameSoft.AmarGiri.DataBase\FrameSoft.AmarGiri.DataBase.csproj">
+      <Project>{e2f6cc23-2366-45d8-abe2-43861d7df3f5}</Project>
+      <Name>FrameSoft.AmarGiri.DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FramwsoftSignalGoServices\FramwsoftSignalGoServices.csproj">
+      <Project>{465E0483-DCFC-40E9-B302-9482E53241E0}</Project>
+      <Name>FramwsoftSignalGoServices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\FrameSoft.pubxml" />
+    <None Include="Properties\PublishProfiles\FramesoftApp.pubxml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'FrameAppVPS|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;FrameAppVPS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'FrameSoft.ir|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'FrameSoftIR|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;FrameSoftIR</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4786</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:4786/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

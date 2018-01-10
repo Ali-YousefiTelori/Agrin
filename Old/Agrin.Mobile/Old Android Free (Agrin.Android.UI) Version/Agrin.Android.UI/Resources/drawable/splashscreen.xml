@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <bitmap android:src="@drawable/background" android:gravity="fill" android:layout_gravity="fill" />
+  </item>
+  <item>
+    <bitmap android:src="@drawable/Icon" android:gravity="center" android:layout_gravity="center" />
+  </item>
+  <!--<item android:bottom="30dip">
+    <bitmap android:src="@drawable/splash_text"  android:layout_width="256px" android:layout_height="256px" android:width="256px" android:height="256px" android:gravity="bottom" android:layout_gravity="bottom" />
+  </item>-->
+</layer-list>

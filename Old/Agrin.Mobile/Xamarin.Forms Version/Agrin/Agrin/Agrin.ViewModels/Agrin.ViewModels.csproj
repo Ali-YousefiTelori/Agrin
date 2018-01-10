@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ABD55B89-5DCA-437A-ABA1-2D6F6D7F8D16}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Agrin.ViewModels</RootNamespace>
+    <AssemblyName>Agrin.ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Agrin.About">
+      <HintPath>..\..\Refrences\Obfuscate\Agrin.About.dll</HintPath>
+    </Reference>
+    <Reference Include="Agrin.BaseViewModels">
+      <HintPath>..\..\Refrences\Obfuscate\Agrin.BaseViewModels.dll</HintPath>
+    </Reference>
+    <Reference Include="Agrin.Data">
+      <HintPath>..\..\Refrences\Obfuscate\Agrin.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Agrin.Download">
+      <HintPath>..\..\Refrences\Obfuscate\Agrin.Download.dll</HintPath>
+    </Reference>
+    <Reference Include="Agrin.Framesoft">
+      <HintPath>..\..\Refrences\Obfuscate\Agrin.Framesoft.dll</HintPath>
+    </Reference>
+    <Reference Include="Agrin.Helper">
+      <HintPath>..\..\Refrences\Obfuscate\Agrin.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="Agrin.IO">
+      <HintPath>..\..\Refrences\Obfuscate\Agrin.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Agrin.LinkExtractor">
+      <HintPath>..\..\Refrences\Obfuscate\Agrin.LinkExtractor.dll</HintPath>
+    </Reference>
+    <Reference Include="Agrin.Log">
+      <HintPath>..\..\Refrences\Obfuscate\Agrin.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Refrences\Obfuscate\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v1.0\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ComponentModel\RelayCommand.cs" />
+    <Compile Include="Helpers\ApplicationHelper.cs" />
+    <Compile Include="Helpers\DeviceHelper.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\InitializeApplication.cs" />
+    <Compile Include="Helpers\ViewsUtility.cs" />
+    <Compile Include="Link\AddLinksViewModel.cs" />
+    <Compile Include="Lists\LinksListViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

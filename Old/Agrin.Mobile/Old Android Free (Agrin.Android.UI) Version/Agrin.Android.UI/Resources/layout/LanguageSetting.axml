@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:minWidth="25px"
+    p1:minHeight="25px"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:padding="40dip">
+    <LinearLayout
+        p1:orientation="vertical"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:layout_gravity="center_vertical">
+        <Button
+            p1:text="فارسی"
+            p1:layout_width="match_parent"
+            p1:layout_height="match_parent"
+            p1:id="@+LanguageSetting/btnPersian"
+            p1:padding="20dip"
+            p1:layout_margin="10dip" />
+        <Button
+            p1:text="English"
+            p1:layout_width="match_parent"
+            p1:layout_height="match_parent"
+            p1:id="@+LanguageSetting/btnEnglish"
+            p1:padding="20dip"
+            p1:layout_margin="10dip" />
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="Agrin.Windows.UI.Views.Toolbox.TabMenuControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:Agrin.Windows.UI.ViewModels.Toolbox"
+             xmlns:helper="clr-namespace:Agrin.ViewModels.ControlHelpers;assembly=RapidbazPlus.ViewModels"
+             mc:Ignorable="d" FlowDirection="{DynamicResource RightToLeftStyle}" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <vm:TabMenuControlViewModel x:Key="TabMenuControlViewModel"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource TabMenuControlViewModel}"/>
+    </UserControl.DataContext>
+    <Grid>
+        <TabControl helper:TabControlExpander.IsTabControlExpander="True" SelectedIndex="{Binding SelectedIndex}">
+            <TabControl.Items>
+                <TabItem Header="لینک ها">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Command="{Binding LinksCommand}" IsChecked="{Binding IsLinksSelected,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="همۀ لینک ها" Tag="{DynamicResource List_TemplateStyle}"/>
+                        <ToggleButton Command="{Binding CompleteLinksCommand}" IsChecked="{Binding IsCompleteLinksSelected,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ToolbaarToggleButtonStyle}" Content="تکمیل شده" Tag="{DynamicResource CheckList_TemplateStyle}"/>
+                        <ToggleButton Command="{Binding DownloadingLinksCommand}" IsChecked="{Binding IsDownloadingLinksSelected,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ToolbaarToggleButtonStyle}" Content="در حال دانلود" Tag="{DynamicResource PlayList_TemplateStyle}"/>
+                        <ToggleButton Command="{Binding NotCompleteLinksCommand}" IsChecked="{Binding IsNotCompleteLinksSelected,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ToolbaarToggleButtonStyle}" Content="ناتمام" Tag="{DynamicResource NotCompleteList_TemplateStyle}"/>
+                        <ToggleButton Command="{Binding ErrorLinksCommand}" IsChecked="{Binding IsErrorLinksSelected,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ToolbaarToggleButtonStyle}" Content="خطا داده" Tag="{DynamicResource WarningList_TemplateStyle}"/>
+                        <ToggleButton Command="{Binding QueueLinksCommand}" IsChecked="{Binding IsQueueLinksSelected,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ToolbaarToggleButtonStyle}" Content="در صف دانلود" Tag="{DynamicResource QueueList_TemplateStyle}"/>
+                        <ToggleButton Command="{Binding ShowGroupLinksCommand}" CommandParameter="{Binding Path=IsChecked,RelativeSource={RelativeSource Self}}" Style="{DynamicResource ToolbaarToggleButtonStyle}" Content="گروه بندی" Tag="{DynamicResource GroupList_TemplateStyle}"/>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="گروه ها">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Command="{Binding GroupsCommand}" IsChecked="True" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="گروه ها" Tag="{DynamicResource GroupList_TemplateStyle}"/>
+                        <!--<RadioButton Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="لیست ساده" Tag="{DynamicResource List_TemplateStyle}"/>
+                        <StackPanel>
+                            <RadioButton Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="درج گروه" Tag="{DynamicResource AddGroup_TemplateStyle}"/>
+                        </StackPanel>-->
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="رپیدباز">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Command="{Binding LoginRapidBazCommand}" IsChecked="{Binding IsLoginRapidBaz,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="{Binding LoginText}" Tag="{DynamicResource UserRole_TemplateStyle}"/>
+                        <RadioButton IsEnabled="{Binding IsLogin,Mode=OneWay}" Command="{Binding CompleteRapidBazCommand}" IsChecked="{Binding IsCompleteList,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="تکمیل شده" Tag="{DynamicResource CheckList_TemplateStyle}"/>
+                        <RadioButton IsEnabled="{Binding IsLogin,Mode=OneWay}" Command="{Binding QueueRapidBazCommand}" IsChecked="{Binding IsQueueRapidBaz,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="صف انتقال" Tag="{DynamicResource QueueList_TemplateStyle}"/>
+                        <RadioButton IsEnabled="{Binding IsLogin,Mode=OneWay}" Command="{Binding FolderExplorerRapidBazCommand}" IsChecked="{Binding IsFolderExplorerRapidBaz,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="پوشه ها" Tag="{DynamicResource Folder_TemplateStyle}"/>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="مدیریت وظایف">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Command="{Binding TasksListCommand}" IsChecked="True" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="لیست وظایف" Tag="{DynamicResource TaskList_TemplateStyle}"/>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="تنظیمات" Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton IsChecked="True" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="سرعت" Tag="{DynamicResource Speed_TemplateStyle}"/>
+                        <RadioButton Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="پروکسی" Tag="{DynamicResource Proxy_TemplateStyle}"/>
+                        <RadioButton Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="مجوز کاربری" Tag="{DynamicResource UserCheck_TemplateStyle}"/>
+                        <RadioButton Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="دریافت و پایان" Tag="{DynamicResource FinishFlag_TemplateStyle}"/>
+                        <RadioButton Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="نرم افزار" Tag="{DynamicResource AgrinLogo_TemplateStyle}"/>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="راهنما">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton IsChecked="True" Command="{Binding RapidBazInformationCommand}" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="درباره رپیدباز" Tag="{DynamicResource Info_TemplateStyle}"/>
+                        <RadioButton Command="{Binding ApplicationAboutCommand}" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="درباره نرم افزار" Tag="{DynamicResource Info_TemplateStyle}"/>
+                        <!--<RadioButton Command="{Binding FeedBackCommand}" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="تماس با ما" Tag="{DynamicResource Message_TemplateStyle}"/>-->
+                    </StackPanel>
+                </TabItem>
+            </TabControl.Items>
+        </TabControl>
+    </Grid>
+</UserControl>

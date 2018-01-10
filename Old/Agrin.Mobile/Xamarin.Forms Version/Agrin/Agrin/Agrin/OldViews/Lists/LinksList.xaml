@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Agrin.ViewModels.Lists;assembly=Agrin.ViewModels"
+             xmlns:controls="clr-namespace:Agrin.OldViews.Lists"
+             x:Class="Agrin.OldViews.Lists.LinksList">
+    <ContentView.BindingContext>
+        <vm:LinksListViewModel/>
+    </ContentView.BindingContext>
+    <ScrollView Orientation="Vertical">
+        <StackLayout x:Name="listStack" VerticalOptions="FillAndExpand" Orientation="Vertical">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <controls:LinkInfoItemTemplate BindingContext="{Binding}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </StackLayout>
+    </ScrollView>
+</ContentView>

@@ -1,0 +1,408 @@
+﻿<Window x:Class="Agrin.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Agrin.UI.Views.Downloads"
+        xmlns:toolbox="clr-namespace:Agrin.UI.Views.Toolbox"
+        xmlns:lists="clr-namespace:Agrin.UI.Views.Lists"
+        xmlns:elements="clr-namespace:Agrin.UI.Views.UserControls"
+        xmlns:popup="clr-namespace:Agrin.UI.Views.Popups"
+        xmlns:ext="clr-namespace:System.Windows.Extensions;assembly=Chrome"
+        xmlns:pages="clr-namespace:Agrin.UI.Views.Pages"
+        BorderThickness="2" BorderBrush="White" Icon="Project1.ico" 
+        Title="مدیریت دانلود آگرین" x:Name="mainWindow" Height="600" Width="1000" Loaded="mainWindow_Loaded" MouseLeftButtonDown="Window_MouseLeftButtonDown" WindowStartupLocation="CenterScreen" Background="{DynamicResource Blue_ApplicationColors}" StateChanged="mainWindow_StateChanged" Closing="mainWindow_Closing">
+    <ext:WindowChrome.WindowChrome>
+        <ext:WindowChrome UseGlassFrame="False" CaptionHeight="50"/>
+    </ext:WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Storyboard x:Key="ShowStoryboardPage">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" DecelerationRatio="1.0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" DecelerationRatio="1.0">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseStoryboardDownloadsPage">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" DecelerationRatio="1.0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" DecelerationRatio="1.0">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="-800,0,800,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseStoryboardPage">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" DecelerationRatio="1.0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" DecelerationRatio="1.0">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="800,0,-800,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseStoryboardPage2">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" DecelerationRatio="1.0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" DecelerationRatio="1.0">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="-800,0,800,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ShowToolbarStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" DecelerationRatio="1.0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" DecelerationRatio="1.0">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="-2,0,0,5"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseToolbarStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" DecelerationRatio="1.0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" DecelerationRatio="1.0">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="-110,0,0,5"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ShowGroupStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" DecelerationRatio="1.0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" DecelerationRatio="1.0">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,0,-2,5"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseGroupStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" DecelerationRatio="1.0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" DecelerationRatio="1.0">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="5,0,-254,5"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Grid x:Name="mainlayout" Margin="3">
+        <Grid  ClipToBounds="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Height="75" x:Name="titleGrid">
+                <Grid Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <toolbox:MenuControl x:Name="mainMenu" ext:WindowChrome.HitTestable="True"/>
+                    <popup:Notification x:Name="mainNotify" Margin="0,0,0,0" Grid.Column="1" ext:WindowChrome.HitTestable="True"/>
+                    <Button Visibility="Collapsed" Grid.Column="1" ext:WindowChrome.HitTestable="True" Content="ارائه نظرات و پیشنهادات شما" VerticalAlignment="Top" HorizontalAlignment="Right" Height="38" Margin="5,0,3,0" FontSize="18" Foreground="White" BorderThickness="0" Padding="20,0,20,0" Background="Black" Click="Button_Click_1"/>
+                </Grid>
+                <toolbox:TopToolbox x:Name="mainTopToolBox" Height="35" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <Rectangle  Margin="-2,52,0,0" Height="2" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left" Fill="{DynamicResource WhiteLine_ApplicationColors}"/>
+                <Rectangle  Margin="-2,55,0,0" Height="1" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left" Fill="{DynamicResource WhiteLine_ApplicationColors}"/>
+                <Grid HorizontalAlignment="Left" Height="51" Margin="1" VerticalAlignment="Top">
+                    <Control Template="{DynamicResource ApplicationIcon_TemplateStyle}" >
+                        <Control.Effect>
+                            <DropShadowEffect Opacity="0.8"/>
+                        </Control.Effect>
+                    </Control>
+                    <Button ext:WindowChrome.HitTestable="True" x:Name="notifyButton" Click="notifyButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Height="28" Width="28">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Grid x:Name="mainGrid" Background="#fffc00">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="MouseOver">
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ctrlMain" Storyboard.TargetProperty="Opacity">
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="0.8" />
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+
+                                    <Control x:Name="ctrlMain" Template="{DynamicResource Arrow_TemplateStyle}"  Foreground="Green" Margin="5,5,0,0"  RenderTransformOrigin="0.5,0.5">
+                                        <Control.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="45"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Control.RenderTransform>
+                                    </Control>
+
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button ext:WindowChrome.HitTestable="True" x:Name="minimizeButton" Click="minimizeButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="21" Width="21">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Grid x:Name="mainGrid" Background="#0fffffff">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="MouseOver">
+                                                <Storyboard>
+                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Background.Color">
+                                                        <EasingColorKeyFrame KeyTime="0:0:0.05" Value="#4fffffff" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <!--<VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="iconControl">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.05" Value="{DynamicResource ToolbarButtonForegroundMousePress_ApplicationColors}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="textControl">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.05" Value="{DynamicResource ToolbarButtonForegroundMousePress_ApplicationColors}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="mainGrid">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="0.5" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="iconControl">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.05" Value="{DynamicResource ToolbarButtonForegroundMouseOver_ApplicationColors}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="textControl">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.05" Value="{DynamicResource ToolbarButtonForegroundMouseOver_ApplicationColors}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused" />-->
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Rectangle x:Name="mainRect" Height="2" HorizontalAlignment="Right" Width="10" VerticalAlignment="Bottom" Margin="0,0,5,8" Fill="White" Opacity="0.5"/>
+
+                                </Grid>
+
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button ext:WindowChrome.HitTestable="True" x:Name="closeButton" Click="closeButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="19.2" Width="19.5" Margin="9,0,0,2">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Grid x:Name="mainGrid" Background="#0fffffff">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="MouseOver">
+                                                <Storyboard>
+                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Background.Color">
+                                                        <EasingColorKeyFrame KeyTime="0:0:0.05" Value="#4fffffff" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <!--<VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="iconControl">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.05" Value="{DynamicResource ToolbarButtonForegroundMousePress_ApplicationColors}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="textControl">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.05" Value="{DynamicResource ToolbarButtonForegroundMousePress_ApplicationColors}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="mainGrid">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="0.5" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="iconControl">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.05" Value="{DynamicResource ToolbarButtonForegroundMouseOver_ApplicationColors}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="textControl">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.05" Value="{DynamicResource ToolbarButtonForegroundMouseOver_ApplicationColors}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused" />-->
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Control Template="{DynamicResource Cross_TemplateStyle}" Margin="5" Opacity="0.5"/>
+                                </Grid>
+
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+
+                <TextBlock  Margin="55,15,0,0" HorizontalAlignment="Left" Style="{DynamicResource WhiteNormalPersianTextBlockStyle}"  FontSize="{DynamicResource NormalXFontSizeStyle}" Text="مدیریت دانلود آگرین">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Opacity="0.8"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtVersion" Style="{DynamicResource WhiteNormalPersianTextBlockStyle}" Foreground="#ff7ed0ff"  FontSize="9pt" FontFamily="tahoma" VerticalAlignment="Top" Margin="32,0,0,0" HorizontalAlignment="Left" Text="" FlowDirection="LeftToRight">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Opacity="0.6"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="1"  Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" Margin="5,0,5,5">
+                    <Grid >
+                        <Grid.Style>
+                            <Style TargetType="{x:Type Grid}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=mainWindow,Path=IsShowMessege}" Value="false">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard Storyboard="{StaticResource ShowStoryboardPage}"/>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard Storyboard="{StaticResource CloseStoryboardPage}"/>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <!--<Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>-->
+                        <controls:LinkInfoesDownloadingManager ClipToBounds="True" x:Name="downloadManager">
+                            <controls:LinkInfoesDownloadingManager.Style>
+                                <Style TargetType="{x:Type controls:LinkInfoesDownloadingManager}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=mainWindow,Path=IsShowPage}" Value="false">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard Storyboard="{StaticResource ShowStoryboardPage}"/>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard Storyboard="{StaticResource CloseStoryboardDownloadsPage}"/>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </controls:LinkInfoesDownloadingManager.Style>
+                        </controls:LinkInfoesDownloadingManager>
+                        <pages:PagesManager>
+                            <pages:PagesManager.Style>
+                                <Style TargetType="{x:Type pages:PagesManager}">
+                                    <Setter Property="Margin" Value="800,0,-800,0" />
+                                    <Setter Property="Opacity" Value="0"/>
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=mainWindow,Path=IsShowPage}" Value="True">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard Storyboard="{StaticResource ShowStoryboardPage}"/>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard Storyboard="{StaticResource CloseStoryboardPage}"/>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </pages:PagesManager.Style>
+                        </pages:PagesManager>
+                    </Grid>
+                </Grid>
+
+                <elements:WindowMessegeBox Grid.Column="1">
+                    <elements:WindowMessegeBox.Style>
+                        <Style TargetType="{x:Type elements:WindowMessegeBox}">
+                            <Setter Property="Margin" Value="-800,0,800,0" />
+                            <Setter Property="Opacity" Value="0"/>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=mainWindow,Path=IsShowMessege}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource ShowStoryboardPage}"/>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard Storyboard="{StaticResource CloseStoryboardPage2}"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </elements:WindowMessegeBox.Style>
+                </elements:WindowMessegeBox>
+                <Grid x:Name="toolbarGrid" DataContext="{Binding ElementName=mainWindow}" Margin="-110,0,0,0" Opacity="0.0" Visibility="Collapsed">
+                    <Grid.Style>
+                        <Style TargetType="{x:Type Grid}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsShowToolbar}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource ShowToolbarStoryboard}"/>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard Storyboard="{StaticResource CloseToolbarStoryboard}"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <toolbox:Toolbar MouseLeave="Toolbar_MouseLeave">
+                        <toolbox:Toolbar.Effect>
+                            <DropShadowEffect BlurRadius="10" Opacity="0.2"/>
+                        </toolbox:Toolbar.Effect>
+                    </toolbox:Toolbar>
+                </Grid>
+                <!--<Grid x:Name="groupGrid" Width="250" Grid.Column="2" DataContext="{Binding ElementName=mainWindow}" Margin="5,0,-254,0" Opacity="0.0" Visibility="Collapsed">
+                    <Grid.Style>
+                        <Style TargetType="{x:Type Grid}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsShowGroup}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource ShowGroupStoryboard}"/>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard Storyboard="{StaticResource CloseGroupStoryboard}"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <lists:GroupListData MouseLeave="Toolbar_MouseLeave"/>
+                </Grid>-->
+            </Grid>
+            <Border Grid.Row="1" Background="#01ffffff" Opacity="0.001" IsHitTestVisible="True" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="10" Margin="-2,0,0,80" MouseMove="Toolbar_MouseMove"/>
+            <!--<Border Grid.Row="1"  Background="#01ffffff" Opacity="0.001" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="8" Margin="0,0,0,80" MouseMove="Group_MouseMove"/>-->
+        </Grid>
+    </Grid>
+</Window>

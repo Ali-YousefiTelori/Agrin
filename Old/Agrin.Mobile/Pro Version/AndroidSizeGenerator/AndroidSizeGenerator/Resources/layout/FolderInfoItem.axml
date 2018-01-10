@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="@dimen/folderSize"
+    android:layout_height="@dimen/folderLayoutHeight">
+    <ImageView
+        android:src="@drawable/Mydocumentsicon"
+        android:layout_width="@dimen/folderSize"
+        android:layout_height="@dimen/folderSize"
+        android:id="@+FolderInfoItem/imgIcon" />
+    <TextView
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+FolderInfoItem/txtName"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="@dimen/folderTextSize" />
+</LinearLayout>

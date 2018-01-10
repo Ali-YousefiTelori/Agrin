@@ -1,0 +1,22 @@
+﻿<Window x:Class="CreateFileCheckSum.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="400" Width="1000" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Width="100" Content="Start" x:Name="btnStart" Click="btnStart_Click"/>
+            <Button Margin="10,0,0,0" Width="100" Content="Check" x:Name="btnCheck" Click="btnCheck_Click"/>
+            <Button Margin="10,0,0,0" Width="100" Content="Get Positions" x:Name="btnGetPositions" Click="btnGetPositions_Click"/>
+            <Button Margin="10,0,0,0" Width="100" Content="Get Bytes" x:Name="btnBytes" Click="btnBytes_Click"/>
+            <Button Margin="10,0,0,0" Width="100" Content="Download" x:Name="btnDownload" Click="btnDownload_Click"/>
+
+        </StackPanel>
+        <ProgressBar x:Name="mainProgress" Grid.Row="1"/>
+        <ListBox Grid.Row="2" x:Name="mainListBox"/>
+    </Grid>
+</Window>

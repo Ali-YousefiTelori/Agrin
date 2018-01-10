@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Android", "Agrin.Android.UI\Agrin.Android.csproj", "{A5796620-9980-49B7-9B65-17358C5679C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlidingMenuSharp", "C:\Users\Ali Visual Studio\Downloads\Projects\SlidingMenuSharp-master\SlidingMenuSharp-master\SlidingMenuSharp\SlidingMenuSharp.csproj", "{555937D8-1533-4D19-A346-55C192C35A5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{555937D8-1533-4D19-A346-55C192C35A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{555937D8-1533-4D19-A346-55C192C35A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{555937D8-1533-4D19-A346-55C192C35A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{555937D8-1533-4D19-A346-55C192C35A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5796620-9980-49B7-9B65-17358C5679C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5796620-9980-49B7-9B65-17358C5679C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5796620-9980-49B7-9B65-17358C5679C0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A5796620-9980-49B7-9B65-17358C5679C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5796620-9980-49B7-9B65-17358C5679C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5796620-9980-49B7-9B65-17358C5679C0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

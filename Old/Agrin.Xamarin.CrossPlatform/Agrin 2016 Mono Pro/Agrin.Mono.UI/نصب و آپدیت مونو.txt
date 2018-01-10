@@ -1,0 +1,5 @@
+﻿آپدیت و نصب :
+http://stackoverflow.com/questions/13365158/installing-mono-3-x-in-ubuntu-debian
+
+http://www.mono-project.com/docs/getting-started/install/linux/#debian-ubuntu-and-derivatives
+

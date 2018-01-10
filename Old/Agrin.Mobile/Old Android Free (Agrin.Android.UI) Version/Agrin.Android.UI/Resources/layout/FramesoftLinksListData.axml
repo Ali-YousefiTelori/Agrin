@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+FramesoftLinksListData/mainLayout">
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1">
+        <!--<HorizontalScrollView
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">-->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fillViewport="true"
+                android:gravity="top">
+                <ListView
+                    android:id="@+FramesoftLinksListData/mainListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollingCache="true"
+                    android:isScrollContainer="true" />
+            </ScrollView>
+        <!--</HorizontalScrollView>-->
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:text="RefreshList_Language"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:id="@+FramesoftLinksListData/btnRefersh"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
