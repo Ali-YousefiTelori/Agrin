@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="Agrin.Windows.UI.Views.RapidBaz.FolderFilesExplorer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:busy="clr-namespace:Agrin.Windows.UI.Views.WindowLayouts"
+             xmlns:conv="clr-namespace:Agrin.ViewModels.Converters;assembly=Agrin.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tool="clr-namespace:Agrin.Windows.UI.Views.Toolbox"
+             xmlns:vm="clr-namespace:Agrin.Windows.UI.ViewModels.RapidBaz"
+             xmlns:helper="clr-namespace:Agrin.Windows.UI.Helpers"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.Resources>
+        <vm:FolderFilesExplorerViewModel x:Key="FolderFilesExplorerViewModel"/>
+        <!--<vm:RapidbazToolbarViewModel-->
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <conv:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" IsInverse="True"/>
+
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="100"/>
+            <!--<Setter Property="ContentTemplate" Value="{StaticResource ItemTemplateTaskListBox}" />-->
+            <Setter Property="IsSelected" Value="{Binding IsChecked}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border  Name="Border" Padding="2" SnapsToDevicePixels="true">
+                            <Grid Margin="5">
+                                <ContentControl Foreground="Gray" Template="{DynamicResource Folder_TemplateStyle}"/>
+                                <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Bottom" Margin="0,0,0,10" HorizontalAlignment="Center" MaxWidth="80" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#35000000"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#35000000"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!--<Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="ContentTemplate" Value="{StaticResource SelectedTemplateTaskListBox}" />
+                        </Trigger>
+                    </Style.Triggers>-->
+        </Style>
+    </UserControl.Resources>
+    <UserControl.DataContext >
+        <Binding Source="{StaticResource FolderFilesExplorerViewModel}"/>
+    </UserControl.DataContext>
+    <busy:BusyMessageBox Command="{Binding AddFolderOKCommand}" MessageHeight="120" MessageWidth="223" IsBusy="{Binding IsAddFolderMessage}" Title="درج پوشه">
+        <busy:BusyMessageBox.Message>
+            <Grid>
+                <TextBox Text="{Binding AddFolderName,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Center">
+                    <TextBox.Tag>
+                        <TextBlock Text="نام پوشه" Tag="{DynamicResource Folder_TemplateStyle}"/>
+                    </TextBox.Tag>
+                </TextBox>
+            </Grid>
+        </busy:BusyMessageBox.Message>
+        <busy:BusyMessageBox Command="{Binding MessageCommand}" IsBusy="{Binding IsShowMessage}" Message="{Binding Message}" Title="{Binding MessageTitle}">
+            <busy:BusyIndicator IsBusy="{Binding IsBusy}" Message="{Binding RapidTextStatus}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <tool:LinksToolbar RefreshCommand="{Binding RefreshCommand}" AddCommand="{Binding AddFolderCommand}" DeleteCommand="{Binding DeleteFolderCommand}" Height="27" Margin="0,5,0,10">
+                    </tool:LinksToolbar>
+                    <ListBox helper:UserControlHelper.Name="MainList,Agrin.Windows.UI.Views.RapidBaz.FolderFilesExplorer" Grid.Row="1" Visibility="{Binding IsFolderList,Converter={StaticResource BoolToVisibilityConverter}}" ItemsSource="{Binding Items}" SelectionMode="Extended">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel MaxWidth="{Binding RelativeSource={RelativeSource AncestorType=ListBox,Mode=FindAncestor},Path=ActualWidth}" MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=ListBox,Mode=FindAncestor},Path=ActualHeight}">
+                                </WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                    <!--<ListBox Grid.Row="2" DisplayMemberPath="Name" Visibility="{Binding IsFolderList,Converter={StaticResource InverseBoolToVisibilityConverter}}" ItemsSource="{Binding Items}" SelectionMode="Extended">
+                
+            </ListBox>-->
+                </Grid>
+            </busy:BusyIndicator>
+        </busy:BusyMessageBox>
+
+    </busy:BusyMessageBox>
+</UserControl>

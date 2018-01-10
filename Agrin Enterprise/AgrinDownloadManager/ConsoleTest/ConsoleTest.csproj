@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1914355B-6ADA-47AB-A5DD-7B30BBD3472D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ConsoleTest</RootNamespace>
+    <AssemblyName>ConsoleTest</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MobileDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\MobileDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MobileRelease|AnyCPU'">
+    <OutputPath>bin\MobileRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Github\CrazyMapper\CrazyMapper\CrazyMapper\CrazyMapper.csproj">
+      <Project>{95f87b4e-84e1-43db-8149-0283242a5f7b}</Project>
+      <Name>CrazyMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
+      <Project>{da7b703a-faa1-4ab0-8271-7ce8fd27592e}</Project>
+      <Name>SignalGo.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Checksum\Agrin.Checksum.csproj">
+      <Project>{7ae5f3b1-c702-4ebc-bd71-6d34a77450e7}</Project>
+      <Name>Agrin.Checksum</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Client.DataBase\Agrin.Client.DataBase.csproj">
+      <Project>{7142b851-2734-44f7-b527-87f55bd43803}</Project>
+      <Name>Agrin.Client.DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Component\Agrin.Component.csproj">
+      <Project>{A33682AF-3571-443A-85FD-42FDA2EA3B3A}</Project>
+      <Name>Agrin.Component</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.DebugSystem\Agrin.DebugSystem.csproj">
+      <Project>{2d83571b-aade-4f6c-b7e7-62aadbb52729}</Project>
+      <Name>Agrin.DebugSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Download.Models\Agrin.Download.Models.csproj">
+      <Project>{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}</Project>
+      <Name>Agrin.Download.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Foundation\Agrin.Foundation.csproj">
+      <Project>{783fbbb4-cdd4-4a9d-a8ab-57fbc5bf04de}</Project>
+      <Name>Agrin.Foundation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Helper\Agrin.Helper.csproj">
+      <Project>{71bd502b-8b04-42e8-a64f-a20c286c46f6}</Project>
+      <Name>Agrin.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj">
+      <Project>{5ef58a1f-368f-40f9-b68a-cde14e68fa7d}</Project>
+      <Name>Agrin.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.LinkExtractor\Agrin.LinkExtractor.csproj">
+      <Project>{387d5e23-4fcc-4b98-a85d-bdbcc7fb6c8e}</Project>
+      <Name>Agrin.LinkExtractor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Log\Agrin.Log.csproj">
+      <Project>{48c97c2d-e494-470b-9cef-4770db0de45d}</Project>
+      <Name>Agrin.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Models\Agrin.Models.csproj">
+      <Project>{e2018fd5-df00-48a2-a588-dabf5d92e0c8}</Project>
+      <Name>Agrin.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Web\Agrin.Web.csproj">
+      <Project>{83D0A53E-35BA-4E55-949A-67C831BCF36E}</Project>
+      <Name>Agrin.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!--<item android:drawable="@drawable/red_scrubber_control_disabled_holo" android:state_enabled="false"/>
+  <item android:drawable="@drawable/red_scrubber_control_pressed_holo" android:state_pressed="true"/>
+  <item android:drawable="@drawable/red_scrubber_control_focused_holo" android:state_selected="true"/>-->
+  <item android:drawable="@drawable/seekbarThumbImage"/>
+</selector>
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item >
+    <shape android:shape="oval">
+      <solid android:color="#ed1f24"/>
+      <stroke android:color="#ffffff" android:width="1dp"/>
+      <size android:height="20dp" android:width="20dp" />
+    </shape>
+    <shape android:innerRadiusRatio="2"
+         android:shape="ring"
+         android:thickness="0dp"
+         android:useLevel="false" >
+      <solid android:color="#5abf49" />
+      <size android:height="22dp" android:width="22dp" />
+      <stroke android:color="#5abf49" android:width="2dp"/>
+    </shape>
+  </item>
+</selector>-->

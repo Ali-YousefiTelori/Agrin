@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Agrin.Windows.UI.Views.Controls.ProgressIconRender"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Agrin.Windows.UI.Views.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="16" d:DesignWidth="16">
+    <UserControl.Resources>
+        <local:ProgressToAngleConverter x:Key="ProgressConverter"/>
+        <Style TargetType="{x:Type ProgressBar}" x:Key="ProgressBarStyle">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#FF0072B4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Viewbox>
+                            <Grid Width="16" Height="16" SnapsToDevicePixels="True">
+                                <Ellipse StrokeThickness="0.5" Stroke="Gray" Width="16" Height="16" Fill="{TemplateBinding Background}"/>
+                                <local:Arc Width="16" Height="16" StrokeThickness="2.5" Stroke="{TemplateBinding Foreground}" >
+                                    <local:Arc.StartAngle>
+                                        <MultiBinding Converter="{StaticResource ProgressConverter}">
+                                            <Binding Path="Minimum" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        </MultiBinding>
+                                    </local:Arc.StartAngle>
+                                    <local:Arc.EndAngle>
+                                        <MultiBinding Converter="{StaticResource ProgressConverter}">
+                                            <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        </MultiBinding>
+                                    </local:Arc.EndAngle>
+                                </local:Arc>
+                                <Viewbox>
+                                        <TextBlock FontFamily="arial" Margin="5" Text="{Binding Value, RelativeSource={RelativeSource TemplatedParent}, StringFormat=\{0:0\}}"
+                                       Foreground="Black"
+                                       FontWeight="Bold"/>
+                                </Viewbox>
+                            </Grid>
+                        </Viewbox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <ProgressBar x:Name="mainProgress" Style="{StaticResource ProgressBarStyle}" Maximum="100" Value="0"/>
+    </Grid>
+</UserControl>

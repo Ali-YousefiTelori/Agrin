@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+AddGroups/LinearLayoutRightToLeft">
+        <TextView
+            android:text="GroupName_Language"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+AddGroups/txt_NameTitle" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+AddGroups/txt_Name"
+                android:layout_weight="1"
+                android:inputType="textUri"
+                android:singleLine="true" />
+        </LinearLayout>
+        <TextView
+            android:text="SaveAddress_Language"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+AddGroups/txt_AddressTitle" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+AddGroups/txt_SavePath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <Button
+                android:text="Browse_Language"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+AddGroups/btnBrowse" />
+        </LinearLayout>
+        <TextView
+            android:text="Extentions_Language"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+AddGroups/txt_ExtentionsTitle" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+AddGroups/txt_Extentions"
+                android:layout_weight="1"
+                android:singleLine="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+AddGroups/LinearLayoutReverce1">
+            <Button
+                android:text="Add_Language"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+AddGroups/btnAdd"
+                android:layout_weight="1" />
+            <Button
+                android:text="Cancel_Language"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:id="@+AddGroups/btnCancel" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

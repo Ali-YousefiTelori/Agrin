@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <TargetFrameworks>net45;portable45-net45+win8;portable-net45+win8+wpa81</TargetFrameworks>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <AssemblyVersion>1.0</AssemblyVersion>
+    <FileVersion>1.0</FileVersion>
+    <VersionPrefix>1.0</VersionPrefix>
+    <!--<VersionSuffix>beta1</VersionSuffix>-->
+    <Company></Company>
+    <Product>Agrin.Server.DataBase</Product>
+    <Description>
+
+    </Description>
+    <Copyright>Copyright © ali.visual.studio@gmail.com 2017</Copyright>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <RepositoryType>git</RepositoryType>
+    <RootNamespace>Agrin.Server.DataBase</RootNamespace>
+    <AssemblyName>Agrin.Server.DataBase</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <MinClientVersion>2.12</MinClientVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\$(Configuration)</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\$(Configuration)</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Agrin.Server.DataBase.rar" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Agrin.Server.DataBase.xml</DocumentationFile>
+  </PropertyGroup>
+
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
+    <AssemblyTitle>Agrin.Server.DataBase  .NET 4.5</AssemblyTitle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
+    <AssemblyTitle>Agrin.Server.DataBase .NET 4.0</AssemblyTitle>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='portable45-net45+win8'">
+    <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
+    <AssemblyTitle>Agrin.Server.DataBase .NET Portable</AssemblyTitle>
+    <EnableDefaultCompileItems>True</EnableDefaultCompileItems>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <LanguageTargets>$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets</LanguageTargets>
+    <DefineConstants>PORTABLE;$(AdditionalConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='portable-net45+win8+wpa81'">
+    <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
+    <AssemblyTitle>Agrin.Server.DataBase .NET Portable</AssemblyTitle>
+    <EnableDefaultCompileItems>True</EnableDefaultCompileItems>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <NugetTargetMoniker>.NETPortable,Version=v0.0,Profile=Profile111</NugetTargetMoniker>
+    <LanguageTargets>$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets</LanguageTargets>
+    <DefineConstants>PORTABLE;PORTABLE111;$(AdditionalConstants)</DefineConstants>
+  </PropertyGroup>
+
+
+  <!--<ItemGroup Condition="'$(TargetFramework)' == 'portable-net45+win8+wpa81'">
+    <PackageReference Include="NuGetPackageFolderOverride" Version="0.0.0.1" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'portable45-net45+win8'">
+    <PackageReference Include="NuGetPackageFolderOverride" Version="0.0.0.1" />
+  </ItemGroup>-->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <!--<PackageReference Include="EntityFramework" Version="6.1.3" />
+    <ProjectReference Include="..\..\..\..\..\Github\health-family-server\HealthFamily\Framesoft.Helpers\Framesoft.Helpers.csproj">
+      <Project>{A4EB8EB5-2AB6-4B40-A927-965B92AF6AAE}</Project>
+      <Name>Framesoft.Helpers</Name>
+    </ProjectReference>-->
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
+
+    <!--<ProjectReference Include="..\..\..\..\..\Github\health-family-server\HealthFamily\Framesoft.Helpers\Framesoft.Helpers.csproj">
+      <Project>{A4EB8EB5-2AB6-4B40-A927-965B92AF6AAE}</Project>
+      <Name>Framesoft.Helpers</Name>
+    </ProjectReference>-->
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Github\health-family-server\HealthFamily\Framesoft.Helpers\Framesoft.Helpers.csproj">
+      <Project>{A4EB8EB5-2AB6-4B40-A927-965B92AF6AAE}</Project>
+      <Name>Framesoft.Helpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+
+  <!--<ItemGroup Condition="'$(TargetFramework)' == 'portable45-net45+win8'">
+    <ProjectReference Include="..\..\..\..\..\Github\health-family-server\HealthFamily\Framesoft.Helpers\Framesoft.Helpers.csproj">
+      <Project>{A4EB8EB5-2AB6-4B40-A927-965B92AF6AAE}</Project>
+      <Name>Framesoft.Helpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'portable-net45+win8+wpa81'">
+    <ProjectReference Include="..\..\..\..\..\Github\health-family-server\HealthFamily\Framesoft.Helpers\Framesoft.Helpers.csproj">
+      <Project>{A4EB8EB5-2AB6-4B40-A927-965B92AF6AAE}</Project>
+      <Name>Framesoft.Helpers</Name>
+    </ProjectReference>
+  </ItemGroup>-->
+</Project>

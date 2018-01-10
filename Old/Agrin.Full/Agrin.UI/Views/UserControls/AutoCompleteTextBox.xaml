@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="Agrin.UI.Views.UserControls.AutoCompleteTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converter="clr-namespace:Agrin.ViewModels.Converters;assembly=Agrin.ViewModels"
+             xmlns:converter2="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+             mc:Ignorable="d" 
+             d:DesignHeight="26" d:DesignWidth="300" PreviewKeyDown="UserControl_KeyDown" FontFamily="{DynamicResource PersianFontFamilyStyle}" x:Name="mainControl" >
+    <UserControl.Resources>
+        <converter:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        <converter2:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/> 
+    </UserControl.Resources>
+    <Grid>
+        <Border DataContext="{Binding ElementName=mainPopUp}" x:Name="mainBorder" BorderBrush="{DynamicResource WhiteForeground_ApplicationColors}" BorderThickness="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox IsReadOnly="{Binding IsReadOnlyText,ElementName=mainControl}" Focusable="{Binding IsReadOnlyText,ElementName=mainControl,Converter={StaticResource InverseBooleanConverter}}" BorderThickness="0" Height="auto" Width="auto" x:Name="maintextBox" Text="{Binding Text,ElementName=mainControl,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                <Rectangle Grid.Column="1" Fill="{DynamicResource WhiteForeground_ApplicationColors}" Width="2"/>
+                <Border x:Name="readOnlyBorder" Background="#01ffffff" Opacity="0.001" MouseLeftButtonUp="readOnlyBorder_MouseLeftButtonUp" Visibility="{Binding IsReadOnlyText,ElementName=mainControl,Converter={StaticResource BooleanToVisibilityConverter}}" Grid.ColumnSpan="2">
+                </Border>
+                <ToggleButton x:Name="mainToggle" Grid.Column="2" Width="{Binding ElementName=mainControl,Path=OpenerWidth}" IsChecked="{Binding ElementName=mainPopUp,Path=IsOpen,Mode=OneWay}" Click="mainToggle_Click">
+                    <ToggleButton.Style>
+                        <Style TargetType="ToggleButton">
+                            <Setter Property="Foreground" Value="{DynamicResource WhiteForeground_ApplicationColors}"/>
+                            <Setter Property="Background" Value="{DynamicResource Blue_ApplicationColors}"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Grid SnapsToDevicePixels="True">
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal"/>
+                                                    <VisualState x:Name="MouseOver"/>
+                                                    <VisualState x:Name="Pressed">
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetName="CheckBackground" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" To="1"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Disabled">
+                                                        <Storyboard>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DisibleBackground" Storyboard.TargetProperty="Visibility">
+                                                                <DiscreteObjectKeyFrame KeyTime="0" >
+                                                                    <DiscreteObjectKeyFrame.Value>
+                                                                        <Visibility>Visible</Visibility>
+                                                                    </DiscreteObjectKeyFrame.Value>
+                                                                </DiscreteObjectKeyFrame>
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                                <VisualStateGroup x:Name="CheckStates">
+                                                    <VisualState x:Name="Checked">
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetName="CheckBackground" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" To="1"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Unchecked">
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetName="CheckBackground" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" To="0"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                                <VisualStateGroup x:Name="FocusStates">
+                                                    <VisualState x:Name="Focused"/>
+                                                    <VisualState x:Name="Unfocused" />
+                                                </VisualStateGroup>
+                                                <VisualStateGroup x:Name="ValidationStates">
+                                                    <VisualState x:Name="Valid"/>
+                                                    <VisualState x:Name="InvalidUnfocused"/>
+                                                    <VisualState x:Name="InvalidFocused"/>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+                                            <Grid x:Name="Background" Background="{TemplateBinding Background}">
+                                                
+                                            </Grid>
+                                            <Grid x:Name="CheckBackground" Background="#ff0a1016" Opacity="0">
+                                               
+                                            </Grid>
+                                            <Viewbox Margin="7">
+                                                <Path Data="M 0 0 L 4 5 L 8 0 Z" Fill="{TemplateBinding Foreground}"/>
+                                            </Viewbox>
+                                            <Grid x:Name="DisibleBackground" Background="Black" Opacity="0.5" Visibility="Collapsed">
+                                            </Grid>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Trigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetName="CheckBackground" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" To="1"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.EnterActions>
+                                                <Trigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetName="CheckBackground" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" To="0"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.ExitActions>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+            </Grid>
+        </Border>
+        <Popup x:Name="mainPopUp" VerticalOffset="-2" Focusable="True" Closed="mainPopUp_Closed" StaysOpen="False" SnapsToDevicePixels="True" FocusManager.IsFocusScope="False" AllowsTransparency="True" Loaded="mainPopUp_Loaded">
+            <Border Background="{DynamicResource Blue_ApplicationColors}" SnapsToDevicePixels="True" BorderBrush="{DynamicResource WhiteBorder_ApplicationColors}" BorderThickness="2" MaxHeight="200" MinWidth="{Binding ActualWidth,ElementName=mainBorder}">
+                <ListBox BorderThickness="0" Background="Transparent"  x:Name="mainListBox" Height="auto"  MouseLeftButtonUp="mainListBox_MouseLeftButtonUp"  ItemTemplate="{Binding ItemTemplate,ElementName=mainControl}" SelectedItem="{Binding SelectedItem,ElementName=mainControl,TargetNullValue=false}" Style="{x:Null}" FontSize="{Binding ElementName=mainControl,Path=FontSize}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Foreground" Value="{DynamicResource WhiteForeground_ApplicationColors}"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>

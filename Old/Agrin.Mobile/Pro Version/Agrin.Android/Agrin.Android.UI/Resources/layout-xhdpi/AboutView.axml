@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/background"
+        android:padding="5dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+AboutView/ReverceLinearLayout1">
+            <TextView
+                android:text="DeveloperTitle_Language"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+AboutView/TxtProgrammerTitle" />
+            <TextView
+                android:text="Developer_Language"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+AboutView/TxtProgrammer" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+AboutView/ReverceLinearLayout2">
+            <TextView
+                android:text="SiteTitle_Language"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+AboutView/TxtSiteTitle" />
+            <TextView
+                android:text="Site_Language"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+AboutView/TxtSite" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+AboutView/ReverceLinearLayout3">
+            <TextView
+                android:text="Version_Language"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+AboutView/TxtVersionTitle" />
+            <TextView
+                android:text="1.5"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+AboutView/TxtVersion" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

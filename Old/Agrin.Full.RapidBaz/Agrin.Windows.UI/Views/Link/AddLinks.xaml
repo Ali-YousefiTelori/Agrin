@@ -1,0 +1,175 @@
+﻿<UserControl x:Class="Agrin.Windows.UI.Views.Link.AddLinks"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ctrl="clr-namespace:Agrin.Windows.UI.Views.Controls"
+             xmlns:cov="clr-namespace:Agrin.ViewModels.Converters;assembly=RapidbazPlus.ViewModels"
+             xmlns:vm="clr-namespace:Agrin.ViewModels.Link;assembly=RapidbazPlus.ViewModels"
+             xmlns:helper="clr-namespace:Agrin.ViewModels.ControlHelpers;assembly=RapidbazPlus.ViewModels"
+             xmlns:busy="clr-namespace:Agrin.Windows.UI.Views.WindowLayouts"
+             mc:Ignorable="d" x:Name="mainControl"
+             Width="500" Height="300">
+    <UserControl.Resources>
+        <HierarchicalDataTemplate x:Key="AutoCompeleteItemTemplate" DataType="ListBoxItem">
+            <TextBlock x:Name="txt_main" Text="{Binding Name}" Foreground="#494949"/>
+        </HierarchicalDataTemplate>
+        <cov:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <cov:BoolToVisibilityConverter IsInverse="True" x:Key="InverseBoolToVisibilityConverter"/>
+        <cov:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <vm:AddLinksViewModel x:Key="AddLinksViewModel"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource AddLinksViewModel}"/>
+    </UserControl.DataContext>
+    <busy:BusyIndicator IsBusy="{Binding IsBusy}" Message="{Binding RapidTextStatus}">
+        <busy:BusyMessageBox Command="{Binding AddFolderOKCommand}" MessageHeight="120" MessageWidth="223" IsBusy="{Binding IsAddFolderMessage}" Title="درج پوشه">
+            <busy:BusyMessageBox.Message>
+                <Grid>
+                    <TextBox Text="{Binding AddFolderName,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center">
+                        <TextBox.Tag>
+                            <TextBlock Text="نام پوشه" Tag="{DynamicResource Folder_TemplateStyle}"/>
+                        </TextBox.Tag>
+                    </TextBox>
+                </Grid>
+            </busy:BusyMessageBox.Message>
+            <busy:BusyMessageBox IsBusy="{Binding IsShowLogin}" Title="ورود به رپیدباز...." Command="{Binding LoginRapidBazCommand}">
+                <busy:BusyMessageBox.Message>
+                    <Grid>
+                        <StackPanel>
+                            <TextBox VerticalAlignment="Top" Text="{Binding RapidBazUserName}">
+                                <TextBox.Tag>
+                                    <TextBlock Text="نام کاربری" Tag="{DynamicResource User_TemplateStyle}"/>
+                                </TextBox.Tag>
+                            </TextBox>
+                            <PasswordBox VerticalAlignment="Top" helper:PasswordHelper.Password="{Binding RapidBazPassword}" Margin="0,10,0,0">
+                                <PasswordBox.Tag>
+                                    <TextBlock Text="رمز عبور" Tag="{DynamicResource Lock_TemplateStyle}"/>
+                                </PasswordBox.Tag>
+                            </PasswordBox>
+                            <CheckBox IsChecked="{Binding IsSaveRapidBazSetting}" Content="ذخیره مشخصات ورود" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </busy:BusyMessageBox.Message>
+                <busy:BusyMessageBox IsBusy="{Binding GroupLinkIsBusy}" Command="{Binding AddGroupLinksCommand}" CommandButton1="{Binding AddFromClipboardCommand}" IsButton1="True" Title="{Binding GroupLinkTitle}" ContentButton1="درج از کلیپبرد" MessageWidth="480" MessageHeight="280">
+                    <busy:BusyMessageBox.Message>
+                        <Grid>
+                            <ListBox SelectionMode="Single" ItemsSource="{Binding GroupLinks}" FlowDirection="LeftToRight" FontFamily="{DynamicResource EnglishFontFamilyStyle}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid FlowDirection="LeftToRight">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Command="{Binding RemoveLinkFromGroupListCommand,Source={StaticResource AddLinksViewModel}}" CommandParameter="{Binding}" Foreground="Red" Width="24" Height="24" Style="{DynamicResource IconButtonStyle3}" Content="{DynamicResource Close_TemplateStyle}"/>
+                                            <TextBlock Text="{Binding}" Grid.Column="1" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                    </busy:BusyMessageBox.Message>
+                    <Border BorderBrush="#a9a9a9" BorderThickness="1" Background="#e7e7e7" CornerRadius="5" FlowDirection="{DynamicResource RightToLeftStyle}">
+                        <Grid Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel>
+                                <Grid FlowDirection="LeftToRight">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto" MinWidth="40"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Command="{Binding ShowGroupLinksCommand}" ToolTip="درح گروهی" VerticalAlignment="Top" Margin="5,0,0,0" Height="23" Width="30" Grid.Column="1" Padding="3,4,3,1">
+                                        <Button.Content>
+                                            <ContentControl Template="{DynamicResource GroupList_TemplateStyle}" />
+                                        </Button.Content>
+                                    </Button>
+                                    <StackPanel>
+                                        <TextBox IsEnabled="{Binding IsGroupList,Converter={StaticResource InverseBooleanConverter}}" FlowDirection="LeftToRight" VerticalAlignment="Top" Text="{Binding UriAddress,UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Tag>
+                                                <TextBlock Text="آدرس لینک" Tag="{DynamicResource Link_TemplateStyle}"/>
+                                            </TextBox.Tag>
+                                        </TextBox>
+                                        <CheckBox Content="لینک مستقیم" IsChecked="{Binding IsDirectLink}" Margin="0,5,0,0" Visibility="{Binding IsRapidBazLink,Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                    </StackPanel>
+                                    
+                                </Grid>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                    <TextBlock Text="ذخیره در رپیدباز:" VerticalAlignment="Center" />
+                                    <ToggleButton IsEnabled="{Binding IsEnableRapidBazAddLinks}" IsChecked="{Binding IsRapidBazLink}" Style="{DynamicResource OnOffSwitchToggleButton}" Height="25" Margin="5,0,0,0" HorizontalAlignment="Right"/>
+                                </StackPanel>
+                                <!---->
+                                <Grid Margin="0,10,0,0" Visibility="{Binding IsRapidBazLink,Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" MinWidth="40"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="گروه:" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                    <ctrl:AutoCompleteTextBox Grid.Column="1" FlowDirection="{DynamicResource RightToLeftStyle}" OpenerWidth="20" HorizontalAlignment="Left" Width="100"  ItemsSource="{Binding Groups,Mode=OneWay}" ItemTemplate="{StaticResource AutoCompeleteItemTemplate}"  PathPropertyName="Name"  SelectedItem="{Binding SelectedGroup,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" NullableSelectedItem="True"/>
+                                </Grid>
+
+                                <Grid Visibility="{Binding IsRapidBazLink,Converter={StaticResource BoolToVisibilityConverter}}"  Margin="0,10,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" MinWidth="40"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="پوشه:" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                    <ctrl:AutoCompleteTextBox Grid.Column="1" FlowDirection="{DynamicResource RightToLeftStyle}" OpenerWidth="20" HorizontalAlignment="Left" Width="100"  ItemsSource="{Binding RapidBazFolderList,Mode=OneWay}" ItemTemplate="{StaticResource AutoCompeleteItemTemplate}"  PathPropertyName="Name"  SelectedItem="{Binding SelectedRapidBazFolder,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" NullableSelectedItem="True"/>
+                                    <Button Margin="5,0,0,0" Command="{Binding RefreshRapidBazFolderListCommand}" Content="{DynamicResource Refresh_TemplateStyle}" Style="{DynamicResource toolbarButtonStyle}" Grid.Column="2"/>
+                                    <Button Command="{Binding AddFolderCommand}" Content="{DynamicResource Add_TemplateStyle}" Style="{DynamicResource toolbarButtonStyle}" Grid.Column="3"/>
+                                </Grid>
+                                <Grid  Visibility="{Binding IsRapidBazLink,Converter={StaticResource InverseBoolToVisibilityConverter}}" Margin="0,10,0,0" FlowDirection="LeftToRight">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto" MinWidth="40"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Command="{Binding BrowseFileCommand}" Margin="5,0,0,0" Height="23" Width="30" Grid.Column="1" Padding="3">
+                                        <Button.Content>
+                                            <ContentControl Template="{DynamicResource FolderDownloads_TemplateStyle}" />
+                                        </Button.Content>
+                                    </Button>
+                                    <TextBox VerticalAlignment="Top" Text="{Binding SaveToPath}">
+                                        <TextBox.Tag>
+                                            <TextBlock Text="آدرس محل ذخیره" Tag="{DynamicResource FolderDownloads_TemplateStyle}"/>
+                                        </TextBox.Tag>
+                                    </TextBox>
+                                </Grid>
+
+                                <Expander Visibility="{Binding IsRapidBazLink,Converter={StaticResource InverseBoolToVisibilityConverter}}" Margin="0,10,0,0" Header="سایر تنظیمات" IsExpanded="False">
+                                    <StackPanel>
+                                        <TextBox VerticalAlignment="Top" Text="{Binding UserName}">
+                                            <TextBox.Tag>
+                                                <TextBlock Text="نام کاربری" Tag="{DynamicResource User_TemplateStyle}"/>
+                                            </TextBox.Tag>
+                                        </TextBox>
+
+                                        <TextBox VerticalAlignment="Top" Text="{Binding Password}" Margin="0,5,0,0">
+                                            <TextBox.Tag>
+                                                <TextBlock Text="رمز عبور" Tag="{DynamicResource Lock_TemplateStyle}"/>
+                                            </TextBox.Tag>
+                                        </TextBox>
+                                    </StackPanel>
+                                </Expander>
+
+                            </StackPanel>
+                            <Grid Grid.Row="1" VerticalAlignment="Bottom">
+                                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Command="{Binding AddLinkAndPlayCommand}" Content="درج و دانلود"/>
+                                    <Button Command="{Binding AddLinkCommand}" Content="درج لینک" Margin="10,0,0,0" />
+                                </StackPanel>
+                                <Button Command="{Binding BackCommand}" Content="بازگشت" Width="100" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </busy:BusyMessageBox>
+            </busy:BusyMessageBox>
+        </busy:BusyMessageBox>
+    </busy:BusyIndicator>
+</UserControl>

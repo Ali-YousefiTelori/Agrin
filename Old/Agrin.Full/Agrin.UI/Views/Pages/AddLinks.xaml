@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="Agrin.UI.Views.Pages.AddLinks"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Agrin.UI.ViewModels.Pages"
+             xmlns:ctrl="clr-namespace:Agrin.UI.Views.UserControls"
+             xmlns:cov="clr-namespace:Agrin.ViewModels.Converters;assembly=Agrin.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="650" d:DesignWidth="800" FontFamily="{DynamicResource PersianFontFamilyStyle}"  FlowDirection="{DynamicResource RightToLeftStyle}">
+    <UserControl.Resources>
+        <vm:AddLinksViewModel x:Key="AddLinksViewModel"/>
+        <HierarchicalDataTemplate x:Key="AutoCompeleteItemTemplate" DataType="ListBoxItem">
+            <TextBlock x:Name="txt_main" Text="{Binding Name}" Foreground="{DynamicResource WhiteForeground_ApplicationColors}"/>
+        </HierarchicalDataTemplate>
+        <HierarchicalDataTemplate x:Key="AutoCompeleteItemTemplate2" DataType="ListBoxItem">
+            <TextBlock x:Name="txt_main" Text="{Binding}" Foreground="{DynamicResource WhiteForeground_ApplicationColors}"/>
+        </HierarchicalDataTemplate>
+        <cov:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <cov:InverseVisibilityConverter x:Key="InverseVisibilityConverter"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource AddLinksViewModel}"/>
+    </UserControl.DataContext>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <TextBlock Text="آدرس:" Style="{DynamicResource LargTextBlockStyle}"/>
+            <TextBlock Text="گروه:" Style="{DynamicResource LargTextBlockStyle}" Margin="0,58,0,0"/>
+            <Button Style="{DynamicResource UnderlineButton}" Command="{Binding BrowseFileCommand}" Content="محل ذخیره:"/>
+            <TextBlock Text="کیفیت:" Style="{DynamicResource LargTextBlockStyle}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Text="{Binding UriAddress,UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0" SelectionStart="0" Style="{DynamicResource LargTextBoxStyle}" FlowDirection="LeftToRight"/>
+                <Button Grid.Column="1" Content="درج گروهی" BorderThickness="2" Padding="20,0,20,0" Height="48"  Margin="5,5,0,0"/>
+            </Grid>
+            <CheckBox x:Name="chkRapid" IsChecked="{Binding IsRapidBazLink}" Content="ارسال به رپیدباز" Style="{DynamicResource  LargCheckBoxStyle}">
+
+            </CheckBox>
+            <ctrl:AutoCompleteTextBox IsEnabled="{Binding ElementName=chkRapid,Path=IsChecked,Converter={StaticResource InverseBooleanConverter}}" ItemsSource="{Binding Groups,Mode=OneWay}" PathPropertyName="Name" HorizontalAlignment="Left" Margin="0,10,0,0" ItemTemplate="{StaticResource AutoCompeleteItemTemplate}" Style="{DynamicResource LargUserControlStyle}"  FlowDirection="RightToLeft" SelectedItem="{Binding SelectedGroup,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" NullableSelectedItem="True"/>
+            <TextBox IsEnabled="{Binding ElementName=chkRapid,Path=IsChecked,Converter={StaticResource InverseBooleanConverter}}" Text="{Binding SaveToPath,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,0" SelectionStart="0" Style="{DynamicResource LargTextBoxStyle}" FlowDirection="LeftToRight"/>
+            <ctrl:AutoCompleteTextBox IsReadOnlyText="True" ItemsSource="{Binding YoutubeLinks,Mode=OneWay}" HorizontalAlignment="Left" Margin="0,10,0,0" ItemTemplate="{StaticResource AutoCompeleteItemTemplate2}" Style="{DynamicResource LargUserControlStyle}"  FlowDirection="RightToLeft" SelectedIndex="{Binding YoutubeLinksSelectedIndex,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" NullableSelectedItem="True"/>
+        </StackPanel>
+        <Expander x:Name="expSetting" IsEnabled="{Binding ElementName=chkRapid,Path=IsChecked,Converter={StaticResource InverseBooleanConverter}}" IsExpanded="{Binding IsExpandSetting}" FlowDirection="RightToLeft" Grid.ColumnSpan="2" Grid.Row="1" Header="تنظیمات:">
+            <Grid Margin="30,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="مجوز ورود:" Margin="0,0,0,20" Style="{DynamicResource LargTextBlockStyle}"/>
+                <TextBlock Text="نام کاربری:" Grid.Row="1" Style="{DynamicResource LargTextBlockStyle}"/>
+                <TextBlock Text="کلمه عبور:" Grid.Row="1" Grid.Column="2" Style="{DynamicResource LargTextBlockStyle}"/>
+                <TextBox Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" Margin="20,0,20,0" Style="{DynamicResource LargTextBoxStyle}"/>
+                <TextBox Text="{Binding Password}" Grid.Row="1" Grid.Column="3" Margin="20,0,10,0" Style="{DynamicResource LargTextBoxStyle}"/>
+            </Grid>
+        </Expander>
+        <TextBlock Text="{Binding RapidTextStatus}" Visibility="{Binding IsBussy,Converter={StaticResource BoolToVisibilityConverter}}" Style="{DynamicResource LargTextBlockStyle}" Margin="0,58,0,0" Grid.Row="2" Grid.Column="1"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" FlowDirection="LeftToRight" Grid.Row="3" Grid.ColumnSpan="2">
+            <Button Visibility="{Binding ElementName=btnYoutube,Path=Visibility,Converter={StaticResource InverseVisibilityConverter}}" IsEnabled="{Binding ElementName=chkRapid,Path=IsChecked,Converter={StaticResource InverseBooleanConverter}}" Command="{Binding AddLinkCommand}" Style="{DynamicResource IconButtonStyle}" Content="{DynamicResource PlusNoBorder_TemplateStyle}"/>
+            <Button Visibility="{Binding ElementName=btnYoutube,Path=Visibility,Converter={StaticResource InverseVisibilityConverter}}" Command="{Binding AddLinkAndPlayCommand}" Margin="15,0,15,0" Style="{DynamicResource IconButtonStyle}" Content="{DynamicResource PlayNoBorder_TemplateStyle}"/>
+            <Button x:Name="btnYoutube" Visibility="{Binding IsYoutubeVisiility}" IsEnabled="{Binding IsBussy,Converter={StaticResource InverseBooleanConverter}}" Command="{Binding LoadYoutubeLinkCommand}" Style="{DynamicResource IconButtonStyle}" Content="{DynamicResource Download_TemplateStyle}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

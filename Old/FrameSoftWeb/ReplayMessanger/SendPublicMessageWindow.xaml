@@ -1,0 +1,26 @@
+﻿<Window x:Class="ReplayMessanger.SendPublicMessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SendPublicMessageWindow" Height="430" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid FlowDirection="RightToLeft" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel >
+            <TextBlock Text="موضوع:" FontSize="20" Height="30"/>
+            <TextBlock Text="محدودیت ارسال:" FontSize="20" Margin="0,10,0,0" Height="30"/>
+            <TextBlock Text="متن پیام:" FontSize="20" Margin="0,10,0,0" Height="30"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="5,0,0,0">
+            <TextBox x:Name="txtTitle" Text="" FontSize="20" Height="30"/>
+            <ComboBox x:Name="cboLimit" VerticalContentAlignment="Center" DisplayMemberPath="Text" SelectedIndex="0" Padding="0" FontSize="15" Margin="0,10,0,0" Height="30"/>
+            <TextBox TextWrapping="Wrap" x:Name="txtMessage" AcceptsReturn="True" Text="" FontSize="20" Margin="0,10,0,0" Height="270"/>
+        </StackPanel>
+        <Button Height="30" Grid.Row="1" Grid.Column="1" Content="ارسال پیام" Click="Button_Click"/>
+    </Grid>
+</Window>

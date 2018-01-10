@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DC4C7B7E-7B0B-4866-9BF1-D15ED4A5ECCA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Agrin.UI</RootNamespace>
+    <AssemblyName>Agrin.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Project1.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MobileApp|AnyCPU'">
+    <OutputPath>bin\MobileApp\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MobileApp|x64'">
+    <OutputPath>bin\x64\MobileApp\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MobileApp|x86'">
+    <OutputPath>bin\x86\MobileApp\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'XamarinApp|AnyCPU'">
+    <OutputPath>bin\XamarinApp\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'XamarinApp|x64'">
+    <OutputPath>bin\x64\XamarinApp\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'XamarinApp|x86'">
+    <OutputPath>bin\x86\XamarinApp\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AgrinRsourceFiles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AgrinRsourceFiles.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\SingleApplication\Delegates.cs" />
+    <Compile Include="Helper\SingleApplication\Enumerators.cs" />
+    <Compile Include="Helper\SingleApplication\EventArgs.cs" />
+    <Compile Include="Helper\SingleApplication\Exceptions.cs" />
+    <Compile Include="Helper\SingleApplication\InstanceAwareApplication.cs" />
+    <Compile Include="Helper\Views\FocusBehaviour.cs" />
+    <Compile Include="Models\Converters\FileNameToIconConverter.cs" />
+    <Compile Include="Models\Converters\GetControlMousePositionConverter.cs" />
+    <Compile Include="Theme\RenderControlToBitmap.cs" />
+    <Compile Include="ViewModels\Downloads\ConnectionInfoDownloadViewModel.cs" />
+    <Compile Include="ViewModels\Downloads\LinkInfoDownloadDetailViewModel.cs" />
+    <Compile Include="ViewModels\Downloads\LinkInfoesDownloadingManagerViewModel.cs" />
+    <Compile Include="ViewModels\Lists\LinksListDataViewModel.cs" />
+    <Compile Include="ViewModels\Pages\AddGroupViewModel.cs" />
+    <Compile Include="ViewModels\Pages\AddLinksViewModel.cs" />
+    <Compile Include="ViewModels\Pages\LinkInfoSettingViewModel.cs" />
+    <Compile Include="ViewModels\Pages\PagesManagerViewModel.cs" />
+    <Compile Include="ViewModels\Pages\SendFeedBackViewModel.cs" />
+    <Compile Include="ViewModels\Pages\Settings\ApplicationViewSettingViewModel.cs" />
+    <Compile Include="ViewModels\Pages\Settings\GeneralSettingViewModel.cs" />
+    <Compile Include="ViewModels\Pages\Settings\LinkAddressesSettingViewModel.cs" />
+    <Compile Include="ViewModels\Pages\Settings\LinkInfoDownloadSettingViewModel.cs" />
+    <Compile Include="ViewModels\Pages\Settings\ProxySettingViewModel.cs" />
+    <Compile Include="ViewModels\Pages\Settings\SpeedSettingViewModel.cs" />
+    <Compile Include="ViewModels\Pages\Settings\UserAccountsSettingViewModel.cs" />
+    <Compile Include="ViewModels\Popups\BalloonViewModel.cs" />
+    <Compile Include="ViewModels\Popups\NotificationViewModel.cs" />
+    <Compile Include="ViewModels\Toolbox\MenuControlViewModel.cs" />
+    <Compile Include="ViewModels\Toolbox\ToolbarViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\WindowMessegeBoxViewModel.cs" />
+    <Compile Include="Views\Downloads\ConnectionInfoDownload.xaml.cs">
+      <DependentUpon>ConnectionInfoDownload.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Downloads\LinkInfoDownload.xaml.cs">
+      <DependentUpon>LinkInfoDownload.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Downloads\LinkInfoDownloadDetail.xaml.cs">
+      <DependentUpon>LinkInfoDownloadDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Downloads\LinkInfoesDownloadingManager.xaml.cs">
+      <DependentUpon>LinkInfoesDownloadingManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lists\LinksListData.xaml.cs">
+      <DependentUpon>LinksListData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoadingWindow.xaml.cs">
+      <DependentUpon>LoadingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\AddGroup.xaml.cs">
+      <DependentUpon>AddGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\AddLinks.xaml.cs">
+      <DependentUpon>AddLinks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\LinkInfoSetting.xaml.cs">
+      <DependentUpon>LinkInfoSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PagesManager.xaml.cs">
+      <DependentUpon>PagesManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\QueuesManager.xaml.cs">
+      <DependentUpon>QueuesManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\SendFeedBack.xaml.cs">
+      <DependentUpon>SendFeedBack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\ApplicationViewSetting.xaml.cs">
+      <DependentUpon>ApplicationViewSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\GeneralSetting.xaml.cs">
+      <DependentUpon>GeneralSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\LinkAddressesSetting.xaml.cs">
+      <DependentUpon>LinkAddressesSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\LinkInfoDownloadSetting.xaml.cs">
+      <DependentUpon>LinkInfoDownloadSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\ProxySetting.xaml.cs">
+      <DependentUpon>ProxySetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\SpeedSetting.xaml.cs">
+      <DependentUpon>SpeedSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Settings\UserAccountsSetting.xaml.cs">
+      <DependentUpon>UserAccountsSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Popups\Balloon.xaml.cs">
+      <DependentUpon>Balloon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Popups\Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TestControl.xaml.cs">
+      <DependentUpon>TestControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Toolbox\MenuControl.xaml.cs">
+      <DependentUpon>MenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Toolbox\Toolbar.xaml.cs">
+      <DependentUpon>Toolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Toolbox\TopToolbox.xaml.cs">
+      <DependentUpon>TopToolbox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\AutoCompleteTextBox.xaml.cs">
+      <DependentUpon>AutoCompleteTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ChartProgressbar.xaml.cs">
+      <DependentUpon>ChartProgressbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\DownloadToolbarButton.xaml.cs">
+      <DependentUpon>DownloadToolbarButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PopupAutoLocation.cs" />
+    <Compile Include="Views\UserControls\WindowMessegeBox.xaml.cs">
+      <DependentUpon>WindowMessegeBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helper\ApplicationResources.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="AgrinRsourceFiles.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AgrinRsourceFiles.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agrin.Data\Agrin.Data.csproj">
+      <Project>{74f61d18-08e4-4509-8256-b5ce6442dc12}</Project>
+      <Name>Agrin.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Download\Agrin.Download.csproj">
+      <Project>{93d045fb-5a87-4f07-94ff-9754531c2549}</Project>
+      <Name>Agrin.Download</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Drawing\Agrin.Drawing.csproj">
+      <Project>{63341cb2-1d87-4554-82c9-d83b3d341380}</Project>
+      <Name>Agrin.Drawing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Helper\Agrin.Helper.csproj">
+      <Project>{93676062-4e74-4edb-af8f-92a4edcfbcab}</Project>
+      <Name>Agrin.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj">
+      <Project>{ee7fd998-1cc1-47c9-af1b-546675210e5b}</Project>
+      <Name>Agrin.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Log\Agrin.Log.csproj">
+      <Project>{4c518ec4-1897-47b7-9433-05db59d9cce5}</Project>
+      <Name>Agrin.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.System\Agrin.OS.csproj">
+      <Project>{248a855c-9207-48ab-b447-b74086d5240c}</Project>
+      <Name>Agrin.OS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.WPFCore\Agrin.WPFCore.csproj">
+      <Project>{9af8ac60-d81b-432b-8a02-061de6b23dca}</Project>
+      <Name>Agrin.WPFCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Agrin.About.dll" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ReferencePath Include="D:\Agrin 2013\Agrin Download Manager\Agrin.Data\bin\Debug\Agrin.Data.dll" />
+    <ReferencePath Include="D:\Agrin 2013\Agrin Download Manager\Agrin.Download\bin\Debug\Agrin.Download.dll" />
+    <ReferencePath Include="D:\Agrin 2013\Agrin Download Manager\Agrin.Drawing\bin\Debug\Agrin.Drawing.dll" />
+    <ReferencePath Include="D:\Agrin 2013\Agrin Download Manager\Agrin.Helper\bin\Debug\Agrin.Helper.dll" />
+    <ReferencePath Include="D:\Agrin 2013\Agrin Download Manager\Agrin.IO\bin\Debug\Agrin.IO.dll" />
+    <ReferencePath Include="D:\Agrin 2013\Agrin Download Manager\Agrin.Log\bin\Debug\Agrin.Log.dll" />
+    <ReferencePath Include="D:\Agrin 2013\Agrin Download Manager\Agrin.System\bin\Debug\Agrin.OS.dll" />
+    <ReferencePath Include="D:\Agrin 2013\Agrin Download Manager\Agrin.WPFCore\bin\Debug\Agrin.WPFCore.dll" />
+    <ReferencePath Include="D:\Agrin 2013\Agrin Download Manager\Refrences\Chrome.dll" />
+    <ReferencePath Include="D:\Agrin 2013\Agrin Download Manager\Refrences\Contacts.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\mscorlib.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.Drawing.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.ServiceModel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\WindowsBase.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\MainWindow.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Downloads\ConnectionInfoDownload.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Downloads\LinkInfoDownload.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Downloads\LinkInfoDownloadDetail.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Downloads\LinkInfoesDownloadingManager.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Lists\LinksListData.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\LoadingWindow.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\AboutPage.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\AddGroup.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\AddLinks.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\LinkInfoSetting.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\PagesManager.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\QueuesManager.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\SendFeedBack.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\Settings\ApplicationViewSetting.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\Settings\GeneralSetting.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\Settings\LinkAddressesSetting.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\Settings\LinkInfoDownloadSetting.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\Settings\ProxySetting.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\Settings\SpeedSetting.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Pages\Settings\UserAccountsSetting.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Popups\Balloon.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Popups\Notification.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\TestControl.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Toolbox\MenuControl.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Toolbox\Toolbar.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\Toolbox\TopToolbox.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\UserControls\AutoCompleteTextBox.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\UserControls\ChartProgressbar.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\UserControls\DownloadToolbarButton.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\Views\UserControls\WindowMessegeBox.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\App.g.cs" />
+    <Compile Include="D:\Agrin 2013\Agrin Download Manager\Agrin.UI\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
+</Project>

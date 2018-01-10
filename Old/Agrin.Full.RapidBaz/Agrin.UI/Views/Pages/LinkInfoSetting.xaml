@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="Agrin.UI.Views.Pages.LinkInfoSetting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             xmlns:vm="clr-namespace:Agrin.UI.ViewModels.Pages"
+             d:DesignHeight="500" d:DesignWidth="800" FontFamily="{DynamicResource PersianFontFamilyStyle}"  FlowDirection="{DynamicResource RightToLeftStyle}">
+    <UserControl.Resources>
+        <vm:LinkInfoSettingViewModel x:Key="LinkInfoSettingViewModel"/>
+        <sys:Int32 x:Key="GeneralIntSelected">0</sys:Int32>
+        <sys:Int32 x:Key="SpeedIntSelected">1</sys:Int32>
+        <sys:Int32 x:Key="ProxyIntSelected">2</sys:Int32>
+        <sys:Int32 x:Key="AccountIntSelected">3</sys:Int32>
+        <sys:Int32 x:Key="LinksIntSelected">4</sys:Int32>
+        <sys:Int32 x:Key="DownloadEndIntSelected">5</sys:Int32>
+        <sys:Int32 x:Key="AppSettingIntSelected">6</sys:Int32>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource LinkInfoSettingViewModel}"/>
+    </UserControl.DataContext>
+    <Grid ClipToBounds="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="tabStack" Orientation="Horizontal" VerticalAlignment="Top" SnapsToDevicePixels="True">
+            <StackPanel.Resources>
+                <Style x:Key="rectangleStyle" TargetType="Rectangle">
+                    <Setter Property="Margin" Value="-54,0,0,0"/>
+                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                    <Setter Property="Fill" Value="{DynamicResource Border_ApplicationColors}"/>
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="35"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="14"/>
+                            </TransformGroup>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Width" Value="1"/>
+                </Style>
+            </StackPanel.Resources>
+            <RadioButton x:Name="radioGeneral" Style="{DynamicResource TabRadioButton}" Tag="{StaticResource GeneralIntSelected}" Content="جامع" VerticalAlignment="Top" Height="40" IsChecked="True" Margin="-29,0,0,0"/>
+            <Rectangle Style="{StaticResource rectangleStyle}"/>
+            <RadioButton x:Name="radioSpeed" Style="{DynamicResource TabRadioButton}" Tag="{StaticResource SpeedIntSelected}" Content="سرعت" VerticalAlignment="Top" Height="40" Margin="-27,0,0,0"/>
+            <Rectangle Style="{StaticResource rectangleStyle}"/>
+            <RadioButton x:Name="radioProxy" Style="{DynamicResource TabRadioButton}" Tag="{StaticResource ProxyIntSelected}" Content="پروکسی" VerticalAlignment="Top" Height="40" Margin="-27,0,0,0"/>
+            <Rectangle Style="{StaticResource rectangleStyle}"/>
+            <RadioButton x:Name="radioAccount" Style="{DynamicResource TabRadioButton}" Tag="{StaticResource AccountIntSelected}" Content="مجوز کاربری" VerticalAlignment="Top" Height="40" Margin="-27,0,0,0"/>
+            <Rectangle Style="{StaticResource rectangleStyle}"/>
+            <RadioButton x:Name="radioLinks" Style="{DynamicResource TabRadioButton}" Tag="{StaticResource LinksIntSelected}" Content="لینک ها" VerticalAlignment="Top" Height="40" Margin="-27,0,0,0"/>
+            <Rectangle Style="{StaticResource rectangleStyle}"/>
+            <RadioButton x:Name="radioDownloadEnd" Style="{DynamicResource TabRadioButton}" Tag="{StaticResource DownloadEndIntSelected}" Content="دریافت و پایان" VerticalAlignment="Top" Height="40" Margin="-27,0,0,0"/>
+            <Rectangle x:Name="rectAppSetting" Style="{StaticResource rectangleStyle}"/>
+            <RadioButton x:Name="radioAppSetting" Style="{DynamicResource TabRadioButton}" Tag="{StaticResource AppSettingIntSelected}" Content="نرم افزار" VerticalAlignment="Top" Height="40" Margin="-27,0,0,0"/>
+        </StackPanel>
+        <Rectangle Grid.Row="1" Height="1" FlowDirection="LeftToRight">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="{DynamicResource Border_ApplicationColor}" Offset="0"/>
+                    <GradientStop Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Grid Grid.Row="2">
+            <ContentControl x:Name="currentControlCollapsed" Content="{Binding CurrentControlCollapsed}" Padding="0" Opacity="0" Visibility="Collapsed"/>
+            <ContentControl x:Name="currentControl" Content="{Binding CurrentControl}" Padding="0"/>
+        </Grid>
+        <StackPanel Grid.Row="3" Margin="10,0,10,10">
+            <StackPanel x:Name="stackAllSetting" Orientation="Horizontal">
+                <TextBlock Text="ثبت این تنظیمات برای" Style="{DynamicResource LargTextBlockStyle}"/>
+                <CheckBox IsChecked="{Binding IsSettingForAllLinks}" Margin="10,0,10,0" Style="{DynamicResource LargCheckBoxStyle}" Content="همه لینک ها"/>
+                <CheckBox IsChecked="{Binding IsSettingForNewLinks}" Margin="10,0,10,0" Style="{DynamicResource LargCheckBoxStyle}" Content="لینک های جدید"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding SaveSettingCommand}" Foreground="{DynamicResource GreenForeground_ApplicationColors}" BorderThickness="2" Content="ذخیره"  Grid.Column="3"  Padding="40,0,40,0" Height="48"/>
+                <Button Command="{Binding BackCommand}" Foreground="{DynamicResource RedForeground_ApplicationColors}" BorderThickness="2" Content="انصراف" Grid.Column="3"  Padding="40,0,40,0" Height="48" Margin="10,0,0,0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

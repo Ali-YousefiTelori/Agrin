@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{6DDC3A94-817B-4006-B32E-1428E1921B63}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Agrin.Droid PreferredExecutionTarget="Android.169.254.138.177:5555" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Agrin\Agrin\OldViews\MainMenu.xaml">
+    <Files>
+      <File FileName="Agrin\Agrin\Views\Lists\LinkInfoItemTemplate.xaml" Line="58" Column="14" />
+      <File FileName="Agrin\Agrin\OldViews\MainMenu.xaml" Line="6" Column="47" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <DisabledProjects>
+    <String>Agrin\Agrin.UWP\Agrin.UWP.csproj</String>
+  </DisabledProjects>
+</Properties>

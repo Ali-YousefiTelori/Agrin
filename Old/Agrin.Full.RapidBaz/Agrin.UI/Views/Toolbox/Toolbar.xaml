@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Agrin.UI.Views.Toolbox.Toolbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ctrl="clr-namespace:Agrin.UI.Views.UserControls"
+             xmlns:vm="clr-namespace:Agrin.UI.ViewModels.Toolbox"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="100" Width="100" x:Name="mainControl" Background="{DynamicResource DarkBlue_ApplicationColors}">
+    <UserControl.Resources>
+        <vm:ToolbarViewModel x:Key="ToolbarViewModel"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource ToolbarViewModel}"/>
+    </UserControl.DataContext>
+    <Border BorderThickness="0,1,1,1">
+        <Border.BorderBrush>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <LinearGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform Angle="270" CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Offset="0"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Grid ClipToBounds="True">
+            <StackPanel>
+                <ctrl:DownloadToolbarButton Command="{Binding  AddLinkPageCommand}" IconTemplate="{DynamicResource Add_TemplateStyle}" Height="60" Width="90" Margin="5" Background="{Binding ElementName=mainControl,Path=Background}"/>
+                <ctrl:DownloadToolbarButton Command="{Binding PlayLinksCommand}" IconTemplate="{DynamicResource Play_TemplateStyle}" Height="60" Width="90" Margin="5" Background="{Binding ElementName=mainControl,Path=Background}"/>
+                <ctrl:DownloadToolbarButton Command="{Binding PauseLinksCommand}" Visibility="Collapsed" IconTemplate="{DynamicResource Pause_TemplateStyle}" Height="60" Width="90" Margin="5" Background="{Binding ElementName=mainControl,Path=Background}"/>
+                <ctrl:DownloadToolbarButton Command="{Binding StopLinksCommand}" IconTemplate="{DynamicResource Stop_TemplateStyle}" Height="60" Width="90" Margin="5" Background="{Binding ElementName=mainControl,Path=Background}"/>
+                <ctrl:DownloadToolbarButton Command="{Binding SettingCommand}" IconTemplate="{DynamicResource Setting_TemplateStyle}" Height="60" Width="90" Margin="5" Background="{Binding ElementName=mainControl,Path=Background}"/>
+                <ctrl:DownloadToolbarButton Command="{Binding DeleteLinksCommand}" IconTemplate="{DynamicResource Delete_TemplateStyle}" Height="60" Width="90" Margin="5" Background="{Binding ElementName=mainControl,Path=Background}"/>
+            </StackPanel>
+            <ContentControl Foreground="{DynamicResource WhiteForeground_ApplicationColors}" Opacity="0.05" Template="{DynamicResource ChartProgressBarTriangle_TemplateStyle}" Margin="-61,-68,-109,-9" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False">
+                <ContentControl.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="12.235"/>
+                        <RotateTransform Angle="18.553"/>
+                        <TranslateTransform Y="9.773" X="-2.9"/>
+                    </TransformGroup>
+                </ContentControl.RenderTransform>
+            </ContentControl>
+            <ctrl:DownloadToolbarButton Command="{Binding PinCommand}" Width="20" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="Transparent"  IconTemplate="{Binding PinStyle,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <dimen name="folderSize">44dp</dimen>
+  <dimen name="folderLayoutHeight">70dp</dimen>
+  <dimen name="folderTextSize">11dp</dimen>
+  <dimen name="TaskInfoTextSize">8dp</dimen>
+
+  <dimen name="ButtonTextSize">11dp</dimen>
+  <dimen name="TextBoxMinHeight">30dp</dimen>
+  <dimen name="TitleBarIconSize">28dp</dimen>
+  <dimen name="TitleBarTextSize">16dp</dimen>
+  <dimen name="TextViewTextSize">14dp</dimen>
+  <dimen name="ButtonPaddingLeft">5dp</dimen>
+  <dimen name="ButtonPaddingRight">5dp</dimen>
+  <dimen name="LinkInfoToolBoxButtonWidth">48dp</dimen>
+  <dimen name="LinkInfoToolBoxButtonHeight">42dp</dimen>
+
+  <dimen name="MenuItemTextSize">14dp</dimen>
+  <dimen name="MenuItemHeight">45dp</dimen>
+
+  <dimen name="NumericUpDownTextSize">16dp</dimen>
+  <dimen name="NumericUpDownTextHeight">20dp</dimen>
+  <dimen name="NumericUpDownLayoutHeight">80dp</dimen>
+  <dimen name="NumericUpDownWidth">80dp</dimen>
+
+  <dimen name="CheckBoxButtonHeight">30dp</dimen>
+</resources>

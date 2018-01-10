@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:minHeight="200dp"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+FolderBrowserDialog/LinearLayoutReverce1">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+FolderBrowserDialog/txt_GoPath"
+            android:layout_weight="1"
+            android:inputType="textUri"
+            android:singleLine="true"
+            android:minHeight="40dp"
+            android:background="@drawable/editboxshape"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center_vertical" />
+        <Button
+            android:text="Go_Language"
+            android:id="@+FolderBrowserDialog/btnGo"
+            style="@style/btn_stand" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <GridView
+            android:columnWidth="@dimen/folderSize"
+            android:numColumns="auto_fit"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:stretchMode="columnWidth"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+FolderBrowserDialog/mainGridView"
+            android:layout_margin="5dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+FolderBrowserDialog/LinearLayoutReverce2"
+        android:layout_marginBottom="5dip">
+        <Button
+            android:text="Select_Language"
+            android:id="@+FolderBrowserDialog/btnSelect"
+            style="@style/btn_stand" />
+        <Button
+            android:text="NewFolder_Language"
+            android:id="@+FolderBrowserDialog/btnNewFolder"
+            style="@style/btn_stand" />
+        <Button
+            android:text="Back_Language"
+            android:id="@+FolderBrowserDialog/btnBack"
+            style="@style/btn_stand" />
+        <Button
+            android:text="Cancel_Language"
+            android:id="@+FolderBrowserDialog/btnCancel"
+            style="@style/btn_stand" />
+    </LinearLayout>
+</LinearLayout>
