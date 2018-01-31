@@ -24,7 +24,7 @@ namespace Agrin.Download.Web.Requests
             throw new Exception("WebRequestExchangerBase type not support");
         }
 
-        public long ContentLength { get; set; }
+        public long ContentLength { get; set; } = -2;
         public Uri ResponseUri { get; set; }
         public WebHeaderCollection RequestHeaders { get; set; }
         public WebHeaderCollection ResponseHeaders { get; set; }

@@ -58,18 +58,19 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComponentModels\NotifyPropertyChanged.cs" />
+    <Compile Include="Converters\EnumToStringConverterBase.cs" />
+    <Compile Include="Converters\SizeToStringConverterBase.cs" />
+    <Compile Include="Helpers\ApplicationResourceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticExtensions.cs" />
     <Compile Include="Threads\ObjectLocker.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Converters\" />
     <Folder Include="Web\" />
   </ItemGroup>
   <ItemGroup>

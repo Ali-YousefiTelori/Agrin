@@ -220,6 +220,8 @@ namespace Agrin.IO
                 ext = Path.GetExtension(fileName);
                 if (string.IsNullOrEmpty(ext))
                     ext = ".html";
+                else
+                    ext = "";
                 return GetFileNameValidChar(fileName + ext);
 
             }
@@ -232,7 +234,13 @@ namespace Agrin.IO
             ext = Path.GetExtension(fileName);
             if (string.IsNullOrEmpty(ext))
                 ext = ".html";
-            return GetFileNameValidChar(fileName + ext);
+            else
+                ext = "";
+            fileName = fileName + ext;
+            if (!fileName.StartsWith("?"))
+                fileName = fileName.Split('?').FirstOrDefault();
+            fileName = fileName.Split('&').LastOrDefault().Split('=').LastOrDefault();
+            return GetFileNameValidChar(fileName);
         }
 
         public static string GetFileNameValidChar(string fileName)

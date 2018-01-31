@@ -12,5 +12,7 @@ namespace Agrin.IO.HardWare
         public abstract long GetFreeSizeByPath(string path);
 
         public abstract string GetRootPath(string path);
+
+        public abstract List<string> GetStorageDirectories();
     }
 }

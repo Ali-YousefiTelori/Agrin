@@ -5,6 +5,7 @@ using Agrin.Client.DataBase;
 using Agrin.Download.CoreModels.Link;
 using Agrin.Download.EntireModels.Link;
 using Agrin.Download.ShortModels.Link;
+using Agrin.Download.Web;
 using Agrin.IO;
 using Agrin.Log;
 using Agrin.Web;
@@ -127,22 +128,93 @@ namespace ConsoleTest
             AgrinClientContext.LinkInfoTable.Initialize<LinkInfo>();
         }
 
+        //readonly static Uri SomeBaseUri = new Uri("http://canbeanything");
+        //static string GetFileNameFromUrl(string url)
+        //{
+        //    Uri uri;
+        //    if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
+        //        uri = new Uri(SomeBaseUri, url);
+
+        //    var fileName = Path.GetFileName(uri.LocalPath);
+        //    if (string.IsNullOrEmpty(fileName))
+        //    {
+        //        Path.GetInvalidFileNameChars();
+        //    }
+        //}
+
+        public static string GetFileNameValidChar(string fileName)
+        {
+            foreach (var item in System.IO.Path.GetInvalidFileNameChars())
+            {
+                fileName = fileName.Replace(item.ToString(), "");
+            }
+#if(MobileApp)
+            foreach (var item in androidinvalidChars)
+            {
+                fileName = fileName.Replace(item.ToString(), "");
+            }
+#endif
+            return fileName;
+        }
+
+        public static string GetFileNameFromUrl(string url)
+        {
+            string fileName = "";
+            if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
+            {
+                fileName = GetFileNameValidChar(Path.GetFileName(uri.AbsolutePath));
+            }
+            string ext = "";
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                ext = Path.GetExtension(fileName);
+                if (string.IsNullOrEmpty(ext))
+                    ext = ".html";
+                else
+                    ext = "";
+                return GetFileNameValidChar(fileName + ext);
+
+            }
+
+            fileName = Path.GetFileName(url);
+            if (string.IsNullOrEmpty(fileName))
+            {
+                fileName = "noName";
+            }
+            ext = Path.GetExtension(fileName);
+            if (string.IsNullOrEmpty(ext))
+                ext = ".html";
+            else
+                ext = "";
+            fileName = fileName + ext;
+            if (!fileName.StartsWith("?"))
+                fileName = fileName.Split('?').FirstOrDefault();
+            fileName = fileName.Split('&').LastOrDefault().Split('=').LastOrDefault();
+            return GetFileNameValidChar(fileName);
+        }
+
         static void Main(string[] args)
         {
             try
             {
-                InitializeMapper();
-                LoadData();
+                var fileName = GetFileNameFromUrl("http://cdn.p30download.com/?b=p30dl-software&f=Mozilla.Firefox.v58.0.x86_p30download.com.zip");
+                LinkChecker hostChecker = new LinkChecker() { };
+                hostChecker.Restart("http://cdn.p30download.com/?b=p30dl-software&f=Adobe.Photoshop.CC.2017.v18.1.1.252.x64_p30download.com.part2.rar");
+                Console.ReadKey();
+                //hostChecker.Start();
+                //Console.ReadKey();
+                //InitializeMapper();
+                //LoadData();
 
                 //var link = LinkInfoCore.CreateInstance("http://up.bia4music.org/music/96/Khordad/Hoorosh%20Band%20-%20Be%20Ki%20Poz%20Midi.mp3");//"https://www.telerik.com/docs/default-source/fiddler/fiddlersetup.exe?sfvrsn=4"
-                
+
                 var link = AgrinClientContext.LinkInfoes.Last();
                 //item.CreatedDateTime = DateTime.Now;
                 //AgrinClientContext.LinkInfoTable.Update(item);
 
                 //AgrinClientContext.LinkInfoTable.Add(link);
 
-                link.Play();
+                //link.Play();
                 while (true)
                 {
                     Logger.WriteLine(link.DownloadedSize + " , " + link.Size);

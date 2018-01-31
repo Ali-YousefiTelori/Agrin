@@ -13,6 +13,7 @@ namespace Agrin.Models.Serialization.Link
         public bool IsComplete { get; set; }
         public bool IsError { get; set; }
         public long Size { get; set; }
+        public bool IsGetSize { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public DateTime LastDownloadedDateTime { get; set; }
 

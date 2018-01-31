@@ -35,10 +35,6 @@ namespace Agrin.Download.Web
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3 | (SecurityProtocolType)3072;
         }
 
-        /// <summary>
-        /// main thread that downloading Link
-        /// </summary>
-        Thread MainThread { get; set; }
         Thread CheckResumableThread { get; set; }
 
         WebRequestExchangerBase CurrentWebRequestExchanger { get; set; }
@@ -132,12 +128,12 @@ namespace Agrin.Download.Web
             this.RunInLock(() =>
             {
                 ConnectionStatus = ConnectionStatus.CreatingRequest;
-                MainThread = new Thread(StartConnection)
+                var thread = new Thread(StartConnection)
                 {
                     IsBackground = false
                 };
 
-                MainThread.Start();
+                thread.Start();
             });
         }
 
@@ -148,6 +144,20 @@ namespace Agrin.Download.Web
         {
             this.RunInLock(() =>
             {
+                SetStatus(ConnectionStatus.Stoped);
+                Dispose();
+            });
+        }
+
+        public void StopWithError(Exception ex)
+        {
+            if (IsDispose)
+                return;
+            LinkInfo.AsShort().LinkInfoManagementCore.AddError(ex);
+            SetStatus(ConnectionStatus.Error);
+            LinkInfo.OnBasicDataChanged?.Invoke();
+            this.RunInLock(() =>
+            {
                 Dispose();
             });
         }
@@ -155,9 +165,16 @@ namespace Agrin.Download.Web
 
         private void StartConnection()
         {
-            if (CreateRequest())
+            try
             {
-                Connect();
+                if (CreateRequest())
+                {
+                    Connect();
+                }
+            }
+            catch (Exception ex)
+            {
+                StopWithError(ex);
             }
         }
 
@@ -292,12 +309,20 @@ namespace Agrin.Download.Web
                 }
                 else
                     LinkInfo.CreateRequestCoreIfNeeded();
-
+                //if (LinkInfo.IsGetSize && CurrentWebRequestExchanger.ContentLength != LinkInfo.Size)
+                //{
+                //    throw new Exception("link size is not true!");
+                //}
                 if (RequestCore.EndPosition == -2)
                 {
                     RequestCore.EndPosition = CurrentWebRequestExchanger.ContentLength;
-                    if (LinkInfo.Connections.Count == 1 && LinkInfo.Size == -2)
-                        LinkInfo.Size = CurrentWebRequestExchanger.ContentLength;
+
+                }
+
+                if (!LinkInfo.IsGetSize && LinkInfo.Connections.Count == 1)
+                {
+                    LinkInfo.Size = CurrentWebRequestExchanger.ContentLength;
+                    LinkInfo.IsGetSize = true;
                 }
 
                 if (RequestCore.Id == 1)
@@ -640,6 +665,8 @@ namespace Agrin.Download.Web
         /// </summary>
         public void Dispose()
         {
+            if (IsDispose)
+                return;
             BeginDispose();
             this.RunInLock(() =>
             {
@@ -647,14 +674,13 @@ namespace Agrin.Download.Web
                 ObjectLocker.ObjectDisposed(this);
                 if (CheckResumableThread != null)
                     CheckResumableThread.Abort();
-                
+
                 CurrentWebRequestExchanger.Dispose();
 
                 RequestCore.BaseConnectionInfo = null;
                 RequestCore = null;
                 LinkInfo = null;
                 CheckResumableThread = null;
-                MainThread.Abort();
             });
         }
     }

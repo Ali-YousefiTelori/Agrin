@@ -3,6 +3,7 @@ using Agrin.Download.EntireModels.Link;
 using Agrin.Download.ShortModels.Link;
 using Agrin.Download.Web;
 using Agrin.Foundation;
+using Agrin.Helpers;
 using Agrin.IO.Helpers;
 using Agrin.IO.Mixer;
 using Agrin.Log;
@@ -22,6 +23,8 @@ namespace Agrin.Download.CoreModels.Link
     /// </summary>
     public abstract class LinkInfoCore : NotifyPropertyChanged
     {
+        public Action OnBasicDataChanged { get; set; }
+
         volatile ConcurrentList<LinkInfoRequestCore> _Connections = null;
         volatile bool _IsCopyingFile = false;
         volatile bool _IsManualStop = true;
@@ -72,6 +75,7 @@ namespace Agrin.Download.CoreModels.Link
             private set
             {
                 _IsCopyingFile = value;
+                ValidateUI();
             }
         }
 
@@ -82,7 +86,7 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
-                return Connections.Count(x => x.IsComplete) == Connections.Count;
+                return Connections.Count > 0 && Connections.Count(x => x.IsComplete) == Connections.Count;
             }
         }
 
@@ -98,7 +102,18 @@ namespace Agrin.Download.CoreModels.Link
             set
             {
                 _IsComplete = value;
-                OnPropertyChanged(nameof(IsComplete));
+                ValidateUI();
+            }
+        }
+
+        /// <summary>
+        /// when link is not completed
+        /// </summary>
+        public bool IsNotComplete
+        {
+            get
+            {
+                return !IsComplete;
             }
         }
 
@@ -109,11 +124,12 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
-                return _IsManualError || Connections.Count(x => x.IsError) == Connections.Count;
+                return Connections.Count > 0 && (_IsManualError || Connections.Count(x => x.IsError) == Connections.Count);
             }
             set
             {
                 _IsManualError = value;
+                ValidateUI();
             }
         }
 
@@ -124,7 +140,7 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
-                return IsManualStop && !IsCopyingFile;
+                return IsManualStop && !IsCopyingFile && !IsComplete;
             }
         }
 
@@ -135,7 +151,7 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
-                return !CanPlay && !IsCopyingFile;
+                return !CanPlay && !IsCopyingFile && !IsComplete;
             }
         }
 
@@ -154,6 +170,8 @@ namespace Agrin.Download.CoreModels.Link
                         return ConnectionStatus.Downloading;
                     return ConnectionStatus.Connecting;
                 }
+                else if (IsComplete)
+                    return ConnectionStatus.Complete;
                 else if (IsError)
                     return ConnectionStatus.Error;
                 else if (CanComplete && ValidateLinkCompletion())
@@ -186,7 +204,7 @@ namespace Agrin.Download.CoreModels.Link
             set
             {
                 _IsManualStop = value;
-                OnPropertyChanged("IsManualStop");
+                ValidateUI();
             }
         }
 
@@ -202,6 +220,36 @@ namespace Agrin.Download.CoreModels.Link
         }
 
         /// <summary>
+        /// get percent of downloaded size by double value
+        /// </summary>
+        public double PercentDouble
+        {
+            get
+            {
+                if (IsComplete || Size == 0 || Size == -2)
+                    return 1.0;
+                else if (Size < 0)
+                    return 0.0;
+                return (double)DownloadedSize / Size;
+            }
+        }
+
+        /// <summary>
+        /// get percent of downloaded size
+        /// </summary>
+        public string Percent
+        {
+            get
+            {
+                if (IsComplete || Size == 0)
+                    return "100%";
+                else if (Size == -2)
+                    return "0%";
+                return Size < 0 ? ApplicationResourceBase.Current.GetAppResource("Unknown_Language") : String.Format("{0:00.00%}", PercentDouble);
+            }
+        }
+
+        /// <summary>
         /// size of connection
         /// </summary>
         public long Size
@@ -213,12 +261,20 @@ namespace Agrin.Download.CoreModels.Link
             set
             {
                 Thread.VolatileWrite(ref _Size, value);
+                OnPropertyChanged(nameof(Size));
             }
         }
         /// <summary>
         /// if size geted from web request
         /// </summary>
-        public bool IsGetSize { get => _IsGetSize; set => _IsGetSize = value; }
+        public bool IsGetSize
+        {
+            get => _IsGetSize; set
+            {
+                _IsGetSize = value;
+                OnBasicDataChanged?.Invoke();
+            }
+        }
 
         public DateTime CreatedDateTime
         {
@@ -308,7 +364,7 @@ namespace Agrin.Download.CoreModels.Link
                                 fs.SetLength(0);
                             }
                         }
-                        mixerType = MixerInfo.GenerateAutoMixerByDriveSize(linkInfoShort.PathInfo.FullSaveAddress, (long)linkInfoShort.Size, files);
+                        mixerType = MixerInfo.GenerateAutoMixerByDriveSize(linkInfoShort.PathInfo.DirectorySavePath, (long)linkInfoShort.Size, files);
                         if (mixerType == MixerTypeEnum.NoSpace)
                             throw new Exception("فضای کافی برای ذخیره سازی بر روی دیسک خود ندارید. حداقل فضای کافی برای تکمیل سازی فایل 10 مگابایت می باشد.");
                         mixerInfo = MixerInfo.InstanceMixerByType(mixerType, linkInfoShort.PathInfo.MixerSavePath, null);//linkInfoShort.PathInfo.MixerBackupSavePath
@@ -358,6 +414,7 @@ namespace Agrin.Download.CoreModels.Link
                 catch (Exception e)
                 {
                     AutoLogger.LogError(e, "Complete Error");
+                    IsCopyingFile = false;
                     IsError = true;
                     linkInfoShort.LinkInfoManagementCore.AddError(e);
                     if (e is System.IO.IOException)
@@ -368,6 +425,7 @@ namespace Agrin.Download.CoreModels.Link
                     {
                         //DownloadingProperty.ErrorAction?.Invoke();
                     }
+                    Stop();
                 }
                 finally
                 {
@@ -414,7 +472,10 @@ namespace Agrin.Download.CoreModels.Link
                     requestCore.EndPosition = max.EndPosition + size;
 
                 }
+                else
+                {
 
+                }
                 Logger.WriteLine("CreateNewRequestCore", $"{requestCore.StartPosition} , {requestCore.EndPosition}");
 
                 Connections.Add(requestCore);
@@ -438,24 +499,26 @@ namespace Agrin.Download.CoreModels.Link
                 }
                 var completeCount = Connections.Count(x => x.IsComplete);
                 bool cannewwhenEnd = Connections.Count == 0 || (Size - DownloadedSize) > 1024 * 1024 || completeCount == Connections.Count;
-                var canAddConection = cannewwhenEnd && (DownloadedSize < Size || !IsGetSize);
+                var canAddConection = cannewwhenEnd && (DownloadedSize < Size || !IsGetSize) && Connections.Count(x => x.EndPosition > 0 && x.StartPosition >= 0) == 0;
                 if (canAddConection && (Connections.Count - completeCount) < ((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.GetConcurrentConnectionCount())
                 {
                     var connection = CreateNewRequestCore();
                     connection.Play();
                 }
+                ValidateUI();
             });
         }
 
         /// <summary>
         /// play the Link
         /// </summary>
-        public void Play()
+        internal void Play()
         {
             this.RunInLock(() =>
             {
                 if (!CanPlay)
                     return;
+                _IsManualError = false;
                 IsManualStop = false;
                 if (Connections.Count(x => x.CanPlay) > 0)
                 {
@@ -463,6 +526,10 @@ namespace Agrin.Download.CoreModels.Link
                     {
                         item.Play();
                     }
+                }
+                else if (CanComplete && ValidateLinkCompletion())
+                {
+                    CheckComplete();
                 }
                 else
                 {
@@ -474,12 +541,37 @@ namespace Agrin.Download.CoreModels.Link
         /// <summary>
         /// stop link
         /// </summary>
-        public void Stop()
+        internal void Stop()
         {
-            //lock (ObjectLocker.TakeAnObject(this))
-            //{
+            this.RunInLock(() =>
+            {
+                if (!CanStop)
+                    return;
+                if (Connections.Count(x => x.CanStop) > 0)
+                {
+                    foreach (var item in Connections.Where(x => x.CanStop).Take(((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.GetConcurrentConnectionCount()))
+                    {
+                        item.Stop();
+                    }
+                }
+                IsManualStop = true;
+            });
+        }
 
-            //}
+        public void ValidateUI()
+        {
+            OnPropertyChanged(nameof(IsDownloading));
+            OnPropertyChanged(nameof(Status));
+            OnPropertyChanged(nameof(IsError));
+            OnPropertyChanged(nameof(IsComplete));
+            OnPropertyChanged(nameof(IsCopyingFile));
+            OnPropertyChanged(nameof(IsManualStop));
+            OnPropertyChanged(nameof(CanPlay));
+            OnPropertyChanged(nameof(CanStop));
+            OnPropertyChanged(nameof(Percent));
+            OnPropertyChanged(nameof(DownloadedSize));
+            OnPropertyChanged(nameof(Size));
+            OnPropertyChanged(nameof(IsNotComplete));
         }
 
         /// <summary>
@@ -508,7 +600,7 @@ namespace Agrin.Download.CoreModels.Link
             base.Dispose();
         }
 
-        public static LinkInfoCore CreateInstance(string url)
+        internal static LinkInfoCore CreateInstance(string url)
         {
 #if (Debug || Release)
             var link = new LinkInfo();
@@ -517,6 +609,11 @@ namespace Agrin.Download.CoreModels.Link
 #endif
             link.PathInfo.MainUriAddress = url;
             return link;
+        }
+
+        public LinkInfoShort AsShort()
+        {
+            return (LinkInfoShort)this;
         }
     }
 }

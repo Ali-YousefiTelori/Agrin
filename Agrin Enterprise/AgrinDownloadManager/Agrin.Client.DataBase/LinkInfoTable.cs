@@ -38,7 +38,7 @@ namespace Agrin.Client.DataBase
             {
                 AgrinClientContext.MainLoadedLinkInfoes.Add(item);
             }
-            AgrinClientContext.LinkInfoes = new ObservableCollection<LinkInfoCore>(AgrinClientContext.MainLoadedLinkInfoes.OrderBy(x => x.LastDownloadedDateTime));
+            AgrinClientContext.LinkInfoes = new ObservableCollection<LinkInfoCore>(AgrinClientContext.MainLoadedLinkInfoes.OrderByDescending(x => x.LastDownloadedDateTime));
         }
 
         public override void Add(LinkInfoCore linkInfoCore)

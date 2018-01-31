@@ -78,6 +78,10 @@
       <Project>{95f87b4e-84e1-43db-8149-0283242a5f7b}</Project>
       <Name>CrazyMapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Github\MVVMGo\MvvmGo\MvvmGo\MvvmGo.csproj">
+      <Project>{9d38c00c-b80d-478a-b151-9bc1bf891ffd}</Project>
+      <Name>MvvmGo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
       <Project>{da7b703a-faa1-4ab0-8271-7ce8fd27592e}</Project>
       <Name>SignalGo.Shared</Name>
