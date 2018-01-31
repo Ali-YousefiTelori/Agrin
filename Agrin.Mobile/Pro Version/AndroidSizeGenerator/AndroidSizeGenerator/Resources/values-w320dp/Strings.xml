@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="Hello">values-w320dp</string>
-    <string name="ApplicationName">AndroidSizeGenerator</string>
-</resources>

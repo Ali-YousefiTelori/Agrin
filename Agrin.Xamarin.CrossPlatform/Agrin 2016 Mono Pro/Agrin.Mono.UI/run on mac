@@ -1,4 +1,0 @@
-export DYLD_FALLBACK_LIBRARY_PATH="/Library/Frameworks/Mono.framework/Versions/Current/lib:/usr/local/lib:/usr/lib"
-here="`dirname \"$0\"`"
-
-mono $here/Agrin.Mono.UI.exe
