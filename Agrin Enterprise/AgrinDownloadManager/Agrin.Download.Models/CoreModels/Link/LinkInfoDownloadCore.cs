@@ -29,7 +29,14 @@ namespace Agrin.Download.CoreModels.Link
         /// <summary>
         /// support resumable for link
         /// </summary>
-        public ResumeCapabilityEnum ResumeCapability { get => _ResumeCapability; set => _ResumeCapability = value; }
+        public ResumeCapabilityEnum ResumeCapability
+        {
+            get => _ResumeCapability; set
+            {
+                _ResumeCapability = value;
+                LinkInfo.OnBasicDataChanged?.Invoke();
+            }
+        }
 
         /// <summary>
         /// linkinfo playing maximum connection count

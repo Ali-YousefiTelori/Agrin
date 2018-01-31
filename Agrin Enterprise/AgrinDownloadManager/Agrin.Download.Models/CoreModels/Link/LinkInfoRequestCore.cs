@@ -47,6 +47,7 @@ namespace Agrin.Download.CoreModels.Link
                 {
                     LinkInfo.ValidateLinkCompletion();
                 }
+                LinkInfo.ValidateUI();
             }
         }
 
@@ -161,6 +162,9 @@ namespace Agrin.Download.CoreModels.Link
             set
             {
                 Thread.VolatileWrite(ref _DownloadedSize, value);
+                LinkInfo.OnPropertyChanged(nameof(LinkInfo.DownloadedSize));
+                LinkInfo.OnPropertyChanged(nameof(LinkInfo.Percent));
+                LinkInfo.OnPropertyChanged(nameof(LinkInfo.PercentDouble));
             }
         }
         /// <summary>
@@ -239,7 +243,7 @@ namespace Agrin.Download.CoreModels.Link
         /// <summary>
         /// play the connection
         /// </summary>
-        public void Play()
+        internal void Play()
         {
             if (!CanPlay)
                 return;
@@ -251,11 +255,12 @@ namespace Agrin.Download.CoreModels.Link
         /// <summary>
         /// stop the connection
         /// </summary>
-        public void Stop()
+        internal void Stop()
         {
             if (!CanStop)
                 return;
-
+            BaseConnectionInfo.Stop();
+            DisposeConnection();
         }
 
         /// <summary>
@@ -284,7 +289,7 @@ namespace Agrin.Download.CoreModels.Link
         /// <summary>
         /// complete link downloading
         /// </summary>
-        public void Complete()
+        internal void Complete()
         {
             FixCompleteProblems();
             if (DownloadedSize != Length)

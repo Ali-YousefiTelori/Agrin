@@ -83,4 +83,21 @@ namespace Agrin.Models
         /// </summary>
         Unknown = 2
     }
+
+    public enum CheckStatus : byte
+    {
+        Unknown = 0,
+        Busy = 1,
+        Success = 2,
+        Error = 3
+    }
+
+    public enum SizeEnum
+    {
+        Byte = 0,
+        KB = 1,
+        MB = 2,
+        GB = 3,
+        TB = 4
+    }
 }

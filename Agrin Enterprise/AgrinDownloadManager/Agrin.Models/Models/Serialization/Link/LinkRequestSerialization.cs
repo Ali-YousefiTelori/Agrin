@@ -15,5 +15,6 @@ namespace Agrin.Models.Serialization.Link
         public long EndPosition { get; set; }
         public int BufferRead { get; set; }
         public int LimitPerSecound { get; set; }
+        public long DownloadedSize { get; set; }
     }
 }

@@ -51,8 +51,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LiteDB, Version=4.1.0.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
-      <HintPath>I:\nuget\LiteDB.4.1.0\lib\net40\LiteDB.dll</HintPath>
+    <Reference Include="LiteDB, Version=4.1.1.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Agrin.UI\packages\LiteDB.4.1.1\lib\net40\LiteDB.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -61,7 +61,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -74,6 +73,7 @@
     <Compile Include="EntireModels\Link\LinkInfoRequest.cs" />
     <Compile Include="CoreModels\Link\LinkInfoCore.cs" />
     <Compile Include="CoreModels\Link\LinkInfoRequestCore.cs" />
+    <Compile Include="EntireModels\Managers\LinkInfoManager.cs" />
     <Compile Include="ShortModels\Link\LinkInfoDownloadShort.cs" />
     <Compile Include="ShortModels\Link\LinkInfoManagementShort.cs" />
     <Compile Include="ShortModels\Link\LinkInfoPathShort.cs" />
@@ -84,6 +84,8 @@
     <Compile Include="EntireModels\Link\LinkInfoProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\BaseConnectionInfo.cs" />
+    <Compile Include="Web\HostStatisticsHelper.cs" />
+    <Compile Include="Web\LinkChecker.cs" />
     <Compile Include="Web\LinkHelper.cs" />
     <Compile Include="Web\LinkResumableChecker.cs" />
     <Compile Include="Web\Requests\WebRequestExchanger.cs" />
@@ -104,6 +106,10 @@
     <Folder Include="ShortModels\Task\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Github\MVVMGo\MvvmGo\MvvmGo\MvvmGo.csproj">
+      <Project>{5906d001-ec0e-4e59-8346-323a0a28ae12}</Project>
+      <Name>MvvmGo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
       <Project>{da7b703a-faa1-4ab0-8271-7ce8fd27592e}</Project>
       <Name>SignalGo.Shared</Name>
