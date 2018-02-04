@@ -167,6 +167,7 @@ namespace Agrin.Download.CoreModels.Link
                 LinkInfo.OnPropertyChanged(nameof(LinkInfo.PercentDouble));
             }
         }
+
         /// <summary>
         /// start position of link
         /// </summary>

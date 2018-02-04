@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Enums.cs" />
     <Compile Include="Interfaces\IObjectDisposable.cs" />
+    <Compile Include="Models\ConcurrentCircularBuffer.cs" />
     <Compile Include="Models\Link\LinkAddressInfo.cs" />
     <Compile Include="Models\Serialization\Link\LinkInfoDownloadSerialization.cs" />
     <Compile Include="Models\Serialization\Link\LinkInfoManagementSerialization.cs" />

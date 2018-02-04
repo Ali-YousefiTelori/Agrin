@@ -36,7 +36,7 @@ namespace Agrin.Client.DataBase
 
         public static ObservableCollection<LinkInfoCore> LinkInfoes { get; set; }
 
-        internal static ConcurrentList<LinkInfoCore> MainLoadedLinkInfoes = new ConcurrentList<LinkInfoCore>();
+        public static ConcurrentList<LinkInfoCore> MainLoadedLinkInfoes { get; private set; } = new ConcurrentList<LinkInfoCore>();
 
         public static LinkInfoTable LinkInfoTable { get; set; } = new LinkInfoTable();
         

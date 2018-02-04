@@ -1,6 +1,7 @@
 ﻿using Agrin.ComponentModels;
 using Agrin.Download.ShortModels.Link;
 using Agrin.IO;
+using Agrin.Web.Text;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -108,7 +109,7 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
-                return PathHelper.GetFileNameFromUrl(MainUriAddress);
+                return Decodings.FullDecodeString(PathHelper.GetFileNameFromUrl(MainUriAddress));
             }
         }
 
