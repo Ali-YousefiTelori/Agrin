@@ -1,4 +1,5 @@
 ﻿using Agrin.Download.CoreModels.Link;
+using Agrin.Download.Engines;
 using Agrin.Download.ShortModels.Link;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace Agrin.Download.EntireModels.Managers
             }
         }
 
+        public SpeedEngineHelper CurrentSpeedEngineHelper { get; set; }
+
         public LinkInfoShort CreateInstance(string link)
         {
             return LinkInfoCore.CreateInstance(link).AsShort();
@@ -33,7 +36,10 @@ namespace Agrin.Download.EntireModels.Managers
         public void Play(LinkInfoCore linkInfoCore)
         {
             if (linkInfoCore.CanPlay)
+            {
                 linkInfoCore.Play();
+                CurrentSpeedEngineHelper?.Resume();
+            }
         }
 
         public void Stop(LinkInfoCore linkInfoCore)
@@ -41,6 +47,5 @@ namespace Agrin.Download.EntireModels.Managers
             if (linkInfoCore.CanStop)
                 linkInfoCore.Stop();
         }
-
     }
 }

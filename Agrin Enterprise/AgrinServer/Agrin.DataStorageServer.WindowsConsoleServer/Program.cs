@@ -30,7 +30,7 @@ namespace Agrin.DataStorageServer.WindowsConsoleServer
                     return new MessageContract() { IsSuccess = false, Message = "server Exception", Error = ErrorMessage.ServerException };
                 };
 
-                provider.InternalSetting = new SignalGo.Server.Settings.InternalSetting() { IsEnabledDataExchanger = true };
+                provider.InternalSetting = new SignalGo.Server.Settings.InternalSetting() { IsEnabledDataExchanger = true, IsEnabledReferenceResolver = true, IsEnabledReferenceResolverForArray = true };
                 Console.WriteLine("server started");
             }
             catch (Exception ex)

@@ -69,6 +69,7 @@
     <Compile Include="CoreModels\Link\LinkInfoManagementCore.cs" />
     <Compile Include="CoreModels\Link\LinkInfoPathCore.cs" />
     <Compile Include="CoreModels\Link\LinkInfoPropertiesCore.cs" />
+    <Compile Include="Engines\SpeedEngineHelper.cs" />
     <Compile Include="EntireModels\Link\LinkInfoDownload.cs" />
     <Compile Include="EntireModels\Link\LinkInfoRequest.cs" />
     <Compile Include="CoreModels\Link\LinkInfoCore.cs" />

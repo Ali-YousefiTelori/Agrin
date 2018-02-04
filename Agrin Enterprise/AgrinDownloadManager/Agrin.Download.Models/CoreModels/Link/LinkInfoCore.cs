@@ -29,6 +29,11 @@ namespace Agrin.Download.CoreModels.Link
         volatile bool _IsCopyingFile = false;
         volatile bool _IsManualStop = true;
         long _Size = -2;//-2 = not get download size and -1 = dont know what is download size
+        long _DownloadedSizePerSecound = 0;
+        long _MixedSize = 0;
+        ConcurrentCircularBuffer<long> _AvarageDownloadedSizePerSecound = new ConcurrentCircularBuffer<long>(10);
+        long _PreviousDownloadedSize;
+        TimeSpan? _TimeRemaining = null;
         volatile int _Id;
         volatile bool _IsGetSize = false;
         volatile ConnectionStatus _ManualStatus = ConnectionStatus.None;
@@ -215,7 +220,73 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
+                if (MixedSize > 0)
+                    return MixedSize;
                 return Connections.Sum(x => x.DownloadedSize);
+            }
+        }
+        /// <summary>
+        /// mixed size when link completing
+        /// </summary>
+        public long MixedSize
+        {
+            get
+            {
+                return _MixedSize;
+            }
+            set
+            {
+                _MixedSize = value;
+                OnPropertyChanged(nameof(MixedSize));
+                OnPropertyChanged(nameof(DownloadedSize));
+            }
+        }
+
+        /// <summary>
+        /// calculated downloaded size for download per time
+        /// </summary>
+        public long PreviousDownloadedSize
+        {
+            get
+            {
+                return Thread.VolatileRead(ref _PreviousDownloadedSize);
+            }
+            set
+            {
+                Thread.VolatileWrite(ref _PreviousDownloadedSize, value);
+            }
+        }
+
+        /// <summary>
+        /// downloaded size per one secound
+        /// </summary>
+        public long DownloadedSizePerSecound
+        {
+            get
+            {
+                return _DownloadedSizePerSecound;
+            }
+            set
+            {
+                _DownloadedSizePerSecound = value;
+                OnPropertyChanged(nameof(DownloadedSizePerSecound));
+            }
+        }
+
+        /// <summary>
+        /// avarage downloaded size per one secound
+        /// </summary>
+        /// 
+        public ConcurrentCircularBuffer<long> AvarageDownloadedSizePerSecound
+        {
+            get
+            {
+                return _AvarageDownloadedSizePerSecound;
+            }
+            set
+            {
+                _AvarageDownloadedSizePerSecound = value;
+                OnPropertyChanged(nameof(AvarageDownloadedSizePerSecound));
             }
         }
 
@@ -300,6 +371,24 @@ namespace Agrin.Download.CoreModels.Link
             }
         }
 
+        /// <summary>
+        /// time remaining to complete link
+        /// </summary>
+        public TimeSpan? TimeRemaining
+        {
+            get
+            {
+                return _TimeRemaining;
+            }
+
+            set
+            {
+                _TimeRemaining = value;
+                OnPropertyChanged(nameof(TimeRemaining));
+            }
+        }
+
+
 
         /// <summary>
         /// check if link is going to complete else create a new request for this
@@ -335,11 +424,11 @@ namespace Agrin.Download.CoreModels.Link
                     //تغییر برای بخش سکیوریتی اندروید
                     //if (string.IsNullOrEmpty(linkInfoShort.PathInfo.SecurityDirectorySavePath) && !System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(linkInfoShort.PathInfo.FullSaveAddress)))
                     //    IOHelper.CreateDirectory(System.IO.Path.GetDirectoryName(linkInfoShort.PathInfo.FullSaveAddress));
-
-                    foreach (var item in Connections.ToArray())
-                    {
-                        item.DownloadedSize = 0;
-                    }
+                    MixedSize = 0;
+                    //foreach (var item in Connections.ToArray())
+                    //{
+                    //    item.DownloadedSize = 0;
+                    //}
 
                     List<string> files = new List<string>();
 
@@ -378,18 +467,20 @@ namespace Agrin.Download.CoreModels.Link
 
                     mixer.OnChangedDataAction = () =>
                     {
-                        //linkInfoShort.DownloadedSize = mixer.MixedSize;
+                        MixedSize = mixer.MixedSize;
+                        ValidateUI();
                     };
 
 
                     mixer.Start(mixerInfo);
 
-                    fileLen = mixer.Size;
+                    MixedSize = fileLen = mixer.Size;
 
                     if (fileLen != linkInfoShort.Size && linkInfoShort.Size > 0)
                     {
                         throw new Exception("File length is not true! try again.");
                     }
+
                     IsComplete = true;
                     //linkInfoShort.PathInfo.UserDirectorySavePath = PathInfo.SavePath;
                     //linkInfoShort.LinkInfoDownloadCore.SpeedByteDownloaded = 0;
@@ -571,7 +662,8 @@ namespace Agrin.Download.CoreModels.Link
             OnPropertyChanged(nameof(Percent));
             OnPropertyChanged(nameof(DownloadedSize));
             OnPropertyChanged(nameof(Size));
-            OnPropertyChanged(nameof(IsNotComplete));
+            OnPropertyChanged(nameof(IsNotComplete)); 
+            OnPropertyChanged(nameof(PercentDouble));
         }
 
         /// <summary>

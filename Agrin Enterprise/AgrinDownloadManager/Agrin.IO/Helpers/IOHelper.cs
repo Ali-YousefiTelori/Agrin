@@ -9,6 +9,7 @@ namespace Agrin.IO.Helpers
 {
     public static class IOHelper
     {
+        public static Action<string> OpenFileAction { get; set; }
         public static Func<string, Stream> OpenFileStreamForReadAction { get; set; }
         public static Func<string, string, FileMode, Action<string>, object, IStreamWriter> OpenFileStreamForWriteAction { get; set; }
         //public static List<string> FilesList { get; set; } = new List<string>();
