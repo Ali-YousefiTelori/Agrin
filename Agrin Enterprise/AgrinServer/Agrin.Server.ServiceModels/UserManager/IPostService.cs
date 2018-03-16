@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Agrin.Server.ServiceModels.UserManager
 {
-    [ServiceContract("PostService", InstanceType = InstanceType.SingleInstance)]
+    [ServiceContract("PostService", ServiceType.ServerService, InstanceType = InstanceType.SingleInstance)]
     public interface IPostService
     {
         MessageContract<List<PostInfo>> GetListOfPost(int index, int length);

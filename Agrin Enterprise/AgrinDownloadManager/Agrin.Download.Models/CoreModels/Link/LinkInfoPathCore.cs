@@ -183,21 +183,21 @@ namespace Agrin.Download.CoreModels.Link
             }
         }
 
-        /// <summary>
-        /// saved mixer path
-        /// mixer is mixing splited downloaded parts of file connections to one file
-        /// </summary>
-        public string MixerSavePath { get => _MixerSavePath; set => _MixerSavePath = value; }
-        /// <summary>
-        /// security of saved mixer path
-        /// mixer is mixing splited downloaded parts of file connections to one file
-        /// </summary>
-        public string SecurityMixerSavePath { get => _SecurityMixerSavePath; set => _SecurityMixerSavePath = value; }
-        /// <summary>
-        /// backup of saved mixer path
-        /// mixer is mixing splited downloaded parts of file connections to one file
-        /// if path is security can replace with this
-        /// </summary>
-        public string BackUpMixerSavePath { get => _BackUpMixerSavePath; set => _BackUpMixerSavePath = value; }
+        ///// <summary>
+        ///// saved mixer path
+        ///// mixer is mixing splited downloaded parts of file connections to one file
+        ///// </summary>
+        //public string MixerSavePath { get => _MixerSavePath; set => _MixerSavePath = value; }
+        ///// <summary>
+        ///// security of saved mixer path
+        ///// mixer is mixing splited downloaded parts of file connections to one file
+        ///// </summary>
+        //public string SecurityMixerSavePath { get => _SecurityMixerSavePath; set => _SecurityMixerSavePath = value; }
+        ///// <summary>
+        ///// backup of saved mixer path
+        ///// mixer is mixing splited downloaded parts of file connections to one file
+        ///// if path is security can replace with this
+        ///// </summary>
+        //public string BackUpMixerSavePath { get => _BackUpMixerSavePath; set => _BackUpMixerSavePath = value; }
     }
 }

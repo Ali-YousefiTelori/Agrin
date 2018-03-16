@@ -81,55 +81,60 @@ namespace Agrin.Download.CoreModels.Link
                 LinkInfo.Save();
         }
 
+        public static Action<int,Exception> LinkInfoAddErrorAction { get; set; }
         /// <summary>
         /// add error in application Error List
         /// </summary>
         /// <param name="error"></param>
         public void AddError(Exception error)
         {
-            try
+            this.RunInLock(() =>
             {
-                Logger.WriteLine("AddError", error);
-                List<AgrinCustomWebException> items = GetErrors(out string errorsFileName);
-                this.RunInLock(() =>
-                {
-                    var last = items.LastOrDefault();
-                    if (last != null && last.ExceptionData != null && last.ExceptionData.Message == error.Message)
-                        return;
-                    LastException = AgrinCustomWebException.ExceptionToSerializable(error);
-                    var find = (from x in items where x.ExceptionData.ToString() == LastException.ExceptionData.ToString() select x).FirstOrDefault();
-                    if (find != null)
-                    {
-                        find.Count++;
-                        find.CreatedDateTime = DateTime.Now;
-                    }
-                    else
-                        items.Add(LastException);
-                    if (items.Count > 20)
-                    {
-                        items.RemoveAt(0);
-                    }
+                LinkInfoAddErrorAction?.Invoke(LinkInfo.Id, error);
+            });
+            //try
+            //{
+            //    //Logger.WriteLine("AddError", error);
+            //    //List<AgrinCustomWebException> items = GetErrors(out string errorsFileName);
+            //    //this.RunInLock(() =>
+            //    //{
+            //    //    var last = items.LastOrDefault();
+            //    //    if (last != null && last.ExceptionData != null && last.ExceptionData.Message == error.Message)
+            //    //        return;
+            //    //    LastException = AgrinCustomWebException.ExceptionToSerializable(error);
+            //    //    var find = (from x in items where x.ExceptionData.ToString() == LastException.ExceptionData.ToString() select x).FirstOrDefault();
+            //    //    if (find != null)
+            //    //    {
+            //    //        find.Count++;
+            //    //        find.CreatedDateTime = DateTime.Now;
+            //    //    }
+            //    //    else
+            //    //        items.Add(LastException);
+            //    //    if (items.Count > 20)
+            //    //    {
+            //    //        items.RemoveAt(0);
+            //    //    }
 
-                    try
-                    {
-                        using (var writer = IOHelper.OpenFileStreamForWrite(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite).GetStream())
-                        {
-                            var serialized = Newtonsoft.Json.JsonConvert.SerializeObject(items);
-                            var bytes = Encoding.UTF8.GetBytes(serialized);
-                            writer.Write(bytes, 0, bytes.Length);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        AutoLogger.LogError(ex, "AddError 2");
-                    }
-                });
+            //    //    try
+            //    //    {
+            //    //        using (var writer = IOHelperBase.OpenFileStreamForWrite(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite).GetStream())
+            //    //        {
+            //    //            var serialized = Newtonsoft.Json.JsonConvert.SerializeObject(items);
+            //    //            var bytes = Encoding.UTF8.GetBytes(serialized);
+            //    //            writer.Write(bytes, 0, bytes.Length);
+            //    //        }
+            //    //    }
+            //    //    catch (Exception ex)
+            //    //    {
+            //    //        AutoLogger.LogError(ex, "AddError 2");
+            //    //    }
+            //    //});
 
-            }
-            catch (Exception e)
-            {
-                AutoLogger.LogError(e, "AddError 3");
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    AutoLogger.LogError(e, "AddError 3");
+            //}
         }
 
         /// <summary>
@@ -137,41 +142,41 @@ namespace Agrin.Download.CoreModels.Link
         /// </summary>
         /// <param name="errorsFileName"></param>
         /// <returns></returns>
-        public List<AgrinCustomWebException> GetErrors(out string errorsFileName)
-        {
-            errorsFileName = "";
-            List<AgrinCustomWebException> items = new List<AgrinCustomWebException>();
-            try
-            {
-                errorsFileName = this.RunInLock(() =>
-                {
-                    string fName = "";
-                    if (!string.IsNullOrEmpty(LinkInfo.PathInfo.SecurityTemporarySavePath))
-                        fName = PathHelper.CombineSecurityPathWithNoSecurity(LinkInfo.PathInfo.TemporarySavePath, "Errors.agn");
-                    else
-                        fName = PathHelper.Combine(LinkInfo.PathInfo.TemporarySavePath, "Errors.agn");
+        //public List<AgrinCustomWebException> GetErrors(out string errorsFileName)
+        //{
+        //    errorsFileName = "";
+        //    List<AgrinCustomWebException> items = new List<AgrinCustomWebException>();
+        //    try
+        //    {
+        //        errorsFileName = this.RunInLock(() =>
+        //        {
+        //            string fName = "";
+        //            if (!string.IsNullOrEmpty(LinkInfo.PathInfo.SecurityTemporarySavePath))
+        //                fName = PathHelper.CombineSecurityPathWithNoSecurity(LinkInfo.PathInfo.TemporarySavePath, "Errors.agn");
+        //            else
+        //                fName = PathHelper.Combine(LinkInfo.PathInfo.TemporarySavePath, "Errors.agn");
 
-                    try
-                    {
-                        using (var reader = new StreamReader(IOHelper.OpenFileStreamForRead(fName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
-                        {
-                            var oldItems = Newtonsoft.Json.JsonConvert.DeserializeObject<List<AgrinCustomWebException>>(reader.ReadToEnd());
-                            items.AddRange(oldItems);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        AutoLogger.LogError(ex, "GetErrors");
-                    }
-                    return fName;
-                });
-            }
-            catch (Exception e)
-            {
-                AutoLogger.LogError(e, "GetErrors 2");
-            }
-            return items;
-        }
+        //            try
+        //            {
+        //                using (var reader = new StreamReader(IOHelperBase.OpenFileStreamForRead(fName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
+        //                {
+        //                    var oldItems = Newtonsoft.Json.JsonConvert.DeserializeObject<List<AgrinCustomWebException>>(reader.ReadToEnd());
+        //                    items.AddRange(oldItems);
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                AutoLogger.LogError(ex, "GetErrors");
+        //            }
+        //            return fName;
+        //        });
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        AutoLogger.LogError(e, "GetErrors 2");
+        //    }
+        //    return items;
+        //}
 
     }
 }

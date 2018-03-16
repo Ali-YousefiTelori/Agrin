@@ -43,10 +43,11 @@ namespace Agrin.Download.CoreModels.Link
             set
             {
                 _Status = value;
-                if (value == ConnectionStatus.Complete)
+                if (value == ConnectionStatus.Complete || IsDownloading)
                 {
                     LinkInfo.ValidateLinkCompletion();
                 }
+                LinkInfo.ValidateConnectionsToDownload();
                 LinkInfo.ValidateUI();
             }
         }

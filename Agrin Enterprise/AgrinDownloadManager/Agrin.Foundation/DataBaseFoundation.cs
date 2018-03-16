@@ -9,8 +9,11 @@ namespace Agrin.Foundation
         public static DataBaseFoundation<T> Current { get; set; }
 
         public abstract void Initialize<TResult>() where TResult : T;
+        public abstract void Initialize();
         public abstract void Update(T data);
+        public abstract void Delete(T data);
         public abstract void Add(T data);
         public abstract List<TResult> GetList<TResult>();
+        public abstract List<T> GetList();
     }
 }

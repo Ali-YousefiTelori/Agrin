@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Agrin.Server.ServiceModels.StorageManager
 {
-    [ServiceContract("PostStorageManager")]
+    [ServiceContract("PostStorageManager", ServiceType.StreamService)]
     public interface IPostStorageManager
     {
         StreamInfo<DateTime> DownloadPostImage(int postUserId, int postId, string fileName);

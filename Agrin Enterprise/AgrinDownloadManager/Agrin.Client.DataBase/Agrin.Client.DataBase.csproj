@@ -31,20 +31,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LiteDB, Version=4.1.1.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Agrin.UI\packages\LiteDB.4.1.1\lib\net40\LiteDB.dll</HintPath>
+    <Reference Include="LiteDB, Version=4.1.2.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.4.1.2\lib\net40\LiteDB.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddRangePositionInfoTable.cs" />
     <Compile Include="AgrinClientContext.cs" />
+    <Compile Include="ExceptionInfoTable.cs" />
     <Compile Include="LinkInfoTable.cs" />
+    <Compile Include="MixerInfoTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaskSchedulerTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Github\CrazyMapper\CrazyMapper\CrazyMapper\CrazyMapper.csproj">
@@ -55,17 +62,17 @@
       <Project>{da7b703a-faa1-4ab0-8271-7ce8fd27592e}</Project>
       <Name>SignalGo.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Agrin.Component\Agrin.Component.csproj">
-      <Project>{A33682AF-3571-443A-85FD-42FDA2EA3B3A}</Project>
-      <Name>Agrin.Component</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Agrin.Download.Models\Agrin.Download.Models.csproj">
       <Project>{4539f9d8-d4c2-47c8-a7ad-21f4a39a1fb7}</Project>
       <Name>Agrin.Download.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Foundation\Agrin.Foundation.csproj">
-      <Project>{783FBBB4-CDD4-4A9D-A8AB-57FBC5BF04DE}</Project>
+      <Project>{783fbbb4-cdd4-4a9d-a8ab-57fbc5bf04de}</Project>
       <Name>Agrin.Foundation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj">
+      <Project>{5ef58a1f-368f-40f9-b68a-cde14e68fa7d}</Project>
+      <Name>Agrin.IO</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Models\Agrin.Models.csproj">
       <Project>{e2018fd5-df00-48a2-a588-dabf5d92e0c8}</Project>

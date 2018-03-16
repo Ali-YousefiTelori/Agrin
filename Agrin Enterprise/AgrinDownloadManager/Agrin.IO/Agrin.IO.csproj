@@ -50,8 +50,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -61,21 +61,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DeSerialization.cs" />
-    <Compile Include="Data\SerializationData.cs" />
     <Compile Include="HardWare\DriveHelperBase.cs" />
     <Compile Include="HardWare\IDriveHelper.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
-    <Compile Include="Mixer\FileConnection.cs" />
-    <Compile Include="Mixer\FileDeleterMixer.cs" />
-    <Compile Include="Mixer\FileMixer.cs" />
-    <Compile Include="Mixer\FileNormalMixer.cs" />
-    <Compile Include="Mixer\FileRevercerMixer.cs" />
-    <Compile Include="Mixer\MixerInfo.cs" />
     <Compile Include="PathHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Streams\IStreamWriter.cs" />
     <Compile Include="Streams\StreamWriter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Agrin.Checksum\Agrin.Checksum.csproj">
@@ -87,7 +82,7 @@
       <Name>Agrin.Log</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Web\Agrin.Web.csproj">
-      <Project>{83D0A53E-35BA-4E55-949A-67C831BCF36E}</Project>
+      <Project>{83d0a53e-35ba-4e55-949a-67c831bcf36e}</Project>
       <Name>Agrin.Web</Name>
     </ProjectReference>
   </ItemGroup>

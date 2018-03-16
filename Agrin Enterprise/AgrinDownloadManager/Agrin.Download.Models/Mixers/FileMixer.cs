@@ -4,24 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Agrin.IO.Mixer
+namespace Agrin.Download.Mixers
 {
     public abstract class FileMixer : IDisposable
     {
-        public static FileMixer GetMixerByType(MixerTypeEnum type, List<string> files)
-        {
-            if (type == MixerTypeEnum.Normal)
-                return new FileNormalMixer(files);
-            else if (type == MixerTypeEnum.Deleter)
-                return new FileDeleterMixer(files);
-            else if (type == MixerTypeEnum.Revercer)
-                return new FileRevercerMixer(files);
-            return null;
-        }
-
+        public static Func<MixerTypeEnum, List<string>, FileMixer> GetMixerByTypeAction;
         public Action OnChangedDataAction { get; set; }
 
-        public MixerInfo CurrentMixer { get; set; }
+        public MixerInfoBase CurrentMixer { get; set; }
 
         public List<FileConnection> Files
         {
@@ -59,16 +49,18 @@ namespace Agrin.IO.Mixer
             }
         }
 
-        public virtual void Start(MixerInfo currentMixer)
+        public virtual void Start(MixerInfoBase currentMixer)
         {
             CurrentMixer = currentMixer;
         }
 
-        public virtual void GenerateFiles(MixerInfo currentMixer, List<string> newFiles)
+        public virtual void GenerateFiles(MixerInfoBase currentMixer, List<string> newFiles)
         {
             long mainLen = 0;
             foreach (var file in newFiles)
             {
+                if (isCanceled)
+                    return;
                 var find = (from x in Files where x.FileName == System.IO.Path.GetFileName(file) select x).FirstOrDefault();
                 if (find == null)
                 {
@@ -100,29 +92,27 @@ namespace Agrin.IO.Mixer
 
         public void Complete()
         {
-            try
-            {
-                IOHelper.DeleteFile(CurrentMixer.MixerBackupPath);
-            }
-            catch (Exception ex)
-            {
-                Log.AutoLogger.LogError(ex, "FileMixer Complete Delete MixerBackupPath");
-            }
-            try
-            {
-                IOHelper.DeleteFile(CurrentMixer.MixerPath);
-            }
-            catch (Exception ex)
-            {
-                Log.AutoLogger.LogError(ex, "FileMixer Complete Delete MixerPath");
-            }
+            //try
+            //{
+            //    IOHelperBase.DeleteFile(CurrentMixer.MixerBackupPath);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Log.AutoLogger.LogError(ex, "FileMixer Complete Delete MixerBackupPath");
+            //}
+            //try
+            //{
+            //    IOHelperBase.DeleteFile(CurrentMixer.MixerPath);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Log.AutoLogger.LogError(ex, "FileMixer Complete Delete MixerPath");
+            //}
         }
 
         public abstract void FixCompleteFileSizeFotResume();
 
-        public void Dispose()
-        {
-
-        }
+        protected bool isCanceled = false;
+        public abstract void Dispose();
     }
 }

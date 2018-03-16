@@ -1,11 +1,11 @@
 ﻿using Agrin.ComponentModels;
 using Agrin.Download.EntireModels.Link;
+using Agrin.Download.Mixers;
 using Agrin.Download.ShortModels.Link;
 using Agrin.Download.Web;
 using Agrin.Foundation;
 using Agrin.Helpers;
 using Agrin.IO.Helpers;
-using Agrin.IO.Mixer;
 using Agrin.Log;
 using Agrin.Models;
 using Agrin.Threads;
@@ -31,6 +31,9 @@ namespace Agrin.Download.CoreModels.Link
         long _Size = -2;//-2 = not get download size and -1 = dont know what is download size
         long _DownloadedSizePerSecound = 0;
         long _MixedSize = 0;
+        bool _IsSelected = false;
+        ushort _SelectedIndex = 0;
+
         ConcurrentCircularBuffer<long> _AvarageDownloadedSizePerSecound = new ConcurrentCircularBuffer<long>(10);
         long _PreviousDownloadedSize;
         TimeSpan? _TimeRemaining = null;
@@ -58,6 +61,11 @@ namespace Agrin.Download.CoreModels.Link
         }
 
         /// <summary>
+        /// link were in error but need aa delay time to start
+        /// </summary>
+        public bool IsWaitForErrorTimeToPLay { get; set; }
+
+        /// <summary>
         /// if connection is downloading
         /// </summary>
         public bool IsDownloading
@@ -65,6 +73,39 @@ namespace Agrin.Download.CoreModels.Link
             get
             {
                 return (Connections.Count == 0 && !IsManualStop) || Connections.Count(x => x.IsDownloading) > 0;
+            }
+        }
+
+        /// <summary>
+        /// mybe link is in error but time remaning need to download again
+        /// </summary>
+        public bool IsDownloadingInActual
+        {
+            get
+            {
+                return IsDownloading || IsWaitForErrorTimeToPLay;
+            }
+        }
+
+        /// <summary>
+        /// link is activee download or etc need to app server be run
+        /// </summary>
+        public bool IsNeedActiveInActual
+        {
+            get
+            {
+                return IsDownloadingInActual || IsCopyingFile || IsCompleting || isDestroying;
+            }
+        }
+
+        /// <summary>
+        /// if link can play in actual but not in this time
+        /// </summary>
+        public bool CanPlayInActual
+        {
+            get
+            {
+                return CanPlay || !IsComplete;
             }
         }
 
@@ -85,13 +126,18 @@ namespace Agrin.Download.CoreModels.Link
         }
 
         /// <summary>
+        /// when link rise of complete method one time
+        /// </summary>
+        public bool IsCompleting { get; set; }
+
+        /// <summary>
         /// when link can do complete method
         /// </summary>
         public bool CanComplete
         {
             get
             {
-                return Connections.Count > 0 && Connections.Count(x => x.IsComplete) == Connections.Count;
+                return (IsCompleting || (Connections.Count > 0 && Connections.Count(x => x.IsComplete) == Connections.Count)) && !isDestroying;
             }
         }
 
@@ -129,7 +175,7 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
-                return Connections.Count > 0 && (_IsManualError || Connections.Count(x => x.IsError) == Connections.Count);
+                return Connections.Count > 0 && (IsWaitForErrorTimeToPLay || _IsManualError || Connections.Count(x => x.IsError) == Connections.Count(x => !x.IsComplete));
             }
             set
             {
@@ -145,7 +191,7 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
-                return IsManualStop && !IsCopyingFile && !IsComplete;
+                return IsManualStop && !IsCopyingFile && !IsComplete && !isDestroying;
             }
         }
 
@@ -156,7 +202,7 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
-                return !CanPlay && !IsCopyingFile && !IsComplete;
+                return !CanPlay && !IsCopyingFile && !IsComplete || isDestroying;
             }
         }
 
@@ -181,7 +227,17 @@ namespace Agrin.Download.CoreModels.Link
                     return ConnectionStatus.Error;
                 else if (CanComplete && ValidateLinkCompletion())
                     return ConnectionStatus.Complete;
-
+                else if (!IsManualStop)
+                {
+                    StringBuilder buildeer = new StringBuilder();
+                    buildeer.AppendLine("Start What is status");
+                    foreach (var item in Connections)
+                    {
+                        buildeer.AppendLine(item.Status.ToString());
+                    }
+                    buildeer.AppendLine("End What is status");
+                    AutoLogger.LogText(buildeer.ToString());
+                }
                 return ConnectionStatus.Stoped;
             }
         }
@@ -359,6 +415,22 @@ namespace Agrin.Download.CoreModels.Link
             }
         }
 
+        /// <summary>
+        /// index of celection for multi select
+        /// </summary>
+        public ushort SelectedIndex
+        {
+            get
+            {
+                return _SelectedIndex;
+            }
+            set
+            {
+                _SelectedIndex = value;
+                OnPropertyChanged(nameof(SelectedIndex));
+            }
+        }
+
         public DateTime LastDownloadedDateTime
         {
             get
@@ -388,7 +460,23 @@ namespace Agrin.Download.CoreModels.Link
             }
         }
 
-
+        /// <summary>
+        /// when link info selected by user
+        /// </summary>
+        public bool IsSelected
+        {
+            get
+            {
+                return _IsSelected;
+            }
+            set
+            {
+                _IsSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+                if (!value)
+                    SelectedIndex = 0;
+            }
+        }
 
         /// <summary>
         /// check if link is going to complete else create a new request for this
@@ -411,6 +499,8 @@ namespace Agrin.Download.CoreModels.Link
                 Complete();
         }
 
+        public static Action<LinkInfoShort> CompletedLinkAction { get; set; }
+        FileMixer _doingMixer;
         internal void Complete()
         {
             this.RunInLock(() =>
@@ -420,6 +510,7 @@ namespace Agrin.Download.CoreModels.Link
                 {
                     if (IsCopyingFile)
                         return;
+                    IsCompleting = true;
                     IsCopyingFile = true;
                     //تغییر برای بخش سکیوریتی اندروید
                     //if (string.IsNullOrEmpty(linkInfoShort.PathInfo.SecurityDirectorySavePath) && !System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(linkInfoShort.PathInfo.FullSaveAddress)))
@@ -440,7 +531,7 @@ namespace Agrin.Download.CoreModels.Link
                     }
 
                     //میکسر لینک که قبلاً ذخیره شده بود
-                    MixerInfo mixerInfo = MixerInfo.LoadFromFile(linkInfoShort.PathInfo.MixerSavePath, linkInfoShort.PathInfo.SecurityMixerSavePath, null);//, linkInfoShort.PathInfo.BackUpMixerSavePath
+                    var mixerInfo = MixerInfo.LoadAction(Id);//, linkInfoShort.PathInfo.BackUpMixerSavePath
 
                     MixerTypeEnum mixerType = MixerTypeEnum.NoSpace;
 
@@ -448,33 +539,35 @@ namespace Agrin.Download.CoreModels.Link
                     {
                         if (System.IO.File.Exists(linkInfoShort.PathInfo.FullSaveAddress))
                         {
-                            using (var fs = IOHelper.OpenFileStreamForWrite(linkInfoShort.PathInfo.DirectorySavePath, System.IO.FileMode.OpenOrCreate, fileName: linkInfoShort.PathInfo.FileName))
+                            using (var fs = IOHelperBase.OpenFileStreamForWrite(linkInfoShort.PathInfo.DirectorySavePath, System.IO.FileMode.OpenOrCreate, fileName: linkInfoShort.PathInfo.FileName))
                             {
                                 fs.SetLength(0);
                             }
                         }
-                        mixerType = MixerInfo.GenerateAutoMixerByDriveSize(linkInfoShort.PathInfo.DirectorySavePath, (long)linkInfoShort.Size, files);
+                        mixerType = MixerInfo.GenerateAutoMixerByDriveSizeAction(linkInfoShort.PathInfo.DirectorySavePath, (long)linkInfoShort.Size, files);
                         if (mixerType == MixerTypeEnum.NoSpace)
                             throw new Exception("فضای کافی برای ذخیره سازی بر روی دیسک خود ندارید. حداقل فضای کافی برای تکمیل سازی فایل 10 مگابایت می باشد.");
-                        mixerInfo = MixerInfo.InstanceMixerByType(mixerType, linkInfoShort.PathInfo.MixerSavePath, null);//linkInfoShort.PathInfo.MixerBackupSavePath
+                        mixerInfo = new MixerInfoBase() { MixerType = mixerType, LinkId = Id };//.InstanceMixerByTypeAction(mixerType, linkInfoShort.PathInfo.MixerSavePath, null);//linkInfoShort.PathInfo.MixerBackupSavePath
                     }
                     else
                         mixerType = mixerInfo.MixerType;
                     //موتور میکس کننده
-                    FileMixer mixer = FileMixer.GetMixerByType(mixerType, files);
+                    _doingMixer = FileMixer.GetMixerByTypeAction(mixerType, files);
                     mixerInfo.FilePath = linkInfoShort.PathInfo.DirectorySavePath;
                     mixerInfo.FileName = linkInfoShort.PathInfo.FileName;
-
-                    mixer.OnChangedDataAction = () =>
+                    if (isDestroying)
+                        return;
+                    _doingMixer.OnChangedDataAction = () =>
                     {
-                        MixedSize = mixer.MixedSize;
+                        MixedSize = _doingMixer.MixedSize;
                         ValidateUI();
                     };
 
 
-                    mixer.Start(mixerInfo);
-
-                    MixedSize = fileLen = mixer.Size;
+                    _doingMixer.Start(mixerInfo);
+                    if (isDestroying)
+                        return;
+                    MixedSize = fileLen = _doingMixer.Size;
 
                     if (fileLen != linkInfoShort.Size && linkInfoShort.Size > 0)
                     {
@@ -482,6 +575,8 @@ namespace Agrin.Download.CoreModels.Link
                     }
 
                     IsComplete = true;
+                    IsCompleting = false;
+                    CompletedLinkAction?.Invoke(this.AsShort());
                     //linkInfoShort.PathInfo.UserDirectorySavePath = PathInfo.SavePath;
                     //linkInfoShort.LinkInfoDownloadCore.SpeedByteDownloaded = 0;
                     //string bkFileName = MPath.CreateOneFileByAddress(MPath.BackUpCompleteLinksPath);
@@ -504,7 +599,7 @@ namespace Agrin.Download.CoreModels.Link
                 }
                 catch (Exception e)
                 {
-                    AutoLogger.LogError(e, "Complete Error");
+                    AutoLogger.LogError(e, $"Complete Error {isDestroying}");
                     IsCopyingFile = false;
                     IsError = true;
                     linkInfoShort.LinkInfoManagementCore.AddError(e);
@@ -520,11 +615,14 @@ namespace Agrin.Download.CoreModels.Link
                 }
                 finally
                 {
-                    IsCopyingFile = false;
-                    Save();
+                    if (!isDestroying)
+                    {
+                        IsCopyingFile = false;
+                        Save();
+                    }
                 }
 #if (MobileApp)
-            GC.Collect();
+                GC.Collect();
 #else
 
                 GC.Collect(5, GCCollectionMode.Forced);
@@ -544,6 +642,8 @@ namespace Agrin.Download.CoreModels.Link
         {
             return this.RunInLock(() =>
             {
+                if (isDestroying)
+                    return null;
                 var maximumId = Connections.Select(x => x.Id).DefaultIfEmpty((ushort)0).Max();
                 maximumId++;
                 LinkInfoRequestCore requestCore = LinkInfoRequestCore.Instance();
@@ -579,31 +679,54 @@ namespace Agrin.Download.CoreModels.Link
         {
             this.RunInLock(() =>
             {
-                if (!IsDownloading)
+                if (isDestroying)
+                    return;
+                if (!IsDownloading || IsCompleting)
                     return;
                 if (Connections.Count > 0 && ((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.ResumeCapability != ResumeCapabilityEnum.Yes)
                 {
                     var connection = Connections.First();
+                    if (isDestroying)
+                        return;
                     if (connection.CanPlay)
                         connection.Play();
                     return;
                 }
                 var completeCount = Connections.Count(x => x.IsComplete);
                 bool cannewwhenEnd = Connections.Count == 0 || (Size - DownloadedSize) > 1024 * 1024 || completeCount == Connections.Count;
-                var canAddConection = cannewwhenEnd && (DownloadedSize < Size || !IsGetSize) && Connections.Count(x => x.EndPosition > 0 && x.StartPosition >= 0) == 0;
+                var canAddConection = cannewwhenEnd && (DownloadedSize < Size || !IsGetSize) && !Connections.Any(x => x.EndPosition < 0);
                 if (canAddConection && (Connections.Count - completeCount) < ((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.GetConcurrentConnectionCount())
                 {
                     var connection = CreateNewRequestCore();
-                    connection.Play();
+                    if (isDestroying)
+                        return;
+                    connection?.Play();
                 }
                 ValidateUI();
             });
         }
 
+        internal void ValidateConnectionsToDownload()
+        {
+            if (!IsManualStop)
+            {
+                var connections = Connections.ToArray();
+                var downloadingCount = connections.Count(x => x.IsDownloading);
+                var takeCount = AsShort().LinkInfoDownloadCore.GetConcurrentConnectionCount() - downloadingCount;
+                if (takeCount > 0)
+                {
+                    foreach (var item in connections.Where(x => x.CanPlay).Take(takeCount))
+                    {
+                        item.Play();
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// play the Link
         /// </summary>
-        internal void Play()
+        public void Play()
         {
             this.RunInLock(() =>
             {
@@ -611,14 +734,14 @@ namespace Agrin.Download.CoreModels.Link
                     return;
                 _IsManualError = false;
                 IsManualStop = false;
-                if (Connections.Count(x => x.CanPlay) > 0)
+                if (Connections.ToArray().Count(x => x.CanPlay) > 0 && !IsCompleting)
                 {
                     foreach (var item in Connections.Where(x => x.CanPlay).Take(((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.GetConcurrentConnectionCount()))
                     {
                         item.Play();
                     }
                 }
-                else if (CanComplete && ValidateLinkCompletion())
+                else if (CanComplete && ValidateLinkCompletion() || IsCompleting)
                 {
                     CheckComplete();
                 }
@@ -632,7 +755,7 @@ namespace Agrin.Download.CoreModels.Link
         /// <summary>
         /// stop link
         /// </summary>
-        internal void Stop()
+        public void Stop()
         {
             this.RunInLock(() =>
             {
@@ -649,6 +772,9 @@ namespace Agrin.Download.CoreModels.Link
             });
         }
 
+        public static Action LinkValidatedAction { get; set; }
+
+
         public void ValidateUI()
         {
             OnPropertyChanged(nameof(IsDownloading));
@@ -662,8 +788,19 @@ namespace Agrin.Download.CoreModels.Link
             OnPropertyChanged(nameof(Percent));
             OnPropertyChanged(nameof(DownloadedSize));
             OnPropertyChanged(nameof(Size));
-            OnPropertyChanged(nameof(IsNotComplete)); 
+            OnPropertyChanged(nameof(IsNotComplete));
             OnPropertyChanged(nameof(PercentDouble));
+            LinkValidatedAction?.Invoke();
+        }
+
+        volatile bool isDestroying = false;
+        public void Distroy()
+        {
+            isDestroying = true;
+            Stop();
+            if (_doingMixer != null)
+                _doingMixer.Dispose();
+            Dispose();
         }
 
         /// <summary>
@@ -692,7 +829,7 @@ namespace Agrin.Download.CoreModels.Link
             base.Dispose();
         }
 
-        internal static LinkInfoCore CreateInstance(string url)
+        public static LinkInfoCore CreateInstance(string url)
         {
 #if (Debug || Release)
             var link = new LinkInfo();

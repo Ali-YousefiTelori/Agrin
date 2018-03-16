@@ -51,14 +51,17 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LiteDB, Version=4.1.1.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Agrin.UI\packages\LiteDB.4.1.1\lib\net40\LiteDB.dll</HintPath>
+    <Reference Include="LiteDB, Version=4.1.2.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.4.1.2\lib\net40\LiteDB.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -69,12 +72,25 @@
     <Compile Include="CoreModels\Link\LinkInfoManagementCore.cs" />
     <Compile Include="CoreModels\Link\LinkInfoPathCore.cs" />
     <Compile Include="CoreModels\Link\LinkInfoPropertiesCore.cs" />
+    <Compile Include="CoreModels\Task\ITaskProcessor.cs" />
+    <Compile Include="CoreModels\Task\LinkDownloaderTaskProcessor.cs" />
+    <Compile Include="CoreModels\Task\TaskSchedulerInfo.cs" />
+    <Compile Include="DataBaseModels\AddRangePositionInfo.cs" />
+    <Compile Include="DataBaseModels\ExceptionInfo.cs" />
     <Compile Include="Engines\SpeedEngineHelper.cs" />
     <Compile Include="EntireModels\Link\LinkInfoDownload.cs" />
     <Compile Include="EntireModels\Link\LinkInfoRequest.cs" />
     <Compile Include="CoreModels\Link\LinkInfoCore.cs" />
     <Compile Include="CoreModels\Link\LinkInfoRequestCore.cs" />
-    <Compile Include="EntireModels\Managers\LinkInfoManager.cs" />
+    <Compile Include="EntireModels\Managers\LinkInfoManagerBase.cs" />
+    <Compile Include="EntireModels\Managers\TaskScheduleManagerBase.cs" />
+    <Compile Include="Helpers\LinkActionsBase.cs" />
+    <Compile Include="Mixers\FileDeleterMixer.cs" />
+    <Compile Include="Mixers\FileMixer.cs" />
+    <Compile Include="Mixers\FileNormalMixer.cs" />
+    <Compile Include="Mixers\FileRevercerMixer.cs" />
+    <Compile Include="Mixers\MixerInfo.cs" />
+    <Compile Include="Mixers\MixerInfoBase.cs" />
     <Compile Include="ShortModels\Link\LinkInfoDownloadShort.cs" />
     <Compile Include="ShortModels\Link\LinkInfoManagementShort.cs" />
     <Compile Include="ShortModels\Link\LinkInfoPathShort.cs" />
@@ -96,7 +112,6 @@
     <Folder Include="CoreModels\Connection\" />
     <Folder Include="CoreModels\Group\" />
     <Folder Include="CoreModels\Sharing\" />
-    <Folder Include="CoreModels\Task\" />
     <Folder Include="EntireModels\Connection\" />
     <Folder Include="EntireModels\Group\" />
     <Folder Include="EntireModels\Sharing\" />
@@ -114,6 +129,10 @@
     <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
       <Project>{da7b703a-faa1-4ab0-8271-7ce8fd27592e}</Project>
       <Name>SignalGo.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agrin.Checksum\Agrin.Checksum.csproj">
+      <Project>{7AE5F3B1-C702-4EBC-BD71-6D34A77450E7}</Project>
+      <Name>Agrin.Checksum</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Component\Agrin.Component.csproj">
       <Project>{A33682AF-3571-443A-85FD-42FDA2EA3B3A}</Project>

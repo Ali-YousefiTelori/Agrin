@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Agrin.Server.ServiceModels.Authentication
 {
-    [ServiceContract("AuthenticationService", InstanceType = InstanceType.SingleInstance)]
+    [ServiceContract("AuthenticationService", ServiceType.ServerService, InstanceType = InstanceType.SingleInstance)]
     public interface IAuthentication
     {
 
