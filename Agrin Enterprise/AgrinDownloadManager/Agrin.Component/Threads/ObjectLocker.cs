@@ -1,4 +1,5 @@
 ﻿using Agrin.Interfaces;
+using Agrin.Log;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -49,7 +50,7 @@ namespace Agrin.Threads
                 {
                     if (!key.IsDispose)
                     {
-
+                        AutoLogger.LogError(ex, "RunInLock");
                     }
                 }
             }

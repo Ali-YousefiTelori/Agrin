@@ -62,61 +62,58 @@ namespace Agrin.Download.CoreModels.Link
                 return ApplicationSettingsInfo.Current.SpeedSettingInfo.MaximumConnectionCount;
             return _ConcurrentConnectionCount.Value;
         }
+
+        public static Action<int,long> AddStartedRangePositionAction { get; set; }
+
         /// <summary>
         /// add Started Range Position
         /// </summary>
         /// <param name="position"></param>
         public void AddStartedRangePosition(long position)
         {
-            try
+            this.RunInLock(() =>
             {
-                LinkInfo.RunInLock(() =>
-                {
-                    string errorsFileName = "";
-                    if (!string.IsNullOrEmpty(LinkInfo.PathInfo.SecurityTemporarySavePath))
-                        errorsFileName = PathHelper.CombineSecurityPathWithNoSecurity(LinkInfo.PathInfo.TemporarySavePath, "RangePositions.agn");
-                    else
-                        errorsFileName = PathHelper.Combine(LinkInfo.PathInfo.TemporarySavePath, "RangePositions.agn");
+                AddStartedRangePositionAction?.Invoke(LinkInfo.Id, position);
+                    //string errorsFileName = "";
+                    //if (!string.IsNullOrEmpty(LinkInfo.PathInfo.SecurityTemporarySavePath))
+                    //    errorsFileName = PathHelper.CombineSecurityPathWithNoSecurity(LinkInfo.PathInfo.TemporarySavePath, "RangePositions.agn");
+                    //else
+                    //    errorsFileName = PathHelper.Combine(LinkInfo.PathInfo.TemporarySavePath, "RangePositions.agn");
 
-                    List<long> items = new List<long>();
-                    try
-                    {
-                        if (File.Exists(errorsFileName))
-                        {
-                            using (var reader = new StreamReader(IOHelper.OpenFileStreamForRead(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
-                            {
-                                var oldItems = Newtonsoft.Json.JsonConvert.DeserializeObject<List<long>>(reader.ReadToEnd());
-                                if (oldItems != null)
-                                    items.AddRange(oldItems);
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        AutoLogger.LogError(ex, "AddStartedRangePosition");
-                    }
+                //List<long> items = new List<long>();
+                //try
+                //{
+                //    if (File.Exists(errorsFileName))
+                //    {
+                //        using (var reader = new StreamReader(IOHelperBase.OpenFileStreamForRead(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
+                //        {
+                //            var oldItems = Newtonsoft.Json.JsonConvert.DeserializeObject<List<long>>(reader.ReadToEnd());
+                //            if (oldItems != null)
+                //                items.AddRange(oldItems);
+                //        }
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    AutoLogger.LogError(ex, "AddStartedRangePosition");
+                //}
 
-                    items.Add(position);
+                //items.Add(position);
 
-                    try
-                    {
-                        using (var writer = IOHelper.OpenFileStreamForWrite(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite).GetStream())
-                        {
-                            var serialized = Newtonsoft.Json.JsonConvert.SerializeObject(items);
-                            var bytes = Encoding.ASCII.GetBytes(serialized);
-                            writer.Write(bytes, 0, bytes.Length);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        AutoLogger.LogError(ex, "AddStartedRangePosition 2");
-                    }
-                });
-            }
-            catch (Exception e)
-            {
-                AutoLogger.LogError(e, "AddStartedRangePosition 3");
-            }
+                //try
+                //{
+                //    using (var writer = IOHelperBase.OpenFileStreamForWrite(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite).GetStream())
+                //    {
+                //        var serialized = Newtonsoft.Json.JsonConvert.SerializeObject(items);
+                //        var bytes = Encoding.ASCII.GetBytes(serialized);
+                //        writer.Write(bytes, 0, bytes.Length);
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    AutoLogger.LogError(ex, "AddStartedRangePosition 2");
+                //}
+            });
         }
     }
 }

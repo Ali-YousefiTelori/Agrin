@@ -21,7 +21,7 @@ namespace Agrin.Converters
             items.Add(time.Seconds + " " + ApplicationResourceBase.Current.GetAppResource("Secound"));
             if (time.Minutes > 0)
             {
-                if (!ShowSecounds)
+                if (!IsShowSecounds)
                 {
                     items.Clear();
                     items.Add(time.Minutes + " " + ApplicationResourceBase.Current.GetAppResource("Minute") + " ");
@@ -46,12 +46,12 @@ namespace Agrin.Converters
         }
 
 
-        private bool _ShowSecounds = true;
+        private bool _isShowSecounds = true;
 
-        public bool ShowSecounds
+        public bool IsShowSecounds
         {
-            get { return _ShowSecounds; }
-            set { _ShowSecounds = value; }
+            get { return _isShowSecounds; }
+            set { _isShowSecounds = value; }
         }
     }
 }

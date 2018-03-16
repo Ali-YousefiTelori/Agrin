@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Agrin.IO.Mixer
+namespace Agrin.Download.Mixers
 {
     /// <summary>
     /// میکسر تا زمانی که فایل را کامل کپی نکند ان را حذف نمی کند
@@ -17,8 +17,10 @@ namespace Agrin.IO.Mixer
             _newFiles = files;
         }
 
-        public override void Start(MixerInfo currentMixer)
+        public override void Start(MixerInfoBase currentMixer)
         {
+            if (isCanceled)
+                return;
             base.Start(currentMixer);
             GenerateFiles(currentMixer, _newFiles);
             FixCompleteFileSizeFotResume();
@@ -32,15 +34,19 @@ namespace Agrin.IO.Mixer
 
         public void CreateFile()
         {
+            if (isCanceled)
+                return;
             MixedSize = 0;
-            using (var stream = IOHelper.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
             {
+                if (isCanceled)
+                    return;
                 stream.SetLength(0);
                 stream.Seek(0, System.IO.SeekOrigin.Begin);
                 foreach (var file in Files)
                 {
                     long currentMixed = MixedSize;
-                    using (var copystream = IOHelper.OpenFileStreamForRead(file.Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                    using (var copystream = IOHelperBase.OpenFileStreamForRead(file.Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
                     {
                         int len = 1024 * 1024 * 2;
                         byte[] read = new byte[len];
@@ -50,8 +56,12 @@ namespace Agrin.IO.Mixer
                             System.Threading.Thread.Sleep(2);
                             stream.Write(read, 0, rCount);
                             MixedSize = currentMixed + copystream.Position;
+                            if (isCanceled)
+                                return;
                         }
                     }
+                    if (isCanceled)
+                        return;
                     file.IsComplete = IsCompleteEnum.Comeplete;
                     CurrentMixer.MixedCompletedLen = stream.Length;
                 }
@@ -59,9 +69,11 @@ namespace Agrin.IO.Mixer
             }
             try
             {
+                if (isCanceled)
+                    return;
                 foreach (var file in Files)
                 {
-                    IOHelper.DeleteFile(file.Path);
+                    IOHelperBase.DeleteFile(file.Path);
                 }
             }
             catch (Exception ex)
@@ -76,6 +88,11 @@ namespace Agrin.IO.Mixer
             if (size > freeSpace)
                 return false;
             return true;
+        }
+
+        public override void Dispose()
+        {
+            isCanceled = true;
         }
     }
 }

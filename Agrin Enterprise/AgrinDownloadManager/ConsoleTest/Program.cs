@@ -7,7 +7,9 @@ using Agrin.Download.EntireModels.Link;
 using Agrin.Download.ShortModels.Link;
 using Agrin.Download.Web;
 using Agrin.IO;
+using Agrin.IO.Helpers;
 using Agrin.Log;
+using Agrin.UI.ViewModels.Helpers;
 using Agrin.Web;
 using CrazyMapper;
 using Newtonsoft.Json;
@@ -79,17 +81,15 @@ namespace ConsoleTest
         static void InitializeMapper()
         {
             //{ "Unable to cast object of type 'Agrin.Download.ShortModels.Link.LinkInfoPropertiesShort' to type 'Agrin.Download.EntireModels.Link.LinkInfoProperties'."}
-            Mapper.Bind<LinkInfoPropertiesShort, LinkInfoProperties>();
-            Mapper.Bind<LinkInfoRequestCore, LinkInfoRequest>();
-            Mapper.AfterInstance<LinkInfoRequest>((target, parent) =>
+            Mapper.Bind<LinkInfoRequestCore, LinkInfoRequestShort>();
+            Mapper.AfterSetParameters<LinkInfoRequestShort>((target, parent) =>
             {
-                target.LinkInfo = (LinkInfo)parent;
                 try
                 {
-                    if (File.Exists(target.SaveConnectionFileName))
+                    if (IOHelperBase.FileExists(target.SaveConnectionFileName))
                     {
-                        FileInfo file = new FileInfo(target.SaveConnectionFileName);
-                        target.DownloadedSize = file.Length;
+                        using (var stream = IOHelperBase.OpenFileStreamForRead(target.SaveConnectionFileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                            target.DownloadedSize = stream.Length;
                         if (target.DownloadedSize == target.Length)
                         {
                             target.Status = Agrin.Models.ConnectionStatus.Complete;
@@ -101,21 +101,25 @@ namespace ConsoleTest
 
                 }
             });
+            Mapper.AfterInstance<LinkInfoRequestShort>((target, parent) =>
+            {
+                target.LinkInfo = (LinkInfoShort)parent;
+            });
             Mapper.AfterInstance<LinkInfoPathShort>((target, parent) =>
             {
-                target.LinkInfo = (LinkInfo)parent;
+                target.LinkInfo = (LinkInfoShort)parent;
             });
-            Mapper.AfterInstance<LinkInfoProperties>((target, parent) =>
+            Mapper.AfterInstance<LinkInfoPropertiesShort>((target, parent) =>
             {
-                target.LinkInfo = (LinkInfo)parent;
+                target.LinkInfo = (LinkInfoShort)parent;
             });
             Mapper.AfterInstance<LinkInfoManagementShort>((target, parent) =>
             {
-                target.LinkInfo = (LinkInfo)parent;
+                target.LinkInfo = (LinkInfoShort)parent;
             });
-            Mapper.AfterInstance<LinkInfoDownloadCore>((target, parent) =>
+            Mapper.AfterInstance<LinkInfoDownloadShort>((target, parent) =>
             {
-                target.LinkInfo = (LinkInfo)parent;
+                target.LinkInfo = (LinkInfoShort)parent;
             });
         }
 
@@ -125,7 +129,8 @@ namespace ConsoleTest
             PathHelper.Initialize(path, path, path);
             AgrinClientContext.DataBasePath = path;
             AutoLogger.ApplicationDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            AgrinClientContext.LinkInfoTable.Initialize<LinkInfo>();
+            AgrinClientContext.LinkInfoTable.Initialize<LinkInfoShort>();
+            AgrinClientContext.TaskSchedulerTable.Initialize();
         }
 
         //readonly static Uri SomeBaseUri = new Uri("http://canbeanything");
@@ -197,24 +202,23 @@ namespace ConsoleTest
         {
             try
             {
-                var fileName = GetFileNameFromUrl("http://cdn.p30download.com/?b=p30dl-software&f=Mozilla.Firefox.v58.0.x86_p30download.com.zip");
-                LinkChecker hostChecker = new LinkChecker() { };
-                hostChecker.Restart("http://cdn.p30download.com/?b=p30dl-software&f=Adobe.Photoshop.CC.2017.v18.1.1.252.x64_p30download.com.part2.rar");
-                Console.ReadKey();
+                //var fileName = GetFileNameFromUrl("http://cdn.p30download.com/?b=p30dl-software&f=Mozilla.Firefox.v58.0.x86_p30download.com.zip");
+                //LinkChecker hostChecker = new LinkChecker() { };
+                //hostChecker.Restart("http://cdn.p30download.com/?b=p30dl-software&f=Adobe.Photoshop.CC.2017.v18.1.1.252.x64_p30download.com.part2.rar");
+                //Console.ReadKey();
                 //hostChecker.Start();
                 //Console.ReadKey();
-                //InitializeMapper();
-                //LoadData();
+                InitializeMapper();
+                LoadData();
 
-                //var link = LinkInfoCore.CreateInstance("http://up.bia4music.org/music/96/Khordad/Hoorosh%20Band%20-%20Be%20Ki%20Poz%20Midi.mp3");//"https://www.telerik.com/docs/default-source/fiddler/fiddlersetup.exe?sfvrsn=4"
+                var link = LinkInfoManager.Current.CreateInstance("https://se10.noyes.in/drive/1s0MNHjXvDK6BAgGeGgF7ZCpMXBNtRNaQ/482714_video_1519799697.mov?md5=pJwWnhe9ySJzlbJGe6sZyg&expires=1519987665");//"https://www.telerik.com/docs/default-source/fiddler/fiddlersetup.exe?sfvrsn=4"
+                AgrinClientContext.LinkInfoTable.Add(link);
 
-                var link = AgrinClientContext.LinkInfoes.Last();
-                //item.CreatedDateTime = DateTime.Now;
-                //AgrinClientContext.LinkInfoTable.Update(item);
+                //var link = AgrinClientContext.MainLoadedLinkInfoes.FirstOrDefault(x => x.Id == 16);
 
-                //AgrinClientContext.LinkInfoTable.Add(link);
 
-                //link.Play();
+                LinkInfoManager.Current.Play(link);
+                //link.LinkInfoDownloadCore.ConcurrentConnectionCount = 20;
                 while (true)
                 {
                     Logger.WriteLine(link.DownloadedSize + " , " + link.Size);

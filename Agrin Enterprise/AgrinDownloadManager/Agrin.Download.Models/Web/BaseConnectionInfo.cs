@@ -186,7 +186,7 @@ namespace Agrin.Download.Web
             if (IsDispose)
                 return false;
             ConnectionStatus = ConnectionStatus.CreatingRequest;
-            _saveStream = IOHelper.OpenFileStreamForWrite(RequestCore.SaveConnectionFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            _saveStream = IOHelperBase.OpenFileStreamForWrite(RequestCore.SaveConnectionFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
 
             RequestCore.DownloadedSize = _saveStream.Length;
             if (RequestCore.EndPosition != -2 && _saveStream.Length == RequestCore.Length)
@@ -209,19 +209,19 @@ namespace Agrin.Download.Web
             CurrentWebRequestExchanger = WebRequestExchangerBase.Create(RequestExchangerType.NetFrameworkWebRequest);
             CurrentWebRequestExchanger.CreateRequest(_currentAddress, _authentication, 60000, _currentProxy, RequestCore.RequestCookieContainer, int.MaxValue, GetCustomHeaders());
 
-            foreach (var error in LinkInfo.LinkInfoManagementCore.GetErrors(out string errorsFileName))
-            {
-                if (error == null)
-                    continue;
-                if (error.ExceptionData is WebException)
-                {
-                    if (error.OtherData.FirstOrDefault() is WebExceptionStatus && (WebExceptionStatus)error.OtherData.FirstOrDefault() == WebExceptionStatus.ConnectFailure)
-                    {
-                        CurrentWebRequestExchanger.SetExpect100Continue(false);
-                        break;
-                    }
-                }
-            }
+            //foreach (var error in LinkInfo.LinkInfoManagementCore.GetErrors(out string errorsFileName))
+            //{
+            //    if (error == null)
+            //        continue;
+            //    if (error.ExceptionData is WebException)
+            //    {
+            //        if (error.OtherData.FirstOrDefault() is WebExceptionStatus && (WebExceptionStatus)error.OtherData.FirstOrDefault() == WebExceptionStatus.ConnectFailure)
+            //        {
+            //            CurrentWebRequestExchanger.SetExpect100Continue(false);
+            //            break;
+            //        }
+            //    }
+            //}
 
             if (RequestCore.StartPosition + _saveStream.Length > 0 && LinkInfo.LinkInfoDownloadCore.ResumeCapability == ResumeCapabilityEnum.Yes)
             {
@@ -644,6 +644,10 @@ namespace Agrin.Download.Web
 
         void Complete()
         {
+            if (_saveStream.Length != RequestCore.Length && RequestCore.Length > 0)
+            {
+                _saveStream.SetLength(RequestCore.Length);
+            }
             BeginDispose();
             RequestCore.Complete();
             Dispose();

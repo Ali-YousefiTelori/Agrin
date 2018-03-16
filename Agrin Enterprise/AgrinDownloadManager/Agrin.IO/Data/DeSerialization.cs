@@ -18,7 +18,7 @@ namespace Agrin.IO.Data
         {
             if (string.IsNullOrEmpty(path))
                 return null;
-            using (var stream = IOHelper.OpenFileStreamForRead(path, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite))
+            using (var stream = IOHelperBase.OpenFileStreamForRead(path, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite))
             {
                 List<byte> result = new List<byte>();
                 while (stream.Position < stream.Length)

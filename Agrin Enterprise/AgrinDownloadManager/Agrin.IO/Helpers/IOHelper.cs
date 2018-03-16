@@ -7,9 +7,8 @@ using System.Text;
 
 namespace Agrin.IO.Helpers
 {
-    public static class IOHelper
+    public static class IOHelperBase
     {
-        public static Action<string> OpenFileAction { get; set; }
         public static Func<string, Stream> OpenFileStreamForReadAction { get; set; }
         public static Func<string, string, FileMode, Action<string>, object, IStreamWriter> OpenFileStreamForWriteAction { get; set; }
         //public static List<string> FilesList { get; set; } = new List<string>();
@@ -28,6 +27,11 @@ namespace Agrin.IO.Helpers
         public static bool FileExists(string filePath)
         {
             return File.Exists(filePath);
+        }
+
+        public static bool DirectoryExists(string filePath)
+        {
+            return Directory.Exists(filePath);
         }
 
         public static IStreamWriter OpenFileStreamForWrite(string fileAddress, FileMode fileMode, FileAccess fileAccess = FileAccess.ReadWrite, string fileName = null, Action<string> newSecurityFileName = null, object data = null)

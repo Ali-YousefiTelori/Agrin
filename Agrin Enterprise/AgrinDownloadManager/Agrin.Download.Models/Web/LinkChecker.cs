@@ -5,6 +5,7 @@ using SignalGo.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
@@ -166,6 +167,7 @@ namespace Agrin.Download.Web
                 System.Net.IWebProxy _currentProxy = null;
                 using (var currentWebRequestExchanger = WebRequestExchangerBase.Create(RequestExchangerType.NetFrameworkWebRequest))
                 {
+
                     currentWebRequestExchanger.CreateRequest(linkAddress, _authentication, 60000, _currentProxy, null, int.MaxValue, null);
                     currentWebRequestExchanger.GetResponse();
                     LinkSize = currentWebRequestExchanger.ContentLength;

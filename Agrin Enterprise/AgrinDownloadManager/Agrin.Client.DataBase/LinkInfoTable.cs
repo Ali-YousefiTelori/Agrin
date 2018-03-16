@@ -1,4 +1,5 @@
 ﻿using Agrin.Download.CoreModels.Link;
+using Agrin.Download.Mixers;
 using Agrin.Foundation;
 using Agrin.Models.Serialization.Link;
 using CrazyMapper;
@@ -31,14 +32,19 @@ namespace Agrin.Client.DataBase
             }
         }
 
-        public override void Initialize<T>() 
+        bool oneTimeLoaded = false;
+        public override void Initialize<T>()
         {
+            if (oneTimeLoaded)
+                return;
+            oneTimeLoaded = true;
             var links = GetList<T>();
             foreach (var item in links)
             {
                 AgrinClientContext.MainLoadedLinkInfoes.Add(item);
             }
             AgrinClientContext.LinkInfoes = new ObservableCollection<LinkInfoCore>(AgrinClientContext.MainLoadedLinkInfoes.OrderByDescending(x => x.LastDownloadedDateTime));
+            AgrinClientContext.OnLinkInfoesChanged?.Invoke();
         }
 
         public override void Add(LinkInfoCore linkInfoCore)
@@ -56,13 +62,36 @@ namespace Agrin.Client.DataBase
             }
         }
 
+        public override void Delete(LinkInfoCore linkInfoCore)
+        {
+            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            {
+                var links = db.GetCollection<LinkInfoSerialization>("LinkInfoes");
+                var item = Mapper.Map<LinkInfoSerialization>(linkInfoCore);
+                item.IsDeleted = true;
+                links.Update(item);
+                AgrinClientContext.MainLoadedLinkInfoes.Remove(linkInfoCore);
+                AgrinClientContext.LinkInfoes.Remove(linkInfoCore);
+            }
+        }
+
         public override List<T> GetList<T>()
         {
             using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
             {
                 var links = db.GetCollection<LinkInfoSerialization>("LinkInfoes");
-                return AgrinClientContext.MapList<LinkInfoSerialization, T>(links.FindAll().ToList());
+                return AgrinClientContext.MapList<LinkInfoSerialization, T>(links.Find(x => !x.IsDeleted).ToList());
             }
+        }
+
+        public override void Initialize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<LinkInfoCore> GetList()
+        {
+            throw new NotImplementedException();
         }
 
         //static List<T> GetLinkInfoes<T>(Expression<Func<LinkInfoSerialization, bool>> query)
