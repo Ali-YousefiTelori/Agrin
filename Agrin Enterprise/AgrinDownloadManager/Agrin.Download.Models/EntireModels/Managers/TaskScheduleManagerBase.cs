@@ -44,5 +44,6 @@ namespace Agrin.Download.EntireModels.Managers
         }
 
         public abstract void DeleteRange(IEnumerable<TaskSchedulerInfo> taskSchedulerInfoes);
+        public abstract void DeleteEmptyTasks();
     }
 }

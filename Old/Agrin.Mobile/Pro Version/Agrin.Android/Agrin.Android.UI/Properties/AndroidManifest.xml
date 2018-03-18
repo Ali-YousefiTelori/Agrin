@@ -10,7 +10,7 @@
     </activity>-->
 		<service android:name="agrin.android.agrinservice"></service>
 		<!--<receiver android:name="agrin.aervices.alarm"></receiver>-->
-      <receiver android:name="agrin.services.alarm" android:process=":remote" android:exported="true">
+		<receiver android:name="agrin.services.alarm" android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.NOTIFY" />
 			</intent-filter>
