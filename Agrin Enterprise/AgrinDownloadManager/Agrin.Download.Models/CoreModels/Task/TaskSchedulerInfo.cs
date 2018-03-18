@@ -137,6 +137,21 @@ namespace Agrin.Download.CoreModels.Task
                 if (TaskProcessorsInStart.Count == TaskProcessorsInStart.Count(x => x.Status == TaskStatus.Finished))
                 {
                     Status = TaskStatus.Finished;
+                    if (TaskProcessorsInEnd.Count > 0)
+                    {
+                        AsyncActions.Run(() =>
+                        {
+                            foreach (var item in TaskProcessorsInEnd)
+                            {
+                                item.Start();
+                            }
+                        }, (ex) =>
+                        {
+                            Status = TaskStatus.Error;
+                            Save();
+                            AutoLogger.LogError(ex, "TaskSchedulerInfo OneTaskFinished");
+                        });
+                    }
                     Save();
                 }
             }
@@ -189,7 +204,7 @@ namespace Agrin.Download.CoreModels.Task
                     if (instance != null)
                     {
                         instance.Parent = this;
-                        TaskProcessorsInStart.Add(instance);
+                        TaskProcessorsInEnd.Add(instance);
                     }
                 }
             }

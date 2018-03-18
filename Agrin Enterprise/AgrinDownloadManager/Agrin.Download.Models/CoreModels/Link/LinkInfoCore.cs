@@ -708,19 +708,22 @@ namespace Agrin.Download.CoreModels.Link
 
         internal void ValidateConnectionsToDownload()
         {
-            if (!IsManualStop)
+            this.RunInLock(() =>
             {
-                var connections = Connections.ToArray();
-                var downloadingCount = connections.Count(x => x.IsDownloading);
-                var takeCount = AsShort().LinkInfoDownloadCore.GetConcurrentConnectionCount() - downloadingCount;
-                if (takeCount > 0)
+                if (!IsManualStop && !isStopping)
                 {
-                    foreach (var item in connections.Where(x => x.CanPlay).Take(takeCount))
+                    var connections = Connections.ToArray();
+                    var downloadingCount = connections.Count(x => x.IsDownloading);
+                    var takeCount = AsShort().LinkInfoDownloadCore.GetConcurrentConnectionCount() - downloadingCount;
+                    if (takeCount > 0)
                     {
-                        item.Play();
+                        foreach (var item in connections.Where(x => x.CanPlay).Take(takeCount))
+                        {
+                            item.Play();
+                        }
                     }
                 }
-            }
+            });
         }
 
         /// <summary>
@@ -732,6 +735,7 @@ namespace Agrin.Download.CoreModels.Link
             {
                 if (!CanPlay)
                     return;
+                isStopping = false;
                 _IsManualError = false;
                 IsManualStop = false;
                 if (Connections.ToArray().Count(x => x.CanPlay) > 0 && !IsCompleting)
@@ -752,6 +756,7 @@ namespace Agrin.Download.CoreModels.Link
             });
         }
 
+        volatile bool isStopping = false;
         /// <summary>
         /// stop link
         /// </summary>
@@ -761,6 +766,7 @@ namespace Agrin.Download.CoreModels.Link
             {
                 if (!CanStop)
                     return;
+                isStopping = true;
                 if (Connections.Count(x => x.CanStop) > 0)
                 {
                     foreach (var item in Connections.Where(x => x.CanStop).Take(((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.GetConcurrentConnectionCount()))
@@ -769,6 +775,7 @@ namespace Agrin.Download.CoreModels.Link
                     }
                 }
                 IsManualStop = true;
+                isStopping = false;
             });
         }
 
