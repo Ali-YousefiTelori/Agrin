@@ -17,6 +17,8 @@ namespace Agrin.Download.EntireModels.Managers
         public abstract List<TaskSchedulerInfo> TaskSchedulerInfoes { get; }
 
         public abstract List<TaskSchedulerInfo> GetTaskSchedulerInfoesByLinkId(int linkId);
+        public abstract bool IsLinkInfoInsideOfNotCompletedTask(int linkId);
+        public abstract DateTime? GetLinkInfoQueueTime(int linkId);
 
         public void RemoveLinkIdFromEveryTaskSchedulerInfoes(IEnumerable<int> linkIds)
         {

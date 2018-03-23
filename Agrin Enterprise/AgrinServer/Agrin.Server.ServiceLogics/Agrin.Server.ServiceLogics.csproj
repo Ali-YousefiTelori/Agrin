@@ -54,6 +54,10 @@
     <Compile Include="UserManager\PostService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Github\health-family-server\HealthFamily\Framesoft.Helpers\Framesoft.Helpers.csproj">
+      <Project>{a4eb8eb5-2ab6-4b40-a927-965b92af6aae}</Project>
+      <Name>Framesoft.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Server\SignalGo.Server.csproj">
       <Project>{8170e507-f79c-49c4-9ec2-9112c565a98b}</Project>
       <Name>SignalGo.Server</Name>
@@ -61,6 +65,10 @@
     <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
       <Project>{78d8601b-e331-47b7-a4a8-46b7460d82a4}</Project>
       <Name>SignalGo.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AgrinDownloadManager\Agrin.Shared\Agrin.Shared.csproj">
+      <Project>{A9BFAD91-746A-4524-BC32-73E47234C4E8}</Project>
+      <Name>Agrin.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Server.DataBaseLogic\Agrin.Server.DataBaseLogic.csproj">
       <Project>{4f272868-bd23-4ca5-86b5-f00dfa79adf5}</Project>
@@ -73,10 +81,6 @@
     <ProjectReference Include="..\Agrin.Server.Models\Agrin.Server.Models.csproj">
       <Project>{09268CA1-07AC-4F32-9D20-8E1E326699DE}</Project>
       <Name>Agrin.Server.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Agrin.Server.ServiceModels\Agrin.Server.ServiceModels.csproj">
-      <Project>{4932A701-7024-46C7-AC2B-CF114875F3EF}</Project>
-      <Name>Agrin.Server.ServiceModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

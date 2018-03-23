@@ -1,6 +1,6 @@
 ﻿using Agrin.Server.Models;
 using Agrin.Server.ServiceLogics.StorageManager;
-using Agrin.Server.ServiceModels;
+using Agrin.Shared.Helpers;
 using SignalGo.Server.ServiceManager;
 using System;
 using System.Collections.Generic;

@@ -65,13 +65,17 @@
       <Project>{8170e507-f79c-49c4-9ec2-9112c565a98b}</Project>
       <Name>SignalGo.Server</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
-      <Project>{78d8601b-e331-47b7-a4a8-46b7460d82a4}</Project>
-      <Name>SignalGo.Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Client\SignalGo.Client.csproj">
       <Project>{da4f99a9-69e4-48f1-8850-5298f7762ab9}</Project>
       <Name>SignalGo.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
+      <Project>{78d8601b-e331-47b7-a4a8-46b7460d82a4}</Project>
+      <Name>SignalGo.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AgrinDownloadManager\Agrin.Shared\Agrin.Shared.csproj">
+      <Project>{a9bfad91-746a-4524-bc32-73e47234c4e8}</Project>
+      <Name>Agrin.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Server.DataBaseLogic\Agrin.Server.DataBaseLogic.csproj">
       <Project>{4f272868-bd23-4ca5-86b5-f00dfa79adf5}</Project>
@@ -88,10 +92,6 @@
     <ProjectReference Include="..\Agrin.Server.ServiceLogics\Agrin.Server.ServiceLogics.csproj">
       <Project>{67b5288b-49d6-448d-8350-1700cec1ccbf}</Project>
       <Name>Agrin.Server.ServiceLogics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Agrin.Server.ServiceModels\Agrin.Server.ServiceModels.csproj">
-      <Project>{4932A701-7024-46C7-AC2B-CF114875F3EF}</Project>
-      <Name>Agrin.Server.ServiceModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

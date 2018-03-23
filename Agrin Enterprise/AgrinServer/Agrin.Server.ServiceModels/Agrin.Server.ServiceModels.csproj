@@ -42,11 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\IAuthentication.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StorageManager\IPostStorageManager.cs" />
-    <Compile Include="UserManager\IPostService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -61,13 +58,14 @@
       <Name>SignalGo.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Server.DataBase\Agrin.Server.DataBase.csproj">
-      <Project>{0f60233a-45b4-4b9a-81a5-099201927ae4}</Project>
+      <Project>{C6014AA0-8EA1-4E03-ACAF-D1D29BF140A7}</Project>
       <Name>Agrin.Server.DataBase</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Server.Models\Agrin.Server.Models.csproj">
-      <Project>{09268ca1-07ac-4f32-9d20-8e1e326699de}</Project>
+      <Project>{09268CA1-07AC-4F32-9D20-8E1E326699DE}</Project>
       <Name>Agrin.Server.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

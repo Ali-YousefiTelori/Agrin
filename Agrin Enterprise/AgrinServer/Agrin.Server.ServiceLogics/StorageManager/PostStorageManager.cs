@@ -1,5 +1,5 @@
-﻿using Agrin.Server.ServiceModels;
-using Agrin.Server.ServiceModels.StorageManager;
+﻿using Agrin.Shared.Helpers;
+using SignalGo.Shared.DataTypes;
 using SignalGo.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace Agrin.Server.ServiceLogics.StorageManager
 {
-    public class PostStorageManager : IPostStorageManager
+    [ServiceContract("PostStorageManager", ServiceType.StreamService)]
+    public class PostStorageManager
     {
         public StreamInfo<DateTime> DownloadPostImage(int postUserId, int postId, string fileName)
         {
             var stream = new StreamInfo<DateTime>();
-            string filePath = FileManager.GePostImageDirectory(postUserId, postId, fileName);
+            string filePath = FileManager.GetPostImageDirectory(postUserId, postId, fileName);
             if (!File.Exists(filePath))
             {
                 stream.Status = System.Net.HttpStatusCode.NotFound;

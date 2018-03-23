@@ -75,10 +75,6 @@
       <Project>{8170e507-f79c-49c4-9ec2-9112c565a98b}</Project>
       <Name>SignalGo.Server</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
-      <Project>{78d8601b-e331-47b7-a4a8-46b7460d82a4}</Project>
-      <Name>SignalGo.Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Agrin.Server.DataBaseLogic\Agrin.Server.DataBaseLogic.csproj">
       <Project>{4F272868-BD23-4CA5-86B5-F00DFA79ADF5}</Project>
       <Name>Agrin.Server.DataBaseLogic</Name>
@@ -94,10 +90,6 @@
     <ProjectReference Include="..\Agrin.Server.ServiceLogics\Agrin.Server.ServiceLogics.csproj">
       <Project>{67b5288b-49d6-448d-8350-1700cec1ccbf}</Project>
       <Name>Agrin.Server.ServiceLogics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Agrin.Server.ServiceModels\Agrin.Server.ServiceModels.csproj">
-      <Project>{4932a701-7024-46c7-ac2b-cf114875f3ef}</Project>
-      <Name>Agrin.Server.ServiceModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
