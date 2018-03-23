@@ -73,6 +73,10 @@
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Github\health-family-server\HealthFamily\Framesoft.Helpers\Framesoft.Helpers.csproj">
+      <Project>{14d9ccd3-1179-4a1c-8e9d-926f41abe60b}</Project>
+      <Name>Framesoft.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Agrin.Checksum\Agrin.Checksum.csproj">
       <Project>{7ae5f3b1-c702-4ebc-bd71-6d34a77450e7}</Project>
       <Name>Agrin.Checksum</Name>

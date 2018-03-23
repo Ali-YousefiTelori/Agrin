@@ -1,5 +1,4 @@
-﻿using Agrin.Server.ServiceModels.UserManager;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +7,12 @@ using Agrin.Server.DataBase.Models;
 using Agrin.Server.Models;
 using Agrin.Server.DataBaseLogic;
 using Agrin.Server.Models.Filters;
+using SignalGo.Shared.DataTypes;
 
 namespace Agrin.Server.ServiceLogics
 {
-    public class PostService : IPostService
+    [ServiceContract("PostService", ServiceType.ServerService, InstanceType = InstanceType.SingleInstance)]
+    public class PostService
     {
         public MessageContract<List<PostInfo>> GetListOfPost(int index, int length)
         {

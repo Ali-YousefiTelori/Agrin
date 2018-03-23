@@ -68,10 +68,6 @@
       <Project>{da4f99a9-69e4-48f1-8850-5298f7762ab9}</Project>
       <Name>SignalGo.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
-      <Project>{78d8601b-e331-47b7-a4a8-46b7460d82a4}</Project>
-      <Name>SignalGo.Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Agrin.Server.DataBaseLogic\Agrin.Server.DataBaseLogic.csproj">
       <Project>{4f272868-bd23-4ca5-86b5-f00dfa79adf5}</Project>
       <Name>Agrin.Server.DataBaseLogic</Name>
@@ -87,10 +83,6 @@
     <ProjectReference Include="..\Agrin.Server.ServiceLogics\Agrin.Server.ServiceLogics.csproj">
       <Project>{67b5288b-49d6-448d-8350-1700cec1ccbf}</Project>
       <Name>Agrin.Server.ServiceLogics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Agrin.Server.ServiceModels\Agrin.Server.ServiceModels.csproj">
-      <Project>{4932a701-7024-46c7-ac2b-cf114875f3ef}</Project>
-      <Name>Agrin.Server.ServiceModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Server.WindowsConsoleServer\Agrin.Server.WindowsConsoleServer.csproj">
       <Project>{698dfad5-cd82-4255-ab2c-faccf06fc929}</Project>

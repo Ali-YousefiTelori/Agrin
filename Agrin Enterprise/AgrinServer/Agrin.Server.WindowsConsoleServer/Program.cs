@@ -3,8 +3,7 @@ using Agrin.Server.Models.Filters;
 using Agrin.Server.ServiceLogics;
 using Agrin.Server.ServiceLogics.Authentication;
 using Agrin.Server.ServiceLogics.StorageManager;
-using Agrin.Server.ServiceModels;
-using Agrin.Server.ServiceModels.UserManager;
+using Agrin.Shared.Helpers;
 using Framesoft.Helpers.Helpers;
 using SignalGo.Client;
 using SignalGo.Server.ServiceManager;
@@ -27,8 +26,8 @@ namespace Agrin.Server.WindowsConsoleServer
                 SignalGo.Server.Log.ServerMethodCallsLogger logger = new SignalGo.Server.Log.ServerMethodCallsLogger();
                 logger.IsPersianDateLog = true;
                 logger.Initialize();
-                provider.InitializeService<PostService>();
-                provider.InitializeService<AuthenticationService>();
+                provider.RegisterServerService<PostService>();
+                provider.RegisterServerService<AuthenticationService>();
                 provider.RegisterStreamService(typeof(PostStorageManager));
                 provider.Start("http://localhost:2222/AgringServices/SignalGo");
 
@@ -39,6 +38,7 @@ namespace Agrin.Server.WindowsConsoleServer
 
                 provider.InternalSetting = new SignalGo.Server.Settings.InternalSetting() { IsEnabledDataExchanger = true, IsEnabledReferenceResolver = true, IsEnabledReferenceResolverForArray = true };
                 Console.WriteLine("server started");
+                var daya = new SignalGo.Server.Helpers.ServiceReferenceHelper().GetServiceReferenceCSharpCode("ali", provider);
                 //TestClient();
             }
             catch (Exception ex)
@@ -48,14 +48,14 @@ namespace Agrin.Server.WindowsConsoleServer
             Console.ReadLine();
         }
 
-        public static void TestClient()
-        {
-            Console.WriteLine("test client runed");
-            ClientProvider client = new ClientProvider();
-            client.Connect("http://localhost:2222/AgringServices/SignalGo");
-            var postService = client.RegisterClientServiceInterfaceWrapper<IPostService>();
-            var virtualPosts = postService.FilterVirtualPostCategories(new FilterBaseInfo() { });
+        //public static void TestClient()
+        //{
+        //    Console.WriteLine("test client runed");
+        //    ClientProvider client = new ClientProvider();
+        //    client.Connect("http://localhost:2222/AgringServices/SignalGo");
+        //    var postService = client.RegisterServerService<IPostService>();
+        //    var virtualPosts = postService.FilterVirtualPostCategories(new FilterBaseInfo() { });
 
-        }
+        //}
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Agrin.ComponentModels;
 using Agrin.Download.EntireModels.Link;
+using Agrin.Download.EntireModels.Managers;
 using Agrin.Download.Mixers;
 using Agrin.Download.ShortModels.Link;
 using Agrin.Download.Web;
@@ -203,6 +204,28 @@ namespace Agrin.Download.CoreModels.Link
             get
             {
                 return !CanPlay && !IsCopyingFile && !IsComplete || isDestroying;
+            }
+        }
+
+        /// <summary>
+        /// is link in active queue
+        /// </summary>
+        public bool IsInQueue
+        {
+            get
+            {
+                return TaskScheduleManagerBase.Current.IsLinkInfoInsideOfNotCompletedTask(Id);
+            }
+        }
+
+        /// <summary>
+        /// time of task queue
+        /// </summary>
+        public DateTime? QueueTime
+        {
+            get
+            {
+                return TaskScheduleManagerBase.Current.GetLinkInfoQueueTime(Id);
             }
         }
 
@@ -735,6 +758,7 @@ namespace Agrin.Download.CoreModels.Link
             {
                 if (!CanPlay)
                     return;
+                LastDownloadedDateTime = DateTime.Now;
                 isStopping = false;
                 _IsManualError = false;
                 IsManualStop = false;
@@ -753,6 +777,7 @@ namespace Agrin.Download.CoreModels.Link
                 {
                     CreateRequestCoreIfNeeded();
                 }
+                Save();
             });
         }
 
