@@ -45,13 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddRangePositionInfoTable.cs" />
+    <Compile Include="Tables\AddRangePositionInfoTable.cs" />
     <Compile Include="AgrinClientContext.cs" />
-    <Compile Include="ExceptionInfoTable.cs" />
-    <Compile Include="LinkInfoTable.cs" />
-    <Compile Include="MixerInfoTable.cs" />
+    <Compile Include="Tables\ExceptionInfoTable.cs" />
+    <Compile Include="Models\FolderBookmarkInfo.cs" />
+    <Compile Include="Tables\FolderBookmarkInfoTable.cs" />
+    <Compile Include="Tables\LinkInfoTable.cs" />
+    <Compile Include="Tables\MixerInfoTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaskSchedulerTable.cs" />
+    <Compile Include="Tables\TaskSchedulerTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Github\CrazyMapper\CrazyMapper\CrazyMapper\CrazyMapper.csproj">

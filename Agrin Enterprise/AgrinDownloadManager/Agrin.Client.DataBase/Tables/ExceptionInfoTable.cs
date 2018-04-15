@@ -5,9 +5,10 @@ using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
-namespace Agrin.Client.DataBase
+namespace Agrin.Client.DataBase.Tables
 {
     public class ExceptionInfoTable : DataBaseFoundation<ExceptionInfo>
     {
@@ -43,6 +44,16 @@ namespace Agrin.Client.DataBase
         }
 
         public override void Delete(ExceptionInfo data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Delete(Expression<Func<ExceptionInfo, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ExceptionInfo FindItem(Expression<Func<ExceptionInfo, bool>> predicate)
         {
             throw new NotImplementedException();
         }

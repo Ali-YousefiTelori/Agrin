@@ -1,4 +1,5 @@
-﻿using Agrin.Foundation;
+﻿using Agrin.Download.EntireModels.Managers;
+using Agrin.Foundation;
 using Agrin.Log;
 using LiteDB;
 using SignalGo.Shared;
@@ -102,6 +103,7 @@ namespace Agrin.Download.CoreModels.Task
                 Save();
                 return;
             }
+
             if (DelayTimeToStart == null)
             {
                 foreach (var item in TaskProcessorsInStart)
@@ -216,6 +218,7 @@ namespace Agrin.Download.CoreModels.Task
         public void Save()
         {
             DataBaseFoundation<TaskSchedulerInfo>.Current.Update(this);
+            TaskScheduleManagerBase.TaskScheduleChanged?.Invoke();
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Agrin.Download.EntireModels.Managers
         /// 
         /// </summary>
         public static TaskScheduleManagerBase Current { get; set; }
-
+        public static Action TaskScheduleChanged { get; set; }
 
         public abstract List<TaskSchedulerInfo> TaskSchedulerInfoes { get; }
 

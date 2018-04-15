@@ -5,9 +5,10 @@ using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
-namespace Agrin.Client.DataBase
+namespace Agrin.Client.DataBase.Tables
 {
     public class MixerInfoTable : DataBaseFoundation<MixerInfoBase>
     {
@@ -113,6 +114,16 @@ namespace Agrin.Client.DataBase
         }
 
         public override List<MixerInfoBase> GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override MixerInfoBase FindItem(Expression<Func<MixerInfoBase, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Delete(Expression<Func<MixerInfoBase, bool>> predicate)
         {
             throw new NotImplementedException();
         }

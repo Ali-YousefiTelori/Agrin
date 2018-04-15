@@ -1,17 +1,13 @@
-﻿using Agrin.Download.CoreModels.Link;
+﻿using Agrin.Client.DataBase.Tables;
+using Agrin.Download.CoreModels.Link;
 using Agrin.Download.CoreModels.Task;
 using CrazyMapper;
-using LiteDB;
 using SignalGo.Shared.Helpers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Agrin.Client.DataBase
 {
@@ -45,7 +41,8 @@ namespace Agrin.Client.DataBase
         public static ExceptionInfoTable ExceptionInfoTable { get; set; } = new ExceptionInfoTable();
         public static AddRangePositionInfoTable AddRangePositionInfoTable { get; set; } = new AddRangePositionInfoTable();
         public static TaskSchedulerTable TaskSchedulerTable { get; set; } = new TaskSchedulerTable();
-        
+        public static FolderBookmarkInfoTable FolderBookmarkInfoTable { get; set; } = new FolderBookmarkInfoTable();
+
         public static MixerInfoTable MixerInfoTable = new MixerInfoTable();
         public static List<TResult> MapList<T, TResult>(IEnumerable items)
         {

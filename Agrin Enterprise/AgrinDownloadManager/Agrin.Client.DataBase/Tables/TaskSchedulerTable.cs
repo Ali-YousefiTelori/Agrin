@@ -4,9 +4,10 @@ using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
-namespace Agrin.Client.DataBase
+namespace Agrin.Client.DataBase.Tables
 {
     public class TaskSchedulerTable : DataBaseFoundation<TaskSchedulerInfo>
     {
@@ -81,6 +82,14 @@ namespace Agrin.Client.DataBase
             }
         }
 
+        public override TaskSchedulerInfo FindItem(Expression<Func<TaskSchedulerInfo, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
 
+        public override void Delete(Expression<Func<TaskSchedulerInfo, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

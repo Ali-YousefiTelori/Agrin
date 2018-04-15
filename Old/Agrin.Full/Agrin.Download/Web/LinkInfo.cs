@@ -944,6 +944,8 @@ namespace Agrin.Download.Web
                 {
                     if (item.State == ConnectionState.Error || item.State == ConnectionState.Paused || item.State == ConnectionState.Stoped)
                     {
+                        if (item.EndPosition > this.DownloadingProperty.Size && this.DownloadingProperty.Size > 0)
+                            item.EndPosition = this.DownloadingProperty.Size;
                         downloading++;
                         item.Play(isManual);
                     }
