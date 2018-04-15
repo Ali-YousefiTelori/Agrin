@@ -10,6 +10,7 @@ using Agrin.IO.Helpers;
 using Agrin.Log;
 using Agrin.Models;
 using Agrin.Threads;
+using SignalGo.Shared;
 using SignalGo.Shared.Helpers;
 using System;
 using System.Collections.Generic;
@@ -700,32 +701,35 @@ namespace Agrin.Download.CoreModels.Link
 
         internal void CreateRequestCoreIfNeeded()
         {
-            this.RunInLock(() =>
+            AsyncActions.Run(() =>
             {
-                if (isDestroying)
-                    return;
-                if (!IsDownloading || IsCompleting)
-                    return;
-                if (Connections.Count > 0 && ((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.ResumeCapability != ResumeCapabilityEnum.Yes)
+                this.RunInLock(() =>
                 {
-                    var connection = Connections.First();
                     if (isDestroying)
                         return;
-                    if (connection.CanPlay)
-                        connection.Play();
-                    return;
-                }
-                var completeCount = Connections.Count(x => x.IsComplete);
-                bool cannewwhenEnd = Connections.Count == 0 || (Size - DownloadedSize) > 1024 * 1024 || completeCount == Connections.Count;
-                var canAddConection = cannewwhenEnd && (DownloadedSize < Size || !IsGetSize) && !Connections.Any(x => x.EndPosition < 0);
-                if (canAddConection && (Connections.Count - completeCount) < ((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.GetConcurrentConnectionCount())
-                {
-                    var connection = CreateNewRequestCore();
-                    if (isDestroying)
+                    if (!IsDownloading || IsCompleting)
                         return;
-                    connection?.Play();
-                }
-                ValidateUI();
+                    if (Connections.Count > 0 && ((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.ResumeCapability != ResumeCapabilityEnum.Yes)
+                    {
+                        var connection = Connections.First();
+                        if (isDestroying)
+                            return;
+                        if (connection.CanPlay)
+                            connection.Play();
+                        return;
+                    }
+                    var completeCount = Connections.Count(x => x.IsComplete);
+                    bool cannewwhenEnd = Connections.Count == 0 || (Size - DownloadedSize) > 1024 * 1024 || completeCount == Connections.Count;
+                    var canAddConection = cannewwhenEnd && (DownloadedSize < Size || !IsGetSize) && !Connections.Any(x => x.EndPosition < 0);
+                    if (canAddConection && (Connections.Count - completeCount) < ((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.GetConcurrentConnectionCount())
+                    {
+                        var connection = CreateNewRequestCore();
+                        if (isDestroying)
+                            return;
+                        connection?.Play();
+                    }
+                    ValidateUI();
+                });
             });
         }
 

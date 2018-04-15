@@ -11,7 +11,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Agrin.Client.DataBase
+namespace Agrin.Client.DataBase.Tables
 {
     public class LinkInfoTable : DataBaseFoundation<LinkInfoCore>
     {
@@ -90,6 +90,16 @@ namespace Agrin.Client.DataBase
         }
 
         public override List<LinkInfoCore> GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override LinkInfoCore FindItem(Expression<Func<LinkInfoCore, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Delete(Expression<Func<LinkInfoCore, bool>> predicate)
         {
             throw new NotImplementedException();
         }

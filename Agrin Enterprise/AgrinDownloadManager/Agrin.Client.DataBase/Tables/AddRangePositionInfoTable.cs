@@ -4,9 +4,10 @@ using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
-namespace Agrin.Client.DataBase
+namespace Agrin.Client.DataBase.Tables
 {
     public class AddRangePositionInfoTable : DataBaseFoundation<AddRangePositionInfo>
     {
@@ -28,6 +29,16 @@ namespace Agrin.Client.DataBase
         }
 
         public override void Delete(AddRangePositionInfo data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Delete(Expression<Func<AddRangePositionInfo, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override AddRangePositionInfo FindItem(Expression<Func<AddRangePositionInfo, bool>> predicate)
         {
             throw new NotImplementedException();
         }

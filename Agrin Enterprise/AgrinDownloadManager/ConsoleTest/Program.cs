@@ -4,6 +4,7 @@
 using Agrin.Client.DataBase;
 using Agrin.Download.CoreModels.Link;
 using Agrin.Download.EntireModels.Link;
+using Agrin.Download.EntireModels.Managers;
 using Agrin.Download.ShortModels.Link;
 using Agrin.Download.Web;
 using Agrin.IO;
@@ -202,6 +203,8 @@ namespace ConsoleTest
         {
             try
             {
+                LinkInfoManagerBase.Current = new LinkInfoManager();
+                TaskScheduleManagerBase.Current = new TaskScheduleManager();
                 //var fileName = GetFileNameFromUrl("http://cdn.p30download.com/?b=p30dl-software&f=Mozilla.Firefox.v58.0.x86_p30download.com.zip");
                 //LinkChecker hostChecker = new LinkChecker() { };
                 //hostChecker.Restart("http://cdn.p30download.com/?b=p30dl-software&f=Adobe.Photoshop.CC.2017.v18.1.1.252.x64_p30download.com.part2.rar");
@@ -211,7 +214,7 @@ namespace ConsoleTest
                 InitializeMapper();
                 LoadData();
 
-                var link = LinkInfoManager.Current.CreateInstance("https://se10.noyes.in/drive/1s0MNHjXvDK6BAgGeGgF7ZCpMXBNtRNaQ/482714_video_1519799697.mov?md5=pJwWnhe9ySJzlbJGe6sZyg&expires=1519987665");//"https://www.telerik.com/docs/default-source/fiddler/fiddlersetup.exe?sfvrsn=4"
+                var link = LinkInfoManager.Current.CreateInstance("http://clicksite.org/dl_file.php?key=2800634339&idG=818");
                 AgrinClientContext.LinkInfoTable.Add(link);
 
                 //var link = AgrinClientContext.MainLoadedLinkInfoes.FirstOrDefault(x => x.Id == 16);

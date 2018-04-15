@@ -12,6 +12,10 @@ namespace Agrin.IO
     /// </summary>
     public static class PathHelper
     {
+        /// <summary>
+        /// get home dir path
+        /// </summary>
+        public static Func<string> GetHomeDirectoryAction { get; set; }
         static volatile string _ApplicationBasePath;
         static volatile string _ApplicationTemporaryPath;
         static volatile string _DownloadsPath;

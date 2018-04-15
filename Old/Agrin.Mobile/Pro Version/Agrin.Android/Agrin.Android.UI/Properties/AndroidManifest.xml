@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Agrin.Android" android:versionName="2.2.6" android:installLocation="auto" android:versionCode="64">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Agrin.Android" android:versionName="2.2.7" android:installLocation="auto" android:versionCode="65">
 	<uses-sdk android:minSdkVersion="10" />
 	<application android:label="Agrin Download Manager" android:largeHeap="true" android:icon="@drawable/Icon" android:hardwareAccelerated="true">
 		<!--<activity android:name="md5a7a3c803e481ad8926683588c7e9031b.MainActivity">
