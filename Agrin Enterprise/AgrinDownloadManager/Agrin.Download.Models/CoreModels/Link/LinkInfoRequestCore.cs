@@ -7,6 +7,7 @@ using Agrin.IO.Helpers;
 using Agrin.Models;
 using Agrin.Models.Settings;
 using Agrin.Threads;
+using MvvmGo.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,6 +50,7 @@ namespace Agrin.Download.CoreModels.Link
                 }
                 LinkInfo.ValidateConnectionsToDownload();
                 LinkInfo.ValidateUI();
+                OnPropertyChanged(nameof(Status));
             }
         }
 
@@ -98,6 +100,36 @@ namespace Agrin.Download.CoreModels.Link
             get
             {
                 return Status == ConnectionStatus.Error;
+            }
+        }
+
+        /// <summary>
+        /// get percent of downloaded size by double value
+        /// </summary>
+        public double PercentDouble
+        {
+            get
+            {
+                if (IsComplete || Length == 0 || Length == -2)
+                    return 1.0;
+                else if (Length < 0)
+                    return 0.0;
+                return (double)DownloadedSize / Length;
+            }
+        }
+
+        /// <summary>
+        /// get percent of downloaded size
+        /// </summary>
+        public string Percent
+        {
+            get
+            {
+                if (IsComplete || Length == 0)
+                    return "100%";
+                else if (Length == -2)
+                    return "0%";
+                return Length < 0 ? ApplicationResourceBase.Current.GetAppResource("Unknown_Language") : String.Format("{0:00.00%}", PercentDouble);
             }
         }
 
@@ -166,6 +198,8 @@ namespace Agrin.Download.CoreModels.Link
                 LinkInfo.OnPropertyChanged(nameof(LinkInfo.DownloadedSize));
                 LinkInfo.OnPropertyChanged(nameof(LinkInfo.Percent));
                 LinkInfo.OnPropertyChanged(nameof(LinkInfo.PercentDouble));
+                OnPropertyChanged(nameof(Percent));
+                OnPropertyChanged(nameof(PercentDouble));
             }
         }
 

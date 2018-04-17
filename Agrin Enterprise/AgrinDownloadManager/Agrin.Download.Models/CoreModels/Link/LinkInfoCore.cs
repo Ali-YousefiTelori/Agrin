@@ -5,15 +5,16 @@ using Agrin.Download.Mixers;
 using Agrin.Download.ShortModels.Link;
 using Agrin.Download.Web;
 using Agrin.Foundation;
-using Agrin.Helpers;
 using Agrin.IO.Helpers;
 using Agrin.Log;
 using Agrin.Models;
 using Agrin.Threads;
+using MvvmGo.Resources;
 using SignalGo.Shared;
 using SignalGo.Shared.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -28,6 +29,7 @@ namespace Agrin.Download.CoreModels.Link
         public Action OnBasicDataChanged { get; set; }
 
         volatile ConcurrentList<LinkInfoRequestCore> _Connections = null;
+        volatile ObservableCollection<LinkInfoRequestCore> _BindConnections = new ObservableCollection<LinkInfoRequestCore>();
         volatile bool _IsCopyingFile = false;
         volatile bool _IsManualStop = true;
         long _Size = -2;//-2 = not get download size and -1 = dont know what is download size
@@ -280,6 +282,25 @@ namespace Agrin.Download.CoreModels.Link
             }
             set => _Connections = value;
         }
+
+        /// <summary>
+        /// connections for bind
+        /// </summary>
+        public ObservableCollection<LinkInfoRequestCore> BindConnections
+        {
+            get
+            {
+                if (_BindConnections.Count != Connections.Count)
+                {
+                    foreach (var item in Connections)
+                    {
+                        _BindConnections.Add(item);
+                    }
+                }
+                return _BindConnections;
+            }
+        }
+        
         /// <summary>
         /// is manually stopped link by user
         /// </summary>
@@ -694,6 +715,8 @@ namespace Agrin.Download.CoreModels.Link
                 Logger.WriteLine("CreateNewRequestCore", $"{requestCore.StartPosition} , {requestCore.EndPosition}");
 
                 Connections.Add(requestCore);
+                BindConnections.Add(requestCore);
+
                 Save();
                 return requestCore;
             });
@@ -739,12 +762,11 @@ namespace Agrin.Download.CoreModels.Link
             {
                 if (!IsManualStop && !isStopping)
                 {
-                    var connections = Connections.ToArray();
-                    var downloadingCount = connections.Count(x => x.IsDownloading);
+                    var downloadingCount = Connections.Count(x => x.IsDownloading);
                     var takeCount = AsShort().LinkInfoDownloadCore.GetConcurrentConnectionCount() - downloadingCount;
                     if (takeCount > 0)
                     {
-                        foreach (var item in connections.Where(x => x.CanPlay).Take(takeCount))
+                        foreach (var item in Connections.Where(x => x.CanPlay).Take(takeCount))
                         {
                             item.Play();
                         }
