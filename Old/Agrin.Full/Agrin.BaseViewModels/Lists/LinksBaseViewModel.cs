@@ -534,7 +534,7 @@ namespace Agrin.BaseViewModels.Lists
                 int i = 0;
                 //var repair = Agrin.Download.Engine.Repairer.LinkRepairer.RepairFile(SelectedItem.PathInfo.BackUpCompleteAddress, SelectedItem.PathInfo.FullAddressFileName);
                 
-                var repairByCheckSum = Agrin.Download.Engine.Repairer.LinkRepairer.RepairFileByCheckSum(@"H:\Takken 7\error20.CheckSum", @"H:\Takken 7\truechecksum.CheckSum", SelectedItem.PathInfo.FullAddressFileName, SelectedItem.PathInfo.BackUpCompleteAddress);
+                var repairByCheckSum = Agrin.Download.Engine.Repairer.LinkRepairer.RepairFileByCheckSum(@"G:\Downloads\errorCheckSum.CheckSum", @"G:\Downloads\trueCheckSum.CheckSum", SelectedItem.PathInfo.FullAddressFileName, SelectedItem.PathInfo.BackUpCompleteAddress);
             }
             catch (Exception e)
             {
