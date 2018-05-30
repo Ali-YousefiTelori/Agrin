@@ -79,8 +79,8 @@ namespace Agrin.Download.Responses
                     request.KeepAlive = true;
                     if (Headers.Count == 0)
                     {
-                        request.Headers.Add("Accept-Language", "en-us,en;q=0.5");
-                        request.UserAgent = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
+                        request.Headers.Add("Accept-Language", "en-US");
+                        request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
                     }
                     else
                     {

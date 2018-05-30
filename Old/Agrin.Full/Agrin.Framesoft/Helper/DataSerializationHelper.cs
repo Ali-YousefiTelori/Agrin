@@ -119,8 +119,8 @@ namespace Agrin.Framesoft.Helper
             HttpWebRequest _request = (HttpWebRequest)WebRequest.Create(uri);
             _request.AllowAutoRedirect = true;
             _request.KeepAlive = true;
-            _request.Headers.Add("Accept-Language", "en-us,en;q=0.5");
-            _request.UserAgent = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
+            _request.Headers.Add("Accept-Language", "en-US");
+            _request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
             using (HttpWebResponse response = (HttpWebResponse)_request.GetResponse())
             {
                 var length = response.ContentLength;
@@ -161,8 +161,8 @@ namespace Agrin.Framesoft.Helper
             HttpWebRequest _request = (HttpWebRequest)WebRequest.Create(uri);
             _request.AllowAutoRedirect = true;
             _request.KeepAlive = true;
-            _request.Headers.Add("Accept-Language", "en-us,en;q=0.5");
-            _request.UserAgent = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
+            _request.Headers.Add("Accept-Language", "en-US");
+            _request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
             _request.Headers.Add("DataJson", values);
             if (ShowStackTrace)
                 _request.Headers.Add("stacktrace", "");
@@ -193,8 +193,8 @@ namespace Agrin.Framesoft.Helper
             //HttpWebRequest _request = (HttpWebRequest)WebRequest.Create(uri);
             //_request.AllowAutoRedirect = true;
             //_request.KeepAlive = true;
-            //_request.Headers.Add("Accept-Language", "en-us,en;q=0.5");
-            //_request.UserAgent = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
+            //_request.Headers.Add("Accept-Language", "en-US");
+            //_request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
             //_request.Method = "POST";
             //_request.ContentLength = bytes.Length;
 

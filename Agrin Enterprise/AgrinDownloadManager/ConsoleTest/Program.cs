@@ -13,6 +13,7 @@ using Agrin.Log;
 using Agrin.UI.ViewModels.Helpers;
 using Agrin.Web;
 using CrazyMapper;
+using LiteDB;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -224,7 +225,7 @@ namespace ConsoleTest
                 //link.LinkInfoDownloadCore.ConcurrentConnectionCount = 20;
                 while (true)
                 {
-                    Logger.WriteLine(link.DownloadedSize + " , " + link.Size);
+                    System.Logger.WriteLine(link.DownloadedSize + " , " + link.Size);
                     if (link.DownloadedSize == link.Size)
                         break;
                     Thread.Sleep(1000);

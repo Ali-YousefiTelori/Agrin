@@ -59,8 +59,8 @@ namespace Agrin.LinkExtractor.Facebook
             _request.ServicePoint.ConnectionLimit = int.MaxValue;
 
             _request.KeepAlive = true;
-            _request.Headers.Add("Accept-Language", "en-us,en;q=0.5");
-            _request.UserAgent = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
+            _request.Headers.Add("Accept-Language", "en-US");
+            _request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
             HttpWebResponse response = (HttpWebResponse)_request.GetResponse();
             TextReader reader = new StreamReader(response.GetResponseStream());
             var text = reader.ReadToEnd();

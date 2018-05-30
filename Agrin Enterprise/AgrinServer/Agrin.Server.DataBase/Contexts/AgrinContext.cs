@@ -1,12 +1,8 @@
-﻿#if (!PORTABLE)
-using Agrin.Server.DataBase.Configurations;
-using Agrin.Server.DataBase.Models;
-using Framesoft.Helpers.DataTypes;
+﻿using Agrin.Server.DataBase.Models;
+using Agrin.Server.DataBase.Models.Relations;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,73 +17,94 @@ namespace Agrin.Server.DataBase.Contexts
             System.AppDomain.CurrentDomain.SetData("DataDirectory", current);
         }
 
-        /// <summary>
-        /// حذف کلاس از حافظه
-        /// </summary>
-        public new void Dispose()
-        {
-            Configuration.AutoDetectChangesEnabled = true;
-            base.Dispose();
-        }
-
-        /// <summary>
-        /// کانستراکتور پیفرض برای تایین کانکشن استرینگ و ساخت دیتابیس و اپدیت
-        /// </summary>
         public AgrinContext(bool autoDetectChangesEnabled)
-             : base("data source=82.102.13.102;initial catalog=AgrinServer;persist security info=True;user id=Ali;password=AVS?3773284HAMISHEBAHAR?2354;MultipleActiveResultSets=True;App=EntityFramework")
-             //: base("data source=(LOCAL)\\SQLEXPRESS;initial catalog=AgrinServer;persist security info=True;user id=Ali;password=AVS?3773284HAMISHEBAHAR?2354;MultipleActiveResultSets=True;App=EntityFramework")
-        //    : base("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\HealthFamily.mdf;User Instance=false;Integrated Security=True;MultipleActiveResultSets=True")
         {
             Initialize(autoDetectChangesEnabled);
         }
-        /// <summary>
-        /// کانستراکتور پیفرض برای تایین کانکشن استرینگ و ساخت دیتابیس و اپدیت
-        /// </summary>
+
         public AgrinContext()
-             : base("data source=82.102.13.102;initial catalog=AgrinServer;persist security info=True;user id=Ali;password=AVS?3773284HAMISHEBAHAR?2354;MultipleActiveResultSets=True;App=EntityFramework")
-             //: base("data source=(LOCAL)\\SQLEXPRESS;initial catalog=AgrinServer;persist security info=True;user id=Ali;password=AVS?3773284HAMISHEBAHAR?2354;MultipleActiveResultSets=True;App=EntityFramework")
-        //     : base("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\HealthFamily.mdf;User Instance=false;Integrated Security=True;MultipleActiveResultSets=True")
         {
             Initialize(true);
         }
 
-        /// <summary>
-        /// سازنده ی دیتابیس و تنظیمات پیشفرض
-        /// </summary>
-        /// <param name="autoDetectChangesEnabled"></param>
         public void Initialize(bool autoDetectChangesEnabled)
         {
-            Database.SetInitializer<AgrinContext>(null);
-            Database.SetInitializer(new CreateDatabaseIfNotExists<AgrinContext>());
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AgrinContext, AgrinConfiguration>());
-            ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += (sender, e) => DateTimeKindAttribute.Apply(e.Entity);
-            Configuration.LazyLoadingEnabled = false;
-            Configuration.AutoDetectChangesEnabled = autoDetectChangesEnabled;
-
+            if (!autoDetectChangesEnabled)
+                ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            string current = AppDomain.CurrentDomain.BaseDirectory;
+            System.AppDomain.CurrentDomain.SetData("DataDirectory", current);
+            //local
+            //optionsBuilder.UseSqlServer($"Server=.\\SQLEXPRESS;initial catalog=AgrinServer;User ID=Agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
+            //server
+            // optionsBuilder.UseSqlServer("Server=agrin.info,4565\\SQLEXPRESS;initial catalog=AgrinServer;User ID=Agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
+            optionsBuilder.UseSqlServer("Data Source=agrin.info,4565\\SQLEXPRESS;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserInfo>()
+                .HasMany(u => u.FromUserCreditInfoes)
+                .WithOne(t => t.FromUserInfo);
+
+            modelBuilder.Entity<UserInfo>()
+                .HasMany(u => u.ToUserCreditInfoes)
+                .WithOne(t => t.ToUserInfo);
+
+
+            modelBuilder.Entity<DirectFolderInfo>().HasIndex(e => e.Name).IsUnique();
+            modelBuilder.Entity<UserInfo>().HasIndex(e => e.UserName).IsUnique();
+            modelBuilder.Entity<DirectFileToUserRelationInfo>().HasKey(x => new { x.UserId, x.DirectFileId });
+            modelBuilder.Entity<PostCategoryTagRelationInfo>().HasKey(x => new { x.TagId, x.PostCategoryId });
+            modelBuilder.Entity<PostTagRelationInfo>().HasKey(x => new { x.TagId, x.PostId });
+            modelBuilder.Entity<DirectFolderToUserRelationInfo>().HasKey(x => new { x.UserId, x.DirectFolderId });
+
+            modelBuilder.Entity<UserInfo>().HasIndex(u => u.TelegramUserId).IsUnique().HasFilter(null); 
+            modelBuilder.Entity<UserInfo>().HasIndex(u => u.UserName).IsUnique().HasFilter(null); 
+
+            modelBuilder.Entity<UserCreditInfo>().HasIndex(u => u.Key).IsUnique().HasFilter(null); 
+
+            //modelBuilder.Entity<PostCategoryTagRelationInfo>()
+            //    .HasOne(bc => bc.PostCategoryInfo)
+            //    .WithMany(b => b.PostCategoryTagRelationInfoes)
+            //    .HasForeignKey(bc => bc.PostCategoryId);
+
+            //modelBuilder.Entity<PostCategoryTagRelationInfo>()
+            //    .HasOne(bc => bc.TagInfo)
+            //    .WithMany(c => c.PostCategoryTagRelationInfoes)
+            //    .HasForeignKey(bc => bc.TagId);
+            //modelBuilder.Entity<PostCategoryInfo>()
+            //    .HasMany(e => e.PostCategoryTagInfoes)
+            //    .we()
+            //    .HasForeignKey(e => e.FromProfileId).WillCascadeOnDelete(false);
+            base.OnModelCreating(modelBuilder);
+        }
         /// <summary>
         /// ساخت مدل دیتابیسی
         /// </summary>
         /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
-            modelBuilder.Conventions.Add<CascadeDeleteAttributeConvention>();
-            var conv = new AttributeToTableAnnotationConvention<SoftDeleteAttribute, string>(
-                "SoftDeleteColumnName",
-                (type, attributes) => attributes.Single().ColumnName);
-            modelBuilder.Conventions.Add(conv);
-            //modelBuilder.Entity<ProfileInfo>()
-            //    .HasMany(e => e.FamilyRelationSenders)
-            //    .WithRequired()
-            //    .HasForeignKey(e => e.FromProfileId).WillCascadeOnDelete(false);
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    //modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
+        //    //modelBuilder.Conventions.Add<CascadeDeleteAttributeConvention>();
+        //    //var conv = new AttributeToTableAnnotationConvention<SoftDeleteAttribute, string>(
+        //    //    "SoftDeleteColumnName",
+        //    //    (type, attributes) => attributes.Single().ColumnName);
+        //    //modelBuilder.Conventions.Add(conv);
+        //    //modelBuilder.Entity<ProfileInfo>()
+        //    //    .HasMany(e => e.FamilyRelationSenders)
+        //    //    .WithRequired()
+        //    //    .HasForeignKey(e => e.FromProfileId).WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<ProfileInfo>()
-            //    .HasMany(e => e.FamilyRelationReceivers)
-            //    .WithRequired()
-            //    .HasForeignKey(e => e.ToProfileId).WillCascadeOnDelete(false);
-        }
+        //    //modelBuilder.Entity<ProfileInfo>()
+        //    //    .HasMany(e => e.FamilyRelationReceivers)
+        //    //    .WithRequired()
+        //    //    .HasForeignKey(e => e.ToProfileId).WillCascadeOnDelete(false);
+        //}
 
         /// <summary>
         /// جدول کاربران
@@ -113,7 +130,43 @@ namespace Agrin.Server.DataBase.Contexts
         /// جدول تگ ها و زیر مجموعه های یک موضوع
         /// هر موضوع میتواند چندین زیر مجموعه داشته باشد و هر زیر مجموعه میتواند در چندین موضوع باشد
         /// </summary>
-        public DbSet<PostCategoryTagInfo> PostCategoryTagInfoes { get; set; }
+        public DbSet<TagInfo> TagInfoes { get; set; }
+        /// <summary>
+        /// relation of tag and post
+        /// </summary>
+        public DbSet<PostCategoryTagRelationInfo> PostCategoryTagRelationInfoes { get; set; }
+        /// <summary>
+        /// relation of post tags
+        /// </summary>
+        public DbSet<PostTagRelationInfo> PostTagRelationInfoes { get; set; }
+        /// <summary>
+        /// user sessions for login or access
+        /// </summary>
+        public DbSet<UserSessionInfo> UserSessionInfoes { get; set; }
+        /// <summary>
+        /// direct file
+        /// </summary>
+        public DbSet<DirectFileInfo> DirectFileInfoes { get; set; }
+        /// <summary>
+        /// direct folder
+        /// </summary>
+        public DbSet<DirectFolderInfo> DirectFolderInfoes { get; set; }
+        /// <summary>
+        /// user credit
+        /// </summary>
+        public DbSet<UserCreditInfo> UserCreditInfoes { get; set; }
+        /// <summary>
+        /// user folders
+        /// </summary>
+        public DbSet<DirectFolderToUserRelationInfo> DirectFolderToUserRelationInfoes { get; set; }
+        /// <summary>
+        /// user files
+        /// </summary>
+        public DbSet<DirectFileToUserRelationInfo> DirectFileToUserRelationInfoes { get; set; }
+        /// <summary>
+        /// agrin server infoes
+        /// </summary>
+        public DbSet<ServerInfo> ServerInfoes { get; set; }
+
     }
 }
-#endif

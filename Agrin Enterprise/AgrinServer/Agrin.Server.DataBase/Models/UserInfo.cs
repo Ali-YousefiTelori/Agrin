@@ -1,4 +1,5 @@
-﻿using Framesoft.Helpers.DataTypes;
+﻿//using Framesoft.Helpers.DataTypes;
+using Agrin.Server.DataBase.Models.Relations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,13 +10,26 @@ using System.Threading.Tasks;
 
 namespace Agrin.Server.DataBase.Models
 {
+    /// <summary>
+    /// وضعیت کاربر
+    /// </summary>
     public enum UserStatus : byte
     {
         None = 0,
+        /// <summary>
+        /// فقط ثبت نام کرده
+        /// </summary>
         JustRegistred = 1,
+        /// <summary>
+        /// تایید شده
+        /// </summary>
         Confirm = 2,
+        /// <summary>
+        /// بلاک شده
+        /// </summary>
         Blocked = 3
     }
+
     /// <summary>
     /// user table thet user can login
     /// </summary>
@@ -30,10 +44,6 @@ namespace Agrin.Server.DataBase.Models
         /// user name is phone number or email address
         /// </summary>
         public string UserName { get; set; }
-        /// <summary>
-        /// guid password of user for login
-        /// </summary>
-        public Guid Password { get; set; }
         /// <summary>
         /// name of user
         /// </summary>
@@ -50,12 +60,45 @@ namespace Agrin.Server.DataBase.Models
         /// status of user registred
         /// </summary>
         public UserStatus Status { get; set; }
+        
+        /// <summary>
+        /// سایز اپلودی که فیکس و ثابت هست و فایل های درون ان هم پاک نخواهد شد
+        /// بعد از پاک کردن فایل ها سایز برمیگردد
+        /// </summary>
+        public long StaticUploadSize { get; set; }
+        /// <summary>
+        /// سایز اپلود که ثابت نیست و فایل های درون ان بعد از دانلود یا نهایتا سه روز پاک میشوند
+        /// بعد از پاک شدن فایل ها حجم برگشت داده نمیشود
+        /// </summary>
+        public long RoamUploadSize { get; set; }
+        /// <summary>
+        /// هزینه موجودی کاربر که با آن خرید و شارژ حجم و ... انجام میدهد
+        /// هزینه به ریال می باشد
+        /// </summary>
+        public long Credit { get; set; }
+        /// <summary>
+        /// ای دی کاربر در تلگرام
+        /// </summary>
+        public int? TelegramUserId { get; set; }
+
         /// <summary>
         /// created date time
         /// </summary>
-        [DateTimeKind(DateTimeKind.Local)]
+        //[DateTimeKind(DateTimeKind.Local)]
         public DateTime CreatedDateTime { get; set; }
 
         public virtual ICollection<PostInfo> PostInfoes { get; set; }
+        /// <summary>
+        /// هزینه هایی که به این کاربر انتقال داده شده
+        /// </summary>
+        public virtual ICollection<UserCreditInfo> FromUserCreditInfoes { get; set; }
+        /// <summary>
+        /// تمامی هزینه های کاربر
+        /// </summary>
+        public virtual ICollection<UserCreditInfo> ToUserCreditInfoes { get; set; }
+
+        public virtual ICollection<DirectFileToUserRelationInfo> DirectFileToUserRelationInfoes { get; set; }
+        public virtual ICollection<DirectFolderToUserRelationInfo> DirectFolderToUserRelationInfoes { get; set; }
+        public virtual ICollection<UserSessionInfo> UserSessionInfoes { get; set; }
     }
 }

@@ -50,14 +50,14 @@ namespace UnitTestAgrin.Link
                 _request.UserAgent = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)";
                 //_request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
                 //_request.ServicePoint.ConnectionLimit = 2;
-                //_request.Headers.Add("Accept-Language", "en-US,en;q=0.5");
+                //_request.Headers.Add("Accept-Language", "en-US");
                 //_request.Headers.Add("Accept-Encoding", "gzip, deflate");
                 _request.Headers.Add("Authorization", "Basic YWdyaW46ZnJhbWVzb2Z0");
                 _request.Accept = "*/*";
 
 
                 //_request.KeepAlive = true;
-                //_request.Headers.Add("Accept-Language: en-US,en;q=0.5");
+                //_request.Headers.Add("Accept-Language: en-US");
                 //_request.CookieContainer = new CookieContainer();
                 //Uri target = new Uri(uri);
                 //Cookie ck = new Cookie("session", "F4%2BaCBtu1CCT1LH7bZPiOoQomGHKajFJja%2BpWXHn6iU%3D") { Domain = target.Host };

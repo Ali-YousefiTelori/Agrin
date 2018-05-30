@@ -77,7 +77,7 @@
                                     <Separator/>
                                     <MenuItem Header="کپی آدرس لینک" Command="{Binding CopyLinkLocationCommand,Source={StaticResource LinksViewModel}}"/>
                                     <MenuItem Header="ساخت فایل گزارش..." Command="{Binding CreateReportLinkCommand,Source={StaticResource LinksViewModel}}"/>
-                                    <MenuItem Header="ترمیم لینک..." Command="{Binding RepairLinkCommand,Source={StaticResource LinksViewModel}}"/>
+                                    <!--<MenuItem Header="ترمیم لینک..." Command="{Binding RepairLinkCommand,Source={StaticResource LinksViewModel}}"/>-->
                                     <Separator/>
                                     <MenuItem Header="شروع و رفع مشکل های ISP..." Command="{Binding PlayForceLinkInfoCommand,Source={StaticResource LinksViewModel}}" CommandParameter="{Binding Name}"/>
                                     <Separator/>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Agrin.Server.Models
 {
-    public enum ErrorMessage : int
+    public enum MessageType : int
     {
         None = 0,
         Success = 1,
@@ -17,6 +17,10 @@ namespace Agrin.Server.Models
         FileNotFound = 6,
         DataOverFlow = 7,
         ClientIpIsNotValid = 8,
-        SessionAccessDenied = 9
+        SessionAccessDenied = 9,
+        UsernameOrPasswordIncorrect = 10,
+        NotSupportYet = 11,
+        Duplicate = 12,
+        StorageFull = 13
     }
 }

@@ -13,11 +13,12 @@ namespace Agrin.Download.CoreModels.Link
     /// <summary>
     /// path and addresses of link
     /// </summary>
-    public class LinkInfoPathCore: NotifyPropertyChanged
+    public class LinkInfoPathCore : NotifyPropertyChanged
     {
         volatile LinkInfoShort _LinkInfo;
 
         volatile string _MainUriAddress;
+        volatile string _ReferenceUrl;
 
         volatile string _AppDirectorySavePath;
         volatile string _UserDirectorySavePath;
@@ -29,12 +30,20 @@ namespace Agrin.Download.CoreModels.Link
         volatile string _MixerSavePath;
         volatile string _SecurityMixerSavePath;
         volatile string _BackUpMixerSavePath;
-
-
+        
         /// <summary>
         /// uri address of link
         /// </summary>
-        public string MainUriAddress { get => _MainUriAddress; set => _MainUriAddress = value; }
+        public string MainUriAddress
+        {
+            get => _MainUriAddress;
+            set
+            {
+                _MainUriAddress = value;
+                OnPropertyChanged(nameof(MainUriAddress));
+                OnPropertyChanged(nameof(FileName));
+            }
+        }
 
         /// <summary>
         /// parent of link info
@@ -72,7 +81,11 @@ namespace Agrin.Download.CoreModels.Link
             {
                 return PathHelper.CreateDirectoryIfNotExist(_UserDirectorySavePath);
             }
-            set => _UserDirectorySavePath = value;
+            set
+            {
+                _UserDirectorySavePath = value;
+                OnPropertyChanged(nameof(DirectorySavePath));
+            }
         }
         /// <summary>
         /// security save path of link
@@ -120,7 +133,15 @@ namespace Agrin.Download.CoreModels.Link
         /// <summary>
         /// when user set file name of link
         /// </summary>
-        public string UserFileName { get => _UserFileName; set => _UserFileName = value; }
+        public string UserFileName
+        {
+            get => _UserFileName;
+            set
+            {
+                _UserFileName = value;
+                OnPropertyChanged(nameof(FileName));
+            }
+        }
         /// <summary>
         /// when security file name is set
         /// </summary>
@@ -180,6 +201,19 @@ namespace Agrin.Download.CoreModels.Link
                 if (!string.IsNullOrEmpty(securityPath))
                     return securityPath;
                 return PathHelper.Combine(Agrin.Models.Settings.ApplicationSettingsInfo.Current.PathSettings.TemporaryLinkInfoSavePath, LinkInfo.Id.ToString());
+            }
+        }
+
+        public string ReferenceUrl
+        {
+            get
+            {
+                return _ReferenceUrl;
+            }
+            set
+            {
+                _ReferenceUrl = value;
+                OnPropertyChanged(nameof(ReferenceUrl));
             }
         }
 

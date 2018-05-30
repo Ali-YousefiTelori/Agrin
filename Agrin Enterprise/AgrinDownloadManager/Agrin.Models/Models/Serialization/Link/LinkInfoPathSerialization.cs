@@ -8,7 +8,7 @@ namespace Agrin.Models.Serialization.Link
     public class LinkInfoPathSerialization
     {
         public string MainUriAddress { get; set; }
-
+        public string ReferenceUrl { get; set; }
         public string AppDirectorySavePath { get; set; }
         public string UserDirectorySavePath { get; set; }
         public string SecurityDirectorySavePath { get; set; }

@@ -14,7 +14,7 @@ namespace Agrin.Server.DataBaseLogic
         public static MessageContract RegisterUser(UserInfo userInfo)
         {
             if (userInfo == null || string.IsNullOrEmpty(userInfo.UserName) || userInfo.UserName.Length < 10)
-                return ErrorMessage.PleaseFillAllData;
+                return MessageType.PleaseFillAllData;
 
             using (AgrinContext context = new AgrinContext(false))
             {

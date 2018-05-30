@@ -11,12 +11,12 @@ namespace Agrin.Server.Models
     {
         public object Data { get; set; }
         public string Message { get; set; }
-        public ErrorMessage Error { get; set; }
+        public MessageType Error { get; set; }
         public bool IsSuccess { get; set; }
 
-        public static implicit operator MessageContract(ErrorMessage errorMessage)
+        public static implicit operator MessageContract(MessageType errorMessage)
         {
-            if (errorMessage == ErrorMessage.Success)
+            if (errorMessage == MessageType.Success)
                 return new MessageContract() { IsSuccess = true };
             return new MessageContract() { Error = errorMessage, IsSuccess = false };
         }
@@ -31,12 +31,12 @@ namespace Agrin.Server.Models
     {
         public T Data { get; set; }
         public string Message { get; set; }
-        public ErrorMessage Error { get; set; }
+        public MessageType Error { get; set; }
         public bool IsSuccess { get; set; }
 
-        public static implicit operator MessageContract<T>(ErrorMessage errorMessage)
+        public static implicit operator MessageContract<T>(MessageType errorMessage)
         {
-            if (errorMessage == ErrorMessage.Success)
+            if (errorMessage == MessageType.Success)
                 return new MessageContract<T>() { IsSuccess = true };
             return new MessageContract<T>() { Error = errorMessage, IsSuccess = false };
         }

@@ -1,4 +1,6 @@
 ﻿using Agrin.Download.CoreModels.Link;
+using Agrin.Log;
+using SignalGo.Shared;
 using SignalGo.Shared.Helpers;
 using System;
 using System.Collections.Generic;
@@ -56,6 +58,27 @@ namespace Agrin.Download.Engines
                         }
 
                         linkInfo.PreviousDownloadedSize = linkInfo.DownloadedSize;
+                        if (linkInfo.IsDownloading)
+                        {
+                            foreach (var connection in linkInfo.Connections.ToArray())
+                            {
+                                if (connection.CanPlay || connection.IsDownloading)
+                                {
+                                    if (connection.LastReadDateTime.AddSeconds(connection.LastReadDuration) < DateTime.Now)
+                                    {
+                                        try
+                                        {
+                                            connection.Stop();
+                                            connection.Play();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            AutoLogger.LogError(ex, "try to recconect");
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     if (!isPause)
                         TickCalculatedAction?.Invoke();

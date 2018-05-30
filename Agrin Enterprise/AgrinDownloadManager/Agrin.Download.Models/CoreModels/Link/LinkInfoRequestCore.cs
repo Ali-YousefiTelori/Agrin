@@ -165,7 +165,7 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
-                return !CanStop && !LinkInfo.IsCopyingFile && !IsComplete;
+                return !CanStop && !LinkInfo.IsCopyingFile && !IsComplete && !LinkInfo.IsManualStop;
             }
         }
 
@@ -276,6 +276,10 @@ namespace Agrin.Download.CoreModels.Link
         /// CookieContainer of request
         /// </summary>
         public CookieContainer RequestCookieContainer { get; set; }
+
+        public DateTime LastReadDateTime { get; set; }
+        public int LastReadDuration { get; set; } = 0;
+
         /// <summary>
         /// play the connection
         /// </summary>

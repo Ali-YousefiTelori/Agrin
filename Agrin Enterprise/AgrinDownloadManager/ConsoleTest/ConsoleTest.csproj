@@ -82,6 +82,10 @@
       <Project>{95f87b4e-84e1-43db-8149-0283242a5f7b}</Project>
       <Name>CrazyMapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Github\LiteDBSource\LiteDB\LiteDB\LiteDB.csproj">
+      <Project>{257C2DE8-223C-4B5C-A36C-CF87E183601B}</Project>
+      <Name>LiteDB</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Github\MVVMGo\MvvmGo\MvvmGo\MvvmGo.csproj">
       <Project>{9d38c00c-b80d-478a-b151-9bc1bf891ffd}</Project>
       <Name>MvvmGo</Name>

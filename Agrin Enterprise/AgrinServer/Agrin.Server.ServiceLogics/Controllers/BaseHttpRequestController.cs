@@ -21,20 +21,20 @@ namespace Agrin.Server.ServiceLogics.Controllers
         /// <param name="fileInfo">فایل مورد نظر</param>
         /// <param name="errorMessage">خطای بازگشتی</param>
         /// <returns>عملیات با موفقیت انجام شده یا خیر</returns>
-        public bool TakeFile(out HttpPostedFileInfo fileInfo, out ErrorMessage? errorMessage)
+        public bool TakeFile(out HttpPostedFileInfo fileInfo, out MessageType? errorMessage)
         {
             errorMessage = null;
             fileInfo = TakeNextFile();
             if (fileInfo == null)
             {
                 Status = System.Net.HttpStatusCode.Forbidden;
-                errorMessage = ErrorMessage.FileNotFound;
+                errorMessage = MessageType.FileNotFound;
                 return false;
             }
             else if (fileInfo.ContentLength > 1024 * 1024 * 10)
             {
                 Status = System.Net.HttpStatusCode.Forbidden;
-                errorMessage = ErrorMessage.DataOverFlow;
+                errorMessage = MessageType.DataOverFlow;
                 return false;
             }
             return true;
@@ -45,7 +45,7 @@ namespace Agrin.Server.ServiceLogics.Controllers
         /// </summary>
         /// <param name="msg">خطای مورد نظر</param>
         /// <returns>خطای عدم دسترسی</returns>
-        public ActionResult Error(ErrorMessage msg)
+        public ActionResult Error(MessageType msg)
         {
             Status = System.Net.HttpStatusCode.Forbidden;
             return Content((MessageContract)msg);
@@ -61,35 +61,7 @@ namespace Agrin.Server.ServiceLogics.Controllers
             Status = System.Net.HttpStatusCode.InternalServerError;
             return Content("Internal Error: " + Environment.NewLine + message);
         }
-
-        /// <summary>
-        /// بررسی دسترسی توکن کاربر
-        /// </summary>
-        /// <param name="token">توکن مورد نظر</param>
-        /// <param name="Ip">آی پی کاربر مورد نظر</param>
-        /// <param name="userId">آی دی کاربر بر اساس توکن</param>
-        /// <param name="result">خروجی برای نمایش به کاربر</param>
-        /// <returns>دسترسی دارد یا خیر</returns>
-        public bool CheckAccessToken(Guid token, string Ip, out int userId, out ActionResult result)
-        {
-            result = null;
-            if (!Authentication.AuthenticationService.RegisteredWebTokensOfUser.TryGetValue(token, out (int UserId, string Ip) value))
-            {
-                userId = 0;
-                result = Content((MessageContract)ErrorMessage.SessionAccessDenied);
-                return false;
-            }
-            else if (value.Ip != Ip)
-            {
-                Console.WriteLine($"Last Ip : {value.Ip} Previos IP: {Ip}");
-                userId = 0;
-                result = Content((MessageContract)ErrorMessage.ClientIpIsNotValid);
-                return false;
-            }
-            userId = value.UserId;
-            return true;
-        }
-
+        
         /// <summary>
         /// حذف فایل
         /// </summary>

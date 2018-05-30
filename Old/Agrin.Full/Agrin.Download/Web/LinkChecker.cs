@@ -74,8 +74,8 @@ namespace Agrin.Download.Web
                         HttpWebRequest _request = (HttpWebRequest)WebRequest.Create(address);
                         _request.AllowAutoRedirect = true;
                         _request.KeepAlive = true;
-                        _request.Headers.Add("Accept-Language", "en-us,en;q=0.5");
-                        _request.UserAgent = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
+                        _request.Headers.Add("Accept-Language", "en-US");
+                        _request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
                         if (authentication != null)
                             _request.Headers.Add(authentication[0], authentication[1]);
                         return _request;
@@ -167,8 +167,8 @@ namespace Agrin.Download.Web
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(address.Address);
             request.KeepAlive = true;
             request.Proxy = ProxyInfo.GetProxyByID(items, address.ProxyID);
-            request.Headers.Add("Accept-Language", "en-us,en;q=0.5");
-            request.UserAgent = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
+            request.Headers.Add("Accept-Language", "en-US");
+            request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             response.Close();
             return response.ContentLength;
