@@ -3,12 +3,12 @@ using Agrin.Server.DataBase.Models;
 using Agrin.Server.Models;
 using Agrin.Server.Models.Filters;
 using Framesoft.Helpers.Extensions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
 
 namespace Agrin.Server.DataBaseLogic
 {
@@ -17,7 +17,7 @@ namespace Agrin.Server.DataBaseLogic
         public static MessageContract<List<PostInfo>> GetListOfPost(int index, int length)
         {
             if (index < 0 || length <= 0)
-                return ErrorMessage.WrongData;
+                return MessageType.WrongData;
 
             using (AgrinContext context = new AgrinContext(false))
             {
@@ -28,12 +28,12 @@ namespace Agrin.Server.DataBaseLogic
         public static MessageContract<List<PostInfo>> FilterPosts(FilterPostInfo filterPostInfo)
         {
             if (filterPostInfo.Index < 0 || filterPostInfo.Length <= 0)
-                return ErrorMessage.WrongData;
+                return MessageType.WrongData;
 
             using (AgrinContext context = new AgrinContext(false))
             {
                 var query = context.PostInfoes.AsNoTracking().Include(x => x.FileInfoes).Include(x => x.PostMusicInfo)
-                    .Include(x => x.PostVideoInfo).Include(x => x.PostCategoryTagInfoes);
+                    .Include(x => x.PostVideoInfo).Include(x => x.PostTagRelationInfoes).AsQueryable();
                 if (filterPostInfo.CategoryId != null)
                 {
                     if (filterPostInfo.CategoryId == -1)
@@ -85,25 +85,25 @@ namespace Agrin.Server.DataBaseLogic
                 {
                     Id = -1,
                     Title = "تازه ها",
-                    Posts = context.PostInfoes.Include(x => x.FileInfoes).Include(x => x.PostMusicInfo).Include(x => x.PostVideoInfo).Include(x => x.PostCategoryTagInfoes).OrderByDescending(p => p.CreatedDateTime).Take(5).ToList()
+                    Posts = context.PostInfoes.Include(x => x.FileInfoes).Include(x => x.PostMusicInfo).Include(x => x.PostVideoInfo).Include(x => x.PostTagRelationInfoes).OrderByDescending(p => p.CreatedDateTime).Take(5).ToList()
                 });
                 result.Add(new PostCategoryInfo()
                 {
                     Id = -2,
                     Title = "جدیدترین بروزرسانی ها",
-                    Posts = context.PostInfoes.Include(x => x.FileInfoes).Include(x => x.PostMusicInfo).Include(x => x.PostVideoInfo).Include(x => x.PostCategoryTagInfoes).OrderByDescending(p => p.LastUpdateFileVersionDateTime).Take(5).ToList()
+                    Posts = context.PostInfoes.Include(x => x.FileInfoes).Include(x => x.PostMusicInfo).Include(x => x.PostVideoInfo).Include(x => x.PostTagRelationInfoes).OrderByDescending(p => p.LastUpdateFileVersionDateTime).Take(5).ToList()
                 });
                 result.Add(new PostCategoryInfo()
                 {
                     Id = -3,
                     Title = "پربازدیدترین ها",
-                    Posts = context.PostInfoes.Include(x => x.FileInfoes).Include(x => x.PostMusicInfo).Include(x => x.PostVideoInfo).Include(x => x.PostCategoryTagInfoes).OrderByDescending(p => p.ViewCount).Take(5).ToList()
+                    Posts = context.PostInfoes.Include(x => x.FileInfoes).Include(x => x.PostMusicInfo).Include(x => x.PostVideoInfo).Include(x => x.PostTagRelationInfoes).OrderByDescending(p => p.ViewCount).Take(5).ToList()
                 });
                 result.Add(new PostCategoryInfo()
                 {
                     Id = -4,
                     Title = "برترین ها",
-                    Posts = context.PostInfoes.Include(x => x.FileInfoes).Include(x => x.PostMusicInfo).Include(x => x.PostVideoInfo).Include(x => x.PostCategoryTagInfoes).OrderByDescending(p => p.ViewCount).Take(5).ToList()//sort by likes
+                    Posts = context.PostInfoes.Include(x => x.FileInfoes).Include(x => x.PostMusicInfo).Include(x => x.PostVideoInfo).Include(x => x.PostTagRelationInfoes).OrderByDescending(p => p.ViewCount).Take(5).ToList()//sort by likes
                 });
                 return result.Success();
             }

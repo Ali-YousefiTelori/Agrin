@@ -488,15 +488,21 @@ namespace Agrin.Download.Web
             });
         }
 
+
+
         /// <summary>
         /// download data from connection
         /// </summary>
         public virtual void DownloadData()
         {
+            RequestCore.LastReadDuration += 10;
+            if (RequestCore.LastReadDuration > 60)
+                RequestCore.LastReadDuration = 10;
+            RequestCore.LastReadDateTime = DateTime.Now;
             double downloaded = 0;
             _limitWatch.Start();
             if (RequestCore.Length <= 0)
-                throw new Exception("what is this size?");
+                throw new Exception($"what is this size? {RequestCore.EndPosition} {RequestCore.StartPosition} {LinkInfo.Connections.Count} {RequestCore.Id}");
             int _BufferRead = RequestCore.GetBufferSizeToRead;
             byte[] _read = new byte[_BufferRead];
             ReadBytes(out int readCount, ref _read, _read.Length, LinkInfo.DownloadedSize);
@@ -608,6 +614,8 @@ namespace Agrin.Download.Web
         public void ReadBytes(out int readCount, ref byte[] bytes, int count, long range)
         {
             readCount = ResponseStream.Read(bytes, 0, count);
+            RequestCore.LastReadDateTime = DateTime.Now;
+            RequestCore.LastReadDuration = 10;
         }
 
         void CheckResumableSupport()

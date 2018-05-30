@@ -1,4 +1,5 @@
-﻿using SignalGo;
+﻿using Agrin.Server.DataBase.Models.Relations;
+using SignalGo;
 using SignalGo.Shared.DataTypes;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace Agrin.Server.DataBase.Models
         //[ForeignKey("ParentCategoryId")]
         //public virtual PostCategoryInfo ParentCategoryInfo { get; set; }
 
-        public virtual ICollection<PostCategoryTagInfo> PostCategoryTagInfoes { get; set; }
+        public virtual ICollection<PostCategoryTagRelationInfo> PostCategoryTagRelationInfoes { get; set; }
         public virtual ICollection<PostInfo> Posts { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace Agrin.OS.Management
                 request.Headers["Authorization"] = "Basic YWRtaW46YWRtaW4=";
                 //request.Headers["Origin"] = @"http://192.168.0.1";
                 request.Headers["Accept-Encoding"] = "gzip, deflate";
-                request.Headers["Accept-Language"] = "en-US,en;q=0.5";
+                request.Headers["Accept-Language"] = "en-US";
                 //var requestBody = Encoding.UTF8.GetBytes("Reboot = Reboot");
                 //using (var requestStream = request.GetRequestStream())
                 //{

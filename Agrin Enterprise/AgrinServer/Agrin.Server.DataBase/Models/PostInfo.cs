@@ -1,4 +1,4 @@
-﻿using Framesoft.Helpers.DataTypes;
+﻿using Agrin.Server.DataBase.Models.Relations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -65,17 +65,17 @@ namespace Agrin.Server.DataBase.Models
         /// <summary>
         /// created DateTime
         /// </summary>
-        [DateTimeKind(DateTimeKind.Local)]
+        //[DateTimeKind(DateTimeKind.Local)]
         public DateTime CreatedDateTime { get; set; }
         /// <summary>
         /// last update post
         /// </summary>
-        [DateTimeKind(DateTimeKind.Local)]
+        //[DateTimeKind(DateTimeKind.Local)]
         public DateTime LastUpdateDateTime { get; set; }
         /// <summary>
         /// last update file versions
         /// </summary>
-        [DateTimeKind(DateTimeKind.Local)]
+        //[DateTimeKind(DateTimeKind.Local)]
         public DateTime LastUpdateFileVersionDateTime { get; set; }
 
         [ForeignKey("PostVideoId")]
@@ -90,9 +90,9 @@ namespace Agrin.Server.DataBase.Models
         [ForeignKey("UserId")]
         public virtual UserInfo UserInfo { get; set; }
 
-        public virtual ICollection<FileInfo> FileInfoes { get; set; }
+        public virtual ICollection<PostFileInfo> FileInfoes { get; set; }
 
-        public virtual ICollection<PostCategoryTagInfo> PostCategoryTagInfoes { get; set; }
+        public virtual ICollection<PostTagRelationInfo> PostTagRelationInfoes { get; set; }
 
     }
 }

@@ -47,6 +47,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Github\StreamGo\UltraStreamGo\UltraStreamGo\UltraStreamGo.csproj">
+      <Project>{b81ab514-1a79-458a-90d1-64390e9ff067}</Project>
+      <Name>UltraStreamGo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Github\Telegram.Bot\Telegram.Bot\src\Telegram.Bot\Telegram.Bot.csproj">
+      <Project>{af8e61ec-5185-45f9-a947-9e38dde71078}</Project>
+      <Name>Telegram.Bot</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Client\SignalGo.Client.csproj">
+      <Project>{da4f99a9-69e4-48f1-8850-5298f7762ab9}</Project>
+      <Name>SignalGo.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Server\SignalGo.Server.csproj">
       <Project>{8170e507-f79c-49c4-9ec2-9112c565a98b}</Project>
       <Name>SignalGo.Server</Name>
@@ -55,18 +67,17 @@
       <Project>{78d8601b-e331-47b7-a4a8-46b7460d82a4}</Project>
       <Name>SignalGo.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\AgrinDownloadManager\Agrin.Shared\Agrin.Shared.csproj">
-      <Project>{A9BFAD91-746A-4524-BC32-73E47234C4E8}</Project>
-      <Name>Agrin.Shared</Name>
+    <ProjectReference Include="..\Agrin.StorageServer.ServiceLogics\Agrin.StorageServer.ServiceLogics.csproj">
+      <Project>{F330E3CC-70BF-4636-98E6-7C101C11CE3C}</Project>
+      <Name>Agrin.StorageServer.ServiceLogics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Agrin.Server.Models\Agrin.Server.Models.csproj">
-      <Project>{09268CA1-07AC-4F32-9D20-8E1E326699DE}</Project>
-      <Name>Agrin.Server.Models</Name>
+    <ProjectReference Include="..\Agrin.TelegramBot\Agrin.TelegramBot.csproj">
+      <Project>{e92d9ee7-18e1-454b-9011-83762b844529}</Project>
+      <Name>Agrin.TelegramBot</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Agrin.Server.ServiceLogics\Agrin.Server.ServiceLogics.csproj">
-      <Project>{67b5288b-49d6-448d-8350-1700cec1ccbf}</Project>
-      <Name>Agrin.Server.ServiceLogics</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

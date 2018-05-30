@@ -17,10 +17,12 @@ namespace Agrin.Shared.Helpers
         /// <param name="directory">پوشه ی مورد نظر</param>
         /// <param name="fileName">نام فایل</param>
         /// <returns>ادغام فایل و پوشه</returns>
-        static string CreateDirectoryIfNotExist(string directory, string fileName)
+        static string CreateDirectoryIfNotExist(string directory, string fileName = null)
         {
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
+            if (string.IsNullOrEmpty(fileName))
+                return directory;
             return Path.Combine(directory, fileName);
         }
 
@@ -37,6 +39,11 @@ namespace Agrin.Shared.Helpers
         public static string GetPostImageDirectory(int userId, int postId, string fileName)
         {
             return CreateDirectoryIfNotExist(Path.Combine(DataBaseFolder, "Images", "PostImages", GetFirstFolderName(userId), GetSecondFolderName(userId), userId.ToString(), postId.ToString()), fileName);
+        }
+
+        public static string GetAgrinApplicationDirectory(string operationSystem)
+        {
+            return CreateDirectoryIfNotExist(Path.Combine(DataBaseFolder, "AgrinApplication", operationSystem));
         }
     }
 

@@ -1,11 +1,11 @@
-﻿using Agrin.Server.DataBase.Contexts;
-using Agrin.Server.DataBase.Models;
-using Agrin.Server.DataBaseLogic;
+﻿using Agrin.Server.DataBaseLogic;
+using Agrin.TelegramBot;
 using SignalGo.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +17,18 @@ namespace Agrin.Client.WindowsConsoleClient
         {
             try
             {
+                //WebProxy webProxy = new WebProxy(new Uri("https://dev.atitec.ir:808"));
+                //webProxy.BypassProxyOnLocal = false;
+                //webProxy.Credentials = new NetworkCredential("atitec", "atitec123", "dev.atitec.ir");
+                //webProxy.UseDefaultCredentials = false;
+                
+                //WebRequest webRequest = WebRequest.Create("https://core.telegram.org/bots/api");
+                //webRequest.Proxy = webProxy;
+                //webRequest.Proxy.Credentials = new NetworkCredential("atitec", "atitec123", "dev.atitec.ir");
+
+                //var response = webRequest.GetResponse();
+
+                BotsManager.StartBot<AgrinBotEngine>("519772219:AAHA_Yn4K2wyi-Io_BD9Z5D80y2zkNKPA6A");
                 //var items = PostExtension.FilterVirtualPostCategories(new Server.Models.Filters.FilterBaseInfo());
                 //using (AgrinContext context = new AgrinContext())
                 //{
@@ -32,6 +44,7 @@ namespace Agrin.Client.WindowsConsoleClient
                 //DownloadFiles(CurrentProvider, v.Data[0].Posts.FirstOrDefault());
                 //var postStorageManager = CurrentProvider.RegisterStreamServiceInterfaceWrapper<IPostStorageManager>();
                 //var file = postStorageManager.DownloadPostImage(1, 1, "ali");
+                Console.WriteLine("bot runned!");
             }
             catch (Exception ex)
             {

@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,11 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LiteDB, Version=4.1.2.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
-      <HintPath>..\packages\LiteDB.4.1.2\lib\net40\LiteDB.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -59,6 +58,10 @@
     <ProjectReference Include="..\..\..\..\Github\CrazyMapper\CrazyMapper\CrazyMapper\CrazyMapper.csproj">
       <Project>{95F87B4E-84E1-43DB-8149-0283242A5F7B}</Project>
       <Name>CrazyMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Github\LiteDBSource\LiteDB\LiteDB\LiteDB.csproj">
+      <Project>{257C2DE8-223C-4B5C-A36C-CF87E183601B}</Project>
+      <Name>LiteDB</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
       <Project>{da7b703a-faa1-4ab0-8271-7ce8fd27592e}</Project>

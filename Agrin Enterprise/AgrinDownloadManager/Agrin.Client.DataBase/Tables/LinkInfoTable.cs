@@ -80,7 +80,9 @@ namespace Agrin.Client.DataBase.Tables
             using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
             {
                 var links = db.GetCollection<LinkInfoSerialization>("LinkInfoes");
-                return AgrinClientContext.MapList<LinkInfoSerialization, T>(links.Find(x => !x.IsDeleted).ToList());
+                var allItems = links.Find(x => !x.IsDeleted);
+
+                return AgrinClientContext.MapList<LinkInfoSerialization, T>(allItems);
             }
         }
 

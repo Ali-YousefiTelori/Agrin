@@ -263,6 +263,7 @@ namespace Agrin.Download.CoreModels.Link
                     }
                     buildeer.AppendLine("End What is status");
                     AutoLogger.LogText(buildeer.ToString());
+                    ValidateConnectionsToDownload();
                 }
                 return ConnectionStatus.Stoped;
             }
@@ -766,10 +767,13 @@ namespace Agrin.Download.CoreModels.Link
                     var takeCount = AsShort().LinkInfoDownloadCore.GetConcurrentConnectionCount() - downloadingCount;
                     if (takeCount > 0)
                     {
-                        foreach (var item in Connections.Where(x => x.CanPlay).Take(takeCount))
+                        AsyncActions.Run(() =>
                         {
-                            item.Play();
-                        }
+                            foreach (var item in Connections.Where(x => x.CanPlay).Take(takeCount))
+                            {
+                                item.Play();
+                            }
+                        });
                     }
                 }
             });

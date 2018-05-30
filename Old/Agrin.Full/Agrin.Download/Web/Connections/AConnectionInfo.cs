@@ -114,6 +114,11 @@ namespace Agrin.Download.Web.Connections
             else
             {
                 _request = HttpWebRequest.Create(_currentAddress);
+                //((HttpWebRequest)_request).Accept = "*/*";
+                //((HttpWebRequest)_request).KeepAlive = false;
+                //((HttpWebRequest)_request).Referer = "http://dl3.dlsdm.ir/Serial/Grimm/S02/";
+                //((HttpWebRequest)_request).Headers.Add(HttpRequestHeader.AcceptEncoding, "identity");
+                ((HttpWebRequest)_request).AllowWriteStreamBuffering = false;
                 ((HttpWebRequest)_request).CookieContainer = new CookieContainer();
                 (((HttpWebRequest)_request).CookieContainer).Add(new Cookie("allow", "yes", "", _request.RequestUri.Host));
             }
@@ -140,8 +145,8 @@ namespace Agrin.Download.Web.Connections
                 //    _request.KeepAlive = true;
                 //    //_request.UserAgent = "DriverEasy/Pro V4.7.3.6546";
                 //    //_request.Referer = "http://dow1.drivereasy.com/down17/ra2oou5r.3fg";
-                //    _request.Headers.Add("Accept-Language", "en-us,en;q=0.5");
-                //    _request.UserAgent = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
+                //    _request.Headers.Add("Accept-Language", "en-US");
+                //    _request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
 
                 //}
 
