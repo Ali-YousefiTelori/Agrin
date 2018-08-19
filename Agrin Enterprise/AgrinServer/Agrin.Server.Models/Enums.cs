@@ -21,6 +21,10 @@ namespace Agrin.Server.Models
         UsernameOrPasswordIncorrect = 10,
         NotSupportYet = 11,
         Duplicate = 12,
-        StorageFull = 13
+        StorageFull = 13,
+        NotFound = 14,
+        IsNotConfirm = 15,
+        AccessDenied = 16,
+        CodeNotExist = 17,
     }
 }

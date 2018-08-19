@@ -19,7 +19,7 @@ namespace Agrin.Server.DataBase.Models
         /// <summary>
         /// فقط ثبت نام کرده
         /// </summary>
-        JustRegistred = 1,
+        JustRegistered = 1,
         /// <summary>
         /// تایید شده
         /// </summary>
@@ -100,5 +100,7 @@ namespace Agrin.Server.DataBase.Models
         public virtual ICollection<DirectFileToUserRelationInfo> DirectFileToUserRelationInfoes { get; set; }
         public virtual ICollection<DirectFolderToUserRelationInfo> DirectFolderToUserRelationInfoes { get; set; }
         public virtual ICollection<UserSessionInfo> UserSessionInfoes { get; set; }
+        public virtual ICollection<UserConfirmHashInfo> UserConfirmHashInfoes { get; set; }
+        
     }
 }

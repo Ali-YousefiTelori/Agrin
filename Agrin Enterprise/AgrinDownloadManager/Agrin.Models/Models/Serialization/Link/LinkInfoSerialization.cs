@@ -16,7 +16,6 @@ namespace Agrin.Models.Serialization.Link
         public bool IsGetSize { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public DateTime LastDownloadedDateTime { get; set; }
-        public bool IsCompleting { get; set; }
 
         public List<LinkRequestSerialization> Connections { get; set; }
 

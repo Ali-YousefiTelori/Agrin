@@ -15,7 +15,7 @@ namespace Agrin.Server.ServiceLogics.Controllers
     public class IndexController
     {
         [HomePage]
-        public string OpenPage(string address, string name, List<string> values)
+        public string OpenPage()
         {
             OperationContext.Current.HttpClient.Status = System.Net.HttpStatusCode.MovedPermanently;
             OperationContext.Current.HttpClient.ResponseHeaders.Add("Location", "http://framework.blogfa.com");

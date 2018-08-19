@@ -25,7 +25,17 @@ namespace Agrin.DataStorageServer.WindowsConsoleServer
 
                 AsyncActions.Run(() =>
                 {
-                    AgrinUserBotEngine.Run();
+                    Action<Action> tryAgain = null;
+                    void run()
+                    {
+                        tryAgain(run);
+                    }
+
+                    tryAgain = (action) =>
+                    {
+                        AgrinUserBotEngine.Run(run);
+                    };
+                    run();
                 });
 
                 StorageAuthenticationService.Current = new StorageAuthenticationService("agrin.info", 80);

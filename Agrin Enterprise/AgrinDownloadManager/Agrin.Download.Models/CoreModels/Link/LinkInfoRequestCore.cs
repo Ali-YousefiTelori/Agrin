@@ -48,7 +48,7 @@ namespace Agrin.Download.CoreModels.Link
                 {
                     LinkInfo.ValidateLinkCompletion();
                 }
-                LinkInfo.ValidateConnectionsToDownload();
+                //LinkInfo.ValidateConnectionsToDownload();
                 LinkInfo.ValidateUI();
                 OnPropertyChanged(nameof(Status));
             }
@@ -154,7 +154,7 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
-                return IsDownloading && !LinkInfo.IsCopyingFile;
+                return IsDownloading && !LinkInfo.IsCopyingFile && !IsDispose;
             }
         }
 
@@ -165,7 +165,7 @@ namespace Agrin.Download.CoreModels.Link
         {
             get
             {
-                return !CanStop && !LinkInfo.IsCopyingFile && !IsComplete && !LinkInfo.IsManualStop;
+                return !CanStop && !LinkInfo.IsCopyingFile && !IsComplete && !LinkInfo.IsManualStop && !IsDispose;
             }
         }
 
@@ -200,6 +200,7 @@ namespace Agrin.Download.CoreModels.Link
                 LinkInfo.OnPropertyChanged(nameof(LinkInfo.PercentDouble));
                 OnPropertyChanged(nameof(Percent));
                 OnPropertyChanged(nameof(PercentDouble));
+                OnPropertyChanged(nameof(DownloadedSize));
             }
         }
 
@@ -277,8 +278,14 @@ namespace Agrin.Download.CoreModels.Link
         /// </summary>
         public CookieContainer RequestCookieContainer { get; set; }
 
+        /// <summary>
+        /// last time readed downlaod stream
+        /// </summary>
         public DateTime LastReadDateTime { get; set; }
-        public int LastReadDuration { get; set; } = 0;
+        /// <summary>
+        /// duration of time to timeout from read downlaod stream
+        /// </summary>
+        public int LastReadDuration { get; set; } = 10;
 
         /// <summary>
         /// play the connection
@@ -287,6 +294,7 @@ namespace Agrin.Download.CoreModels.Link
         {
             if (!CanPlay)
                 return;
+            LastReadDateTime = DateTime.Now;
             DisposeConnection();
             BaseConnectionInfo = new BaseConnectionInfo(LinkInfo.PathInfo.MainUriAddress, null, null, this, LinkInfo);
             Status = ConnectionStatus.CreatingRequest;
@@ -299,7 +307,8 @@ namespace Agrin.Download.CoreModels.Link
         {
             if (!CanStop)
                 return;
-            BaseConnectionInfo.Stop();
+            if (BaseConnectionInfo != null)
+                BaseConnectionInfo.Stop();
             DisposeConnection();
         }
 
@@ -321,6 +330,8 @@ namespace Agrin.Download.CoreModels.Link
         /// </summary>
         public void DisposeConnection()
         {
+            if (Status != ConnectionStatus.Error)
+                Status = ConnectionStatus.Stoped;
             if (BaseConnectionInfo != null && !BaseConnectionInfo.IsDispose)
                 BaseConnectionInfo.Dispose();
             BaseConnectionInfo = null;

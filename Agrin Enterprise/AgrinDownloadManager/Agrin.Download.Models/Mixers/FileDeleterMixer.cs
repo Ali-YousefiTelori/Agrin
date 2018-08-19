@@ -58,7 +58,7 @@ namespace Agrin.Download.Mixers
         {
             if (isCanceled)
                 return;
-            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName, newSecurityFileName: (newPath) => CurrentMixer.SecurityAddress = newPath))
             {
                 stream.Seek(0, System.IO.SeekOrigin.End);
                 foreach (var file in Files)

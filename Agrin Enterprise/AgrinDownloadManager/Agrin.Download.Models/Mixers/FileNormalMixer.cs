@@ -37,11 +37,12 @@ namespace Agrin.Download.Mixers
             if (isCanceled)
                 return;
             MixedSize = 0;
-            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName, newSecurityFileName: (newPath) => CurrentMixer.SecurityAddress = newPath))
             {
                 if (isCanceled)
                     return;
                 stream.SetLength(0);
+                stream.Flush();
                 stream.Seek(0, System.IO.SeekOrigin.Begin);
                 foreach (var file in Files)
                 {
@@ -55,6 +56,7 @@ namespace Agrin.Download.Mixers
                         {
                             System.Threading.Thread.Sleep(2);
                             stream.Write(read, 0, rCount);
+                            stream.Flush();
                             MixedSize = currentMixed + copystream.Position;
                             if (isCanceled)
                                 return;
@@ -66,6 +68,7 @@ namespace Agrin.Download.Mixers
                     CurrentMixer.MixedCompletedLen = stream.Length;
                 }
                 Size = stream.Length;
+                stream.Flush();
             }
             try
             {

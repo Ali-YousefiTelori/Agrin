@@ -13,11 +13,12 @@ namespace Agrin.Server.ServiceLogics.WebsiteControllers
     [ServiceContract("Download", ServiceType.HttpService, InstanceType.SingleInstance)]
     public class DownloadController : BaseHttpRequestController
     {
+        static string defaultPath = "E:\\AgrinDataBaseFiles";
         public ActionResult AgrinDownloadManagerProLastVersion()
         {
             try
             {
-                var directory = "";// FileManager.GetAgrinApplicationDirectory("Android");
+                var directory = Path.Combine(defaultPath, "AgrinApplication", "Android");
                 var filePath = Directory.GetFiles(directory).OrderByDescending(x => x).FirstOrDefault();
                 return DownloadFile(filePath);
             }
@@ -31,7 +32,7 @@ namespace Agrin.Server.ServiceLogics.WebsiteControllers
         {
             try
             {
-                var directory = "";// FileManager.GetAgrinApplicationDirectory("Windows");
+                var directory = Path.Combine(defaultPath, "AgrinApplication", "Windows");
                 var filePath = Directory.GetFiles(directory).OrderByDescending(x => x).FirstOrDefault();
                 return DownloadFile(filePath);
             }
@@ -40,12 +41,12 @@ namespace Agrin.Server.ServiceLogics.WebsiteControllers
                 return InternalError("error to download file");
             }
         }
-		
-		public ActionResult DownloadFile(string file)
+
+        public ActionResult DownloadCustomFile(string file)
         {
             try
             {
-                var directory = "";// FileManager.GetAgrinApplicationDirectory("CustomFiles");
+                var directory = Path.Combine(defaultPath, "AgrinApplication", "CustomFiles");
                 var filePath = Directory.GetFiles(directory).OrderByDescending(x => x).FirstOrDefault();
                 return DownloadFile(filePath);
             }

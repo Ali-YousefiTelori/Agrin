@@ -81,17 +81,14 @@ namespace Agrin.Download.CoreModels.Link
                 LinkInfo.Save();
         }
 
-        public static Action<int,Exception> LinkInfoAddErrorAction { get; set; }
+        public static Action<int, Exception> LinkInfoAddErrorAction { get; set; }
         /// <summary>
         /// add error in application Error List
         /// </summary>
         /// <param name="error"></param>
         public void AddError(Exception error)
         {
-            this.RunInLock(() =>
-            {
-                LinkInfoAddErrorAction?.Invoke(LinkInfo.Id, error);
-            });
+            LinkInfoAddErrorAction?.Invoke(LinkInfo.Id, error);
             //try
             //{
             //    //Logger.WriteLine("AddError", error);

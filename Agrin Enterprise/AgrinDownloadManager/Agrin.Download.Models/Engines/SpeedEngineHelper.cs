@@ -1,5 +1,6 @@
 ﻿using Agrin.Download.CoreModels.Link;
 using Agrin.Log;
+using Agrin.Threads;
 using SignalGo.Shared;
 using SignalGo.Shared.Helpers;
 using System;
@@ -68,6 +69,14 @@ namespace Agrin.Download.Engines
                                     {
                                         try
                                         {
+                                            bool canBreak = false;
+                                            linkInfo.RunInLock(() =>
+                                            {
+                                                canBreak = linkInfo.isStopping || linkInfo.IsManualStop || linkInfo.CanPlay;
+                                            });
+                                            if (canBreak)
+                                                break;
+                                            connection.LastReadDuration += 10;
                                             connection.Stop();
                                             connection.Play();
                                         }

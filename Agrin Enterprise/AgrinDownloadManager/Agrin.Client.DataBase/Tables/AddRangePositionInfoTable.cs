@@ -20,11 +20,14 @@ namespace Agrin.Client.DataBase.Tables
 
         public override void Add(AddRangePositionInfo addRangePositionInfo)
         {
-            // Open database (or create if not exits)
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                var positions = db.GetCollection<AddRangePositionInfo>("AddRangePositionInfoes");
-                positions.Insert(addRangePositionInfo);
+                // Open database (or create if not exits)
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var positions = db.GetCollection<AddRangePositionInfo>("AddRangePositionInfoes");
+                    positions.Insert(addRangePositionInfo);
+                }
             }
         }
 

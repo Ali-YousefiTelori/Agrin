@@ -72,7 +72,7 @@ namespace Agrin.Download.Mixers
                 if (!(find.IsComplete == IsCompleteEnum.Comeplete) && !System.IO.File.Exists(file))
                     throw new Exception("mixer file not found");
                 if (find.IsComplete == IsCompleteEnum.Comeplete && !System.IO.File.Exists(currentMixer.FullAddress))
-                    throw new Exception("complete file moved or deleted!");
+                    throw new Exception("complete file moved or deleted! "+ currentMixer.FullAddress);
                 if (System.IO.File.Exists(file) && find.IsComplete == IsCompleteEnum.None)
                 {
                     find.Lenght = new System.IO.FileInfo(file).Length;
@@ -92,6 +92,7 @@ namespace Agrin.Download.Mixers
 
         public void Complete()
         {
+            MixerInfo.SaveAction(CurrentMixer);
             //try
             //{
             //    IOHelperBase.DeleteFile(CurrentMixer.MixerBackupPath);

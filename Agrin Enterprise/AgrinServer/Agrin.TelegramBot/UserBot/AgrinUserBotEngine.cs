@@ -65,7 +65,7 @@ namespace Agrin.TelegramBot.UserBot
 
         static ConcurrentDictionary<int, StreamObject> FileStreamActions { get; set; } = new ConcurrentDictionary<int, StreamObject>();
 
-        public static async void Run()
+        public static async void Run(Action finish)
         {
             Console.WriteLine("starting client...");
             TryAgain:
@@ -182,6 +182,8 @@ namespace Agrin.TelegramBot.UserBot
                     catch (Exception ex)
                     {
                         Console.WriteLine($"client excetion to read something! {ex.Message}");
+                        finish();
+                        break;
                     }
                     finally
                     {

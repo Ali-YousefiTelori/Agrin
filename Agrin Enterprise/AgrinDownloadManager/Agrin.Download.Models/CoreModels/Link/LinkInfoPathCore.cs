@@ -30,7 +30,7 @@ namespace Agrin.Download.CoreModels.Link
         volatile string _MixerSavePath;
         volatile string _SecurityMixerSavePath;
         volatile string _BackUpMixerSavePath;
-        
+
         /// <summary>
         /// uri address of link
         /// </summary>
@@ -96,7 +96,11 @@ namespace Agrin.Download.CoreModels.Link
             {
                 return PathHelper.CreateSecurityDirectoryIfNotExist(_SecurityDirectorySavePath);
             }
-            set => _SecurityDirectorySavePath = value;
+            set
+            {
+                _SecurityDirectorySavePath = value;
+                OnPropertyChanged(nameof(DirectorySavePath));
+            }
         }
         /// <summary>
         /// directory save path of link
@@ -145,7 +149,14 @@ namespace Agrin.Download.CoreModels.Link
         /// <summary>
         /// when security file name is set
         /// </summary>
-        public string SecurityFileName { get => _SecurityFileName; set => _SecurityFileName = value; }
+        public string SecurityFileName
+        {
+            get
+            {
+                return _SecurityFileName;
+            }
+            set => _SecurityFileName = value;
+        }
 
         /// <summary>
         /// file name of link
@@ -172,7 +183,11 @@ namespace Agrin.Download.CoreModels.Link
             get
             {
                 if (!string.IsNullOrEmpty(SecurityDirectorySavePath) || !string.IsNullOrEmpty(SecurityFileName))
+                {
+                    if (string.IsNullOrEmpty(SecurityFileName))
+                        return SecurityDirectorySavePath;
                     return PathHelper.CombineSecurityPath(SecurityDirectorySavePath, SecurityFileName);
+                }
                 return PathHelper.Combine(DirectorySavePath, FileName);
             }
         }

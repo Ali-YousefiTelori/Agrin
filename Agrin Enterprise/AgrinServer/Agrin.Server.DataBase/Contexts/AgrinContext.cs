@@ -167,6 +167,18 @@ namespace Agrin.Server.DataBase.Contexts
         /// agrin server infoes
         /// </summary>
         public DbSet<ServerInfo> ServerInfoes { get; set; }
-
+        /// <summary>
+        /// exception info is helpfull for users to know how to fix problems
+        /// </summary>
+        public DbSet<ExceptionInfo> ExceptionInfoes { get; set; }
+        /// <summary>
+        /// users request to add this exception to new verison of app
+        /// </summary>
+        public DbSet<RequestIdeaInfo> RequestExceptionInfoes { get; set; }
+        /// <summary>
+        /// hash for confirm
+        /// </summary>
+        public DbSet<UserConfirmHashInfo> UserConfirmHashInfoes { get; set; }
+        
     }
 }

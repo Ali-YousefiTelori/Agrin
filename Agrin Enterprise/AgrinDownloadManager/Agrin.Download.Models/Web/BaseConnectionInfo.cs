@@ -125,16 +125,13 @@ namespace Agrin.Download.Web
         /// </summary>
         public void Play()
         {
-            this.RunInLock(() =>
+            ConnectionStatus = ConnectionStatus.CreatingRequest;
+            var thread = new Thread(StartConnection)
             {
-                ConnectionStatus = ConnectionStatus.CreatingRequest;
-                var thread = new Thread(StartConnection)
-                {
-                    IsBackground = false
-                };
+                IsBackground = false
+            };
 
-                thread.Start();
-            });
+            thread.Start();
         }
 
         /// <summary>
@@ -142,26 +139,29 @@ namespace Agrin.Download.Web
         /// </summary>
         public void Stop()
         {
-            this.RunInLock(() =>
-            {
-                SetStatus(ConnectionStatus.Stoped);
-                Dispose();
-            });
+            SetStatus(ConnectionStatus.Stoped);
+            Dispose();
         }
 
         public void StopWithError(Exception ex)
         {
-            if (IsDispose)
-                return;
-            LinkInfo.AsShort().LinkInfoManagementCore.AddError(ex);
-            SetStatus(ConnectionStatus.Error);
-            LinkInfo.OnBasicDataChanged?.Invoke();
-            this.RunInLock(() =>
+            try
+            {
+                if (IsDispose)
+                    return;
+                LinkInfo.AsShort().LinkInfoManagementCore.AddError(ex);
+                SetStatus(ConnectionStatus.Error);
+                LinkInfo.OnBasicDataChanged?.Invoke();
+            }
+            catch
+            {
+
+            }
+            finally
             {
                 Dispose();
-            });
+            }
         }
-
 
         private void StartConnection()
         {
@@ -301,7 +301,8 @@ namespace Agrin.Download.Web
                 //        CheckResumableSupport();
                 //    }
                 //}
-
+                if (IsDispose)
+                    return;
                 if (LinkInfo.Connections.Count == 1 && LinkInfo.LinkInfoDownloadCore.ResumeCapability == ResumeCapabilityEnum.Unknown)
                 {
                     CheckResumableThread = new Thread(CheckResumableSupport) { IsBackground = false };
@@ -352,14 +353,8 @@ namespace Agrin.Download.Web
             }
             catch (Exception e)
             {
-                this.RunInLock(() =>
-                {
-                    AutoLogger.LogError(e, "Connect");
-                    ConnectionStatus = ConnectionStatus.Error;
-                });
-                //if (ParentLinkWebRequest.Parent.DownloadingProperty.UriCache != null)
-                //    ParentLinkWebRequest.Parent.DownloadingProperty.UriCache = null;
-                //StopException(e);
+                AutoLogger.LogError(e, "Connect");
+                ConnectionStatus = ConnectionStatus.Error;
             }
         }
 
@@ -373,9 +368,10 @@ namespace Agrin.Download.Web
                 if (CurrentWebRequestExchanger.ResponseHeaders["content-disposition"] != null)
                 {
                     string fileName = "";
+                    var contentDisposition = CurrentWebRequestExchanger.ResponseHeaders["content-disposition"].Replace("[", "").Replace("]", "");
                     try
                     {
-                        ContentDisposition content = new ContentDisposition(CurrentWebRequestExchanger.ResponseHeaders["content-disposition"]);
+                        ContentDisposition content = new ContentDisposition(contentDisposition);
                         fileName = content.FileName;
                     }
                     catch (Exception ex)
@@ -383,7 +379,7 @@ namespace Agrin.Download.Web
                         AutoLogger.LogError(ex, $"content-disposition: {CurrentWebRequestExchanger.ResponseHeaders["content-disposition"]} !");
                     }
 
-                    fileName = Decodings.FullDecodeString(PathHelper.GetFileNameFromContentDisposition(CurrentWebRequestExchanger.ResponseHeaders["content-disposition"]));
+                    fileName = Decodings.FullDecodeString(PathHelper.GetFileNameFromContentDisposition(contentDisposition));
                     if (!String.IsNullOrEmpty(fileName))
                     {
                         mustSave = LinkInfo.PathInfo.AppFileName != fileName;
@@ -450,22 +446,19 @@ namespace Agrin.Download.Web
             }
             catch (Exception e)
             {
-                this.RunInLock(() =>
+                try
                 {
-                    try
+                    AutoLogger.LogError(e, "GetHeaders");
+                    if (ConnectionStatus == ConnectionStatus.Connecting)
                     {
-                        AutoLogger.LogError(e, "GetHeaders");
-                        if (ConnectionStatus == ConnectionStatus.Connecting)
-                        {
-                            LinkInfo.LinkInfoManagementCore.AddError(e);
-                            ConnectionStatus = ConnectionStatus.Error;
-                        }
+                        LinkInfo.LinkInfoManagementCore.AddError(e);
+                        ConnectionStatus = ConnectionStatus.Error;
                     }
-                    catch (Exception c)
-                    {
-                        AutoLogger.LogError(c, "GetHeaders 2");
-                    }
-                });
+                }
+                catch (Exception c)
+                {
+                    AutoLogger.LogError(c, "GetHeaders 2");
+                }
 
                 //System.Diagnostics.Debugger.Break();
             }
@@ -482,10 +475,7 @@ namespace Agrin.Download.Web
 
         private void SetStatus(ConnectionStatus status)
         {
-            this.RunInLock(() =>
-            {
-                ConnectionStatus = status;
-            });
+            ConnectionStatus = status;
         }
 
 
@@ -495,9 +485,7 @@ namespace Agrin.Download.Web
         /// </summary>
         public virtual void DownloadData()
         {
-            RequestCore.LastReadDuration += 10;
-            if (RequestCore.LastReadDuration > 60)
-                RequestCore.LastReadDuration = 10;
+            RequestCore.LastReadDuration = 10;
             RequestCore.LastReadDateTime = DateTime.Now;
             double downloaded = 0;
             _limitWatch.Start();
@@ -572,17 +560,23 @@ namespace Agrin.Download.Web
                         }
                         else
                             readCount = 0;
+                        if (IsDispose)
+                            break;
                         if (LinkInfo.LinkInfoManagementCore.IsLimit)
                             downloaded += readCount;
                         _BufferRead = RequestCore.GetBufferSizeToRead;
                     }
                     if (readCount == 0)
+                    {
                         if (saveStreamLen == RequestCore.Length)
                         {
                             RequestCore.DownloadedSize = (long)RequestCore.Length;
                             Complete();
                             break;
                         }
+                        else
+                            throw new Exception("zero byte readed link disconnected!");
+                    }
                     goto SaveData;
                 }
                 else
@@ -614,6 +608,8 @@ namespace Agrin.Download.Web
         public void ReadBytes(out int readCount, ref byte[] bytes, int count, long range)
         {
             readCount = ResponseStream.Read(bytes, 0, count);
+            if (IsDispose)
+                return;
             RequestCore.LastReadDateTime = DateTime.Now;
             RequestCore.LastReadDuration = 10;
         }
@@ -642,10 +638,7 @@ namespace Agrin.Download.Web
             }
             catch (Exception ex)
             {
-                this.RunInLock(() =>
-                {
-                    AutoLogger.LogError(ex, "CheckResumableSupport");
-                });
+                AutoLogger.LogError(ex, "CheckResumableSupport");
             }
         }
 
@@ -662,15 +655,14 @@ namespace Agrin.Download.Web
         }
 
         bool _isBeginDispose = false;
+        /// <summary>
+        /// dispose file stream
+        /// </summary>
         public void BeginDispose()
         {
-            this.RunInLock(() =>
-            {
-                if (_isBeginDispose)
-                    return;
-                _saveStream.Dispose();
-            });
-
+            if (_isBeginDispose || _saveStream == null)
+                return;
+            _saveStream.Dispose();
         }
         /// <summary>
         /// dispose objct
@@ -682,17 +674,19 @@ namespace Agrin.Download.Web
             BeginDispose();
             this.RunInLock(() =>
             {
-                IsDispose = true;
                 ObjectLocker.ObjectDisposed(this);
                 if (CheckResumableThread != null)
                     CheckResumableThread.Abort();
 
-                CurrentWebRequestExchanger.Dispose();
+                if (CurrentWebRequestExchanger != null)
+                    CurrentWebRequestExchanger.Dispose();
 
                 RequestCore.BaseConnectionInfo = null;
                 RequestCore = null;
                 LinkInfo = null;
                 CheckResumableThread = null;
+                GC.SuppressFinalize(this);
+                //GC.Collect();
             });
         }
     }

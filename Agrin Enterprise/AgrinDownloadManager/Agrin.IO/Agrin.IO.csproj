@@ -63,11 +63,12 @@
   <ItemGroup>
     <Compile Include="HardWare\DriveHelperBase.cs" />
     <Compile Include="HardWare\IDriveHelper.cs" />
+    <Compile Include="Helpers\DirectoryMoveHelper.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
     <Compile Include="PathHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Streams\IStreamWriter.cs" />
-    <Compile Include="Streams\StreamWriter.cs" />
+    <Compile Include="Streams\StreamCross.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />

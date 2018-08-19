@@ -88,8 +88,15 @@ namespace Agrin.IO
         {
             if (string.IsNullOrEmpty(path))
                 return path;
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+            try
+            {
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+            }
+            catch (Exception ex)
+            {
+
+            }
             return path;
         }
         /// <summary>

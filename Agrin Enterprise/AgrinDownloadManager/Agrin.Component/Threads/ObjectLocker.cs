@@ -28,16 +28,6 @@ namespace Agrin.Threads
             {
                 return;
             }
-            //object obj = null;
-            //lock (lockerObj)
-            //{
-            //    if (key.IsDispose)
-            //        return;
-            //    if (!LockerList.ContainsKey(key))
-            //        LockerList.TryAdd(key, new object());
-            //    obj = LockerList[key];
-            //}
-
             lock (key)
             {
                 if (key.IsDispose)
@@ -66,13 +56,6 @@ namespace Agrin.Threads
         {
             if (key.IsDispose)
                 return default(T);
-            //object obj = null;
-            //lock (lockerObj)
-            //{
-            //    if (!LockerList.ContainsKey(key))
-            //        LockerList.TryAdd(key, new object());
-            //    obj = LockerList[key];
-            //}
 
             lock (key)
             {
@@ -88,8 +71,7 @@ namespace Agrin.Threads
         /// <param name="key"></param>
         public static void ObjectDisposed(IObjectDisposable key)
         {
-            //if (LockerList.ContainsKey(key))
-            //    LockerList.TryRemove(key, out object value);
+            key.IsDispose = true;
         }
     }
 }
