@@ -13,6 +13,7 @@ namespace Agrin.Client.DataBase
 {
     public static class AgrinClientContext
     {
+        internal static object LockOBJ = new object();
         public static Action OnLinkInfoesChanged { get; set; }
 
         static string _DataBasePath;
@@ -42,7 +43,8 @@ namespace Agrin.Client.DataBase
         public static AddRangePositionInfoTable AddRangePositionInfoTable { get; set; } = new AddRangePositionInfoTable();
         public static TaskSchedulerTable TaskSchedulerTable { get; set; } = new TaskSchedulerTable();
         public static FolderBookmarkInfoTable FolderBookmarkInfoTable { get; set; } = new FolderBookmarkInfoTable();
-
+        public static SettingInfoTable SettingInfoTable { get; set; } = new SettingInfoTable();
+        
         public static MixerInfoTable MixerInfoTable = new MixerInfoTable();
         public static List<TResult> MapList<T, TResult>(IEnumerable items)
         {

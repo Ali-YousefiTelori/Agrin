@@ -24,11 +24,14 @@ namespace Agrin.Client.DataBase.Tables
 
         public override void Update(LinkInfoCore linkInfoCore)
         {
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                var links = db.GetCollection<LinkInfoSerialization>("LinkInfoes");
-                var item = Mapper.Map<LinkInfoSerialization>(linkInfoCore);
-                links.Update(item);
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var links = db.GetCollection<LinkInfoSerialization>("LinkInfoes");
+                    var item = Mapper.Map<LinkInfoSerialization>(linkInfoCore);
+                    links.Update(item);
+                }
             }
         }
 
@@ -49,40 +52,49 @@ namespace Agrin.Client.DataBase.Tables
 
         public override void Add(LinkInfoCore linkInfoCore)
         {
-            // Open database (or create if not exits)
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                var links = db.GetCollection<LinkInfoSerialization>("LinkInfoes");
-                var item = Mapper.Map<LinkInfoSerialization>(linkInfoCore);
-                links.EnsureIndex(x => x.Id);
-                links.Insert(item);
-                linkInfoCore.Id = item.Id;
-                AgrinClientContext.LinkInfoes.Insert(0, linkInfoCore);
-                AgrinClientContext.MainLoadedLinkInfoes.Add(linkInfoCore);
+                // Open database (or create if not exits)
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var links = db.GetCollection<LinkInfoSerialization>("LinkInfoes");
+                    var item = Mapper.Map<LinkInfoSerialization>(linkInfoCore);
+                    links.EnsureIndex(x => x.Id);
+                    links.Insert(item);
+                    linkInfoCore.Id = item.Id;
+                    AgrinClientContext.LinkInfoes.Insert(0, linkInfoCore);
+                    AgrinClientContext.MainLoadedLinkInfoes.Add(linkInfoCore);
+                }
             }
         }
 
         public override void Delete(LinkInfoCore linkInfoCore)
         {
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                var links = db.GetCollection<LinkInfoSerialization>("LinkInfoes");
-                var item = Mapper.Map<LinkInfoSerialization>(linkInfoCore);
-                item.IsDeleted = true;
-                links.Update(item);
-                AgrinClientContext.MainLoadedLinkInfoes.Remove(linkInfoCore);
-                AgrinClientContext.LinkInfoes.Remove(linkInfoCore);
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var links = db.GetCollection<LinkInfoSerialization>("LinkInfoes");
+                    var item = Mapper.Map<LinkInfoSerialization>(linkInfoCore);
+                    item.IsDeleted = true;
+                    links.Update(item);
+                    AgrinClientContext.MainLoadedLinkInfoes.Remove(linkInfoCore);
+                    AgrinClientContext.LinkInfoes.Remove(linkInfoCore);
+                }
             }
         }
 
         public override List<T> GetList<T>()
         {
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                var links = db.GetCollection<LinkInfoSerialization>("LinkInfoes");
-                var allItems = links.Find(x => !x.IsDeleted);
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var links = db.GetCollection<LinkInfoSerialization>("LinkInfoes");
+                    var allItems = links.Find(x => !x.IsDeleted);
 
-                return AgrinClientContext.MapList<LinkInfoSerialization, T>(allItems);
+                    return AgrinClientContext.MapList<LinkInfoSerialization, T>(allItems);
+                }
             }
         }
 

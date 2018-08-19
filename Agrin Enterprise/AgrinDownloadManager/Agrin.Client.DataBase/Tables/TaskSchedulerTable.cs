@@ -20,24 +20,30 @@ namespace Agrin.Client.DataBase.Tables
 
         public override void Add(TaskSchedulerInfo data)
         {
-            // Open database (or create if not exits)
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                var links = db.GetCollection<TaskSchedulerInfo>("TaskSchedulerInfoes");
-                links.EnsureIndex(x => x.Id);
-                links.Insert(data);
-                AgrinClientContext.TaskSchedulerInfoes.Insert(0, data);
+                // Open database (or create if not exits)
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var links = db.GetCollection<TaskSchedulerInfo>("TaskSchedulerInfoes");
+                    links.EnsureIndex(x => x.Id);
+                    links.Insert(data);
+                    AgrinClientContext.TaskSchedulerInfoes.Insert(0, data);
+                }
             }
         }
 
         public override void Delete(TaskSchedulerInfo data)
         {
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                var links = db.GetCollection<TaskSchedulerInfo>("TaskSchedulerInfoes");
-                data.IsDeleted = true;
-                links.Update(data);
-                AgrinClientContext.TaskSchedulerInfoes.Remove(data);
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var links = db.GetCollection<TaskSchedulerInfo>("TaskSchedulerInfoes");
+                    data.IsDeleted = true;
+                    links.Update(data);
+                    AgrinClientContext.TaskSchedulerInfoes.Remove(data);
+                }
             }
         }
 
@@ -66,19 +72,25 @@ namespace Agrin.Client.DataBase.Tables
 
         public override void Update(TaskSchedulerInfo data)
         {
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                var links = db.GetCollection<TaskSchedulerInfo>("TaskSchedulerInfoes");
-                links.Update(data);
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var links = db.GetCollection<TaskSchedulerInfo>("TaskSchedulerInfoes");
+                    links.Update(data);
+                }
             }
         }
 
         public override List<TaskSchedulerInfo> GetList()
         {
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                var links = db.GetCollection<TaskSchedulerInfo>("TaskSchedulerInfoes");
-                return links.Find(x => !x.IsDeleted).Where(x => x.Status == TaskStatus.Stopped && x.StartDateTime != null).ToList();
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var links = db.GetCollection<TaskSchedulerInfo>("TaskSchedulerInfoes");
+                    return links.Find(x => !x.IsDeleted).Where(x => x.Status == TaskStatus.Stopped && x.StartDateTime != null).ToList();
+                }
             }
         }
 

@@ -15,9 +15,30 @@ namespace Agrin.Server.DataBase.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rc1-32029")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.CommentInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDateTime");
+
+                    b.Property<int?>("RequestIdeaId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequestIdeaId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CommentInfo");
+                });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.DirectFileInfo", b =>
                 {
@@ -57,6 +78,27 @@ namespace Agrin.Server.DataBase.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("DirectFolderInfoes");
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.ExceptionInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ErrorCode");
+
+                    b.Property<string>("ErrorMessage");
+
+                    b.Property<string>("ExceptionType");
+
+                    b.Property<string>("HelpUrl");
+
+                    b.Property<int?>("HttpErrorCode");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExceptionInfoes");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.PostCategoryInfo", b =>
@@ -218,6 +260,41 @@ namespace Agrin.Server.DataBase.Migrations
                     b.ToTable("PostTagRelationInfoes");
                 });
 
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.RequestIdeaInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDateTime");
+
+                    b.Property<string>("ErrorMessage");
+
+                    b.Property<string>("ExceptionType");
+
+                    b.Property<int?>("HttpErrorCode");
+
+                    b.Property<string>("Mesage");
+
+                    b.Property<string>("StackTrace");
+
+                    b.Property<byte>("Status");
+
+                    b.Property<string>("Title");
+
+                    b.Property<byte>("Type");
+
+                    b.Property<DateTime>("UpdatedDateTime");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RequestExceptionInfoes");
+                });
+
             modelBuilder.Entity("Agrin.Server.DataBase.Models.ServerInfo", b =>
                 {
                     b.Property<int>("Id")
@@ -244,6 +321,29 @@ namespace Agrin.Server.DataBase.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TagInfoes");
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.UserConfirmHashInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDateTime");
+
+                    b.Property<bool>("IsUsed");
+
+                    b.Property<Guid>("RandomGuid");
+
+                    b.Property<int>("RandomNumber");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserConfirmHashInfoes");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.UserCreditInfo", b =>
@@ -340,6 +440,18 @@ namespace Agrin.Server.DataBase.Migrations
                     b.ToTable("UserSessionInfoes");
                 });
 
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.CommentInfo", b =>
+                {
+                    b.HasOne("Agrin.Server.DataBase.Models.RequestIdeaInfo", "RequestIdeaInfo")
+                        .WithMany("CommentInfoes")
+                        .HasForeignKey("RequestIdeaId");
+
+                    b.HasOne("Agrin.Server.DataBase.Models.UserInfo", "UserInfo")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Agrin.Server.DataBase.Models.DirectFileInfo", b =>
                 {
                     b.HasOne("Agrin.Server.DataBase.Models.ServerInfo", "ServerInfo")
@@ -433,6 +545,22 @@ namespace Agrin.Server.DataBase.Migrations
                     b.HasOne("Agrin.Server.DataBase.Models.TagInfo", "TagInfo")
                         .WithMany("PostTagRelationInfoes")
                         .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.RequestIdeaInfo", b =>
+                {
+                    b.HasOne("Agrin.Server.DataBase.Models.UserInfo", "UserInfo")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.UserConfirmHashInfo", b =>
+                {
+                    b.HasOne("Agrin.Server.DataBase.Models.UserInfo", "UserInfo")
+                        .WithMany("UserConfirmHashInfoes")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

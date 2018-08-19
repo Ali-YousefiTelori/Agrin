@@ -8,6 +8,7 @@ using Framesoft.Helpers.Helpers;
 using Microsoft.EntityFrameworkCore;
 using SignalGo.Client;
 using SignalGo.Server.ServiceManager;
+using SMSService.OneWayServices;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -24,6 +25,7 @@ namespace Agrin.Server.WindowsConsoleServer
         {
             try
             {
+                SignalGo.Shared.Log.AutoLogger.IsEnabled = false;
                 //var client = new System.Net.Sockets.TcpClient("94.130.144.179", 9878);
                 using (var context = new AgrinContext())
                 {
@@ -35,20 +37,24 @@ namespace Agrin.Server.WindowsConsoleServer
                     Console.WriteLine("databse OK");
                 }
                 //StreamIdentifier.DefaultFolderPath = "E:\\AgrinDataBaseFiles\\Files";
-
+                SMSSenderController.Current = new SMSSenderController("94.130.144.181", 9157);
                 ServerProvider provider = new ServerProvider();
                 //SignalGo.Server.Log.ServerMethodCallsLogger logger = new SignalGo.Server.Log.ServerMethodCallsLogger();
                 //logger.IsPersianDateLog = true;
-                provider.ProviderSetting.IsEnabledToUseTimeout = true;
+                provider.ProviderSetting.ServerServiceSetting.IsEnabledToUseTimeout = true;
+                provider.ProviderSetting.ServerServiceSetting.ReceiveDataTimeout = new TimeSpan(0, 30, 0);
+                provider.ProviderSetting.ServerServiceSetting.SendDataTimeout = new TimeSpan(0, 30, 0);
                 //logger.Initialize();
                 provider.Start("http://localhost:80/AgringServices/SignalGo", new List<System.Reflection.Assembly>() { typeof(PostService).Assembly });
 
-                provider.ErrorHandlingFunction = (ex) =>
+                provider.ErrorHandlingFunction = (ex, type, method) =>
                 {
                     return new MessageContract() { IsSuccess = false, Message = "server Exception", Error = MessageType.ServerException };
                 };
 
-                provider.InternalSetting = new SignalGo.Server.Settings.InternalSetting() { IsEnabledDataExchanger = true, IsEnabledReferenceResolver = true, IsEnabledReferenceResolverForArray = true };
+                provider.ProviderSetting.IsEnabledDataExchanger = true;
+                provider.ProviderSetting.IsEnabledReferenceResolver = true;
+                provider.ProviderSetting.IsEnabledReferenceResolverForArray = true;
                 Console.WriteLine("server started");
                 //TestOneWayClient();
                 //var daya = new SignalGo.Server.Helpers.ServiceReferenceHelper().GetServiceReferenceCSharpCode("ali", provider);
@@ -84,17 +90,17 @@ namespace Agrin.Server.WindowsConsoleServer
 
         }
 
-        public static void TestOneWayClient()
-        {
-            ClientProvider client = new ClientProvider();
-            //client.Connect("http://localhost:80/AgringServices/SignalGo");
-            var result = SignalGo.Client.ClientProvider.SendOneWayMethod<MessageContract<int>>("localhost", 80, "StorageAuthentication", "HelloWorld", "alli", Guid.NewGuid(), new MessageContract<string>()
-            {
-                IsSuccess = true,
-                Data = "hello ali",
-                Error = MessageType.FileNotFound,
-                Message = "my message"
-            });
-        }
+        //public static void TestOneWayClient()
+        //{
+        //    ClientProvider client = new ClientProvider();
+        //    //client.Connect("http://localhost:80/AgringServices/SignalGo");
+        //    var result = SignalGo.Client.ClientProvider.SendOneWayMethod<MessageContract<int>>("localhost", 80, "StorageAuthentication", "HelloWorld", "alli", Guid.NewGuid(), new MessageContract<string>()
+        //    {
+        //        IsSuccess = true,
+        //        Data = "hello ali",
+        //        Error = MessageType.FileNotFound,
+        //        Message = "my message"
+        //    });
+        //}
     }
 }

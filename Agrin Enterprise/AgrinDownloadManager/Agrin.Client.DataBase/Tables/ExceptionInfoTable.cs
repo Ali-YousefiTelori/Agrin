@@ -21,24 +21,53 @@ namespace Agrin.Client.DataBase.Tables
 
         public override void Add(ExceptionInfo exceptionInfo)
         {
-            // Open database (or create if not exits)
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                exceptionInfo.HashCode = exceptionInfo.CalculateHash();
-
-                var erros = db.GetCollection<ExceptionInfo>("ExceptionInfoes");
-                var find = erros.FindOne(x => x.LinkId == exceptionInfo.LinkId && x.HashCode == exceptionInfo.HashCode);
-                erros.EnsureIndex(x => x.Id);
-                if (find == null)
+                // Open database (or create if not exits)
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
                 {
-                    erros.Insert(exceptionInfo);
+                    exceptionInfo.HashCode = exceptionInfo.CalculateHash();
+
+                    var erros = db.GetCollection<ExceptionInfo>("ExceptionInfoes");
+                    var find = erros.FindOne(x => x.LinkId == exceptionInfo.LinkId && x.HashCode == exceptionInfo.HashCode);
+                    erros.EnsureIndex(x => x.Id);
+                    if (find == null)
+                    {
+                        erros.Insert(exceptionInfo);
+                    }
+                    else
+                    {
+                        find.CountOfError++;
+                        find.LastDateTimeErrorDetected = exceptionInfo.LastDateTimeErrorDetected;
+                        erros.Update(find);
+
+                    }
                 }
-                else
-                {
-                    find.CountOfError++;
-                    find.LastDateTimeErrorDetected = exceptionInfo.LastDateTimeErrorDetected;
-                    erros.Update(find);
+            }
+        }
 
+        public List<ExceptionInfo> GetExceptionsByLinkId(int linkId)
+        {
+            lock (AgrinClientContext.LockOBJ)
+            {
+                // Open database (or create if not exits)
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var erros = db.GetCollection<ExceptionInfo>("ExceptionInfoes");
+                    return erros.Find(x => x.LinkId == linkId).ToList();
+                }
+            }
+        }
+
+        public ExceptionInfo GetExceptionByLinkId(int linkId)
+        {
+            lock (AgrinClientContext.LockOBJ)
+            {
+                // Open database (or create if not exits)
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var erros = db.GetCollection<ExceptionInfo>("ExceptionInfoes");
+                    return erros.Find(x => x.LinkId == linkId).OrderByDescending(x => x.LastDateTimeErrorDetected).FirstOrDefault();
                 }
             }
         }
@@ -65,7 +94,15 @@ namespace Agrin.Client.DataBase.Tables
 
         public override List<ExceptionInfo> GetList()
         {
-            throw new NotImplementedException();
+            lock (AgrinClientContext.LockOBJ)
+            {
+                // Open database (or create if not exits)
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var erros = db.GetCollection<ExceptionInfo>("ExceptionInfoes");
+                    return erros.FindAll().ToList();
+                }
+            }
         }
 
         public override void Initialize<TResult>()

@@ -78,6 +78,10 @@
       <Project>{5906d001-ec0e-4e59-8346-323a0a28ae12}</Project>
       <Name>MvvmGo</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
+      <Project>{bc1236e7-3fb4-4186-bc24-8e9667867b2a}</Project>
+      <Name>SignalGo.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Agrin.Log\Agrin.Log.csproj">
       <Project>{48C97C2D-E494-470B-9CEF-4770DB0DE45D}</Project>
       <Name>Agrin.Log</Name>

@@ -30,10 +30,13 @@ namespace Agrin.Client.DataBase.Tables
                 Add(mixerInfoBase);
             else
             {
-                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                lock (AgrinClientContext.LockOBJ)
                 {
-                    var mixers = db.GetCollection<MixerInfoBase>("MixerInfoes");
-                    mixers.Update(mixerInfoBase);
+                    using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                    {
+                        var mixers = db.GetCollection<MixerInfoBase>("MixerInfoes");
+                        mixers.Update(mixerInfoBase);
+                    }
                 }
             }
         }
@@ -41,22 +44,28 @@ namespace Agrin.Client.DataBase.Tables
 
         public override void Add(MixerInfoBase mixerInfoBase)
         {
-            // Open database (or create if not exits)
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                var links = db.GetCollection<MixerInfoBase>("MixerInfoes");
-                links.EnsureIndex(x => x.Id);
-                links.Insert(mixerInfoBase);
+                // Open database (or create if not exits)
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var links = db.GetCollection<MixerInfoBase>("MixerInfoes");
+                    links.EnsureIndex(x => x.Id);
+                    links.Insert(mixerInfoBase);
+                }
             }
         }
 
         public MixerInfoBase LoadByLinkId(int linkId)
         {
-            using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+            lock (AgrinClientContext.LockOBJ)
             {
-                var links = db.GetCollection<MixerInfoBase>("MixerInfoes");
-                var find = links.FindOne(x => x.LinkId == linkId);
-                return find;
+                using (var db = new LiteDatabase(AgrinClientContext.DataBaseFilePath))
+                {
+                    var links = db.GetCollection<MixerInfoBase>("MixerInfoes");
+                    var find = links.FindOne(x => x.LinkId == linkId);
+                    return find;
+                }
             }
         }
 
@@ -93,7 +102,8 @@ namespace Agrin.Client.DataBase.Tables
             try
             {
                 var freeSpace = DriveHelperBase.Current.GetFreeSizeByPath(savePath);
-
+                if (freeSpace == -1)
+                    return MixerTypeEnum.Normal;
                 if (FileNormalMixer.CanStartByThisMixer(fileSize, freeSpace))
                     return MixerTypeEnum.Normal;
                 else if (FileDeleterMixer.CanStartByThisMixer(partOfFiles, freeSpace, DriveHelperBase.Current.GetRootPath(partOfFiles.First()), DriveHelperBase.Current.GetRootPath(savePath)))

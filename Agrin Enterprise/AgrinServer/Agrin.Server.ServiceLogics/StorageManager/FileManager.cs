@@ -48,7 +48,7 @@ namespace Agrin.Server.ServiceLogics.StorageManager
             }
         }
 
-        [StaticLock]
+        [ConcurrentLock(Type = ConcurrentLockType.PerIpAddress)]
         public MessageContract RoamStorageFileComplete(int userId, long fileId, long fileSize)
         {
             using (var context = new AgrinContext())

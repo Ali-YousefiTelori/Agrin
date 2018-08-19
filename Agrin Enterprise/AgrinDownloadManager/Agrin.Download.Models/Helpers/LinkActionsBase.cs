@@ -9,8 +9,8 @@ namespace Agrin.Download.Helpers
     public abstract class LinkActionsBase
     {
         public static LinkActionsBase Current { get; set; }
-        public abstract void OpenFile(string filePath);
-        public abstract void OpenFileLocation(string directoryPath);
+        public abstract void OpenFile(string filePath, int? linkId);
+        public abstract void OpenFileLocation(string filePath, int? linkId);
         public abstract void ShareFile(string filePath);
         public abstract void CopyLinkAddress(string linkAddress);
         public abstract void Delete(LinkInfoShort linkInfoShort);

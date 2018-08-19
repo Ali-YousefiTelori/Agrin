@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Agrin.Log;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -13,6 +15,10 @@ namespace Agrin.Models.Settings
         volatile ApplicationPathSettingsInfo _PathSettings = null;
         volatile ApplicationSpeedSettingsInfo _SpeedSettingInfo = null;
 
+        /// <summary>
+        /// save path of setting
+        /// </summary>
+        public static string SettingSavePath { get; set; }
         volatile static ApplicationSettingsInfo _Current = null;
         /// <summary>
         /// current setting of application
@@ -59,6 +65,33 @@ namespace Agrin.Models.Settings
             {
                 _SpeedSettingInfo = value;
             }
+        }
+
+        /// <summary>
+        /// load settings from
+        /// </summary>
+        /// <param name="directoryPath">from path</param>
+        public static void Load(string directoryPath)
+        {
+            try
+            {
+                SettingSavePath = directoryPath;
+                var path = Path.Combine(directoryPath, "settings.json");
+                if (File.Exists(path))
+                    Current = Newtonsoft.Json.JsonConvert.DeserializeObject<ApplicationSettingsInfo>(File.ReadAllText(path, Encoding.UTF8));
+            }
+            catch (Exception ex)
+            {
+                AutoLogger.LogError(ex, "Load Setting");
+            }
+        }
+
+        /// <summary>
+        /// save settings
+        /// </summary>
+        public static void Save()
+        {
+            File.WriteAllText(Path.Combine(SettingSavePath, "settings.json"), Newtonsoft.Json.JsonConvert.SerializeObject(Current), Encoding.UTF8);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Agrin.IO.Streams;
+using Agrin.Log;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,18 +10,24 @@ namespace Agrin.IO.Helpers
 {
     public static class IOHelperBase
     {
-        public static Func<string, Stream> OpenFileStreamForReadAction { get; set; }
+        public static Func<string, IStreamWriter> OpenFileStreamForReadAction { get; set; }
         public static Func<string, string, FileMode, Action<string>, object, IStreamWriter> OpenFileStreamForWriteAction { get; set; }
         //public static List<string> FilesList { get; set; } = new List<string>();
 
-        public static Stream OpenFileStreamForRead(string fileName, FileMode fileMode, FileAccess fileAccess = FileAccess.ReadWrite)
+        public static IStreamWriter OpenFileStreamForRead(string fileName, FileMode fileMode, FileAccess fileAccess = FileAccess.ReadWrite)
         {
             //FilesList.Add(fileName);
-            Stream retStream = null;
+            IStreamWriter retStream = null;
             if (OpenFileStreamForReadAction != null)
+            {
                 retStream = OpenFileStreamForReadAction(fileName);
+                AutoLogger.LogText($"OpenFileStreamForRead {fileName}");
+            }
             if (retStream == null)
-                retStream = new FileStream(fileName, fileMode, fileAccess);
+            {
+                retStream = StreamCross.OpenFile(fileName, fileMode, fileAccess);
+                AutoLogger.LogText($"OpenFileStreamForRead new {fileName}");
+            }
             return retStream;
         }
 
@@ -40,13 +47,16 @@ namespace Agrin.IO.Helpers
             //if (OpenFileStreamForWriteAction == null)
             //    Agrin.Log.AutoLogger.LogText("OpenFileStreamForWriteAction is null");
             if (OpenFileStreamForWriteAction != null)
+            {
+                AutoLogger.LogText($"OpenFileStreamForWrite new {fileAddress} {(fileName == null ? "" : fileName)}");
                 retStream = OpenFileStreamForWriteAction(fileAddress, fileName, fileMode, newSecurityFileName, data);
+            }
             if (retStream == null)
             {
                 string path = fileAddress;
                 if (!string.IsNullOrEmpty(fileName))
                     path = Path.Combine(fileAddress, fileName);
-                retStream = new Agrin.IO.Streams.StreamWriter(new FileStream(path, fileMode, fileAccess));
+                retStream = StreamCross.OpenFile(path, fileMode, fileAccess);
             }
 
             return retStream;

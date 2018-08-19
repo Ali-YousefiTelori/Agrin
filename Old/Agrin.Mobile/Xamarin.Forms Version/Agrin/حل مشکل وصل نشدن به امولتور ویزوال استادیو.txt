@@ -1,5 +1,8 @@
 ﻿وارد امولیتور ویزوال استادیو بشید روی دکمه ی << کلیک کنید و تب Network رو انتخاب کنید آی پی رو ببینید (اولی)
 بعد ای پی رو به adb کانکت کنید اینطوری:
+adb devices
+https://stackoverflow.com/questions/1720346/how-to-get-the-android-emulators-ip-address?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+
 
 adb connect 169.254.138.177
 

@@ -50,9 +50,9 @@ namespace Agrin.Download.Mixers
                 else
                     find.Path = file;
                 if (!(find.IsComplete == IsCompleteEnum.Comeplete || find.IsComplete == IsCompleteEnum.Reverce) && !System.IO.File.Exists(file))
-                    throw new Exception("mixer file not found");
+                    throw new Exception("mixer file not found"+ file);
                 if (find.IsComplete == IsCompleteEnum.Comeplete && !System.IO.File.Exists(currentMixer.FullAddress))
-                    throw new Exception("complete file moved or deleted!");
+                    throw new Exception("complete file moved or deleted!" + currentMixer.FullAddress);
                 if (System.IO.File.Exists(file) && find.IsComplete == IsCompleteEnum.None)
                 {
                     find.Lenght = new System.IO.FileInfo(file).Length;
@@ -97,7 +97,7 @@ namespace Agrin.Download.Mixers
             if (isCanceled)
                 return;
             MixedSize = 0;
-            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName, newSecurityFileName: (newPath) => CurrentMixer.SecurityAddress = newPath))
             {
                 if (isCanceled)
                     return;

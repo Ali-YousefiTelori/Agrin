@@ -42,6 +42,22 @@ namespace Agrin.Download.DataBaseModels
         /// </summary>
         public string HashCode { get; set; }
         /// <summary>
+        /// version of application logged this
+        /// </summary>
+        public string AppVersion { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string AppOS { get; set; }
+        /// <summary>
+        /// version of operation system logged this
+        /// </summary>
+        public string OSVersion { get; set; }
+        /// <summary>
+        /// device name
+        /// </summary>
+        public string DeviceName { get; set; }
+        /// <summary>
         /// calculateHashCode
         /// </summary>
         /// <returns></returns>

@@ -63,7 +63,10 @@ namespace Agrin.Download.Mixers
         /// نام فایل
         /// </summary>
         public string FileName { get; set; }
-        
+        /// <summary>
+        /// محل ذخیره امنیتی
+        /// </summary>
+        public string SecurityAddress { get; set; }
         /// <summary>
         /// برای رزیوم باید این هش چک شود که اگر برعکس شده بود دیگر دوباره ان را برعکس نکند
         /// </summary>
