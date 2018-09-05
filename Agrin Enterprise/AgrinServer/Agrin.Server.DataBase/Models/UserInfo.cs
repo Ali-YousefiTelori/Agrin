@@ -101,6 +101,7 @@ namespace Agrin.Server.DataBase.Models
         public virtual ICollection<DirectFolderToUserRelationInfo> DirectFolderToUserRelationInfoes { get; set; }
         public virtual ICollection<UserSessionInfo> UserSessionInfoes { get; set; }
         public virtual ICollection<UserConfirmHashInfo> UserConfirmHashInfoes { get; set; }
+        public virtual ICollection<LikeInfo> LikeInfoes { get; set; }
         
     }
 }

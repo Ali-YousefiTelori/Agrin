@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Agrin.Server.ServiceLogics.Authentication
 {
-    [ServiceContract("AuthenticationService", ServiceType.ServerService, InstanceType = InstanceType.SingleInstance)]
+    [ServiceContract("Authentication", ServiceType.ServerService, InstanceType = InstanceType.SingleInstance)]
     public class AuthenticationService
     {
         public MessageContract<UserInfo> Login(Guid firstKey, Guid secondKey)

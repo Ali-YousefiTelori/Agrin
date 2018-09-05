@@ -11,7 +11,7 @@ using SignalGo.Shared.DataTypes;
 
 namespace Agrin.Server.ServiceLogics
 {
-    [ServiceContract("PostService", ServiceType.ServerService, InstanceType = InstanceType.SingleInstance)]
+    [ServiceContract("Post", ServiceType.ServerService, InstanceType = InstanceType.SingleInstance)]
     public class PostService
     {
         public MessageContract<List<PostInfo>> GetListOfPost(int index, int length)

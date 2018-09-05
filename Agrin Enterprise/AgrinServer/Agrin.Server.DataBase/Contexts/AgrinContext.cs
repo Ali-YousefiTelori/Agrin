@@ -178,6 +178,13 @@ namespace Agrin.Server.DataBase.Contexts
         /// hash for confirm
         /// </summary>
         public DbSet<UserConfirmHashInfo> UserConfirmHashInfoes { get; set; }
-        
+        /// <summary>
+        /// likes of user
+        /// </summary>
+        public DbSet<LikeInfo> LikeInfoes { get; set; }
+        /// <summary>
+        /// comment infoes
+        /// </summary>
+        public DbSet<CommentInfo> CommentInfoes { get; set; }
     }
 }

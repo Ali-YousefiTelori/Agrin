@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Enums.cs" />
     <Compile Include="Filters\FilterBaseInfo.cs" />
+    <Compile Include="Filters\FilterIdInfo.cs" />
     <Compile Include="Filters\FilterPostInfo.cs" />
     <Compile Include="MessageContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
