@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Agrin.Server.ServiceLogics.HelpManager
 {
-    [ServiceContract("ExceptionService", ServiceType.ServerService, InstanceType = InstanceType.SingleInstance)]
+    [ServiceContract("ExceptionsAndIdea", ServiceType.ServerService, InstanceType = InstanceType.SingleInstance)]
     public class ExceptionsManager
     {
         public MessageContract<ExceptionInfo> GetExceptionInformationByCode(int errorCode)
@@ -64,8 +64,23 @@ namespace Agrin.Server.ServiceLogics.HelpManager
         {
             using (AgrinContext context = new AgrinContext(false))
             {
-                var query = context.RequestIdeaInfoes.AsNoTracking().AsQueryable();
-                return query.ToList().Success();
+                var query = context.RequestIdeaInfoes.Select(x => new
+                {
+                    RequestIdeaInfo = x,
+                    LikesCount = x.LikeInfoes.Count,
+                    CommentsCount = x.CommentInfoes.Count,
+                    IsLiked = x.LikeInfoes.Any(y => y.UserId == CurrentUserInfo.UserId)
+                }).AsNoTracking().AsQueryable();
+
+                var result = query.ToList();
+                result.ForEach(x =>
+                {
+                    x.RequestIdeaInfo.LikesCount = x.LikesCount;
+                    x.RequestIdeaInfo.CommentsCount = x.CommentsCount;
+                    x.RequestIdeaInfo.IsLiked = x.IsLiked;
+
+                });
+                return result.Select(x => x.RequestIdeaInfo).ToList().Success();
             }
         }
     }

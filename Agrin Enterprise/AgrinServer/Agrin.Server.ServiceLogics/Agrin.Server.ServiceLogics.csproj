@@ -147,6 +147,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StorageManager\FileManager.cs" />
     <Compile Include="StorageManager\PostStorageManager.cs" />
+    <Compile Include="UserManager\LikesAndCommentsService.cs" />
     <Compile Include="UserManager\PostService.cs" />
     <Compile Include="WebsiteControllers\DownloadController.cs" />
   </ItemGroup>

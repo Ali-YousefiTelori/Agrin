@@ -306,6 +306,7 @@
     <Compile Include="Models\DirectFolderInfo.cs" />
     <Compile Include="Models\DirectLinkInfo.cs" />
     <Compile Include="Models\ExceptionInfo.cs" />
+    <Compile Include="Models\LikeInfo.cs" />
     <Compile Include="Models\PostCategoryInfo.cs" />
     <Compile Include="Models\PostFileInfo.cs" />
     <Compile Include="Models\PostInfo.cs" />
