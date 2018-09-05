@@ -86,7 +86,7 @@ namespace Agrin.Server.DataBase.Models
 
         public string Title { get; set; }
 
-        public string Mesage { get; set; }
+        public string Message { get; set; }
 
         #region exception description
         /// <summary>
@@ -107,6 +107,7 @@ namespace Agrin.Server.DataBase.Models
         public string StackTrace { get; set; }
 
         #endregion
+
         [ForeignKey("UserId")]
         public UserInfo UserInfo { get; set; }
 

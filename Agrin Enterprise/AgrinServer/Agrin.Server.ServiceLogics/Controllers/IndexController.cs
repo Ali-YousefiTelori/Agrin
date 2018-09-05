@@ -18,8 +18,8 @@ namespace Agrin.Server.ServiceLogics.Controllers
         public string OpenPage()
         {
             OperationContext.Current.HttpClient.Status = System.Net.HttpStatusCode.MovedPermanently;
-            OperationContext.Current.HttpClient.ResponseHeaders.Add("Location", "http://framework.blogfa.com");
-            OperationContext.Current.HttpClient.ResponseHeaders.Add("Content-Type", "text/html");
+            OperationContext.Current.HttpClient.ResponseHeaders.Add("Location", new string[] { "http://framework.blogfa.com" });
+            OperationContext.Current.HttpClient.ResponseHeaders.Add("Content-Type", new string[] { "text/html" });
 
             return @"<html>
 <head>

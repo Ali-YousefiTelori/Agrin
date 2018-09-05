@@ -1,11 +1,8 @@
 ﻿using SignalGo.Shared.DataTypes;
+using SignalGo.Shared.IO;
 using SignalGo.Shared.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Agrin.Server.ServiceLogics.StorageManager
 {
@@ -14,7 +11,7 @@ namespace Agrin.Server.ServiceLogics.StorageManager
     {
         public StreamInfo<DateTime> DownloadPostImage(int postUserId, int postId, string fileName)
         {
-            var stream = new StreamInfo<DateTime>();
+            StreamInfo<DateTime> stream = new StreamInfo<DateTime>();
             string filePath = "";// FileManager.GetPostImageDirectory(postUserId, postId, fileName);
             if (!File.Exists(filePath))
             {

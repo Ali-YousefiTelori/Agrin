@@ -1,18 +1,15 @@
 ﻿using Agrin.Server.Models;
+using SignalGo.Server.Models;
 using SignalGo.Shared.Http;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Agrin.Server.ServiceLogics.Controllers
 {
     /// <summary>
     /// کلاس بیس کنترل های توابع وبی
     /// </summary>
-    public class BaseHttpRequestController : HttpRequestController
+    public class BaseHttpRequestController
     {
         /// <summary>
         /// دریافت یک فایل جهت دانلود اطلاعات از کلاینت
@@ -21,19 +18,20 @@ namespace Agrin.Server.ServiceLogics.Controllers
         /// <param name="fileInfo">فایل مورد نظر</param>
         /// <param name="errorMessage">خطای بازگشتی</param>
         /// <returns>عملیات با موفقیت انجام شده یا خیر</returns>
-        public bool TakeFile(out HttpPostedFileInfo fileInfo, out MessageType? errorMessage)
+        public static bool TakeFile(out HttpPostedFileInfo fileInfo, out MessageType? errorMessage)
         {
             errorMessage = null;
-            fileInfo = TakeNextFile();
+            HttpClientInfo client = OperationContext.Current.HttpClient;
+            fileInfo = client.TakeNextFile();
             if (fileInfo == null)
             {
-                Status = System.Net.HttpStatusCode.Forbidden;
+                client.Status = System.Net.HttpStatusCode.Forbidden;
                 errorMessage = MessageType.FileNotFound;
                 return false;
             }
             else if (fileInfo.ContentLength > 1024 * 1024 * 10)
             {
-                Status = System.Net.HttpStatusCode.Forbidden;
+                client.Status = System.Net.HttpStatusCode.Forbidden;
                 errorMessage = MessageType.DataOverFlow;
                 return false;
             }
@@ -45,10 +43,11 @@ namespace Agrin.Server.ServiceLogics.Controllers
         /// </summary>
         /// <param name="msg">خطای مورد نظر</param>
         /// <returns>خطای عدم دسترسی</returns>
-        public ActionResult Error(MessageType msg)
+        public static ActionResult Error(MessageType msg)
         {
-            Status = System.Net.HttpStatusCode.Forbidden;
-            return Content((MessageContract)msg);
+            HttpClientInfo client = OperationContext.Current.HttpClient;
+            client.Status = System.Net.HttpStatusCode.Forbidden;
+            return new ActionResult((MessageContract)msg);
         }
 
         /// <summary>
@@ -56,17 +55,18 @@ namespace Agrin.Server.ServiceLogics.Controllers
         /// </summary>
         /// <param name="message">متن خطا</param>
         /// <returns>خطای داخلی سرور</returns>
-        public ActionResult InternalError(string message)
+        public static ActionResult InternalError(string message)
         {
-            Status = System.Net.HttpStatusCode.InternalServerError;
-            return Content("Internal Error: " + Environment.NewLine + message);
+            HttpClientInfo client = OperationContext.Current.HttpClient;
+            client.Status = System.Net.HttpStatusCode.InternalServerError;
+            return new ActionResult("Internal Error: " + Environment.NewLine + message);
         }
-        
+
         /// <summary>
         /// حذف فایل
         /// </summary>
         /// <param name="filePath">آدرس فایل</param>
-        public void DeleteFile(string filePath)
+        public static void DeleteFile(string filePath)
         {
             try
             {
@@ -84,14 +84,14 @@ namespace Agrin.Server.ServiceLogics.Controllers
         /// <param name="filePath">آدرس فایل که باید در ان قسمت ذخیره شود</param>
         /// <param name="file">فایلی که کاربر اپلود میکند</param>
         /// <returns>حجم فایل</returns>
-        public long DownloadFile(string filePath, HttpPostedFileInfo file)
+        public static long DownloadFile(string filePath, HttpPostedFileInfo file)
         {
-            using (var streamWriter = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            using (FileStream streamWriter = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
-                var bytes = new byte[1024 * 10];
+                byte[] bytes = new byte[1024 * 10];
                 while (true)
                 {
-                    var readCount = file.InputStream.Read(bytes, 0, bytes.Length);
+                    int readCount = file.InputStream.Read(bytes, 0, bytes.Length);
                     if (readCount <= 0)
                         break;
                     streamWriter.Write(bytes, 0, readCount);
@@ -104,18 +104,19 @@ namespace Agrin.Server.ServiceLogics.Controllers
         /// </summary>
         /// <param name="filePath">آدرس فایل</param>
         /// <returns>اکشن فایل یا خطایی که به کاربر  فرستاده میشود</returns>
-        public ActionResult DownloadFile(string filePath)
+        public static ActionResult DownloadFile(string filePath)
         {
+            HttpClientInfo client = OperationContext.Current.HttpClient;
             if (!System.IO.File.Exists(filePath))
             {
-                Status = System.Net.HttpStatusCode.NotFound;
-                return Content($"File {Path.GetFileName(filePath)} Not found");
+                client.Status = System.Net.HttpStatusCode.NotFound;
+                return new ActionResult($"File {Path.GetFileName(filePath)} Not found");
             }
-            var info = new FileInfo(filePath);
-            ResponseHeaders.Add("content-disposition", "attachment; filename=" + info.Name);
-            ResponseHeaders.Add("Content-Length", info.Length.ToString());
-            ResponseHeaders.Add("Content-Type", MimeTypes.MimeTypeMap.GetMimeType(info.Extension));
-            ResponseHeaders.Add("Last-Modified", info.LastWriteTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'UTC'"));
+            FileInfo info = new FileInfo(filePath);
+            client.ResponseHeaders.Add("content-disposition", new string[] { "attachment; filename=" + info.Name });
+            client.ResponseHeaders.Add("Content-Length", new string[] { info.Length.ToString() });
+            client.ResponseHeaders.Add("Content-Type", new string[] { MimeTypes.MimeTypeMap.GetMimeType(info.Extension) });
+            client.ResponseHeaders.Add("Last-Modified", info.LastWriteTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'UTC'").Split(','));
             return new FileActionResult(filePath);
         }
     }

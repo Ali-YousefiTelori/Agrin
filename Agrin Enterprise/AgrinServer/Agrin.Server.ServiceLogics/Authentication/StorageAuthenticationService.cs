@@ -18,7 +18,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
     [ServiceContract("StorageAuthentication", ServiceType.OneWayService, InstanceType = InstanceType.SingleInstance)]
     public class StorageAuthenticationService
     {
-        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.144.179" })]
+        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.214.125" })]
         public MessageContract CheckAccessUserToFileUpload(Guid firstKey, Guid secondKey, long directFileId)
         {
             using (var context = new AgrinContext(false))
@@ -29,7 +29,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
             }
         }
 
-        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.144.179" })]
+        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.214.125" })]
         public MessageContract<UserInfo> GetUserByTelegramUserId(int telegramUserId)
         {
             using (var context = new AgrinContext(false))
@@ -39,7 +39,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
             }
         }
 
-        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.144.179" })]
+        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.214.125" })]
         public MessageContract<UserInfo> GetUserByUserName(string userName)
         {
             using (var context = new AgrinContext(false))
@@ -49,7 +49,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
             }
         }
 
-        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.144.179" })]
+        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.214.125" })]
         public MessageContract ChangeUserTelegramId(int userId, int telegramUserId)
         {
             using (var context = new AgrinContext())
@@ -61,7 +61,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
             }
         }
 
-        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.144.179" })]
+        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.214.125" })]
         public MessageContract<UserInfo> AddUser(UserInfo userInfo)
         {
             using (var context = new AgrinContext())

@@ -23,7 +23,7 @@ namespace Agrin.Server.ServiceLogics.StorageManager
             return CreateEmptyFile(userId);
         }
 
-        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.144.179" })]
+        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.214.125" })]
         public MessageContract<long> CreateEmptyFile(int userId)
         {
             using (var context = new AgrinContext())

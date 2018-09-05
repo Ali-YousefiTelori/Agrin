@@ -187,7 +187,9 @@ namespace Agrin.Download.Web
                 return false;
             ConnectionStatus = ConnectionStatus.CreatingRequest;
             _saveStream = IOHelperBase.OpenFileStreamForWrite(RequestCore.SaveConnectionFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-
+            // fix hang on 99 % 
+            if (_saveStream.Length > 10 && _saveStream.Length != RequestCore.Length)
+                _saveStream.SetLength(_saveStream.Length - 10);
             RequestCore.DownloadedSize = _saveStream.Length;
             if (RequestCore.EndPosition != -2 && _saveStream.Length == RequestCore.Length)
             {

@@ -1,0 +1,179 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <UserControl.Resources>
+    <Style TargetType="{x:Type RadioButton}">
+      <Setter Property="SnapsToDevicePixels" Value="true" />
+      <Setter Property="OverridesDefaultStyle" Value="true" />
+      <Setter Property="Width" Value="80"/>
+      <Setter Property="Height" Value="66"/>
+      <Setter Property="Margin" Value="8,8,0,8"/>
+      <Setter Property="FontFamily" Value="{DynamicResource PersianFontFamilyStyle}"/>
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="Cursor"  Value="Hand"/>
+      <!--<Setter Property="TextOptions.TextHintingMode" Value="Animated"/>-->
+      <Setter Property="Foreground" Value="#757575"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type RadioButton}">
+            <Border x:Name="Border" BorderBrush="#b7b7b7" BorderThickness="1" CornerRadius="10">
+              <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                  <GradientStop Color="#f4f4f4" Offset="0"/>
+                  <GradientStop Color="#d4d4d4" Offset="1"/>
+                </LinearGradientBrush>
+              </Border.Background>
+              <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                  <VisualState x:Name="Normal" />
+                  <VisualState x:Name="MouseOver">
+                    <Storyboard>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="iconControl" Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#0083ce" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#0083ce" />
+                      </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState>
+                  <VisualState x:Name="Pressed">
+                    <Storyboard>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#d4d4d4" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#f4f4f4" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="iconControl" Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#0083ce" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#0083ce" />
+                      </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState>
+                  <VisualState x:Name="Disabled">
+                    <Storyboard>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Opacity">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CheckStates">
+                  <VisualState x:Name="Checked">
+                    <Storyboard>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#d4d4d4" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#f4f4f4" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="iconControl" Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#0083ce" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#0083ce" />
+                      </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState>
+                  <VisualState x:Name="Unchecked" />
+                  <VisualState x:Name="Indeterminate" />
+                </VisualStateGroup>
+              </VisualStateManager.VisualStateGroups>
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="auto"/>
+                  <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Control x:Name="iconControl" FlowDirection="LeftToRight" Margin="0,8,0,0" Foreground="{TemplateBinding Foreground}"  Template="{TemplateBinding Tag}" Width="34" Height="32"/>
+                <ContentPresenter x:Name="Content" Grid.Row="1" TextBlock.Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" RecognizesAccessKey="True" />
+              </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsChecked" Value="true">
+                <Trigger.EnterActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#d4d4d4" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#f4f4f4" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="iconControl" Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#0083ce" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#0083ce" />
+                      </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#f4f4f4" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#d4d4d4" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="iconControl" Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#757575" />
+                      </ColorAnimationUsingKeyFrames>
+                      <ColorAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                        <EasingColorKeyFrame KeyTime="0" Value="#757575" />
+                      </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </BeginStoryboard>
+                </Trigger.ExitActions>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </UserControl.Resources>
+  <Grid>
+    <TabControl SelectedIndex="{Binding SelectedIndex}">
+      <TabControl.Items>
+        <TabItem Header="Links">
+          <StackPanel Orientation="Horizontal">
+            <RadioButton  Command="{Binding LinksCommand}" IsChecked="{Binding IsLinksSelected}" Content="همۀ لینک ها"/>
+            <RadioButton Command="{Binding CompleteLinksCommand}" IsChecked="{Binding IsCompleteLinksSelected}" Content="تکمیل شده" />
+            <RadioButton Command="{Binding DownloadingLinksCommand}" IsChecked="{Binding IsDownloadingLinksSelected}" Content="در حال دانلود"/>
+            <RadioButton Command="{Binding NotCompleteLinksCommand}" IsChecked="{Binding IsNotCompleteLinksSelected}" Content="ناتمام" />
+            <RadioButton Command="{Binding ErrorLinksCommand}" IsChecked="{Binding IsErrorLinksSelected}" Content="خطا داده"/>
+            <RadioButton Command="{Binding QueueLinksCommand}" IsChecked="{Binding IsQueueLinksSelected}" Content="در صف دانلود" />
+            <RadioButton Command="{Binding ShowGroupLinksCommand}" CommandParameter="{Binding Path=IsChecked,RelativeSource={RelativeSource Self}}" Content="گروه بندی" />
+          </StackPanel>
+        </TabItem>
+        <TabItem Header="Groups">
+          <StackPanel Orientation="Horizontal">
+            <!--<RadioButton Command="{Binding GroupsCommand}" IsChecked="True" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="گروه ها" Tag="{DynamicResource GroupList_TemplateStyle}"/>-->
+          </StackPanel>
+        </TabItem>
+        <TabItem Header="Tasks">
+          <StackPanel Orientation="Horizontal">
+            <!--<RadioButton Command="{Binding TasksListCommand}" IsChecked="True" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="لیست وظایف" Tag="{DynamicResource TaskList_TemplateStyle}"/>-->
+          </StackPanel>
+        </TabItem>
+        <TabItem Header="Settings">
+          <!--<StackPanel Orientation="Horizontal">
+            <RadioButton IsEnabled="False" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="سرعت" Tag="{DynamicResource Speed_TemplateStyle}"/>
+            <RadioButton IsEnabled="False" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="پروکسی" Tag="{DynamicResource Proxy_TemplateStyle}"/>
+            <RadioButton IsEnabled="False" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="مجوز کاربری" Tag="{DynamicResource UserCheck_TemplateStyle}"/>
+            <RadioButton IsEnabled="False" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="دریافت و پایان" Tag="{DynamicResource FinishFlag_TemplateStyle}"/>
+            <RadioButton Style="{DynamicResource ToolbaarRadioButtonStyle}" IsChecked="True" Content="نرم افزار" Tag="{DynamicResource AgrinLogo_TemplateStyle}"/>
+          </StackPanel>-->
+        </TabItem>
+        <TabItem Header="Help">
+          <!--<StackPanel Orientation="Horizontal">
+            <RadioButton IsChecked="True" Command="{Binding ApplicationAboutCommand}" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="درباره ی ما" Tag="{DynamicResource Info_TemplateStyle}"/>
+            <RadioButton Command="{Binding FeedBackCommand}" Style="{DynamicResource ToolbaarRadioButtonStyle}" Content="تماس با ما" Tag="{DynamicResource Message_TemplateStyle}"/>
+          </StackPanel>-->
+        </TabItem>
+      </TabControl.Items>
+    </TabControl>
+  </Grid>
+</UserControl>

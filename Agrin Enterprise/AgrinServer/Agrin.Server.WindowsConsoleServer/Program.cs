@@ -26,7 +26,6 @@ namespace Agrin.Server.WindowsConsoleServer
             try
             {
                 SignalGo.Shared.Log.AutoLogger.IsEnabled = false;
-                //var client = new System.Net.Sockets.TcpClient("94.130.144.179", 9878);
                 using (var context = new AgrinContext())
                 {
                     //var user = context.UserInfoes.FirstOrDefault();
@@ -37,7 +36,7 @@ namespace Agrin.Server.WindowsConsoleServer
                     Console.WriteLine("databse OK");
                 }
                 //StreamIdentifier.DefaultFolderPath = "E:\\AgrinDataBaseFiles\\Files";
-                SMSSenderController.Current = new SMSSenderController("94.130.144.181", 9157);
+                SMSSenderController.Current = new SMSSenderController("main.atitec.ir", 9157);
                 ServerProvider provider = new ServerProvider();
                 //SignalGo.Server.Log.ServerMethodCallsLogger logger = new SignalGo.Server.Log.ServerMethodCallsLogger();
                 //logger.IsPersianDateLog = true;

@@ -292,6 +292,14 @@
     <Compile Include="Migrations\20180803105936_registermodels.designer.cs">
       <DependentUpon>20180803105936_registermodels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20180901104513_idea.cs" />
+    <Compile Include="Migrations\20180901104513_idea.designer.cs">
+      <DependentUpon>20180901104513_idea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180901113345_renamefield.cs" />
+    <Compile Include="Migrations\20180901113345_renamefield.designer.cs">
+      <DependentUpon>20180901113345_renamefield.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AgrinServerContextModelSnapshot.cs" />
     <Compile Include="Models\CommentInfo.cs" />
     <Compile Include="Models\DirectFileInfo.cs" />

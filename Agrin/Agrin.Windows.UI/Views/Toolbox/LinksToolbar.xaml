@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="Agrin.Windows.UI.Views.Toolbox.LinksToolbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ctl="clr-namespace:Agrin.Windows.UI.Views.Controls"
+             xmlns:conv="clr-namespace:Agrin.ViewModels.Converters;assembly=Agrin.ViewModels"
+             x:Name="mainControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="27" d:DesignWidth="300" FlowDirection="LeftToRight">
+    <UserControl.Resources>
+        <conv:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal">
+        <Button Style="{DynamicResource toolbarButtonStyle}" Command="{Binding AddCommand,ElementName=mainControl}" Content="{DynamicResource Add_TemplateStyle}" Padding="6"/>
+        <Button Style="{DynamicResource toolbarButtonStyle}" Command="{Binding DownloadCommand,ElementName=mainControl}" Content="{DynamicResource Download2_TemplateStyle}" Padding="6"/>
+        <Button Style="{DynamicResource toolbarButtonStyle}" Command="{Binding PlayCommand,ElementName=mainControl}" Content="{DynamicResource Play_TemplateStyle}"/>
+        <Button Style="{DynamicResource toolbarButtonStyle}" Command="{Binding StopCommand,ElementName=mainControl}" Content="{DynamicResource Pause_TemplateStyle}"/>
+        <Button Style="{DynamicResource toolbarButtonStyle}" Command="{Binding RefreshCommand,ElementName=mainControl}" Content="{DynamicResource Refresh_TemplateStyle}" Padding="6"/>
+        <Button Style="{DynamicResource toolbarButtonStyle}" Command="{Binding DeleteCommand,ElementName=mainControl}" Content="{DynamicResource Trash_TemplateStyle}" Padding="6"/>
+        <Button Style="{DynamicResource toolbarButtonStyle}" Command="{Binding SettingCommand,ElementName=mainControl}" Content="{DynamicResource Setting_TemplateStyle}" Padding="6"/>
+        <Button Style="{DynamicResource toolbarButtonStyle}" Command="{Binding ShowListCommand,ElementName=mainControl}" Content="{DynamicResource List_TemplateStyle}" Padding="6"/>
+        <ToggleButton x:Name="btnPopupSetting" Style="{DynamicResource toolbarToggleButtonStyle}" Command="{Binding PopupShowSettingCommand,ElementName=mainControl}" Content="{DynamicResource Setting_TemplateStyle}" Padding="6">
+
+        </ToggleButton>
+        <Popup x:Name="popupSettingContent" VerticalOffset="-1" IsOpen="{Binding IsChecked, ElementName=btnPopupSetting}" AllowsTransparency="True" StaysOpen="False" PlacementTarget="{Binding ElementName=btnPopupSetting}" Placement="Bottom">
+            <Border CornerRadius="0,5,5,5" BorderBrush="#b2b2b2" BorderThickness="1" Background="{DynamicResource Light_ApplicationColors}">
+                <StackPanel Margin="5" FlowDirection="{DynamicResource RightToLeftStyle}">
+                    <ContentControl Padding="0" Content="{Binding PopupSettingContent,ElementName=mainControl}"/>
+                    <Button Margin="0,5,0,0" HorizontalAlignment="Left" Style="{DynamicResource toolbarButtonStyle}" Visibility="Visible" Command="{Binding PopupSettingSaveCommand,ElementName=mainControl}" Content="{DynamicResource Save_TemplateStyle}" Padding="6">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="btnPopupSetting" Storyboard.TargetProperty="IsChecked">
+                                                <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False" />
+                                            </BooleanAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Popup>
+
+        <Grid Visibility="{Binding ElementName=mainControl,Path=GripVisibility}" Width="1" Background="Gray" Margin="5"/>
+        <ToggleButton x:Name="btnTimeTask" Visibility="Collapsed" Style="{DynamicResource toolbarToggleButtonStyle}" Command="{Binding TimeTaskVisibilityCommand,ElementName=mainControl}" Content="{DynamicResource PlayTime_TemplateStyle}" Padding="6">
+
+        </ToggleButton>
+        <Popup x:Name="playTimePopup" VerticalOffset="-1" IsOpen="{Binding IsChecked, ElementName=btnTimeTask}" AllowsTransparency="True" StaysOpen="False" PlacementTarget="{Binding ElementName=btnTimeTask}" Placement="Bottom">
+            <Border CornerRadius="0,5,5,5" BorderBrush="#b2b2b2" BorderThickness="1" Background="{DynamicResource Light_ApplicationColors}">
+                <StackPanel Margin="5" FlowDirection="{DynamicResource RightToLeftStyle}">
+                    <CheckBox x:Name="chkStartNow" IsChecked="{Binding StartNow,ElementName=mainControl}" Content="شروع در همین لحظه"/>
+                    <TextBlock Text="زمان:" Foreground="#6a6a6a"/>
+                    <StackPanel IsEnabled="{Binding ElementName=chkStartNow,Path=IsChecked,Converter={StaticResource InverseBooleanConverter}}" Orientation="Horizontal" Margin="0,5,0,0">
+                        <ctl:NumbericUpDown x:Name="numM" Width="55" Value="{Binding AddTimeMinutes, ElementName=mainControl}" Minimum="0" Maximum="59"/>
+                        <ctl:NumbericUpDown x:Name="numH" Width="55" Value="{Binding AddTimeHours, ElementName=mainControl}" Minimum="0" Maximum="23"/>
+                    </StackPanel>
+                    <StackPanel  Margin="0,5,0,0" Orientation="Horizontal" FlowDirection="LeftToRight"  HorizontalAlignment="Left">
+                        <TextBlock Text="{Binding ElementName=numH,Path=Value}" VerticalAlignment="Center"/>
+                        <TextBlock Text=":" VerticalAlignment="Center"/>
+                        <TextBlock Margin="0,0,5,0" Text="{Binding ElementName=numM,Path=Value}" VerticalAlignment="Center"/>
+                        <Button Style="{DynamicResource toolbarButtonStyle}" Visibility="Visible" Command="{Binding AddTimeTaskCommand,ElementName=mainControl}" Content="{DynamicResource Add_TemplateStyle}" Padding="6">
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <BooleanAnimationUsingKeyFrames  Storyboard.TargetName="btnTimeTask"  Storyboard.TargetProperty="IsChecked">
+                                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False" />
+                                                </BooleanAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Style="{DynamicResource toolbarButtonStyle}" Visibility="Visible" Command="{Binding PlayTaskCommand,ElementName=mainControl}" Content="{DynamicResource Play_TemplateStyle}">
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <BooleanAnimationUsingKeyFrames  Storyboard.TargetName="btnTimeTask"  Storyboard.TargetProperty="IsChecked">
+                                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False" />
+                                                </BooleanAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Popup>
+        <ToggleButton x:Name="btnTimeStopTask" Visibility="Collapsed" Style="{DynamicResource toolbarToggleButtonStyle}" Command="{Binding TimeTaskVisibilityCommand,ElementName=mainControl}" Content="{DynamicResource StopTime_TemplateStyle}" Padding="6">
+
+        </ToggleButton>
+        <Popup x:Name="stopTimePopup" VerticalOffset="-1" IsOpen="{Binding IsChecked, ElementName=btnTimeStopTask}" AllowsTransparency="True" StaysOpen="False" PlacementTarget="{Binding ElementName=btnTimeStopTask}" Placement="Bottom">
+            <Border CornerRadius="0,5,5,5" BorderBrush="#b2b2b2" BorderThickness="1" Background="{DynamicResource Light_ApplicationColors}">
+                <StackPanel Margin="5" FlowDirection="{DynamicResource RightToLeftStyle}">
+                    <RadioButton x:Name="rdoStopFor" IsChecked="{Binding IsStopForMinutes,ElementName=mainControl}" Content="ایست برای:" Foreground="#6a6a6a"/>
+                    <StackPanel IsEnabled="{Binding ElementName=rdoStopFor,Path=IsChecked}" Orientation="Horizontal" Margin="5,5,0,0">
+                        <ctl:NumbericUpDown x:Name="numMStopFOR" Width="55" Value="{Binding StopTimeForMinutes, ElementName=mainControl}" Minimum="1" Maximum="120"/>
+                        <TextBlock Text="دقیقه" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <RadioButton Margin="0,5,0,0" x:Name="rdoStopTime" Content="ایست در:" Foreground="#6a6a6a"/>
+                    <StackPanel IsEnabled="{Binding ElementName=rdoStopTime,Path=IsChecked}" Orientation="Horizontal" Margin="5,5,0,0">
+                        <ctl:NumbericUpDown x:Name="numMStop" Width="55" Value="{Binding StopTimeMinutes, ElementName=mainControl}" Minimum="0" Maximum="59"/>
+                        <ctl:NumbericUpDown x:Name="numHStop" Width="55" Value="{Binding StopTimeHours, ElementName=mainControl}" Minimum="0" Maximum="23"/>
+                    </StackPanel>
+                    <StackPanel  Margin="0,5,0,0" Orientation="Horizontal" FlowDirection="LeftToRight"  HorizontalAlignment="Left">
+                        <Button Style="{DynamicResource toolbarButtonStyle}" Visibility="Visible" Command="{Binding AddStopTimeTaskCommand,ElementName=mainControl}" Content="{DynamicResource Add_TemplateStyle}" Padding="6">
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <BooleanAnimationUsingKeyFrames  Storyboard.TargetName="btnTimeStopTask"  Storyboard.TargetProperty="IsChecked">
+                                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False" />
+                                                </BooleanAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Style="{DynamicResource toolbarButtonStyle}" Visibility="Visible" Command="{Binding StopTaskCommand,ElementName=mainControl}" Content="{DynamicResource Pause_TemplateStyle}">
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <BooleanAnimationUsingKeyFrames  Storyboard.TargetName="btnTimeStopTask"  Storyboard.TargetProperty="IsChecked">
+                                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False" />
+                                                </BooleanAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Popup>
+        <Button Style="{DynamicResource toolbarButtonStyle}" Command="{Binding DeleteTimesCommand,ElementName=mainControl}" Content="{DynamicResource DeleteTime_TemplateStyle}" Padding="6"/>
+        <Button Style="{DynamicResource toolbarButtonStyle}" Command="{Binding MoveDownCommand,ElementName=mainControl}" Content="{DynamicResource Down_TemplateStyle}" Padding="6"/>
+        <Button Style="{DynamicResource toolbarButtonStyle}" Command="{Binding MoveUpCommand,ElementName=mainControl}" Content="{DynamicResource Up_TemplateStyle}" Padding="6"/>
+    </StackPanel>
+</UserControl>
