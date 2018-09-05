@@ -1,13 +1,9 @@
 ﻿using Agrin.Server.Models;
 using SignalGo.Server.DataTypes;
 using SignalGo.Server.Models;
-using SignalGo.Shared.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Agrin.Server.ServiceLogics
 {
@@ -38,9 +34,11 @@ namespace Agrin.Server.ServiceLogics
             string roles = "";
             if (data != null)
             {
-                roles = $"Your Roles {{IsAdmin: {userIsAdmin} IsNormalUser:{isNormalUser}}}";
+                roles = $"Your Roles {{IsAdmin: {userIsAdmin} IsNormalUser: {isNormalUser}}}";
             }
-            msg.Message += $" Need Roles {{IsAdmin: {IsAdmin} IsNormalUser: {isNormalUser} {Environment.NewLine}}} IsNullUserCookie: {data == null} {roles}  {Environment.NewLine}";
+            else
+                msg.Message += "Access Denied";
+            msg.Message += $" Need Roles {{IsAdmin: {IsAdmin} IsNormalUser: {IsNormalUser} {Environment.NewLine}}} IsNullUserCookie: {data == null} {roles}  {Environment.NewLine}";
             return msg;
         }
     }

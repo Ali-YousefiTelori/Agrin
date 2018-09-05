@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Agrin.Windows.UI.Views.Managers.PagesManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:Agrin.Windows.UI.ViewModels.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <vm:PagesManagerViewModel x:Key="PagesManagerViewModel"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource PagesManagerViewModel}"/>
+    </UserControl.DataContext>
+    <Grid>
+        <ContentControl x:Name="currentControlCollapsed" Content="{Binding CurrentControlCollapsed}" Padding="0" Opacity="0" Visibility="Collapsed"/>
+        <ContentControl x:Name="currentControl" Content="{Binding CurrentControl}" Padding="0"/>
+    </Grid>
+</UserControl>

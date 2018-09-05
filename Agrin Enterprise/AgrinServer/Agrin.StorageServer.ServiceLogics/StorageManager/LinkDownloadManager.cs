@@ -22,15 +22,15 @@ namespace Agrin.StorageServer.ServiceLogics.StorageManager
                 return "File Not found!";
             }
 
-            OperationContext.Current.HttpClient.ResponseHeaders.Add("content-disposition", "attachment; filename=" + info.FileName);
-            OperationContext.Current.HttpClient.ResponseHeaders.Add("Accept-Ranges", "bytes");
+            OperationContext.Current.HttpClient.ResponseHeaders.Add("content-disposition", ("attachment; filename=" + info.FileName).Split(','));
+            OperationContext.Current.HttpClient.ResponseHeaders.Add("Accept-Ranges", "bytes".Split(','));
 
-            OperationContext.Current.HttpClient.ResponseHeaders.Add("Content-Type", MimeTypesMap.GetMimeType(info.Extension));
-            OperationContext.Current.HttpClient.ResponseHeaders.Add("Last-Modified", info.LastUpdateDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'UTC'"));
+            OperationContext.Current.HttpClient.ResponseHeaders.Add("Content-Type", MimeTypesMap.GetMimeType(info.Extension).Split(','));
+            OperationContext.Current.HttpClient.ResponseHeaders.Add("Last-Modified", info.LastUpdateDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'UTC'").Split(','));
             long range = 0;
-            if (OperationContext.Current.HttpClient.RequestHeaders.ExistHeader("Range"))
+            if (OperationContext.Current.HttpClient.RequestHeaders.ContainsKey("Range"))
             {
-                string[] split = split = OperationContext.Current.HttpClient.RequestHeaders["Range"].Split(new string[] { "bytes" }, StringSplitOptions.RemoveEmptyEntries);
+                string[] split = split = OperationContext.Current.HttpClient.GetRequestHeaderValue("Range").Split(new string[] { "bytes" }, StringSplitOptions.RemoveEmptyEntries);
 
 
 
@@ -43,11 +43,11 @@ namespace Agrin.StorageServer.ServiceLogics.StorageManager
                     var toSize = splitDash.Length == 1 ? -1 : long.Parse(splitDash[1]);
                     if (toSize == -1)
                         toSize = info.FileSize - 1;
-                    OperationContext.Current.HttpClient.ResponseHeaders.Add("Content-Range", "bytes " + fromSize + "-" + toSize + "/" + (toSize + 1));
+                    OperationContext.Current.HttpClient.ResponseHeaders.Add("Content-Range", ("bytes " + fromSize + "-" + toSize + "/" + (toSize + 1)).Split(','));
                     var len = toSize - fromSize;
                     if (len < 0)
                         len = info.FileSize;
-                    OperationContext.Current.HttpClient.ResponseHeaders.Add("Content-Length", (len + 1).ToString());
+                    OperationContext.Current.HttpClient.ResponseHeaders.Add("Content-Length", (len + 1).ToString().Split(','));
                     range = fromSize;
                     Console.WriteLine("start from range:" + range);
                 }
@@ -59,7 +59,7 @@ namespace Agrin.StorageServer.ServiceLogics.StorageManager
 
             }
             else
-                OperationContext.Current.HttpClient.ResponseHeaders.Add("Content-Length", info.FileSize.ToString());
+                OperationContext.Current.HttpClient.ResponseHeaders.Add("Content-Length", info.FileSize.ToString().Split(','));
             var fileStream = UltraStreamGo.StreamIdentifier.GetFileStream(fileId, range);
             return new FileActionResult(fileStream);
         }

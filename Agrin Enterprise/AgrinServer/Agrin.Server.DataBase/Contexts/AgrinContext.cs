@@ -39,9 +39,8 @@ namespace Agrin.Server.DataBase.Contexts
             string current = AppDomain.CurrentDomain.BaseDirectory;
             System.AppDomain.CurrentDomain.SetData("DataDirectory", current);
             //local
-            //optionsBuilder.UseSqlServer($"Server=.\\SQLEXPRESS;initial catalog=AgrinServer;User ID=Agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
+            //optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
             //server
-            // optionsBuilder.UseSqlServer("Server=agrin.info,4565\\SQLEXPRESS;initial catalog=AgrinServer;User ID=Agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
             optionsBuilder.UseSqlServer("Data Source=agrin.info,4565\\SQLEXPRESS;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
         }
 
@@ -174,7 +173,7 @@ namespace Agrin.Server.DataBase.Contexts
         /// <summary>
         /// users request to add this exception to new verison of app
         /// </summary>
-        public DbSet<RequestIdeaInfo> RequestExceptionInfoes { get; set; }
+        public DbSet<RequestIdeaInfo> RequestIdeaInfoes { get; set; }
         /// <summary>
         /// hash for confirm
         /// </summary>

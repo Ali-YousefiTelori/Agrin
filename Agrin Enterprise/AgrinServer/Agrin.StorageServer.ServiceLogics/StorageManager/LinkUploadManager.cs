@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UltraStreamGo;
+using SignalGo.Shared.IO;
 
 namespace Agrin.StorageServer.ServiceLogics.StorageManager
 {
@@ -25,7 +26,8 @@ namespace Agrin.StorageServer.ServiceLogics.StorageManager
             {
                 using (var streamIdentifier = new StreamIdentifier())
                 {
-                    var result = streamIdentifier.StartUpload(streamInfo.Data, streamInfo.Stream, 0, streamInfo.Length, (position) =>
+                    Stream stream = streamInfo.Stream;
+                    var result = streamIdentifier.StartUpload(streamInfo.Data, stream, 0, streamInfo.Length, (position) =>
                     {
                         streamInfo.SetPositionFlush(position);
                     });

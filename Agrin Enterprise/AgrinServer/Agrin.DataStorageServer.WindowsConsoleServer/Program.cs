@@ -40,7 +40,6 @@ namespace Agrin.DataStorageServer.WindowsConsoleServer
 
                 StorageAuthenticationService.Current = new StorageAuthenticationService("agrin.info", 80);
                 FileManager.Current = new FileManager("agrin.info", 80);
-
                 UltraStreamGo.StreamIdentifier.DefaultFolderPath = "F:\\AgrinUserFiles";
 
                 BotsManager.StartBot<AgrinBotEngine>("519772219:AAH-l3Uxbz0QByJ4uapsK1PlwaU2OLG_WO4");
@@ -52,12 +51,14 @@ namespace Agrin.DataStorageServer.WindowsConsoleServer
                 provider.Start("http://localhost:1397/AgringServices/SignalGo");
                 provider.RegisterServerService<LinkUploadManager>();
                 provider.RegisterServerService<LinkDownloadManager>();
-                provider.ErrorHandlingFunction = (ex) =>
+                provider.ErrorHandlingFunction = (ex,type,method) =>
                 {
                     return new MessageContract() { IsSuccess = false, Message = "server Exception", Error = MessageType.ServerException };
                 };
 
-                provider.InternalSetting = new SignalGo.Server.Settings.InternalSetting() { IsEnabledDataExchanger = true, IsEnabledReferenceResolver = true, IsEnabledReferenceResolverForArray = true };
+                provider.ProviderSetting.IsEnabledDataExchanger = true;
+                provider.ProviderSetting.IsEnabledReferenceResolver = true;
+                provider.ProviderSetting.IsEnabledReferenceResolverForArray = true;
                 Console.WriteLine("server started");
             }
             catch (Exception ex)

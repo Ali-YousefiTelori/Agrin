@@ -13,17 +13,19 @@ using AgrinMainServer.ClientServices;
 
 namespace AgrinMainServer.ServerServices
 {
-    [ServiceContract("FileManager",ServiceType.ServerService, InstanceType.SingleInstance)]
-    public interface IFileManager
+    [ServiceContract("exceptionserviceserverservice",ServiceType.ServerService, InstanceType.SingleInstance)]
+    public interface IExceptionsManager
     {
-        Agrin.Server.Models.MessageContract<long> CreateEmptyFile();
-        Task<Agrin.Server.Models.MessageContract<long>> CreateEmptyFileAsync();
-        Agrin.Server.Models.MessageContract<long> CreateEmptyFile(int userId);
-        Task<Agrin.Server.Models.MessageContract<long>> CreateEmptyFileAsync(int userId);
-        Agrin.Server.Models.MessageContract RoamStorageFileComplete(int userId, long fileId, long fileSize);
-        Task<Agrin.Server.Models.MessageContract> RoamStorageFileCompleteAsync(int userId, long fileId, long fileSize);
+        Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.ExceptionInfo> GetExceptionInformationByCode(int errorCode);
+        Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.ExceptionInfo>> GetExceptionInformationByCodeAsync(int errorCode);
+        Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.ExceptionInfo> GetExceptionInformationByHttpCode(int errorCode);
+        Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.ExceptionInfo>> GetExceptionInformationByHttpCodeAsync(int errorCode);
+        Agrin.Server.Models.MessageContract AddRequestIdeaInfo(Agrin.Server.DataBase.Models.RequestIdeaInfo requestExceptionInfo);
+        Task<Agrin.Server.Models.MessageContract> AddRequestIdeaInfoAsync(Agrin.Server.DataBase.Models.RequestIdeaInfo requestExceptionInfo);
+        Agrin.Server.Models.MessageContract<System.Collections.Generic.List<Agrin.Server.DataBase.Models.RequestIdeaInfo>> FilterRequestIdeaInfoes(Agrin.Server.Models.Filters.FilterBaseInfo filterInfo);
+        Task<Agrin.Server.Models.MessageContract<System.Collections.Generic.List<Agrin.Server.DataBase.Models.RequestIdeaInfo>>> FilterRequestIdeaInfoesAsync(Agrin.Server.Models.Filters.FilterBaseInfo filterInfo);
     }
-    [ServiceContract("PostService",ServiceType.ServerService, InstanceType.SingleInstance)]
+    [ServiceContract("postserviceserverservice",ServiceType.ServerService, InstanceType.SingleInstance)]
     public interface IPostService
     {
         Agrin.Server.Models.MessageContract<System.Collections.Generic.List<Agrin.Server.DataBase.Models.PostInfo>> GetListOfPost(int index, int length);
@@ -35,17 +37,33 @@ namespace AgrinMainServer.ServerServices
         Agrin.Server.Models.MessageContract<System.Collections.Generic.List<Agrin.Server.DataBase.Models.PostInfo>> FilterPosts(Agrin.Server.Models.Filters.FilterPostInfo filterPostInfo);
         Task<Agrin.Server.Models.MessageContract<System.Collections.Generic.List<Agrin.Server.DataBase.Models.PostInfo>>> FilterPostsAsync(Agrin.Server.Models.Filters.FilterPostInfo filterPostInfo);
     }
-    [ServiceContract("AuthenticationService",ServiceType.ServerService, InstanceType.SingleInstance)]
+    [ServiceContract("authenticationserviceserverservice",ServiceType.ServerService, InstanceType.SingleInstance)]
     public interface IAuthenticationService
     {
         Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo> Login(System.Guid firstKey, System.Guid secondKey);
         Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>> LoginAsync(System.Guid firstKey, System.Guid secondKey);
+        Agrin.Server.Models.MessageContract<int> RegisterUser(Agrin.Server.DataBase.Models.UserInfo userInfo);
+        Task<Agrin.Server.Models.MessageContract<int>> RegisterUserAsync(Agrin.Server.DataBase.Models.UserInfo userInfo);
+        Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserSessionInfo> ConfirmUserWithSMS(int userId, int randomNumber);
+        Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserSessionInfo>> ConfirmUserWithSMSAsync(int userId, int randomNumber);
+        Agrin.Server.Models.MessageContract EditUserSessionInfo(Agrin.Server.DataBase.Models.UserSessionInfo userSessionInfo);
+        Task<Agrin.Server.Models.MessageContract> EditUserSessionInfoAsync(Agrin.Server.DataBase.Models.UserSessionInfo userSessionInfo);
+    }
+    [ServiceContract("filemanagerserverservice",ServiceType.ServerService, InstanceType.SingleInstance)]
+    public interface IFileManager
+    {
+        Agrin.Server.Models.MessageContract<long> CreateEmptyFile();
+        Task<Agrin.Server.Models.MessageContract<long>> CreateEmptyFileAsync();
+        Agrin.Server.Models.MessageContract<long> CreateEmptyFile(int userId);
+        Task<Agrin.Server.Models.MessageContract<long>> CreateEmptyFileAsync(int userId);
+        Agrin.Server.Models.MessageContract RoamStorageFileComplete(int userId, long fileId, long fileSize);
+        Task<Agrin.Server.Models.MessageContract> RoamStorageFileCompleteAsync(int userId, long fileId, long fileSize);
     }
 }
 
 namespace AgrinMainServer.StreamServices
 {
-    [ServiceContract("PostStorageManager",ServiceType.StreamService, InstanceType.SingleInstance)]
+    [ServiceContract("poststoragemanagerstreamservice",ServiceType.StreamService, InstanceType.SingleInstance)]
     public interface IPostStorageManager
     {
         SignalGo.Shared.Models.StreamInfo<System.DateTime> DownloadPostImage(int postUserId, int postId, string fileName);
@@ -55,67 +73,7 @@ namespace AgrinMainServer.StreamServices
 
 namespace AgrinMainServer.OneWayServices
 {
-    [ServiceContract("StorageAuthentication",ServiceType.OneWayService, InstanceType.SingleInstance)]
-    public class StorageAuthenticationService
-    {
-        public static StorageAuthenticationService Current { get; set; }
-        string _signalGoServerAddress = "";
-        int _signalGoPortNumber = 0;
-        public StorageAuthenticationService(string signalGoServerAddress, int signalGoPortNumber)
-        {
-            _signalGoServerAddress = signalGoServerAddress;
-            _signalGoPortNumber = signalGoPortNumber;
-        }
-         public Agrin.Server.Models.MessageContract CheckAccessUserToFileUpload(System.Guid firstKey, System.Guid secondKey, long directFileId)
-        {
-                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "CheckAccessUserToFileUpload", firstKey, secondKey, directFileId);
-        }
-         public Task<Agrin.Server.Models.MessageContract> CheckAccessUserToFileUploadAsync(System.Guid firstKey, System.Guid secondKey, long directFileId)
-        {
-                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract>.Factory.StartNew(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "CheckAccessUserToFileUpload", firstKey, secondKey, directFileId));
-        }
-         public Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo> GetUserByTelegramUserId(int telegramUserId)
-        {
-                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "GetUserByTelegramUserId", telegramUserId);
-        }
-         public Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>> GetUserByTelegramUserIdAsync(int telegramUserId)
-        {
-                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>.Factory.StartNew(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "GetUserByTelegramUserId", telegramUserId));
-        }
-         public Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo> GetUserByUserName(string userName)
-        {
-                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "GetUserByUserName", userName);
-        }
-         public Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>> GetUserByUserNameAsync(string userName)
-        {
-                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>.Factory.StartNew(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "GetUserByUserName", userName));
-        }
-         public Agrin.Server.Models.MessageContract ChangeUserTelegramId(int userId, int telegramUserId)
-        {
-                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "ChangeUserTelegramId", userId, telegramUserId);
-        }
-         public Task<Agrin.Server.Models.MessageContract> ChangeUserTelegramIdAsync(int userId, int telegramUserId)
-        {
-                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract>.Factory.StartNew(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "ChangeUserTelegramId", userId, telegramUserId));
-        }
-         public Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo> AddUser(Agrin.Server.DataBase.Models.UserInfo userInfo)
-        {
-                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "AddUser", userInfo);
-        }
-         public Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>> AddUserAsync(Agrin.Server.DataBase.Models.UserInfo userInfo)
-        {
-                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>.Factory.StartNew(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "AddUser", userInfo));
-        }
-         public Agrin.Server.Models.MessageContract GiftCradit(System.Guid key, System.Guid value, int amount, int toUserId)
-        {
-                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "GiftCradit", key, value, amount, toUserId);
-        }
-         public Task<Agrin.Server.Models.MessageContract> GiftCraditAsync(System.Guid key, System.Guid value, int amount, int toUserId)
-        {
-                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract>.Factory.StartNew(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "StorageAuthentication", "GiftCradit", key, value, amount, toUserId));
-        }
-    }
-    [ServiceContract("FileManager",ServiceType.OneWayService, InstanceType.SingleInstance)]
+    [ServiceContract("filemanageronewayservice",ServiceType.OneWayService, InstanceType.SingleInstance)]
     public class FileManager
     {
         public static FileManager Current { get; set; }
@@ -128,27 +86,87 @@ namespace AgrinMainServer.OneWayServices
         }
          public Agrin.Server.Models.MessageContract<long> CreateEmptyFile()
         {
-                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<long>>(_signalGoServerAddress, _signalGoPortNumber, "FileManager", "CreateEmptyFile");
+                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<long>>(_signalGoServerAddress, _signalGoPortNumber, "filemanageronewayservice", "CreateEmptyFile");
         }
          public Task<Agrin.Server.Models.MessageContract<long>> CreateEmptyFileAsync()
         {
-                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract<long>>.Factory.StartNew(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<long>>(_signalGoServerAddress, _signalGoPortNumber, "FileManager", "CreateEmptyFile"));
+                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract<long>>.Run(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<long>>(_signalGoServerAddress, _signalGoPortNumber, "filemanageronewayservice", "CreateEmptyFile"));
         }
          public Agrin.Server.Models.MessageContract<long> CreateEmptyFile(int userId)
         {
-                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<long>>(_signalGoServerAddress, _signalGoPortNumber, "FileManager", "CreateEmptyFile", userId);
+                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<long>>(_signalGoServerAddress, _signalGoPortNumber, "filemanageronewayservice", "CreateEmptyFile", new SignalGo.Shared.Models.ParameterInfo() {  Name = "userId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(userId) });
         }
          public Task<Agrin.Server.Models.MessageContract<long>> CreateEmptyFileAsync(int userId)
         {
-                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract<long>>.Factory.StartNew(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<long>>(_signalGoServerAddress, _signalGoPortNumber, "FileManager", "CreateEmptyFile", userId));
+                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract<long>>.Run(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<long>>(_signalGoServerAddress, _signalGoPortNumber, "filemanageronewayservice", "CreateEmptyFile", new SignalGo.Shared.Models.ParameterInfo() {  Name = "userId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(userId) }));
         }
          public Agrin.Server.Models.MessageContract RoamStorageFileComplete(int userId, long fileId, long fileSize)
         {
-                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "FileManager", "RoamStorageFileComplete", userId, fileId, fileSize);
+                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "filemanageronewayservice", "RoamStorageFileComplete", new SignalGo.Shared.Models.ParameterInfo() {  Name = "userId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(userId) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "fileId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(fileId) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "fileSize", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(fileSize) });
         }
          public Task<Agrin.Server.Models.MessageContract> RoamStorageFileCompleteAsync(int userId, long fileId, long fileSize)
         {
-                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract>.Factory.StartNew(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "FileManager", "RoamStorageFileComplete", userId, fileId, fileSize));
+                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract>.Run(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "filemanageronewayservice", "RoamStorageFileComplete", new SignalGo.Shared.Models.ParameterInfo() {  Name = "userId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(userId) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "fileId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(fileId) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "fileSize", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(fileSize) }));
+        }
+    }
+    [ServiceContract("storageauthenticationonewayservice",ServiceType.OneWayService, InstanceType.SingleInstance)]
+    public class StorageAuthenticationService
+    {
+        public static StorageAuthenticationService Current { get; set; }
+        string _signalGoServerAddress = "";
+        int _signalGoPortNumber = 0;
+        public StorageAuthenticationService(string signalGoServerAddress, int signalGoPortNumber)
+        {
+            _signalGoServerAddress = signalGoServerAddress;
+            _signalGoPortNumber = signalGoPortNumber;
+        }
+         public Agrin.Server.Models.MessageContract CheckAccessUserToFileUpload(System.Guid firstKey, System.Guid secondKey, long directFileId)
+        {
+                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "CheckAccessUserToFileUpload", new SignalGo.Shared.Models.ParameterInfo() {  Name = "firstKey", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(firstKey) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "secondKey", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(secondKey) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "directFileId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(directFileId) });
+        }
+         public Task<Agrin.Server.Models.MessageContract> CheckAccessUserToFileUploadAsync(System.Guid firstKey, System.Guid secondKey, long directFileId)
+        {
+                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract>.Run(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "CheckAccessUserToFileUpload", new SignalGo.Shared.Models.ParameterInfo() {  Name = "firstKey", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(firstKey) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "secondKey", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(secondKey) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "directFileId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(directFileId) }));
+        }
+         public Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo> GetUserByTelegramUserId(int telegramUserId)
+        {
+                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "GetUserByTelegramUserId", new SignalGo.Shared.Models.ParameterInfo() {  Name = "telegramUserId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(telegramUserId) });
+        }
+         public Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>> GetUserByTelegramUserIdAsync(int telegramUserId)
+        {
+                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>.Run(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "GetUserByTelegramUserId", new SignalGo.Shared.Models.ParameterInfo() {  Name = "telegramUserId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(telegramUserId) }));
+        }
+         public Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo> GetUserByUserName(string userName)
+        {
+                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "GetUserByUserName", new SignalGo.Shared.Models.ParameterInfo() {  Name = "userName", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(userName) });
+        }
+         public Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>> GetUserByUserNameAsync(string userName)
+        {
+                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>.Run(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "GetUserByUserName", new SignalGo.Shared.Models.ParameterInfo() {  Name = "userName", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(userName) }));
+        }
+         public Agrin.Server.Models.MessageContract ChangeUserTelegramId(int userId, int telegramUserId)
+        {
+                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "ChangeUserTelegramId", new SignalGo.Shared.Models.ParameterInfo() {  Name = "userId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(userId) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "telegramUserId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(telegramUserId) });
+        }
+         public Task<Agrin.Server.Models.MessageContract> ChangeUserTelegramIdAsync(int userId, int telegramUserId)
+        {
+                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract>.Run(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "ChangeUserTelegramId", new SignalGo.Shared.Models.ParameterInfo() {  Name = "userId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(userId) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "telegramUserId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(telegramUserId) }));
+        }
+         public Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo> AddUser(Agrin.Server.DataBase.Models.UserInfo userInfo)
+        {
+                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "AddUser", new SignalGo.Shared.Models.ParameterInfo() {  Name = "userInfo", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(userInfo) });
+        }
+         public Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>> AddUserAsync(Agrin.Server.DataBase.Models.UserInfo userInfo)
+        {
+                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>.Run(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract<Agrin.Server.DataBase.Models.UserInfo>>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "AddUser", new SignalGo.Shared.Models.ParameterInfo() {  Name = "userInfo", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(userInfo) }));
+        }
+         public Agrin.Server.Models.MessageContract GiftCradit(System.Guid key, System.Guid value, int amount, int toUserId)
+        {
+                return SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "GiftCradit", new SignalGo.Shared.Models.ParameterInfo() {  Name = "key", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(key) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "value", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(value) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "amount", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(amount) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "toUserId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(toUserId) });
+        }
+         public Task<Agrin.Server.Models.MessageContract> GiftCraditAsync(System.Guid key, System.Guid value, int amount, int toUserId)
+        {
+                return System.Threading.Tasks.Task<Agrin.Server.Models.MessageContract>.Run(() => SignalGo.Client.ClientProvider.SendOneWayMethod<Agrin.Server.Models.MessageContract>(_signalGoServerAddress, _signalGoPortNumber, "storageauthenticationonewayservice", "GiftCradit", new SignalGo.Shared.Models.ParameterInfo() {  Name = "key", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(key) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "value", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(value) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "amount", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(amount) }, new SignalGo.Shared.Models.ParameterInfo() {  Name = "toUserId", Value = SignalGo.Client.ClientSerializationHelper.SerializeObject(toUserId) }));
         }
     }
 }
@@ -157,11 +175,11 @@ namespace AgrinMainServer.HttpServices
 {
     public class IndexController
     {
-        string OpenPage(string address, string name, System.Collections.Generic.List<string> values)
+        string OpenPage()
         {
                 throw new NotSupportedException();
         }
-        Task<string> OpenPageAsync(string address, string name, System.Collections.Generic.List<string> values)
+        Task<string> OpenPageAsync()
         {
                 return System.Threading.Tasks.Task<string>.Factory.StartNew(() => throw new NotSupportedException());
         }
@@ -184,11 +202,11 @@ namespace AgrinMainServer.HttpServices
         {
                 return System.Threading.Tasks.Task<SignalGo.Shared.Http.ActionResult>.Factory.StartNew(() => throw new NotSupportedException());
         }
-        SignalGo.Shared.Http.ActionResult DownloadFile(string file)
+        SignalGo.Shared.Http.ActionResult DownloadCustomFile(string file)
         {
                 throw new NotSupportedException();
         }
-        Task<SignalGo.Shared.Http.ActionResult> DownloadFileAsync(string file)
+        Task<SignalGo.Shared.Http.ActionResult> DownloadCustomFileAsync(string file)
         {
                 return System.Threading.Tasks.Task<SignalGo.Shared.Http.ActionResult>.Factory.StartNew(() => throw new NotSupportedException());
         }
@@ -335,6 +353,296 @@ namespace Agrin.Server.Models
 
 namespace Agrin.Server.DataBase.Models
 {
+    public class ExceptionInfo : SignalGo.Shared.Models.NotifyPropertyChangedBase
+    {
+        private int _Id;
+        public int Id
+        {
+                get
+                {
+                        return _Id;
+                }
+                set
+                {
+                        _Id = value;
+                        OnPropertyChanged(nameof(Id));
+                }
+        }
+
+        private int? _HttpErrorCode;
+        public int? HttpErrorCode
+        {
+                get
+                {
+                        return _HttpErrorCode;
+                }
+                set
+                {
+                        _HttpErrorCode = value;
+                        OnPropertyChanged(nameof(HttpErrorCode));
+                }
+        }
+
+        private int? _ErrorCode;
+        public int? ErrorCode
+        {
+                get
+                {
+                        return _ErrorCode;
+                }
+                set
+                {
+                        _ErrorCode = value;
+                        OnPropertyChanged(nameof(ErrorCode));
+                }
+        }
+
+        private string _ExceptionType;
+        public string ExceptionType
+        {
+                get
+                {
+                        return _ExceptionType;
+                }
+                set
+                {
+                        _ExceptionType = value;
+                        OnPropertyChanged(nameof(ExceptionType));
+                }
+        }
+
+        private string _ErrorMessage;
+        public string ErrorMessage
+        {
+                get
+                {
+                        return _ErrorMessage;
+                }
+                set
+                {
+                        _ErrorMessage = value;
+                        OnPropertyChanged(nameof(ErrorMessage));
+                }
+        }
+
+        private string _HelpUrl;
+        public string HelpUrl
+        {
+                get
+                {
+                        return _HelpUrl;
+                }
+                set
+                {
+                        _HelpUrl = value;
+                        OnPropertyChanged(nameof(HelpUrl));
+                }
+        }
+
+
+    }
+
+    public class RequestIdeaInfo : SignalGo.Shared.Models.NotifyPropertyChangedBase
+    {
+        private int _Id;
+        public int Id
+        {
+                get
+                {
+                        return _Id;
+                }
+                set
+                {
+                        _Id = value;
+                        OnPropertyChanged(nameof(Id));
+                }
+        }
+
+        private System.DateTime _CreatedDateTime;
+        public System.DateTime CreatedDateTime
+        {
+                get
+                {
+                        return _CreatedDateTime;
+                }
+                set
+                {
+                        _CreatedDateTime = value;
+                        OnPropertyChanged(nameof(CreatedDateTime));
+                }
+        }
+
+        private System.DateTime _UpdatedDateTime;
+        public System.DateTime UpdatedDateTime
+        {
+                get
+                {
+                        return _UpdatedDateTime;
+                }
+                set
+                {
+                        _UpdatedDateTime = value;
+                        OnPropertyChanged(nameof(UpdatedDateTime));
+                }
+        }
+
+        private int _UserId;
+        public int UserId
+        {
+                get
+                {
+                        return _UserId;
+                }
+                set
+                {
+                        _UserId = value;
+                        OnPropertyChanged(nameof(UserId));
+                }
+        }
+
+        private Agrin.Server.DataBase.Models.RequestIdeaType _Type;
+        public Agrin.Server.DataBase.Models.RequestIdeaType Type
+        {
+                get
+                {
+                        return _Type;
+                }
+                set
+                {
+                        _Type = value;
+                        OnPropertyChanged(nameof(Type));
+                }
+        }
+
+        private Agrin.Server.DataBase.Models.RequestIdeaStatus _Status;
+        public Agrin.Server.DataBase.Models.RequestIdeaStatus Status
+        {
+                get
+                {
+                        return _Status;
+                }
+                set
+                {
+                        _Status = value;
+                        OnPropertyChanged(nameof(Status));
+                }
+        }
+
+        private string _Title;
+        public string Title
+        {
+                get
+                {
+                        return _Title;
+                }
+                set
+                {
+                        _Title = value;
+                        OnPropertyChanged(nameof(Title));
+                }
+        }
+
+        private string _Message;
+        public string Message
+        {
+                get
+                {
+                        return _Message;
+                }
+                set
+                {
+                        _Message = value;
+                        OnPropertyChanged(nameof(Message));
+                }
+        }
+
+        private int? _HttpErrorCode;
+        public int? HttpErrorCode
+        {
+                get
+                {
+                        return _HttpErrorCode;
+                }
+                set
+                {
+                        _HttpErrorCode = value;
+                        OnPropertyChanged(nameof(HttpErrorCode));
+                }
+        }
+
+        private string _ExceptionType;
+        public string ExceptionType
+        {
+                get
+                {
+                        return _ExceptionType;
+                }
+                set
+                {
+                        _ExceptionType = value;
+                        OnPropertyChanged(nameof(ExceptionType));
+                }
+        }
+
+        private string _ErrorMessage;
+        public string ErrorMessage
+        {
+                get
+                {
+                        return _ErrorMessage;
+                }
+                set
+                {
+                        _ErrorMessage = value;
+                        OnPropertyChanged(nameof(ErrorMessage));
+                }
+        }
+
+        private string _StackTrace;
+        public string StackTrace
+        {
+                get
+                {
+                        return _StackTrace;
+                }
+                set
+                {
+                        _StackTrace = value;
+                        OnPropertyChanged(nameof(StackTrace));
+                }
+        }
+
+        private Agrin.Server.DataBase.Models.UserInfo _UserInfo;
+        public Agrin.Server.DataBase.Models.UserInfo UserInfo
+        {
+                get
+                {
+                        return _UserInfo;
+                }
+                set
+                {
+                        _UserInfo = value;
+                        OnPropertyChanged(nameof(UserInfo));
+                }
+        }
+
+        private System.Collections.Generic.ICollection<Agrin.Server.DataBase.Models.CommentInfo> _CommentInfoes;
+        public System.Collections.Generic.ICollection<Agrin.Server.DataBase.Models.CommentInfo> CommentInfoes
+        {
+                get
+                {
+                        return _CommentInfoes;
+                }
+                set
+                {
+                        _CommentInfoes = value;
+                        OnPropertyChanged(nameof(CommentInfoes));
+                }
+        }
+
+
+    }
+
     public class PostInfo : SignalGo.Shared.Models.NotifyPropertyChangedBase
     {
         private int _Id;
@@ -865,6 +1173,254 @@ namespace Agrin.Server.DataBase.Models
                 }
         }
 
+        private System.Collections.Generic.ICollection<Agrin.Server.DataBase.Models.UserConfirmHashInfo> _UserConfirmHashInfoes;
+        public System.Collections.Generic.ICollection<Agrin.Server.DataBase.Models.UserConfirmHashInfo> UserConfirmHashInfoes
+        {
+                get
+                {
+                        return _UserConfirmHashInfoes;
+                }
+                set
+                {
+                        _UserConfirmHashInfoes = value;
+                        OnPropertyChanged(nameof(UserConfirmHashInfoes));
+                }
+        }
+
+
+    }
+
+    public class UserSessionInfo : SignalGo.Shared.Models.NotifyPropertyChangedBase
+    {
+        private long _Id;
+        public long Id
+        {
+                get
+                {
+                        return _Id;
+                }
+                set
+                {
+                        _Id = value;
+                        OnPropertyChanged(nameof(Id));
+                }
+        }
+
+        private System.Guid _FirstKey;
+        public System.Guid FirstKey
+        {
+                get
+                {
+                        return _FirstKey;
+                }
+                set
+                {
+                        _FirstKey = value;
+                        OnPropertyChanged(nameof(FirstKey));
+                }
+        }
+
+        private System.Guid _SecondKey;
+        public System.Guid SecondKey
+        {
+                get
+                {
+                        return _SecondKey;
+                }
+                set
+                {
+                        _SecondKey = value;
+                        OnPropertyChanged(nameof(SecondKey));
+                }
+        }
+
+        private System.DateTime _CreatedDateTime;
+        public System.DateTime CreatedDateTime
+        {
+                get
+                {
+                        return _CreatedDateTime;
+                }
+                set
+                {
+                        _CreatedDateTime = value;
+                        OnPropertyChanged(nameof(CreatedDateTime));
+                }
+        }
+
+        private string _OsName;
+        public string OsName
+        {
+                get
+                {
+                        return _OsName;
+                }
+                set
+                {
+                        _OsName = value;
+                        OnPropertyChanged(nameof(OsName));
+                }
+        }
+
+        private string _OsVersionNumber;
+        public string OsVersionNumber
+        {
+                get
+                {
+                        return _OsVersionNumber;
+                }
+                set
+                {
+                        _OsVersionNumber = value;
+                        OnPropertyChanged(nameof(OsVersionNumber));
+                }
+        }
+
+        private string _OsVersionName;
+        public string OsVersionName
+        {
+                get
+                {
+                        return _OsVersionName;
+                }
+                set
+                {
+                        _OsVersionName = value;
+                        OnPropertyChanged(nameof(OsVersionName));
+                }
+        }
+
+        private int _UserId;
+        public int UserId
+        {
+                get
+                {
+                        return _UserId;
+                }
+                set
+                {
+                        _UserId = value;
+                        OnPropertyChanged(nameof(UserId));
+                }
+        }
+
+        private bool _IsActive;
+        public bool IsActive
+        {
+                get
+                {
+                        return _IsActive;
+                }
+                set
+                {
+                        _IsActive = value;
+                        OnPropertyChanged(nameof(IsActive));
+                }
+        }
+
+        private Agrin.Server.DataBase.Models.UserInfo _UserInfo;
+        public Agrin.Server.DataBase.Models.UserInfo UserInfo
+        {
+                get
+                {
+                        return _UserInfo;
+                }
+                set
+                {
+                        _UserInfo = value;
+                        OnPropertyChanged(nameof(UserInfo));
+                }
+        }
+
+
+    }
+
+    public class CommentInfo : SignalGo.Shared.Models.NotifyPropertyChangedBase
+    {
+        private int _Id;
+        public int Id
+        {
+                get
+                {
+                        return _Id;
+                }
+                set
+                {
+                        _Id = value;
+                        OnPropertyChanged(nameof(Id));
+                }
+        }
+
+        private int _UserId;
+        public int UserId
+        {
+                get
+                {
+                        return _UserId;
+                }
+                set
+                {
+                        _UserId = value;
+                        OnPropertyChanged(nameof(UserId));
+                }
+        }
+
+        private System.DateTime _CreatedDateTime;
+        public System.DateTime CreatedDateTime
+        {
+                get
+                {
+                        return _CreatedDateTime;
+                }
+                set
+                {
+                        _CreatedDateTime = value;
+                        OnPropertyChanged(nameof(CreatedDateTime));
+                }
+        }
+
+        private int? _RequestIdeaId;
+        public int? RequestIdeaId
+        {
+                get
+                {
+                        return _RequestIdeaId;
+                }
+                set
+                {
+                        _RequestIdeaId = value;
+                        OnPropertyChanged(nameof(RequestIdeaId));
+                }
+        }
+
+        private Agrin.Server.DataBase.Models.UserInfo _UserInfo;
+        public Agrin.Server.DataBase.Models.UserInfo UserInfo
+        {
+                get
+                {
+                        return _UserInfo;
+                }
+                set
+                {
+                        _UserInfo = value;
+                        OnPropertyChanged(nameof(UserInfo));
+                }
+        }
+
+        private Agrin.Server.DataBase.Models.RequestIdeaInfo _RequestIdeaInfo;
+        public Agrin.Server.DataBase.Models.RequestIdeaInfo RequestIdeaInfo
+        {
+                get
+                {
+                        return _RequestIdeaInfo;
+                }
+                set
+                {
+                        _RequestIdeaInfo = value;
+                        OnPropertyChanged(nameof(RequestIdeaInfo));
+                }
+        }
+
 
     }
 
@@ -1168,10 +1724,10 @@ namespace Agrin.Server.DataBase.Models
 
     }
 
-    public class UserSessionInfo : SignalGo.Shared.Models.NotifyPropertyChangedBase
+    public class UserConfirmHashInfo : SignalGo.Shared.Models.NotifyPropertyChangedBase
     {
-        private long _Id;
-        public long Id
+        private int _Id;
+        public int Id
         {
                 get
                 {
@@ -1181,90 +1737,6 @@ namespace Agrin.Server.DataBase.Models
                 {
                         _Id = value;
                         OnPropertyChanged(nameof(Id));
-                }
-        }
-
-        private System.Guid _FirstKey;
-        public System.Guid FirstKey
-        {
-                get
-                {
-                        return _FirstKey;
-                }
-                set
-                {
-                        _FirstKey = value;
-                        OnPropertyChanged(nameof(FirstKey));
-                }
-        }
-
-        private System.Guid _SecondKey;
-        public System.Guid SecondKey
-        {
-                get
-                {
-                        return _SecondKey;
-                }
-                set
-                {
-                        _SecondKey = value;
-                        OnPropertyChanged(nameof(SecondKey));
-                }
-        }
-
-        private System.DateTime _CreatedDateTime;
-        public System.DateTime CreatedDateTime
-        {
-                get
-                {
-                        return _CreatedDateTime;
-                }
-                set
-                {
-                        _CreatedDateTime = value;
-                        OnPropertyChanged(nameof(CreatedDateTime));
-                }
-        }
-
-        private string _OsName;
-        public string OsName
-        {
-                get
-                {
-                        return _OsName;
-                }
-                set
-                {
-                        _OsName = value;
-                        OnPropertyChanged(nameof(OsName));
-                }
-        }
-
-        private string _OsVersionNumber;
-        public string OsVersionNumber
-        {
-                get
-                {
-                        return _OsVersionNumber;
-                }
-                set
-                {
-                        _OsVersionNumber = value;
-                        OnPropertyChanged(nameof(OsVersionNumber));
-                }
-        }
-
-        private string _OsVersionName;
-        public string OsVersionName
-        {
-                get
-                {
-                        return _OsVersionName;
-                }
-                set
-                {
-                        _OsVersionName = value;
-                        OnPropertyChanged(nameof(OsVersionName));
                 }
         }
 
@@ -1282,17 +1754,59 @@ namespace Agrin.Server.DataBase.Models
                 }
         }
 
-        private bool _IsActive;
-        public bool IsActive
+        private int _RandomNumber;
+        public int RandomNumber
         {
                 get
                 {
-                        return _IsActive;
+                        return _RandomNumber;
                 }
                 set
                 {
-                        _IsActive = value;
-                        OnPropertyChanged(nameof(IsActive));
+                        _RandomNumber = value;
+                        OnPropertyChanged(nameof(RandomNumber));
+                }
+        }
+
+        private System.Guid _RandomGuid;
+        public System.Guid RandomGuid
+        {
+                get
+                {
+                        return _RandomGuid;
+                }
+                set
+                {
+                        _RandomGuid = value;
+                        OnPropertyChanged(nameof(RandomGuid));
+                }
+        }
+
+        private bool _IsUsed;
+        public bool IsUsed
+        {
+                get
+                {
+                        return _IsUsed;
+                }
+                set
+                {
+                        _IsUsed = value;
+                        OnPropertyChanged(nameof(IsUsed));
+                }
+        }
+
+        private System.DateTime _CreatedDateTime;
+        public System.DateTime CreatedDateTime
+        {
+                get
+                {
+                        return _CreatedDateTime;
+                }
+                set
+                {
+                        _CreatedDateTime = value;
+                        OnPropertyChanged(nameof(CreatedDateTime));
                 }
         }
 
@@ -2011,12 +2525,32 @@ namespace Agrin.Server.Models
         NotSupportYet = 11,
         Duplicate = 12,
         StorageFull = 13,
+        NotFound = 14,
+        IsNotConfirm = 15,
+        AccessDenied = 16,
+        CodeNotExist = 17,
     }
 
 }
 
 namespace Agrin.Server.DataBase.Models
 {
+    public enum RequestIdeaType : byte
+    {
+        Idea = 1,
+        Bug = 2,
+        ExceptionInformation = 3,
+    }
+
+    public enum RequestIdeaStatus : byte
+    {
+        Created = 1,
+        Checking = 2,
+        Duplicate = 3,
+        Fixed = 4,
+        MoreInformation = 5,
+    }
+
     public enum PostType : byte
     {
         None = 0,
@@ -2027,7 +2561,7 @@ namespace Agrin.Server.DataBase.Models
     public enum UserStatus : byte
     {
         None = 0,
-        JustRegistred = 1,
+        JustRegistered = 1,
         Confirm = 2,
         Blocked = 3,
     }

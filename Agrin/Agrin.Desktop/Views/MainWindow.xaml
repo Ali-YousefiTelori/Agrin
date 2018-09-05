@@ -1,0 +1,15 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Agrin.Desktop.ViewModels;assembly=Agrin.Desktop"
+        Icon="resm:Agrin.Desktop.Assets.Agrin3.ico"
+        xmlns:toolBox="clr-namespace:Agrin.Desktop.Views.Toolbox;assembly=Agrin.Desktop"
+        Title="Agrin.Desktop">
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+
+  <Grid>
+    <toolBox:TabMenuControl/>
+  </Grid>
+</Window>

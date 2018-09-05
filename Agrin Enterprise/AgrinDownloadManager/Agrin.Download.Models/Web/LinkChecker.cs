@@ -133,7 +133,7 @@ namespace Agrin.Download.Web
 
             _isStartHost = true;
             System.Threading.Thread currentThread = null;
-            lastHostThread = currentThread = AsyncActions.Run(() =>
+            lastHostThread = currentThread = AsyncActions.StartNew(() =>
             {
                 TcpClient tcpClient = new TcpClient(uri.Host, uri.Port);
                 tcpClient.Close();
@@ -161,7 +161,7 @@ namespace Agrin.Download.Web
 
             _isStartLink = true;
             System.Threading.Thread currentThread = null;
-            lastLinkThread = currentThread = AsyncActions.Run(() =>
+            lastLinkThread = currentThread = AsyncActions.StartNew(() =>
             {
                 string _authentication = null;
                 System.Net.IWebProxy _currentProxy = null;
@@ -208,7 +208,7 @@ namespace Agrin.Download.Web
                 return;
             _isLinkStatistics = true;
             System.Threading.Thread currentThread = null;
-            lastLinkStatisticsThread = currentThread = AsyncActions.Run(() =>
+            lastLinkStatisticsThread = currentThread = AsyncActions.StartNew(() =>
             {
 
                 var statistics = HostStatisticsHelper.GetHostStatistics(uri.Host);

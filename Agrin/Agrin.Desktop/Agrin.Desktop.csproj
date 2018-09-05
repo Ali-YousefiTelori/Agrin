@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <ApplicationIcon>Assets\Agrin3.ico</ApplicationIcon>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\*" />
+    <None Remove="Views\Toolbox\TabMenuControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.6.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.6.1" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.6.1" />
+    <PackageReference Include="NSubsys" Version="0.7.0-build20180604-0047" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Checksum\Agrin.Checksum.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Client.DataBase\Agrin.Client.DataBase.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Component\Agrin.Component.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Download.Models\Agrin.Download.Models.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Foundation\Agrin.Foundation.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Helper\Agrin.Helper.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.IO\Agrin.IO.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.LinkExtractor\Agrin.LinkExtractor.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Log\Agrin.Log.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Models\Agrin.Models.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Shared\Agrin.Shared.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Web\Agrin.Web.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\Toolbox\TabMenuControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

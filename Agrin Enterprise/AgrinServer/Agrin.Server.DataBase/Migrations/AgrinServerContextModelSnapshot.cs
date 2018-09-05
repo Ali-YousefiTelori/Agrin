@@ -274,7 +274,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.Property<int?>("HttpErrorCode");
 
-                    b.Property<string>("Mesage");
+                    b.Property<string>("Message");
 
                     b.Property<string>("StackTrace");
 
@@ -292,7 +292,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RequestExceptionInfoes");
+                    b.ToTable("RequestIdeaInfoes");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.ServerInfo", b =>
