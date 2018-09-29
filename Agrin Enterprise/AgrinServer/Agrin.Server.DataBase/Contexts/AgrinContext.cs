@@ -62,7 +62,7 @@ namespace Agrin.Server.DataBase.Contexts
             modelBuilder.Entity<PostTagRelationInfo>().HasKey(x => new { x.TagId, x.PostId });
             modelBuilder.Entity<DirectFolderToUserRelationInfo>().HasKey(x => new { x.UserId, x.DirectFolderId });
 
-            modelBuilder.Entity<UserInfo>().HasIndex(u => u.TelegramUserId).IsUnique().HasFilter(null); 
+            modelBuilder.Entity<UserInfo>().HasIndex(u => u.TelegramUserId).HasFilter(null); 
             modelBuilder.Entity<UserInfo>().HasIndex(u => u.UserName).IsUnique().HasFilter(null); 
 
             modelBuilder.Entity<UserCreditInfo>().HasIndex(u => u.Key).IsUnique().HasFilter(null); 

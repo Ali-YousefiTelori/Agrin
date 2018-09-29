@@ -4,14 +4,16 @@ using Agrin.Server.DataBase.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Agrin.Server.DataBase.Migrations
 {
     [DbContext(typeof(AgrinContext))]
-    partial class AgrinServerContextModelSnapshot : ModelSnapshot
+    [Migration("20180927164943_fixtelegramidbug")]
+    partial class fixtelegramidbug
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

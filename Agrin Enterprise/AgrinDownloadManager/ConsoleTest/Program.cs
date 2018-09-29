@@ -209,10 +209,10 @@ namespace ConsoleTest
         {
             try
             {
-                StreamCross.OpenFile = (filename, filemode, fileaccess) =>
-                {
-                    return new AndroidStreamCross(filename, filemode, fileaccess);
-                };
+                //StreamCross.OpenFile = (filename, filemode, fileaccess) =>
+                //{
+                //    return new AndroidStreamCross(filename, filemode, fileaccess);
+                //};
                 LinkInfoManagerBase.Current = new LinkInfoManager();
                 TaskScheduleManagerBase.Current = new TaskScheduleManager();
                 //var fileName = GetFileNameFromUrl("http://cdn.p30download.com/?b=p30dl-software&f=Mozilla.Firefox.v58.0.x86_p30download.com.zip");
@@ -226,6 +226,9 @@ namespace ConsoleTest
 
                 //var linklast = LinkInfoManager.Current.LinkInfoes.Where(x => x.AsShort().PathInfo.FileName.ToLower().Contains("ep06")).FirstOrDefault();
                 var linklast = LinkInfoManager.Current.LinkInfoes.Where(x => !x.IsComplete).OrderByDescending(x => x.LastDownloadedDateTime).FirstOrDefault();
+                var ex = AgrinClientContext.ExceptionInfoTable.GetExceptionsByLinkId(linklast.Id);
+                var exs = TextHelper.Base64Decode(ex.FirstOrDefault().FullMessage);
+                var exsm = TextHelper.Base64Decode(ex.FirstOrDefault().Message);
                 linklast.IsComplete = false;
                 foreach (var item in linklast.Connections)
                 {

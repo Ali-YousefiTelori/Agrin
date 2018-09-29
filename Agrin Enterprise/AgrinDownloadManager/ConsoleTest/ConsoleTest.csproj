@@ -115,7 +115,7 @@
       <Name>Agrin.DebugSystem</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Download.Models\Agrin.Download.Models.csproj">
-      <Project>{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}</Project>
+      <Project>{4539f9d8-d4c2-47c8-a7ad-21f4a39a1fb7}</Project>
       <Name>Agrin.Download.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Foundation\Agrin.Foundation.csproj">
