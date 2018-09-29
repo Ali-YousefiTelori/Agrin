@@ -46,13 +46,17 @@ namespace Agrin.Download.DataBaseModels
         /// </summary>
         public string AppVersion { get; set; }
         /// <summary>
-        /// 
+        /// operation system of user device
         /// </summary>
         public string AppOS { get; set; }
         /// <summary>
-        /// version of operation system logged this
+        /// name of os  version
         /// </summary>
-        public string OSVersion { get; set; }
+        public string OSVersionName { get; set; }
+        /// <summary>
+        /// number of os version
+        /// </summary>
+        public string OSVersionNumber { get; set; }
         /// <summary>
         /// device name
         /// </summary>

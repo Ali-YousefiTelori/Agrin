@@ -4,14 +4,16 @@ using Agrin.Server.DataBase.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Agrin.Server.DataBase.Migrations
 {
     [DbContext(typeof(AgrinContext))]
-    partial class AgrinServerContextModelSnapshot : ModelSnapshot
+    [Migration("20180905165522_likesandcomments")]
+    partial class likesandcomments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,6 @@ namespace Agrin.Server.DataBase.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedDateTime");
-
-                    b.Property<string>("Message");
 
                     b.Property<int?>("RequestIdeaId");
 
@@ -423,7 +423,8 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TelegramUserId");
+                    b.HasIndex("TelegramUserId")
+                        .IsUnique();
 
                     b.HasIndex("UserName")
                         .IsUnique();
@@ -438,8 +439,6 @@ namespace Agrin.Server.DataBase.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedDateTime");
-
-                    b.Property<string>("DeviceName");
 
                     b.Property<Guid>("FirstKey");
 

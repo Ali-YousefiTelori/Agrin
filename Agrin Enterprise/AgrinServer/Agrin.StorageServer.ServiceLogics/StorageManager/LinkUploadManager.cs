@@ -1,35 +1,31 @@
 ﻿using Agrin.Server.Models;
 using AgrinMainServer.OneWayServices;
 using HeyRed.Mime;
-using SignalGo.Shared;
 using SignalGo.Shared.DataTypes;
 using SignalGo.Shared.Log;
 using SignalGo.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UltraStreamGo;
-using SignalGo.Shared.IO;
 
 namespace Agrin.StorageServer.ServiceLogics.StorageManager
 {
     [ServiceContract("LinkUploadManager", ServiceType.StreamService)]
     public class LinkUploadManager
     {
-        public MessageContract UploadFile(Guid firstKey, Guid secondKey, StreamInfo<UltraStreamGo.FileInfo> streamInfo)
+        public async Task<MessageContract> UploadFile(Guid firstKey, Guid secondKey, StreamInfo<UltraStreamGo.FileInfo> streamInfo)
         {
-            var checkAccessToFile = StorageAuthenticationService.Current.CheckAccessUserToFileUpload(firstKey, secondKey, streamInfo.Data.Id);
+            MessageContract checkAccessToFile = StorageAuthenticationService.Current.CheckAccessUserToFileUpload(firstKey, secondKey, streamInfo.Data.Id);
             if (checkAccessToFile.IsSuccess)
             {
-                using (var streamIdentifier = new StreamIdentifier())
+                using (StreamIdentifier streamIdentifier = new StreamIdentifier())
                 {
                     Stream stream = streamInfo.Stream;
-                    var result = streamIdentifier.StartUpload(streamInfo.Data, stream, 0, streamInfo.Length, (position) =>
+                    StreamIdentifierFileUploadResult result = await streamIdentifier.StartUpload(streamInfo.Data, stream, 0, streamInfo.Length, async (position) =>
                     {
-                        streamInfo.SetPositionFlush(position);
+                        await streamInfo.SetPositionFlush(position);
                     });
                     if (result != StreamIdentifierFileUploadResult.Success)
                     {
@@ -43,7 +39,7 @@ namespace Agrin.StorageServer.ServiceLogics.StorageManager
         }
 
         public static List<int> UserFileUploading = new List<int>();
-        static readonly object listLock = new object();
+        private static readonly object listLock = new object();
         public static bool TryAddUserFileDownloading(int userId)
         {
             lock (listLock)
@@ -63,19 +59,19 @@ namespace Agrin.StorageServer.ServiceLogics.StorageManager
             }
         }
 
-        public static MessageContract UploadStream(int userId, Stream stream, string uri, string filePath, long fileSize, string filePassword, Action<byte> inProgressAction, Action<bool, UltraStreamGo.FileInfo> completeAction)
+        public static async Task<MessageContract> UploadStream(int userId, Stream stream, string uri, string filePath, long fileSize, string filePassword, Action<byte> inProgressAction, Action<bool, UltraStreamGo.FileInfo> completeAction)
         {
             try
             {
-                var createdFile = FileManager.Current.CreateEmptyFile(userId);
+                MessageContract<long> createdFile = FileManager.Current.CreateEmptyFile(userId);
                 if (!createdFile.IsSuccess)
                 {
                     completeAction(false, null);
                     return MessageType.ServerException;
                 }
-                using (var streamIdentifier = new StreamIdentifier())
+                using (StreamIdentifier streamIdentifier = new StreamIdentifier())
                 {
-                    var fileInfo = new UltraStreamGo.FileInfo()
+                    UltraStreamGo.FileInfo fileInfo = new UltraStreamGo.FileInfo()
                     {
                         CreatedDateTime = DateTime.Now,
                         DataType = MimeTypesMap.GetMimeType(Path.GetExtension(filePath)),
@@ -85,7 +81,7 @@ namespace Agrin.StorageServer.ServiceLogics.StorageManager
                         Password = filePassword
 
                     };
-                    var result = streamIdentifier.StartUpload(fileInfo, stream, 0, fileSize, (position) =>
+                    StreamIdentifierFileUploadResult result = await streamIdentifier.StartUpload(fileInfo, stream, 0, fileSize, (position) =>
                     {
                         inProgressAction.Invoke((byte)(100 / ((double)fileSize / position)));
                     }, true);

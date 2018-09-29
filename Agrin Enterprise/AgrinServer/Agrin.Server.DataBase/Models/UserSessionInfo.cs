@@ -18,6 +18,7 @@ namespace Agrin.Server.DataBase.Models
         public string OsName { get; set; }
         public string OsVersionNumber { get; set; }
         public string OsVersionName { get; set; }
+        public string DeviceName { get; set; }
         public int UserId { get; set; }
         public bool IsActive { get; set; }
 

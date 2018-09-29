@@ -47,7 +47,14 @@ namespace Agrin.Download.CoreModels.Task
         /// reset device
         /// </summary>
         ResetDevice = 9,
-
+        /// <summary>
+        /// turn on mobile data
+        /// </summary>
+        TurnOnData = 10,
+        /// <summary>
+        /// turn off mobile data
+        /// </summary>
+        TurnOffData = 11,
     }
 
     /// <summary>

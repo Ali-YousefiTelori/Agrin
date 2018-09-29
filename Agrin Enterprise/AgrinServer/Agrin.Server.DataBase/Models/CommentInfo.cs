@@ -12,6 +12,11 @@ namespace Agrin.Server.DataBase.Models
     {
         [Key]
         public int Id { get; set; }
+
+        /// <summary>
+        /// message of comment
+        /// </summary>
+        public string Message { get; set; }
         /// <summary>
         /// Creator userId
         /// </summary>

@@ -300,6 +300,22 @@
     <Compile Include="Migrations\20180901113345_renamefield.designer.cs">
       <DependentUpon>20180901113345_renamefield.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20180905165522_likesandcomments.cs" />
+    <Compile Include="Migrations\20180905165522_likesandcomments.designer.cs">
+      <DependentUpon>20180905165522_likesandcomments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180910155813_commentText.cs" />
+    <Compile Include="Migrations\20180910155813_commentText.designer.cs">
+      <DependentUpon>20180910155813_commentText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180914093124_devicename.cs" />
+    <Compile Include="Migrations\20180914093124_devicename.designer.cs">
+      <DependentUpon>20180914093124_devicename.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180927164943_fixtelegramidbug.cs" />
+    <Compile Include="Migrations\20180927164943_fixtelegramidbug.designer.cs">
+      <DependentUpon>20180927164943_fixtelegramidbug.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AgrinServerContextModelSnapshot.cs" />
     <Compile Include="Models\CommentInfo.cs" />
     <Compile Include="Models\DirectFileInfo.cs" />

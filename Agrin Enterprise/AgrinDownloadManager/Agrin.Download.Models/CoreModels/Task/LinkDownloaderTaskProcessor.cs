@@ -87,6 +87,12 @@ namespace Agrin.Download.CoreModels.Task
                             Finished();
                             break;
                         }
+                        else if (Parent.EndDateTime.HasValue && DateTime.Now > Parent.EndDateTime)
+                        {
+                            Stop();
+                            Finished();
+                            break;
+                        }
                         this.RunInLock(() =>
                         {
                             if (!IsDispose && Status == TaskStatus.Processing)
