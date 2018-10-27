@@ -11,7 +11,7 @@
     <Authors>Ali Yousefi</Authors>
     <Company></Company>
     <DebugType>full</DebugType>
-    <Product>Agrin.Foundation</Product>
+    <Product>Agrin.Download</Product>
     <Description>
 
     </Description>
@@ -39,4 +39,20 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Github\LiteDBSource\LiteDB\LiteDB\LiteDB.csproj" />
+    <ProjectReference Include="..\..\..\..\Github\MVVMGo\MvvmGo\MvvmGo\MvvmGo.csproj" />
+    <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Client\SignalGo.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj" />
+    <ProjectReference Include="..\Agrin.Checksum\Agrin.Checksum.csproj" />
+    <ProjectReference Include="..\Agrin.Component\Agrin.Component.csproj" />
+    <ProjectReference Include="..\Agrin.DebugSystem\Agrin.DebugSystem.csproj" />
+    <ProjectReference Include="..\Agrin.Foundation\Agrin.Foundation.csproj" />
+    <ProjectReference Include="..\Agrin.Helper\Agrin.Helper.csproj" />
+    <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj" />
+    <ProjectReference Include="..\Agrin.Log\Agrin.Log.csproj" />
+    <ProjectReference Include="..\Agrin.Models\Agrin.Models.csproj" />
+    <ProjectReference Include="..\Agrin.Web\Agrin.Web.csproj" />
+  </ItemGroup>
 </Project>

@@ -13,6 +13,7 @@ namespace YoutubeExtractor
     public static class DownloadUrlResolver
     {
         private const string RateBypassFlag = "ratebypass";
+        private const int CorrectSignatureLength = 81;
         private const string SignatureQuery = "signature";
 
         /// <summary>
@@ -47,28 +48,6 @@ namespace YoutubeExtractor
                 videoInfo.DownloadUrl = HttpHelper.ReplaceQueryStringParameter(videoInfo.DownloadUrl, SignatureQuery, decrypted);
                 videoInfo.RequiresDecryption = false;
             }
-        }
-
-        public static VideoInfo GetVideoInfoByFormatCode(List<VideoInfo> items, int formatCode)
-        {
-            foreach (var item in items)
-            {
-                if (item.FormatCode == formatCode)
-                    return item;
-            }
-            return null;
-        }
-
-        public static bool IsYoutubeLink(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                return false;
-            Uri uri = null;
-            if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
-                return false;
-            if (uri.Host.ToLower().Contains("youtu.be") || uri.Host.ToLower().Contains("youtube.com"))
-                return true;
-            return false;
         }
 
         /// <summary>
@@ -121,10 +100,10 @@ namespace YoutubeExtractor
                 {
                     info.HtmlPlayerVersion = htmlPlayerVersion;
 
-                    //if (decryptSignature && info.RequiresDecryption)
-                    //{
-                    //    DecryptDownloadUrl(info);
-                    //}
+                    if (decryptSignature && info.RequiresDecryption)
+                    {
+                        DecryptDownloadUrl(info);
+                    }
                 }
 
                 return infos;
@@ -247,12 +226,17 @@ namespace YoutubeExtractor
 
         private static string GetDecipheredSignature(string htmlPlayerVersion, string signature)
         {
+            if (signature.Length == CorrectSignatureLength)
+            {
+                return signature;
+            }
+
             return Decipherer.DecipherWithVersion(signature, htmlPlayerVersion);
         }
 
         private static string GetHtml5PlayerVersion(JObject json)
         {
-            var regex = new Regex(@"player(.+?).js");
+            var regex = new Regex(@"player-(.+?).js");
 
             string js = json["assets"]["js"].ToString();
 

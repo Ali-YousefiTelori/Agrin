@@ -11,7 +11,6 @@ using Agrin.Models;
 using Agrin.Threads;
 using MvvmGo.Resources;
 using SignalGo.Shared;
-using SignalGo.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -964,7 +963,7 @@ namespace Agrin.Download.CoreModels.Link
 
         public static LinkInfoCore CreateInstance(string url)
         {
-#if (Debug || Release)
+#if (DEBUG || RELEASE)
             var link = new LinkInfo();
 #elif (MobileDebug || MobileRelease)
             var link = new LinkInfoShort();

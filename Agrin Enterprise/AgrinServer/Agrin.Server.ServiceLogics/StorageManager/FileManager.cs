@@ -2,14 +2,15 @@
 using Agrin.Server.DataBase.Models;
 using Agrin.Server.DataBase.Models.Relations;
 using Agrin.Server.Models;
+using Agrin.Server.ServiceLogics.Controllers;
 using SignalGo.Server.DataTypes;
 using SignalGo.Server.Models;
 using SignalGo.Shared.DataTypes;
+using SignalGo.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Agrin.Server.ServiceLogics.StorageManager
 {
@@ -19,16 +20,21 @@ namespace Agrin.Server.ServiceLogics.StorageManager
     {
         public MessageContract<long> CreateEmptyFile()
         {
-            var userId = OperationContext<UserInfo>.CurrentSetting.Id;
+            int userId = OperationContext<UserInfo>.CurrentSetting.Id;
             return CreateEmptyFile(userId);
         }
 
+        /// <summary>
+        /// create an empty file to upload later
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.214.125" })]
         public MessageContract<long> CreateEmptyFile(int userId)
         {
-            using (var context = new AgrinContext())
+            using (AgrinContext context = new AgrinContext())
             {
-                var fileInfo = new DirectFileInfo()
+                DirectFileInfo fileInfo = new DirectFileInfo()
                 {
                     DirectFileToUserRelationInfoes = new List<DirectFileToUserRelationInfo>()
                     {
@@ -48,18 +54,27 @@ namespace Agrin.Server.ServiceLogics.StorageManager
             }
         }
 
+        /// <summary>
+        /// file complete uplodaed
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="fileId"></param>
+        /// <param name="fileSize"></param>
+        /// <returns></returns>
         [ConcurrentLock(Type = ConcurrentLockType.PerIpAddress)]
+        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.214.125" })]
         public MessageContract RoamStorageFileComplete(int userId, long fileId, long fileSize)
         {
-            using (var context = new AgrinContext())
+            using (AgrinContext context = new AgrinContext())
             {
+                //20 mb
                 int BistMB = 1024 * 1024 * 20;
-                var user = context.UserInfoes.FirstOrDefault(x => x.Id == userId);
+                UserInfo user = context.UserInfoes.FirstOrDefault(x => x.Id == userId);
                 if (fileSize > BistMB && user.RoamUploadSize < fileSize)
                 {
                     return MessageType.StorageFull;
                 }
-                var file = context.DirectFileInfoes.FirstOrDefault(x => x.Id == fileId);
+                DirectFileInfo file = context.DirectFileInfoes.FirstOrDefault(x => x.Id == fileId);
                 file.IsComplete = true;
                 if (fileSize > BistMB)
                 {
@@ -69,5 +84,6 @@ namespace Agrin.Server.ServiceLogics.StorageManager
                 return MessageType.Success;
             }
         }
+
     }
 }

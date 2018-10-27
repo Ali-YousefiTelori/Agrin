@@ -12,18 +12,23 @@ namespace YoutubeExtractor
     {
         public static string DownloadString(string url)
         {
-//#if PORTABLE
+#if PORTABLE
             var request = WebRequest.Create(url);
             request.Method = "GET";
 
-            return ReadStreamFromResponse(request.GetResponse());
-//#else
-//            using (var client = new WebClient())
-//            {
-//                client.Encoding = System.Text.Encoding.UTF8;
-//                return client.DownloadString(url);
-//            }
-//#endif
+            System.Threading.Tasks.Task<WebResponse> task = System.Threading.Tasks.Task.Factory.FromAsync(
+                request.BeginGetResponse,
+                asyncResult => request.EndGetResponse(asyncResult),
+                null);
+
+            return task.ContinueWith(t => ReadStreamFromResponse(t.Result)).Result;
+#else
+            using (var client = new WebClient())
+            {
+                client.Encoding = System.Text.Encoding.UTF8;
+                return client.DownloadString(url);
+            }
+#endif
         }
 
         public static string HtmlDecode(string value)

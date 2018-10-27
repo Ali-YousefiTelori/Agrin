@@ -69,7 +69,7 @@ namespace Agrin.Download.Web.Connections.ShareSite
                         {
                             video = DownloadUrlResolver.GetVideoInfoByFormatCode(videos, int.Parse(ParentLinkWebRequest.Parent.Management.SharingSettings.First().ToString()));
                             ParentLinkWebRequest.Parent.PathInfo.AddressFileName = Agrin.IO.Helper.MPath.GetFileNameValidChar(video.Title + video.VideoExtension);
-                            DownloadUrlResolver.DecryptUrl(video);
+                            DownloadUrlResolver.DecryptDownloadUrl(video);
                             uri = video.DownloadUrl;
                             ParentLinkWebRequest.Parent.DownloadingProperty.UriCache = uri;
                         }
@@ -78,7 +78,7 @@ namespace Agrin.Download.Web.Connections.ShareSite
                             ParentLinkWebRequest.Parent.Management.UserSelectedItemAction = (item) =>
                             {
                                 VideoInfo info = item as VideoInfo;
-                                DownloadUrlResolver.DecryptUrl(video);
+                                DownloadUrlResolver.DecryptDownloadUrl(video);
                                 uri = info.DownloadUrl;
                                 _currentAddress = uri;
                                 ParentLinkWebRequest.Parent.DownloadingProperty.UriCache = uri;

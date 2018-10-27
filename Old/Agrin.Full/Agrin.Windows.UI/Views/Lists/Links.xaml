@@ -75,7 +75,8 @@
                                     <MenuItem Header="باز کردن محل ذخیره" Command="{Binding OpenFileLocationCommand,Source={StaticResource LinksViewModel}}"/>
                                     <MenuItem Header="تغییر نام و محل ذخیره..." Command="{Binding ChangeLinkSaveLocationCommand,Source={StaticResource LinksViewModel}}"/>
                                     <Separator/>
-                                    <MenuItem Header="کپی آدرس لینک" Command="{Binding CopyLinkLocationCommand,Source={StaticResource LinksViewModel}}"/>
+									<MenuItem Header="کپی آدرس لینک" Command="{Binding CopyLinkLocationCommand,Source={StaticResource LinksViewModel}}"/>
+									<MenuItem Header="تغییر آدرس لینک (کپی از کلیپبرد)" Command="{Binding PasteLinkAddressCommand,Source={StaticResource LinksViewModel}}"/>
                                     <MenuItem Header="ساخت فایل گزارش..." Command="{Binding CreateReportLinkCommand,Source={StaticResource LinksViewModel}}"/>
                                     <!--<MenuItem Header="ترمیم لینک..." Command="{Binding RepairLinkCommand,Source={StaticResource LinksViewModel}}"/>-->
                                     <Separator/>

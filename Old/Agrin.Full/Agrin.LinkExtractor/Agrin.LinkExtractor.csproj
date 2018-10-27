@@ -83,7 +83,6 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Youtube\Youtube.rar" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj">

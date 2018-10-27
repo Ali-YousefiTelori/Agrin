@@ -41,7 +41,7 @@ namespace Agrin.Server.DataBase.Contexts
             //local
             //optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
             //server
-            optionsBuilder.UseSqlServer("Data Source=agrin.info,4565\\SQLEXPRESS;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
+            optionsBuilder.UseSqlServer("Data Source=frameapp.ir,4565\\SQLEXPRESS;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

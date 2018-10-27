@@ -26,7 +26,6 @@ namespace YoutubeExtractor
     /// <summary>
     /// The exception that is thrown when an error occurs durin audio extraction.
     /// </summary>
-    [Serializable]
     public class AudioExtractionException : Exception
     {
         public AudioExtractionException(string message)

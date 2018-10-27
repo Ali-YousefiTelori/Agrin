@@ -34,9 +34,12 @@ namespace Agrin.Server.ServiceLogics.Authentication
         {
             using (AgrinContext context = new AgrinContext(false))
             {
-                userInfo.UserName = userInfo.UserName.CleanPhoneNumber();
+                userInfo.UserName = userInfo.UserName.FixPhoneNumber();
                 if (string.IsNullOrEmpty(userInfo.UserName) || userInfo.UserName.Length < 5)
                     return MessageType.PleaseFillAllData;
+                else if (!userInfo.UserName.IsNumberValudate())
+                    return MessageType.DataIsNotValid;
+
                 UserInfo find = context.UserInfoes.FirstOrDefault(x => x.UserName == userInfo.UserName);
                 if (find != null)
                 {
@@ -53,8 +56,8 @@ namespace Agrin.Server.ServiceLogics.Authentication
                     if (userInfo.UserName.Length >= 8)
                     {
                         var aStringBuilder = new StringBuilder(userInfo.UserName);
-                        aStringBuilder.Remove(4, 3);
-                        aStringBuilder.Insert(4, "***");
+                        aStringBuilder.Remove(5, 3);
+                        aStringBuilder.Insert(5, "***");
                         find.DisplayName = aStringBuilder.ToString();
                     }
                 }

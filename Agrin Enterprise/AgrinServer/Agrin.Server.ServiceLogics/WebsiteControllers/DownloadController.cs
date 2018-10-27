@@ -1,4 +1,5 @@
-﻿using Agrin.Server.ServiceLogics.Controllers;
+﻿using Agrin.Server.Models;
+using Agrin.Server.ServiceLogics.Controllers;
 using SignalGo.Shared.DataTypes;
 using SignalGo.Shared.Http;
 using System;
@@ -13,12 +14,11 @@ namespace Agrin.Server.ServiceLogics.WebsiteControllers
     [ServiceContract("Download", ServiceType.HttpService, InstanceType.SingleInstance)]
     public class DownloadController
     {
-        static string defaultPath = "E:\\AgrinDataBaseFiles";
         public ActionResult AgrinDownloadManagerProLastVersion()
         {
             try
             {
-                var directory = Path.Combine(defaultPath, "AgrinApplication", "Android");
+                var directory = Path.Combine(AgrinConfigInformation.Current.FileStoragePath, "AgrinApplication", "Android");
                 var filePath = Directory.GetFiles(directory).OrderByDescending(x => x).FirstOrDefault();
                 return BaseHttpRequestController.DownloadFile(filePath);
             }
@@ -32,7 +32,7 @@ namespace Agrin.Server.ServiceLogics.WebsiteControllers
         {
             try
             {
-                var directory = Path.Combine(defaultPath, "AgrinApplication", "Windows");
+                var directory = Path.Combine(AgrinConfigInformation.Current.FileStoragePath, "AgrinApplication", "Windows");
                 var filePath = Directory.GetFiles(directory).OrderByDescending(x => x).FirstOrDefault();
                 return BaseHttpRequestController.DownloadFile(filePath);
             }
@@ -42,12 +42,12 @@ namespace Agrin.Server.ServiceLogics.WebsiteControllers
             }
         }
 
-        public ActionResult DownloadCustomFile(string file)
+        public ActionResult DownloadCustomFile(string fileName)
         {
             try
             {
-                var directory = Path.Combine(defaultPath, "AgrinApplication", "CustomFiles");
-                var filePath = Directory.GetFiles(directory).OrderByDescending(x => x).FirstOrDefault();
+                var directory = Path.Combine(AgrinConfigInformation.Current.FileStoragePath, "AgrinApplication", "CustomFiles");
+                var filePath = Path.Combine(directory, fileName);
                 return BaseHttpRequestController.DownloadFile(filePath);
             }
             catch (Exception ex)

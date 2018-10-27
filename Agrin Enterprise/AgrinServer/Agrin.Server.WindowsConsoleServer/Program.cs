@@ -8,11 +8,13 @@ using SMSService.OneWayServices;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using UltraStreamGo;
 
 namespace Agrin.Server.WindowsConsoleServer
 {
@@ -21,56 +23,22 @@ namespace Agrin.Server.WindowsConsoleServer
         private static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            //ConcurrentQueueCollection<int> BlockBuffers = new ConcurrentQueueCollection<int>();
-            //int i = 0;
-            //while (true)
-            //{
-            //    System.Threading.Tasks.Task.Run(async () =>
-            //    {
-            //        Console.WriteLine(System.Threading.Tasks.Task.CurrentId);
-            //        int ok = await BlockBuffers.TakeAsync();
-            //        BlockBuffers.Add(4);
-            //        int ok1 = await BlockBuffers.TakeAsync();
-            //        int ok2 = await BlockBuffers.TakeAsync();
-            //        int ok3 = await BlockBuffers.TakeAsync();
-            //        await System.Threading.Tasks.Task.Run(async () =>
-            //         {
-            //             await System.Threading.Tasks.Task.Delay(5000);
-            //             BlockBuffers.Add(5);
-            //         });
-            //        int ok4 = await BlockBuffers.TakeAsync();
-            //        int ok5 = await BlockBuffers.TakeAsync();
-            //        int nok = ok;
-            //    });
-            //    Console.WriteLine(System.Diagnostics.Process.GetCurrentProcess().Threads.Count);
-            //    //i++;
-            //    //if (i % 1000 == 0)
-            //    BlockBuffers.Add(1);
-            //    BlockBuffers.Add(2);
-            //    BlockBuffers.Add(3);
-            //}
-
             ServerProvider provider = new ServerProvider();
             try
             {
-
-                //int minWorker, minIOC;
-                // Get the current settings.
-                //System.Threading.ThreadPool.GetMaxThreads(out minWorker, out minIOC);
-                //System.Threading.ThreadPool.SetMaxThreads(out minWorker, out minIOC);
-
                 SignalGo.Shared.Log.AutoLogger.IsEnabled = false;
                 using (AgrinContext context = new AgrinContext())
                 {
-                    //var user = context.UserInfoes.FirstOrDefault();
-
                     context.Database.EnsureCreated();
                     context.Database.Migrate();
                     context.UserInfoes.FirstOrDefault();
                     Console.WriteLine("databse OK");
                 }
-                //StreamIdentifier.DefaultFolderPath = "E:\\AgrinDataBaseFiles\\Files";
-                SMSSenderController.Current = new SMSSenderController("main.atitec.ir", 9157);
+                
+                StreamIdentifier.DefaultFolderPath = Path.Combine(AgrinConfigInformation.Current.FileStoragePath, "Files");
+
+                SMSSenderController.Current = new SMSSenderController(AgrinConfigInformation.Current.SMSSenderDomain, AgrinConfigInformation.Current.SMSSenderPort);
+
                 //SignalGo.Server.Log.ServerMethodCallsLogger logger = new SignalGo.Server.Log.ServerMethodCallsLogger();
                 //logger.IsPersianDateLog = true;
                 provider.ProviderSetting.ServerServiceSetting.IsEnabledToUseTimeout = true;
@@ -84,6 +52,7 @@ namespace Agrin.Server.WindowsConsoleServer
                 provider.ProviderSetting.IsEnabledToUseTimeout = true;
                 provider.ProviderSetting.ReceiveDataTimeout = new TimeSpan(0, 0, 5);
                 provider.ProviderSetting.SendDataTimeout = new TimeSpan(0, 0, 5);
+                provider.ProviderSetting.HttpSetting.DefaultAccessDenidHttpStatusCode = System.Net.HttpStatusCode.OK;
                 //logger.Initialize();
                 provider.Start("http://localhost:80/AgringServices/SignalGo", new List<System.Reflection.Assembly>() { typeof(PostService).Assembly });
 
@@ -116,6 +85,19 @@ namespace Agrin.Server.WindowsConsoleServer
             {
                 Console.WriteLine(ex);
             }
+
+            Task.Run(async () =>
+            {
+                int old = 0;
+                while (true)
+                {
+                    await Task.Delay(1000);
+                    var current = provider.ServerDataProvider.GetConnectedCount();
+                    var newValue = current - old;
+                    old = current;
+                    Console.WriteLine($"{newValue} Request Per Second");
+                }
+            });
             while (true)
             {
                 try

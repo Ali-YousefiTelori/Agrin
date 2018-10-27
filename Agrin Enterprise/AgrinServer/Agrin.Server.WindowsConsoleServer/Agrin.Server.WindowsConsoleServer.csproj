@@ -105,6 +105,9 @@
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MimeTypeMap, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediaTypeMap.2.1.0.0\lib\net40\MimeTypeMap.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -262,6 +265,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -277,6 +283,10 @@
     <ProjectReference Include="..\..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Server\SignalGo.Server.csproj">
       <Project>{8170e507-f79c-49c4-9ec2-9112c565a98b}</Project>
       <Name>SignalGo.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Github\StreamGo\UltraStreamGo\UltraStreamGo\UltraStreamGo.csproj">
+      <Project>{b81ab514-1a79-458a-90d1-64390e9ff067}</Project>
+      <Name>UltraStreamGo</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Client\SignalGo.Client.csproj">
       <Project>{da4f99a9-69e4-48f1-8850-5298f7762ab9}</Project>

@@ -16,6 +16,7 @@ namespace Agrin.Models
                 return _buffer.Count;
             }
         }
+
         public ConcurrentCircularBuffer(int maxItemCount)
         {
             _maxItemCount = maxItemCount;
