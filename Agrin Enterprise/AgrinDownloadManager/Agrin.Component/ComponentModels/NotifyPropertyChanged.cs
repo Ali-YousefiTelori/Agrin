@@ -1,13 +1,11 @@
 ﻿using Agrin.Interfaces;
 using Agrin.Log;
-using SignalGo.Shared;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace Agrin.ComponentModels
 {
@@ -18,14 +16,14 @@ namespace Agrin.ComponentModels
     {
         static NotifyPropertyChanged()
         {
-            Thread thread = new Thread(() =>
+            Task.Run(async () =>
             {
                 while (true)
                 {
                     bool foundOne = false;
                     try
                     {
-                        foreach (var notify in ChangedItems)
+                        foreach (KeyValuePair<NotifyPropertyChanged, ConcurrentQueue<string>> notify in ChangedItems)
                         {
                             //break
                             int count = notify.Value.Count;
@@ -44,21 +42,31 @@ namespace Agrin.ComponentModels
                         AutoLogger.LogError(ex, "NotifyPropertyChanged static thread :");
                     }
                     if (foundOne)
-                        Thread.Sleep(200);
+                        await Task.Delay(200);
                     else
-                        Thread.Sleep(700);
+                        await Task.Delay(700);
                 }
             });
-            thread.Start();
         }
 
-        volatile bool _IsDispose = false;
+        private bool _IsDispose = false;
         /// <summary>
         /// if object is disposed
         /// </summary>
-        public bool IsDispose { get => _IsDispose; set => _IsDispose = value; }
+        public bool IsDispose
+        {
+            get
+            {
+                return _IsDispose;
+            }
 
-        static ConcurrentDictionary<NotifyPropertyChanged, ConcurrentQueue<string>> ChangedItems = new ConcurrentDictionary<NotifyPropertyChanged, ConcurrentQueue<string>>();
+            set
+            {
+                _IsDispose = value;
+            }
+        }
+
+        private static ConcurrentDictionary<NotifyPropertyChanged, ConcurrentQueue<string>> ChangedItems = new ConcurrentDictionary<NotifyPropertyChanged, ConcurrentQueue<string>>();
 
         /// <summary>
         /// propertychanged action called when property is changed
@@ -85,7 +93,7 @@ namespace Agrin.ComponentModels
             //RunPropertyChanged(propertyName);
         }
 
-        void RunPropertyChanged(string propertyName)
+        private void RunPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             OnPropertyChangedAction?.Invoke(propertyName);

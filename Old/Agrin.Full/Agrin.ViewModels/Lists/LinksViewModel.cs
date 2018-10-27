@@ -42,6 +42,7 @@ namespace Agrin.ViewModels.Lists
             PlayTaskCommand = new RelayCommand(PlaySelectionTask, CanPlaySelectionTask);
             StopTaskCommand = new RelayCommand(StopSelectionTask, CanStopSelectionTask);
             CopyLinkLocationCommand = new RelayCommand(CopyLinkLocationOK);
+            PasteLinkAddressCommand = new RelayCommand(PasteLinkAddress);
             CreateReportLinkCommand = new RelayCommand(CreateReportLink);
             RepairLinkCommand = new RelayCommand(RepairLink);
             ReconnectCommand = new RelayCommand(ReconnectSelectedLinks, CanReconnectSelectedLinks);
@@ -54,10 +55,17 @@ namespace Agrin.ViewModels.Lists
 
         private bool CanPasteHeaders()
         {
-            if (GetSelectedItems().Count() == 0)
+            try
+            {
+                if (GetSelectedItems().Count() == 0)
+                    return false;
+                string text = Clipboard.GetText(TextDataFormat.UnicodeText);
+                return text != null && text.Contains("AgrinHeaders");
+            }
+            catch (Exception ex)
+            {
                 return false;
-            var text = Clipboard.GetText(TextDataFormat.UnicodeText);
-            return text != null && text.Contains("AgrinHeaders");
+            }
         }
 
         private bool CanCopyHeaders()
@@ -69,21 +77,21 @@ namespace Agrin.ViewModels.Lists
         {
             try
             {
-                var text = Clipboard.GetText(TextDataFormat.UnicodeText);
+                string text = Clipboard.GetText(TextDataFormat.UnicodeText);
                 Dictionary<string, string> headers = new Dictionary<string, string>();
-                foreach (var header in text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (string header in text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (header == "AgrinHeaders")
                         continue;
-                    var keyValue = header.Split(':');
+                    string[] keyValue = header.Split(':');
                     headers.Add(keyValue[0], keyValue[1]);
                 }
 
-                foreach (var link in GetSelectedItems())
+                foreach (LinkInfo link in GetSelectedItems())
                 {
                     if (link.DownloadingProperty.CustomHeaders == null)
                         link.DownloadingProperty.CustomHeaders = new System.Collections.Concurrent.ConcurrentDictionary<string, string>();
-                    foreach (var header in headers)
+                    foreach (KeyValuePair<string, string> header in headers)
                     {
                         link.DownloadingProperty.CustomHeaders.TryAdd(header.Key, header.Value);
                     }
@@ -99,7 +107,7 @@ namespace Agrin.ViewModels.Lists
         {
             StringBuilder headers = new StringBuilder();
             headers.AppendLine("AgrinHeaders");
-            foreach (var item in SelectedItem?.DownloadingProperty?.CustomHeaders)
+            foreach (KeyValuePair<string, string> item in SelectedItem?.DownloadingProperty?.CustomHeaders)
             {
                 headers.AppendLine(item.Key + ":" + item.Value);
             }
@@ -130,6 +138,7 @@ namespace Agrin.ViewModels.Lists
         public RelayCommand PlayTaskCommand { get; set; }
         public RelayCommand StopTaskCommand { get; set; }
         public RelayCommand CopyLinkLocationCommand { get; set; }
+        public RelayCommand PasteLinkAddressCommand { get; set; }
         public RelayCommand CreateReportLinkCommand { get; set; }
         public RelayCommand RepairLinkCommand { get; set; }
 
@@ -140,14 +149,14 @@ namespace Agrin.ViewModels.Lists
         public RelayCommand<object> RenameGroupInfoCommand { get; set; }
         public RelayCommand<object> DeleteGroupInfoCommand { get; set; }
 
-        RelayCommand _MessageCommand;
+        private RelayCommand _MessageCommand;
         public RelayCommand MessageCommand
         {
             get { return _MessageCommand; }
             set { _MessageCommand = value; OnPropertyChanged("MessageCommand"); }
         }
 
-        bool _IsCancelButton = false;
+        private bool _IsCancelButton = false;
 
         public bool IsCancelButton
         {
@@ -171,7 +180,7 @@ namespace Agrin.ViewModels.Lists
             set { _MessageTitle = value; OnPropertyChanged("MessageTitle"); }
         }
 
-        bool _IsShowMessage;
+        private bool _IsShowMessage;
 
         public bool IsShowMessage
         {
@@ -224,12 +233,27 @@ namespace Agrin.ViewModels.Lists
 
         private void RenameGroupInfo(object obj)
         {
-            var stack = obj as StackPanel;
+            StackPanel stack = obj as StackPanel;
             Initialize(stack);
         }
 
-        List<StackPanel> stacks = new List<StackPanel>();
-        void Initialize(StackPanel stackPanel)
+        public void PasteLinkAddress()
+        {
+            string link = Clipboard.GetText();
+            if (Uri.TryCreate(link, UriKind.Absolute, out Uri uri))
+            {
+                foreach (LinkInfo item in GetSelectedItems())
+                {
+                    item.PathInfo.Address = link;
+                    item.Management.MultiLinks.Clear();
+                    item.Management.MultiLinks.Add(new Download.Web.Link.MultiLinkAddress() { Address = link, IsApplicationAdded = true, IsSelected = true });
+                }
+            }
+        }
+
+        private List<StackPanel> stacks = new List<StackPanel>();
+
+        private void Initialize(StackPanel stackPanel)
         {
             Action<TextBlock, TextBox, bool> visibleData = (txt, tBox, visible) =>
             {
@@ -334,7 +358,7 @@ namespace Agrin.ViewModels.Lists
 
         public void ChangeLinkSaveLocation()
         {
-            var items = GetSelectedItems();
+            IEnumerable<LinkInfo> items = GetSelectedItems();
 
             if (items == null || items.Count() == 1)
             {
@@ -353,10 +377,10 @@ namespace Agrin.ViewModels.Lists
             }
             else
             {
-                var saveFileDialog = new System.Windows.Forms.FolderBrowserDialog() { SelectedPath = SelectedItem.PathInfo.SavePath };
+                System.Windows.Forms.FolderBrowserDialog saveFileDialog = new System.Windows.Forms.FolderBrowserDialog() { SelectedPath = SelectedItem.PathInfo.SavePath };
                 if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    foreach (var item in items)
+                    foreach (LinkInfo item in items)
                     {
                         item.PathInfo.UserSavePath = saveFileDialog.SelectedPath;
                         item.SaveThisLink();

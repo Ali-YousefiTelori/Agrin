@@ -1,13 +1,11 @@
 ﻿using Agrin.Download.CoreModels.Link;
 using Agrin.Log;
 using Agrin.Threads;
-using SignalGo.Shared;
 using SignalGo.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace Agrin.Download.Engines
 {
@@ -15,13 +13,14 @@ namespace Agrin.Download.Engines
     {
         public static Action TickCalculatedAction { get; set; }
         public static SpeedEngineHelper Current { get; set; }
-        ConcurrentList<LinkInfoCore> ListOfLinks { get; set; }
+        private ConcurrentList<LinkInfoCore> ListOfLinks { get; set; }
         //ManualResetEvent ManualResetEvent { get; set; }
         public SpeedEngineHelper(ConcurrentList<LinkInfoCore> listOfLinks)
         {
             ListOfLinks = listOfLinks;
         }
-        bool isStart = false;
+
+        private bool isStart = false;
         //public bool IsPause { get; set; }
         public void Resume()
         {
@@ -34,20 +33,20 @@ namespace Agrin.Download.Engines
             }
             isStart = true;
 
-            Thread thread = new Thread(() =>
+            Task.Run(async () =>
             {
                 while (true)
                 {
-                    var items = ListOfLinks.Where(x => x.IsDownloading || x.IsCopyingFile).Select(x => x.AsShort()).ToList();
+                    List<ShortModels.Link.LinkInfoShort> items = ListOfLinks.Where(x => x.IsDownloading || x.IsCopyingFile).Select(x => x.AsShort()).ToList();
                     bool isPause = items.Count == 0;
-                    foreach (var linkInfo in items)
+                    foreach (ShortModels.Link.LinkInfoShort linkInfo in items)
                     {
                         if (linkInfo.PreviousDownloadedSize > 0)
                             linkInfo.AvarageDownloadedSizePerSecound.Put(linkInfo.DownloadedSize - linkInfo.PreviousDownloadedSize);
 
                         if (linkInfo.AvarageDownloadedSizePerSecound.Count != 0)
                         {
-                            var avarage = linkInfo.AvarageDownloadedSizePerSecound.Read().Average();
+                            double avarage = linkInfo.AvarageDownloadedSizePerSecound.Read().Average();
                             linkInfo.DownloadedSizePerSecound = (long)avarage;
                             if (avarage > 0)
                             {
@@ -61,7 +60,7 @@ namespace Agrin.Download.Engines
                         linkInfo.PreviousDownloadedSize = linkInfo.DownloadedSize;
                         if (linkInfo.IsDownloading)
                         {
-                            foreach (var connection in linkInfo.Connections.ToArray())
+                            foreach (LinkInfoRequestCore connection in linkInfo.Connections.ToArray())
                             {
                                 if (connection.CanPlay || connection.IsDownloading)
                                 {
@@ -91,7 +90,7 @@ namespace Agrin.Download.Engines
                     }
                     if (!isPause)
                         TickCalculatedAction?.Invoke();
-                    Thread.Sleep(1000);
+                    await Task.Delay(1000);
                     //if (IsPause)
                     //{
                     //    ManualResetEvent.Reset();
@@ -100,8 +99,6 @@ namespace Agrin.Download.Engines
                     //}
                 }
             });
-            thread.IsBackground = true;
-            thread.Start();
         }
 
         //public void Pause()

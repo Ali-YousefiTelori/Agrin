@@ -1,6 +1,6 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <UserControl.Resources>
+  <!--<UserControl.Resources>
     <Style TargetType="{x:Type RadioButton}">
       <Setter Property="SnapsToDevicePixels" Value="true" />
       <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -10,7 +10,9 @@
       <Setter Property="FontFamily" Value="{DynamicResource PersianFontFamilyStyle}"/>
       <Setter Property="FontSize" Value="12"/>
       <Setter Property="Cursor"  Value="Hand"/>
-      <!--<Setter Property="TextOptions.TextHintingMode" Value="Animated"/>-->
+      -->
+  <!--<Setter Property="TextOptions.TextHintingMode" Value="Animated"/>-->
+        <!--
       <Setter Property="Foreground" Value="#757575"/>
       <Setter Property="Template">
         <Setter.Value>
@@ -133,7 +135,7 @@
         </Setter.Value>
       </Setter>
     </Style>
-  </UserControl.Resources>
+  </UserControl.Resources>-->
   <Grid>
     <TabControl SelectedIndex="{Binding SelectedIndex}">
       <TabControl.Items>

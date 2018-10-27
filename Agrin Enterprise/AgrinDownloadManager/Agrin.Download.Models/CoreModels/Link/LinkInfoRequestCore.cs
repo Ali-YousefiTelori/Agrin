@@ -371,9 +371,9 @@ namespace Agrin.Download.CoreModels.Link
         /// <returns></returns>
         public static LinkInfoRequestCore Instance()
         {
-#if (Debug || Release)
+#if (DEBUG || RELEASE)
             return new LinkInfoRequest();
-#elif (MobileDebug || MobileRelease)
+#elif (MOBILEDEBUG || MOBILERELEASE)
             return new LinkInfoRequestShort();
 #endif
         }

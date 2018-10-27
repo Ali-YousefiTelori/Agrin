@@ -11,8 +11,14 @@ using System.Linq;
 namespace Agrin.Server.ServiceLogics.HelpManager
 {
     [ServiceContract("ExceptionsAndIdea", ServiceType.ServerService, InstanceType = InstanceType.SingleInstance)]
+    [ServiceContract("ExceptionsAndIdea", ServiceType.HttpService, InstanceType = InstanceType.SingleInstance)]
     public class ExceptionsManager
     {
+        public string HelloSignalGo()
+        {
+            return "Hello SignalGo";
+        }
+
         public MessageContract<ExceptionInfo> GetExceptionInformationByCode(int errorCode)
         {
             using (AgrinContext context = new AgrinContext(false))

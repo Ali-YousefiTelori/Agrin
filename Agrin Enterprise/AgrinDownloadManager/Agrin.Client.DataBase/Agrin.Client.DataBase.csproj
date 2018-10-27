@@ -1,96 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7142B851-2734-44F7-B527-87F55BD43803}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Agrin.Client.DataBase</RootNamespace>
-    <AssemblyName>Agrin.Client.DataBase</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <AssemblyVersion>3.0</AssemblyVersion>
+    <FileVersion>3.0</FileVersion>
+    <Version>3.0</Version>
+    <Authors>Ali Yousefi</Authors>
+    <Company></Company>
+    <DebugType>full</DebugType>
+    <Product>Agrin.Client.DataBase</Product>
+    <Description>
+
+    </Description>
+    <Copyright>Copyright © ali.visual.studio@gmail.com 2016</Copyright>
+    <Summary>
+    </Summary>
+    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\$(Configuration)</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\$(Configuration)</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Agrin.UI\packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Agrin.UI\packages\System.ValueTuple.4.4.0\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\..\..\..\Github\CrazyMapper\CrazyMapper\CrazyMapper\CrazyMapper.csproj" />
+    <ProjectReference Include="..\..\..\..\Github\LiteDBSource\LiteDB\LiteDB\LiteDB.csproj" />
+    <ProjectReference Include="..\Agrin.Download.Models\Agrin.Download.csproj" />
+    <ProjectReference Include="..\Agrin.Foundation\Agrin.Foundation.csproj" />
+    <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj" />
+    <ProjectReference Include="..\Agrin.Models\Agrin.Models.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\SettingInfo.cs" />
-    <Compile Include="Tables\AddRangePositionInfoTable.cs" />
-    <Compile Include="AgrinClientContext.cs" />
-    <Compile Include="Tables\ExceptionInfoTable.cs" />
-    <Compile Include="Models\FolderBookmarkInfo.cs" />
-    <Compile Include="Tables\FolderBookmarkInfoTable.cs" />
-    <Compile Include="Tables\LinkInfoTable.cs" />
-    <Compile Include="Tables\MixerInfoTable.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tables\SettingInfoTable.cs" />
-    <Compile Include="Tables\TaskSchedulerTable.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Github\CrazyMapper\CrazyMapper\CrazyMapper\CrazyMapper.csproj">
-      <Project>{95F87B4E-84E1-43DB-8149-0283242A5F7B}</Project>
-      <Name>CrazyMapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Github\LiteDBSource\LiteDB\LiteDB\LiteDB.csproj">
-      <Project>{257C2DE8-223C-4B5C-A36C-CF87E183601B}</Project>
-      <Name>LiteDB</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
-      <Project>{da7b703a-faa1-4ab0-8271-7ce8fd27592e}</Project>
-      <Name>SignalGo.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Agrin.Download.Models\Agrin.Download.Models.csproj">
-      <Project>{4539f9d8-d4c2-47c8-a7ad-21f4a39a1fb7}</Project>
-      <Name>Agrin.Download.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Agrin.Foundation\Agrin.Foundation.csproj">
-      <Project>{783fbbb4-cdd4-4a9d-a8ab-57fbc5bf04de}</Project>
-      <Name>Agrin.Foundation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj">
-      <Project>{5ef58a1f-368f-40f9-b68a-cde14e68fa7d}</Project>
-      <Name>Agrin.IO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Agrin.Models\Agrin.Models.csproj">
-      <Project>{e2018fd5-df00-48a2-a588-dabf5d92e0c8}</Project>
-      <Name>Agrin.Models</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

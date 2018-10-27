@@ -113,10 +113,10 @@ namespace Agrin.Server.ServiceLogics.Controllers
                 return new ActionResult($"File {Path.GetFileName(filePath)} Not found");
             }
             FileInfo info = new FileInfo(filePath);
-            client.ResponseHeaders.Add("content-disposition", new string[] { "attachment; filename=" + info.Name });
-            client.ResponseHeaders.Add("Content-Length", new string[] { info.Length.ToString() });
-            client.ResponseHeaders.Add("Content-Type", new string[] { MimeTypes.MimeTypeMap.GetMimeType(info.Extension) });
-            client.ResponseHeaders.Add("Last-Modified", info.LastWriteTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'UTC'").Split(','));
+            client.ResponseHeaders.Add("content-disposition",  "attachment; filename=" + info.Name );
+            client.ResponseHeaders.Add("Content-Length",  info.Length.ToString() );
+            client.ResponseHeaders.Add("Content-Type", MimeTypes.MimeTypeMap.GetMimeType(info.Extension));
+            client.ResponseHeaders.Add("Last-Modified", info.LastWriteTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'UTC'"));
             return new FileActionResult(filePath);
         }
     }

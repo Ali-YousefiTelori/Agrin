@@ -43,7 +43,7 @@ namespace Agrin.Server.DataBaseLogic
                 context.SaveChanges();
                 try
                 {
-                    var result = await SMSSenderController.Current.SendSMSAsync("AgrinServerUser", "bNTg$%##F4598NBDDS4548fdkjcpopw[]\\~234GTHGFnm,../KJNFKDF4", "کد ثبت نام در آگرین: " + randomNumber, phone);
+                    var result = await SMSSenderController.Current.SendSMSAsync(AgrinConfigInformation.Current.SMSServerUserName, AgrinConfigInformation.Current.SMSServerPassword, "کد ثبت نام در آگرین: " + randomNumber, phone);
                     if (!result.IsSuccess)
                     {
                         AutoLogger.Default.LogText("Send SMS not success " + result.Message);
