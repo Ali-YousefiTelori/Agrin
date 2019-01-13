@@ -44,6 +44,10 @@ namespace Agrin.LinkExtractor.Instagram
             using (var reader = new System.IO.StreamReader(_request.GetResponse().GetResponseStream()))
             {
                 var data = reader.ReadToEnd();
+                if (Agrin.IO.Strings.Text.GetTextBetweenTwoValue(data, "og:type\"", "/>", false).Contains("profile"))
+                {
+                    throw new Exception("توانایی دانلود از این آدرس وجود ندارد");
+                }
                 var linkString = Agrin.IO.Strings.Text.GetTextBetweenTwoValue(data,  "og:video\"", "/>",false);
                 if (string.IsNullOrEmpty(linkString))
                     linkString = Agrin.IO.Strings.Text.GetTextBetweenTwoValue(data, "og:image\"", "/>", false);

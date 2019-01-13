@@ -24,11 +24,11 @@ namespace Agrin.Server.ServiceLogics.Logics
                     {
                         using (var context = new AgrinContext())
                         {
-                            if (context.UserCreditInfoes.Any(x => x.Key == userCreditInfo.Key))
+                            if (context.UserCredits.Any(x => x.Key == userCreditInfo.Key))
                                 return MessageType.Duplicate;
-                            var user = context.UserInfoes.FirstOrDefault(x => x.Id == userCreditInfo.ToUserId);
+                            var user = context.Users.FirstOrDefault(x => x.Id == userCreditInfo.ToUserId);
                             user.Credit += userCreditInfo.Amount;
-                            context.UserCreditInfoes.Add(userCreditInfo);
+                            context.UserCredits.Add(userCreditInfo);
                             context.SaveChanges();
                             return MessageType.Success;
                         }

@@ -19,7 +19,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;__ANDROID__</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
   </PropertyGroup>
@@ -106,6 +106,8 @@
     <Compile Include="HardWare\Disk.cs" />
     <Compile Include="HardWare\ADriveHelper.cs" />
     <Compile Include="HardWare\IDriveHelper.cs" />
+    <Compile Include="Helper\CrossDirectoryInfo.cs" />
+    <Compile Include="Helper\CrossFileInfo.cs" />
     <Compile Include="Helper\DirectoryMoveHelper.cs" />
     <Compile Include="Helper\ExceptionManager.cs" />
     <Compile Include="Helper\IOHelper.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spliter\FileSpliter.cs" />
     <Compile Include="Streams\IStreamWriter.cs" />
+    <Compile Include="Streams\StreamCross.cs" />
     <Compile Include="Streams\StreamWriter.cs" />
     <Compile Include="Strings\Decodings.cs" />
     <Compile Include="Strings\Encodings.cs" />

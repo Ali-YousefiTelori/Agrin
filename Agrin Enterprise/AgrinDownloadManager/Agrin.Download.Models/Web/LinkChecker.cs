@@ -91,17 +91,24 @@ namespace Agrin.Download.Web
             _isStartHost = false;
             _isStartLink = false;
             _isLinkStatistics = false;
-            if (lastHostThread != null)
+            try
             {
-                lastHostThread.Abort();
+                if (lastHostThread != null)
+                {
+                    lastHostThread.Abort();
+                }
+                if (lastLinkThread != null)
+                {
+                    lastLinkThread.Abort();
+                }
+                if (lastLinkStatisticsThread != null)
+                {
+                    lastLinkStatisticsThread.Abort();
+                }
             }
-            if (lastLinkThread != null)
+            catch (Exception)
             {
-                lastLinkThread.Abort();
-            }
-            if (lastLinkStatisticsThread != null)
-            {
-                lastLinkStatisticsThread.Abort();
+
             }
             ResetProperties(CheckStatus.Busy);
             CheckHost(linkAddress);

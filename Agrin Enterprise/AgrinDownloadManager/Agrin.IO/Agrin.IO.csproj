@@ -45,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Github\StreamGo\UltraStreamGo\UltraStreamGo\UltraStreamGo.csproj" />
     <ProjectReference Include="..\Agrin.Checksum\Agrin.Checksum.csproj" />
     <ProjectReference Include="..\Agrin.Log\Agrin.Log.csproj" />
     <ProjectReference Include="..\Agrin.Web\Agrin.Web.csproj" />

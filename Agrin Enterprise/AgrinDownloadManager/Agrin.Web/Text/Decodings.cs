@@ -11,15 +11,15 @@ namespace Agrin.Web.Text
         {
             if (String.IsNullOrEmpty(txt))
                 return "";
-#if(MobileDebug || MobileRelease)
-            if (String.IsNullOrEmpty(txt))
-                return txt;
-            return HtmlDecoding(UrlDecode(txt.Trim()));
-#else
+//#if(MobileDebug || MobileRelease)
+//            if (String.IsNullOrEmpty(txt))
+//                return txt;
+//            return HtmlDecoding(UrlDecode(txt.Trim()));
+//#else
             if (String.IsNullOrEmpty(txt))
                 return txt;
             return HtmlDecoding(UrlDecode(System.Net.WebUtility.HtmlDecode(txt.Trim())));
-#endif
+//#endif
         }
 
         public static string HtmlDecoding(this string value)

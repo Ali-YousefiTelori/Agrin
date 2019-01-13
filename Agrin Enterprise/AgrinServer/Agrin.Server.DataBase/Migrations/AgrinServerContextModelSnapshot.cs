@@ -39,7 +39,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CommentInfoes");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.DirectFileInfo", b =>
@@ -52,13 +52,15 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.Property<bool>("IsComplete");
 
+                    b.Property<Guid>("Password");
+
                     b.Property<int>("ServerId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ServerId");
 
-                    b.ToTable("DirectFileInfoes");
+                    b.ToTable("DirectFiles");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.DirectFolderInfo", b =>
@@ -79,7 +81,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("DirectFolderInfoes");
+                    b.ToTable("DirectFolders");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.ExceptionInfo", b =>
@@ -100,7 +102,89 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ExceptionInfoes");
+                    b.ToTable("Exceptions");
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.FileInfo", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDateTime");
+
+                    b.Property<bool>("IsComplete");
+
+                    b.Property<Guid>("Password");
+
+                    b.Property<int?>("PostId");
+
+                    b.Property<int?>("RequestIdeaId");
+
+                    b.Property<int?>("RequestIdeaInfoId");
+
+                    b.Property<int>("ServerId");
+
+                    b.Property<byte>("Type");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("Version")
+                        .HasMaxLength(20);
+
+                    b.Property<int?>("VersionNumber");
+
+                    b.Property<int?>("VisitCardId");
+
+                    b.Property<int?>("VisitCardInfoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("RequestIdeaInfoId");
+
+                    b.HasIndex("ServerId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("VisitCardInfoId");
+
+                    b.ToTable("Files");
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.LanguageInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.LanguageKeyInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Key")
+                        .HasMaxLength(20);
+
+                    b.Property<int>("LanguageId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("LanguageKeys");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.LikeInfo", b =>
@@ -119,7 +203,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("LikeInfoes");
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.PostCategoryInfo", b =>
@@ -128,36 +212,13 @@ namespace Agrin.Server.DataBase.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Title");
+                    b.Property<int>("LanguageKeyId");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PostCategoryInfoes");
-                });
+                    b.HasIndex("LanguageKeyId");
 
-            modelBuilder.Entity("Agrin.Server.DataBase.Models.PostFileInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("OperationSystemSupports");
-
-                    b.Property<int>("PostId");
-
-                    b.Property<string>("ServerAddress");
-
-                    b.Property<byte>("Type");
-
-                    b.Property<string>("Version");
-
-                    b.Property<int?>("VersionNumber");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("PostFileInfo");
+                    b.ToTable("PostCategories");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.PostInfo", b =>
@@ -194,7 +255,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PostInfoes");
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.PostSoundInfo", b =>
@@ -207,7 +268,26 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PostSoundInfoes");
+                    b.ToTable("PostSounds");
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.PostSubCategoryInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LanguageKeyId");
+
+                    b.Property<int>("PostCategoryId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageKeyId");
+
+                    b.HasIndex("PostCategoryId");
+
+                    b.ToTable("PostSubCategories");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.PostVideoInfo", b =>
@@ -220,7 +300,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PostVideoInfoes");
+                    b.ToTable("PostVideoes");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.Relations.DirectFileToUserRelationInfo", b =>
@@ -235,7 +315,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("DirectFileId");
 
-                    b.ToTable("DirectFileToUserRelationInfoes");
+                    b.ToTable("DirectFileToUserRelations");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.Relations.DirectFolderToUserRelationInfo", b =>
@@ -250,22 +330,20 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("DirectFolderId");
 
-                    b.ToTable("DirectFolderToUserRelationInfoes");
+                    b.ToTable("DirectFolderToUserRelations");
                 });
 
-            modelBuilder.Entity("Agrin.Server.DataBase.Models.Relations.PostCategoryTagRelationInfo", b =>
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.Relations.PostCategorySubCategoryRelationInfo", b =>
                 {
-                    b.Property<int>("TagId");
+                    b.Property<int>("PostSubCategoryId");
 
                     b.Property<int>("PostCategoryId");
 
-                    b.Property<bool>("IsHeaderTag");
-
-                    b.HasKey("TagId", "PostCategoryId");
+                    b.HasKey("PostSubCategoryId", "PostCategoryId");
 
                     b.HasIndex("PostCategoryId");
 
-                    b.ToTable("PostCategoryTagRelationInfoes");
+                    b.ToTable("PostCategorySubCategoryRelationInfo");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.Relations.PostTagRelationInfo", b =>
@@ -278,7 +356,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("PostTagRelationInfoes");
+                    b.ToTable("PostTagRelations");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.RequestIdeaInfo", b =>
@@ -313,7 +391,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RequestIdeaInfoes");
+                    b.ToTable("RequestIdeas");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.ServerInfo", b =>
@@ -322,13 +400,15 @@ namespace Agrin.Server.DataBase.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Domain");
+                    b.Property<string>("Domain")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("IpAddress");
+                    b.Property<string>("IpAddress")
+                        .HasMaxLength(16);
 
                     b.HasKey("Id");
 
-                    b.ToTable("ServerInfoes");
+                    b.ToTable("Servers");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.TagInfo", b =>
@@ -337,11 +417,12 @@ namespace Agrin.Server.DataBase.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 
-                    b.ToTable("TagInfoes");
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.UserConfirmHashInfo", b =>
@@ -364,7 +445,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserConfirmHashInfoes");
+                    b.ToTable("UserConfirmHashes");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.UserCreditInfo", b =>
@@ -392,7 +473,7 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("ToUserId");
 
-                    b.ToTable("UserCreditInfoes");
+                    b.ToTable("UserCredits");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.UserInfo", b =>
@@ -428,7 +509,24 @@ namespace Agrin.Server.DataBase.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("UserInfoes");
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.UserRoleInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte>("AccessType");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.UserSessionInfo", b =>
@@ -439,17 +537,21 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.Property<DateTime>("CreatedDateTime");
 
-                    b.Property<string>("DeviceName");
+                    b.Property<string>("DeviceName")
+                        .HasMaxLength(100);
 
                     b.Property<Guid>("FirstKey");
 
                     b.Property<bool>("IsActive");
 
-                    b.Property<string>("OsName");
+                    b.Property<string>("OsName")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("OsVersionName");
+                    b.Property<string>("OsVersionName")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("OsVersionNumber");
+                    b.Property<string>("OsVersionNumber")
+                        .HasMaxLength(15);
 
                     b.Property<Guid>("SecondKey");
 
@@ -459,7 +561,28 @@ namespace Agrin.Server.DataBase.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserSessionInfoes");
+                    b.ToTable("UserSessions");
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.VisitCardInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(350);
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(100);
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("VisitCards");
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.CommentInfo", b =>
@@ -489,6 +612,39 @@ namespace Agrin.Server.DataBase.Migrations
                         .HasForeignKey("ParentId");
                 });
 
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.FileInfo", b =>
+                {
+                    b.HasOne("Agrin.Server.DataBase.Models.PostInfo", "PostInfo")
+                        .WithMany("FileInfoes")
+                        .HasForeignKey("PostId");
+
+                    b.HasOne("Agrin.Server.DataBase.Models.RequestIdeaInfo")
+                        .WithMany("FileInfoes")
+                        .HasForeignKey("RequestIdeaInfoId");
+
+                    b.HasOne("Agrin.Server.DataBase.Models.ServerInfo", "ServerInfo")
+                        .WithMany()
+                        .HasForeignKey("ServerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Agrin.Server.DataBase.Models.UserInfo", "UserInfo")
+                        .WithMany("Files")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Agrin.Server.DataBase.Models.VisitCardInfo")
+                        .WithMany("FileInfoes")
+                        .HasForeignKey("VisitCardInfoId");
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.LanguageKeyInfo", b =>
+                {
+                    b.HasOne("Agrin.Server.DataBase.Models.LanguageInfo", "LanguageInfo")
+                        .WithMany("LanguageKeyInfoes")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("Agrin.Server.DataBase.Models.LikeInfo", b =>
                 {
                     b.HasOne("Agrin.Server.DataBase.Models.RequestIdeaInfo", "RequestIdeaInfo")
@@ -501,12 +657,12 @@ namespace Agrin.Server.DataBase.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Agrin.Server.DataBase.Models.PostFileInfo", b =>
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.PostCategoryInfo", b =>
                 {
-                    b.HasOne("Agrin.Server.DataBase.Models.PostInfo", "PostInfo")
-                        .WithMany("FileInfoes")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("Agrin.Server.DataBase.Models.LanguageKeyInfo", "LanguageKeyInfo")
+                        .WithMany("PostCategoryInfoes")
+                        .HasForeignKey("LanguageKeyId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.PostInfo", b =>
@@ -527,6 +683,19 @@ namespace Agrin.Server.DataBase.Migrations
                     b.HasOne("Agrin.Server.DataBase.Models.UserInfo", "UserInfo")
                         .WithMany("PostInfoes")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.PostSubCategoryInfo", b =>
+                {
+                    b.HasOne("Agrin.Server.DataBase.Models.LanguageKeyInfo", "LanguageKeyInfo")
+                        .WithMany()
+                        .HasForeignKey("LanguageKeyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Agrin.Server.DataBase.Models.PostCategoryInfo", "PostCategoryInfo")
+                        .WithMany()
+                        .HasForeignKey("PostCategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -556,17 +725,17 @@ namespace Agrin.Server.DataBase.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Agrin.Server.DataBase.Models.Relations.PostCategoryTagRelationInfo", b =>
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.Relations.PostCategorySubCategoryRelationInfo", b =>
                 {
                     b.HasOne("Agrin.Server.DataBase.Models.PostCategoryInfo", "PostCategoryInfo")
-                        .WithMany("PostCategoryTagRelationInfoes")
+                        .WithMany("PostCategorySubCategoryRelationInfoes")
                         .HasForeignKey("PostCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Agrin.Server.DataBase.Models.TagInfo", "TagInfo")
-                        .WithMany("PostCategoryTagRelationInfoes")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("Agrin.Server.DataBase.Models.PostSubCategoryInfo", "PostSubCategoryInfo")
+                        .WithMany("PostCategorySubCategoryRelationInfoes")
+                        .HasForeignKey("PostSubCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Agrin.Server.DataBase.Models.Relations.PostTagRelationInfo", b =>
@@ -610,10 +779,26 @@ namespace Agrin.Server.DataBase.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.UserRoleInfo", b =>
+                {
+                    b.HasOne("Agrin.Server.DataBase.Models.UserInfo", "UserInfo")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Agrin.Server.DataBase.Models.UserSessionInfo", b =>
                 {
                     b.HasOne("Agrin.Server.DataBase.Models.UserInfo", "UserInfo")
                         .WithMany("UserSessionInfoes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Agrin.Server.DataBase.Models.VisitCardInfo", b =>
+                {
+                    b.HasOne("Agrin.Server.DataBase.Models.UserInfo", "UserInfo")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

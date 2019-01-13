@@ -21,7 +21,7 @@ namespace Agrin.Server.DataBaseLogic
 
             using (AgrinContext context = new AgrinContext(false))
             {
-                context.UserInfoes.Add(userInfo);
+                context.Users.Add(userInfo);
                 context.SaveChanges();
             }
             return true;
@@ -32,7 +32,7 @@ namespace Agrin.Server.DataBaseLogic
             using (var context = new AgrinContext())
             {
                 var randomNumber = RandomizationHelper.GetRandomNumber();
-                context.UserConfirmHashInfoes.Add(new UserConfirmHashInfo()
+                context.UserConfirmHashes.Add(new UserConfirmHashInfo()
                 {
                     IsUsed = false,
                     RandomGuid = Guid.NewGuid(),

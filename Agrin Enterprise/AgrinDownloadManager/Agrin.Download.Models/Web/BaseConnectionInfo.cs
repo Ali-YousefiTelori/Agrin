@@ -12,16 +12,12 @@ using Agrin.Threads;
 using Agrin.Web;
 using Agrin.Web.Text;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Mime;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Agrin.Download.Web
 {
@@ -32,12 +28,19 @@ namespace Agrin.Download.Web
     {
         static BaseConnectionInfo()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3 | (SecurityProtocolType)3072;
+            try
+            {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3 | (SecurityProtocolType)3072;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
-        Thread CheckResumableThread { get; set; }
+        private Thread CheckResumableThread { get; set; }
 
-        WebRequestExchangerBase CurrentWebRequestExchanger { get; set; }
+        private WebRequestExchangerBase CurrentWebRequestExchanger { get; set; }
 
         public Stream ResponseStream
         {
@@ -51,16 +54,16 @@ namespace Agrin.Download.Web
 
         private string _currentAddress;
 
-        private IWebProxy _currentProxy;
+        private readonly IWebProxy _currentProxy;
 
-        private string _authentication;
-        volatile bool _IsDispose = false;
+        private readonly string _authentication;
+        private bool _IsDispose = false;
 
-        LinkInfoRequestCore RequestCore { get; set; }
-        LinkInfoShort LinkInfo { get; set; }
+        private LinkInfoRequestCore RequestCore { get; set; }
+        private LinkInfoShort LinkInfo { get; set; }
 
-        Stopwatch _limitWatch = new Stopwatch();
-        TimeSpan _perTime = new TimeSpan(0, 0, 1);
+        private Stopwatch _limitWatch = new Stopwatch();
+        private readonly TimeSpan _perTime = new TimeSpan(0, 0, 1);
 
         /// <summary>
         /// if link is ftp
@@ -78,7 +81,18 @@ namespace Agrin.Download.Web
         /// <summary>
         /// if object is disposed
         /// </summary>
-        public bool IsDispose { get => _IsDispose; set => _IsDispose = value; }
+        public bool IsDispose
+        {
+            get
+            {
+                return _IsDispose;
+            }
+
+            set
+            {
+                _IsDispose = value;
+            }
+        }
 
         /// <summary>
         /// status of request core
@@ -126,7 +140,7 @@ namespace Agrin.Download.Web
         public void Play()
         {
             ConnectionStatus = ConnectionStatus.CreatingRequest;
-            var thread = new Thread(StartConnection)
+            Thread thread = new Thread(StartConnection)
             {
                 IsBackground = false
             };
@@ -186,7 +200,7 @@ namespace Agrin.Download.Web
             if (IsDispose)
                 return false;
             ConnectionStatus = ConnectionStatus.CreatingRequest;
-            _saveStream = IOHelperBase.OpenFileStreamForWrite(RequestCore.SaveConnectionFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            _saveStream = IOHelperBase.Current.OpenFileStreamForWrite(RequestCore.SaveConnectionFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             // fix hang on 99 % 
             if (_saveStream.Length > 10 && _saveStream.Length != RequestCore.Length)
                 _saveStream.SetLength(_saveStream.Length - 10);
@@ -252,12 +266,12 @@ namespace Agrin.Download.Web
             return true;
         }
 
-        WebHeaderCollection GetCustomHeaders()
+        private WebHeaderCollection GetCustomHeaders()
         {
             if (LinkInfo.LinkInfoDownloadCore is EntireModels.Link.LinkInfoDownload)
             {
                 WebHeaderCollection result = new WebHeaderCollection();
-                foreach (var item in ((EntireModels.Link.LinkInfoDownload)LinkInfo.LinkInfoDownloadCore).CustomHeaders)
+                foreach (KeyValuePair<string, string> item in ((EntireModels.Link.LinkInfoDownload)LinkInfo.LinkInfoDownloadCore).CustomHeaders)
                 {
                     result.Add(item.Key, item.Value);
                 }
@@ -273,7 +287,7 @@ namespace Agrin.Download.Web
             if (IsDispose)
                 return;
             ConnectionStatus = ConnectionStatus.Connecting;
-            var reConnectTimer = Stopwatch.StartNew();
+            Stopwatch reConnectTimer = Stopwatch.StartNew();
             try
             {
                 CurrentWebRequestExchanger.GetResponse();
@@ -335,7 +349,7 @@ namespace Agrin.Download.Web
 
                 string newUri = CurrentWebRequestExchanger.ResponseUri.ToString();
                 bool canAddNewUri = true;
-                foreach (var item in LinkInfo.LinkInfoManagementCore.MultiLinkAddresses)
+                foreach (LinkAddressInfo item in LinkInfo.LinkInfoManagementCore.MultiLinkAddresses)
                 {
                     if (item.Address == newUri)
                     {
@@ -355,6 +369,8 @@ namespace Agrin.Download.Web
             }
             catch (Exception e)
             {
+                if (!IsDispose && ConnectionStatus != ConnectionStatus.Stoped)
+                    LinkInfo.LinkInfoManagementCore.AddError(e);
                 AutoLogger.LogError(e, "Connect");
                 ConnectionStatus = ConnectionStatus.Error;
             }
@@ -370,7 +386,7 @@ namespace Agrin.Download.Web
                 if (CurrentWebRequestExchanger.ResponseHeaders["content-disposition"] != null)
                 {
                     string fileName = "";
-                    var contentDisposition = CurrentWebRequestExchanger.ResponseHeaders["content-disposition"].Replace("[", "").Replace("]", "");
+                    string contentDisposition = CurrentWebRequestExchanger.ResponseHeaders["content-disposition"].Replace("[", "").Replace("]", "");
                     try
                     {
                         ContentDisposition content = new ContentDisposition(contentDisposition);
@@ -396,7 +412,7 @@ namespace Agrin.Download.Web
                 {
                     if (LinkInfo.LinkInfoDownloadCore.ResumeCapability != ResumeCapabilityEnum.No)
                     {
-                        var value = CurrentWebRequestExchanger.ResponseHeaders["accept-ranges"];
+                        string value = CurrentWebRequestExchanger.ResponseHeaders["accept-ranges"];
                         if (value != null && value.ToLower().Contains("bytes"))
                         {
                             if (value.Contains(RequestCore.StartPosition.ToString()) || RequestCore.StartPosition == 0)
@@ -410,7 +426,7 @@ namespace Agrin.Download.Web
                 {
                     if (LinkInfo.LinkInfoDownloadCore.ResumeCapability != ResumeCapabilityEnum.No)
                     {
-                        var value = CurrentWebRequestExchanger.ResponseHeaders["content-range"];
+                        string value = CurrentWebRequestExchanger.ResponseHeaders["content-range"];
                         if (value != null && value.ToLower().Contains(RequestCore.StartPosition.ToString()))
                             LinkInfo.LinkInfoDownloadCore.ResumeCapability = ResumeCapabilityEnum.Yes;
                     }
@@ -430,12 +446,12 @@ namespace Agrin.Download.Web
                     string ext = MimeTypeHelper.GetExtension(contentType);
                     if (string.IsNullOrEmpty(ext) || !LinkInfo.PathInfo.AppFileName.ToLower().EndsWith(ext.ToLower()))
                     {
-                        var extNew = PathHelper.GetFileExtention(LinkInfo.PathInfo.AppFileName);
+                        string extNew = PathHelper.GetFileExtention(LinkInfo.PathInfo.AppFileName);
                         if (extNew != null)
                             extNew = extNew.ToLower();
                         if (extNew == ".htm" || extNew == ".html")
                         {
-                            var newFileName = Path.GetFileNameWithoutExtension(LinkInfo.PathInfo.AppFileName) + extNew;
+                            string newFileName = Path.GetFileNameWithoutExtension(LinkInfo.PathInfo.AppFileName) + extNew;
                             mustSave = LinkInfo.PathInfo.AppFileName != newFileName;
                             LinkInfo.PathInfo.AppFileName = newFileName;
                         }
@@ -453,7 +469,8 @@ namespace Agrin.Download.Web
                     AutoLogger.LogError(e, "GetHeaders");
                     if (ConnectionStatus == ConnectionStatus.Connecting)
                     {
-                        LinkInfo.LinkInfoManagementCore.AddError(e);
+                        if (!IsDispose)
+                            LinkInfo.LinkInfoManagementCore.AddError(e);
                         ConnectionStatus = ConnectionStatus.Error;
                     }
                 }
@@ -466,7 +483,7 @@ namespace Agrin.Download.Web
             }
         }
 
-        bool CanBreak()
+        private bool CanBreak()
         {
             if (IsDispose)
                 return true;
@@ -572,7 +589,7 @@ namespace Agrin.Download.Web
                     {
                         if (saveStreamLen == RequestCore.Length)
                         {
-                            RequestCore.DownloadedSize = (long)RequestCore.Length;
+                            RequestCore.DownloadedSize = RequestCore.Length;
                             Complete();
                             break;
                         }
@@ -616,13 +633,13 @@ namespace Agrin.Download.Web
             RequestCore.LastReadDuration = 10;
         }
 
-        void CheckResumableSupport()
+        private void CheckResumableSupport()
         {
             try
             {
                 if (LinkInfo.LinkInfoDownloadCore.ResumeCapability != ResumeCapabilityEnum.Unknown)
                     return;
-                using (var resumableChecker = new LinkResumableChecker())
+                using (LinkResumableChecker resumableChecker = new LinkResumableChecker())
                 {
                     if (resumableChecker.CheckAddressContentForSupportResumableJustHeader(_currentAddress, _authentication, _currentProxy, RequestCore.RequestCookieContainer, GetCustomHeaders()))
                         LinkInfo.LinkInfoDownloadCore.ResumeCapability = ResumeCapabilityEnum.Yes;
@@ -644,8 +661,7 @@ namespace Agrin.Download.Web
             }
         }
 
-
-        void Complete()
+        private void Complete()
         {
             if (_saveStream.Length != RequestCore.Length && RequestCore.Length > 0)
             {
@@ -656,7 +672,7 @@ namespace Agrin.Download.Web
             Dispose();
         }
 
-        bool _isBeginDispose = false;
+        private readonly bool _isBeginDispose = false;
         /// <summary>
         /// dispose file stream
         /// </summary>

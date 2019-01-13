@@ -10,7 +10,7 @@ namespace Agrin.IO.Spliter
     {
         public static void SplitFile(string fileName, string saveToDirectory, string startFileName, int splitelength)
         {
-            using (var stream = IOHelper.OpenFileStreamForRead(fileName, System.IO.FileMode.Open))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForRead(fileName, System.IO.FileMode.Open))
             {
                 var oneFileSize = stream.Length / splitelength;
                 var lastFileSize = stream.Length % splitelength;
@@ -20,7 +20,7 @@ namespace Agrin.IO.Spliter
                     if (i == oneFileSize)
                         splitelength = (int)lastFileSize;
                     string splitFileName = System.IO.Path.GetFileNameWithoutExtension(startFileName) + i + MPath.GetFileExtention(startFileName);
-                    using (var writeStream = IOHelper.OpenFileStreamForWrite(saveToDirectory, System.IO.FileMode.Create, fileName: splitFileName))
+                    using (var writeStream = IOHelperBase.Current.OpenFileStreamForWrite(saveToDirectory, System.IO.FileMode.Create, fileName: splitFileName))
                     {
                         while (readLen < splitelength)
                         {

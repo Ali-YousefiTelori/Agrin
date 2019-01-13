@@ -149,7 +149,6 @@ namespace AgrinSetup
                         //    directorySecurity.AddAccessRule(new FileSystemAccessRule("Users", rights, AccessControlType.Allow));
                         //    directorySecurity.AddAccessRule(new FileSystemAccessRule("SYSTEM", rights, AccessControlType.Allow));
                         //    directorySecurity.AddAccessRule(new FileSystemAccessRule("ALL APPLICATION PACKAGES", rights, AccessControlType.Allow));
-
                         //}
                         //catch(Exception e)
                         //{

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UltraStreamGo;
 
 namespace Agrin.Download.Mixers
 {
@@ -46,7 +47,7 @@ namespace Agrin.Download.Mixers
             }
             if (isCanceled)
                 return;
-            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
             {
                 if (isCanceled)
                     return;
@@ -58,7 +59,7 @@ namespace Agrin.Download.Mixers
         {
             if (isCanceled)
                 return;
-            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName, newSecurityFileName: (newPath) => CurrentMixer.SecurityAddress = newPath))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName, newSecurityFileName: (newPath) => CurrentMixer.SecurityAddress = newPath))
             {
                 stream.Seek(0, System.IO.SeekOrigin.End);
                 foreach (var file in Files)
@@ -68,7 +69,7 @@ namespace Agrin.Download.Mixers
                     if (isCanceled)
                         return;
                     long currentMixed = MixedSize;
-                    using (var copystream = IOHelperBase.OpenFileStreamForRead(file.Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                    using (var copystream = IOHelperBase.Current.OpenFileStreamForRead(file.Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
                     {
                         int len = 1024 * 1024 * 2;
                         byte[] read = new byte[len];
@@ -87,7 +88,7 @@ namespace Agrin.Download.Mixers
                     MixerInfo.SaveAction(CurrentMixer);
                     try
                     {
-                        IOHelperBase.DeleteFile(file.Path);
+                        CrossFileInfo.Current.Delete(file.Path);
                     }
                     catch (Exception ex)
                     {
@@ -105,7 +106,7 @@ namespace Agrin.Download.Mixers
             long size = 0;
             foreach (var fileName in files)
             {
-                if (System.IO.File.Exists(fileName))
+                if (CrossFileInfo.Current.Exists(fileName))
                 {
                     var fileSize = new System.IO.FileInfo(fileName).Length;
                     if (max < fileSize)

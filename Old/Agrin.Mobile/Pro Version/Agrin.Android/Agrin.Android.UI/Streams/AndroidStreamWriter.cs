@@ -76,5 +76,10 @@ namespace Agrin.Streams
         {
             throw new NotImplementedException();
         }
+
+        public void Flush()
+        {
+            disposeStrream.Flush();
+        }
     }
 }

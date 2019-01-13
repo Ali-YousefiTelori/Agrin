@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Agrin.Server.Models
+﻿namespace Agrin.Server.Models
 {
 
     public class MessageContract
@@ -45,6 +39,11 @@ namespace Agrin.Server.Models
         {
             return new MessageContract<T>() { IsSuccess = value };
         }
+
+        public static implicit operator MessageContract<T>(T data)
+        {
+            return new MessageContract<T>() { IsSuccess = true, Data = data };
+        }
     }
 
     /// <summary>
@@ -72,6 +71,6 @@ namespace Agrin.Server.Models
         {
             return new MessageContract() { IsSuccess = true, Data = data };
         }
-        
+
     }
 }

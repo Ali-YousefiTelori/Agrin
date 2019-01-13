@@ -202,7 +202,7 @@ namespace Agrin.Download.Web.Link
                 if (Errors.Count > 0)
                 {
                     var error = Errors.Last();
-#if(MobileApp)
+#if(MobileApp || __ANDROID__)
                     if (error.ExceptionData is WebException)
                     {
                         if (error.OtherData.Count >= 2 && error.OtherData[1] is HttpStatusCode)

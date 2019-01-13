@@ -9,7 +9,7 @@ namespace Agrin.IO.Strings
         {
             if (String.IsNullOrEmpty(txt))
                 return "";
-#if(MobileApp)
+#if(MobileApp || __ANDROID__)
             if (String.IsNullOrEmpty(txt))
                 return txt;
             return HtmlDecoding(UrlDecode(txt.Trim()));

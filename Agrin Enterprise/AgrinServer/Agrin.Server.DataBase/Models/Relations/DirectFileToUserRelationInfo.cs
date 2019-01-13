@@ -15,6 +15,9 @@ namespace Agrin.Server.DataBase.Models.Relations
         Viewer = 2,
     }
 
+    /// <summary>
+    /// direct user files
+    /// </summary>
     public class DirectFileToUserRelationInfo
     {
         public int UserId { get; set; }

@@ -1,0 +1,821 @@
+[EXECUTING: PerfView /RestartingToElevelate:collect /MinSecForTrigger:0 /KernelEvents:ThreadTime /NoGui /Zip:True Collect]
+Circular buffer size = 0, setting to 500.
+[Kernel Log: D:\Agrin\AgrinServer\edsgsd\PerfView\PerfViewData.kernel.etl]
+Kernel keywords enabled: ThreadTime
+[User mode Log: D:\Agrin\AgrinServer\edsgsd\PerfView\PerfViewData.etl]
+Enabling Provider:PerfViewLogger Level:Verbose Keywords:0xffffffffffffffff Stacks:0 Values: Guid:a8a71ac1-040f-54a2-07ca-00a89b5ab761
+Turning on more CLR GC, JScript and ASP.NET Events.
+Enabling Provider:DotNet Level:Verbose Keywords:0xffffffffffffffff Stacks:1 Values: Guid:319dc449-ada5-50f7-428e-957db6791668
+Enabling Provider:Microsoft-Windows-Kernel-EventTracing Level:Verbose Keywords:0x70 Stacks:1 Values: Guid:b675ec37-bdb6-4648-bc92-f3fdc74d3ca2
+Enabling Provider:ASP.NET Level:Verbose Keywords:0xfffffffffffffffd Stacks:0 Values: Guid:aff081fe-0247-4275-9c4e-021f3dc1da35
+File C:\WINDOWS\System32\inetsrv\iiscore.dll does not, ASP.NET is not enabled on the machine
+Enabling Provider:*Microsoft-Windows-ASPNET Level:Informational Keywords:0xffffffffffffffff Stacks:1 Values: Guid:ee799f41-cfa5-550b-bf2c-344747c1c668
+Enabling Provider:Microsoft-Windows-IIS Level:Critical Keywords:0x0 Stacks:0 Values: Guid:de4649c9-15e8-4fea-9d85-1cdda520c334
+Enabling Provider:Microsoft-PerfTrack-IEFRAME Level:Verbose Keywords:0xffffffffffffffff Stacks:0 Values: Guid:b2a40f1f-a05a-4dfd-886a-4c4f18c4334c
+Enabling Provider:Microsoft-PerfTrack-MSHTML Level:Verbose Keywords:0xffffffffffffffff Stacks:0 Values: Guid:ffdb9886-80f3-4540-aa8b-b85192217ddf
+Enabling Provider:Microsoft-Windows-WinINet Level:Verbose Keywords:0x2 Stacks:0 Values: Guid:43d1a55c-76d6-4f7e-995c-64c711e5cafe
+Enabling Provider:Microsoft-Windows-Application Server-Applications Level:Informational Keywords:0xffffffffffffffff Stacks:0 Values: Guid:c651f5f6-1c0d-492e-8ae1-b4efd7c9d503
+Enabling Provider:Microsoft-IE Level:Informational Keywords:0x1300 Stacks:0 Values: Guid:9e3b3947-ca5d-4614-91a2-7b624e0e7244
+Enabling Provider:Microsoft-Windows-DNS-Client Level:Informational Keywords:0xffffffffffffffff Stacks:0 Values: Guid:1c95126e-7eea-49a9-a3fe-a378b03ddb4d
+Enabling Provider:Microsoft-Windows-DirectComposition Level:Verbose Keywords:0x4 Stacks:0 Values: Guid:c44219d0-f344-11df-a5e2-b307dfd72085
+Enabling Provider:Microsoft-Windows-Immersive-Shell Level:Informational Keywords:0xffffffffffffffff Stacks:0 Values: Guid:315a8872-923e-4ea2-9889-33cd4754bf64
+Enabling Provider:Microsoft-Windows-XAML Level:Informational Keywords:0xffffffffffffffff Stacks:0 Values: Guid:531a35ab-63ce-4bcf-aa98-f88c7a89e455
+Enabling Provider:Microsoft-JScript Level:Verbose Keywords:0xffffffffffffffff Stacks:0 Values: Guid:57277741-3638-4a4b-bdba-0ac6e45da56c
+Enabling Provider:ClrPrivateNative Level:Informational Keywords:0x4002000b Stacks:0 Values: Guid:1095638c-8748-4c7a-b39e-baea27b9c589
+Enabling Provider:CLRPrivate Level:Informational Keywords:0x4002000b Stacks:0 Values: Guid:763fd754-7086-4dfe-95eb-c01a46faf4ca
+Enabling Provider:.NETTasks Level:Verbose Keywords:0xff Stacks:0 Values: Guid:2e5dba47-a3d2-4d16-8ee0-6671ffdcd7b5
+Enabling Provider:.NETFramework Level:Verbose Keywords:0x16 Stacks:1 Values: Guid:8e9f5090-2d75-4d03-8a81-e5afbf85daf1
+Enabling Provider:Microsoft.Tasks.Nuget Level:Informational Keywords:0x80 Stacks:0 Values: Guid:b734069e-103c-5376-2080-4f009207881a
+Enabling Provider:Microsoft-AdoNet-SystemData Level:Informational Keywords:0x1 Stacks:1 Values: Guid:6a4dfe53-eb50-5332-8473-7b7e10a94fd1
+Enabling Provider:ETWCLrProfiler Diagnostics Level:Verbose Keywords:0xffffffffffffffff Stacks:0 Values: Guid:6652970f-1756-5d8d-0805-e9aad152aa79
+Enabling Provider:Microsoft-Windows-HttpService Level:Verbose Keywords:0xffffffffffffffff Stacks:1 Values: Guid:dd5ef90a-6398-47a4-ad34-4dcecdef795f
+Enabling Provider:Microsoft-Windows-TCPIP Level:Informational Keywords:0xffffffffffffffff Stacks:1 Values: Guid:2f07e2ee-15db-40f1-90ef-9d7ba282188a
+Enabling Provider:Microsoft-Windows-NDIS-PacketCapture Level:Informational Keywords:0xffffffffffffffff Stacks:0 Values: Guid:2ed6006e-4729-4609-b423-3ee7bcd678ef
+Enabling Provider:Microsoft-Windows-WebIO Level:Informational Keywords:0xffffffffffffffff Stacks:0 Values: Guid:50b3e73c-9370-461d-bb9f-26f32d68887d
+Enabling Provider:Microsoft-Windows-WinINet Level:Verbose Keywords:0xffffffffffffffff Stacks:0 Values: Guid:43d1a55c-76d6-4f7e-995c-64c711e5cafe
+Enabling Provider:Microsoft-Windows-WinHttp Level:Verbose Keywords:0xffffffffffffffff Stacks:0 Values: Guid:7d44233d-3055-4b9c-ba64-0d47ca40a232
+Enabling Provider:Microsoft-Windows-RPC Level:Informational Keywords:0x0 Stacks:0 Values: Guid:6ad52b32-d609-4be9-ae07-ce8dae937e39
+Enabling Provider:Microsoft-Windows-WebIO Level:Informational Keywords:0xffffffff Stacks:0 Values: Guid:50b3e73c-9370-461d-bb9f-26f32d68887d
+Turning on VS CodeMarkers and MeasurementBlock Providers.
+Enabling Provider:MeasurementBlock Level:Verbose Keywords:0xffffffffffffffff Stacks:0 Values: Guid:143a31db-0372-40b6-b8f1-b4b16adb5f54
+Enabling Provider:CodeMarkers Level:Verbose Keywords:0xffffffffffffffff Stacks:0 Values: Guid:641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e
+Enabling CLR Events: Default
+Enabling Provider:ClrNative Level:Verbose Keywords:0x4c14fccbd Stacks:1 Values: Guid:47c3ba0c-77f1-4eb0-8d4d-aef447f16a85
+Enabling Provider:CLR Level:Verbose Keywords:0x4c14fccbd Stacks:0 Values: Guid:e13c0d23-ccbc-4e12-931b-d9cc2eee27e4
+Enabling Providers specified by the user.
+[Starting collection at 4/27/2018 1:21:50 PM]
+[Collecting   10 sec: Size=613.3 MB.]
+[Collecting   20 sec: Size=815.0 MB.]
+[Collecting   30 sec: Size=900.0 MB.  Recycling started at 30 sec.]
+[Collecting   41 sec: Size=900.0 MB.  Recycling started at 30 sec.]
+[Manually Stopped (NoGui)]
+Stopping tracing for sessions 'NT Kernel Logger' and 'PerfViewSession'.
+[Sending rundown command to CLR providers...]
+[Use /NoNGenRundown if you don't care about pre V4.0 runtimes]
+Enabling Provider:PerfViewLogger Level:Verbose Keywords:0xffffffffffffffff Stacks:0 Values: Guid:a8a71ac1-040f-54a2-07ca-00a89b5ab761
+Enabling Provider:CLRRundown Level:Verbose Keywords:0x108 Stacks:0 Values: Guid:a669021c-c450-4609-a035-5af59af4df18
+Enabling Provider:CLRRundown Level:Verbose Keywords:0x80070130 Stacks:0 Values: Guid:a669021c-c450-4609-a035-5af59af4df18
+Enabling Provider:ClrNative Level:Verbose Keywords:0x80070138 Stacks:0 Values: Guid:47c3ba0c-77f1-4eb0-8d4d-aef447f16a85
+Enabling Provider:Clr Level:Verbose Keywords:0x80070138 Stacks:0 Values: Guid:e13c0d23-ccbc-4e12-931b-d9cc2eee27e4
+Waiting up to 120 sec for rundown events.  Use /RundownTimeout to change.
+If you know your process has exited, use /noRundown qualifer to skip this step.
+Rundown File Length: 22.2MB delta: 22.2MB
+Rundown File Length: 24.8MB delta: 2.6MB
+Rundown File Length: 27.3MB delta: 2.5MB
+Rundown File Length: 30.5MB delta: 3.2MB
+Rundown File Length: 33.6MB delta: 3.0MB
+Rundown File Length: 36.8MB delta: 3.3MB
+Rundown File Length: 40.8MB delta: 3.9MB
+Rundown File Length: 44.6MB delta: 3.8MB
+Rundown File Length: 47.5MB delta: 2.9MB
+Rundown File Length: 50.5MB delta: 2.9MB
+Rundown File Length: 53.4MB delta: 2.9MB
+Rundown File Length: 56.0MB delta: 2.6MB
+Rundown File Length: 58.9MB delta: 2.9MB
+Rundown File Length: 62.2MB delta: 3.3MB
+Rundown File Length: 65.7MB delta: 3.5MB
+Rundown File Length: 69.0MB delta: 3.3MB
+Rundown File Length: 72.0MB delta: 2.9MB
+Rundown File Length: 75.2MB delta: 3.3MB
+Rundown File Length: 78.2MB delta: 2.9MB
+Rundown File Length: 81.3MB delta: 3.1MB
+Rundown File Length: 84.5MB delta: 3.1MB
+Rundown File Length: 87.5MB delta: 3.0MB
+Rundown File Length: 90.1MB delta: 2.6MB
+Rundown File Length: 92.9MB delta: 2.8MB
+Rundown File Length: 95.9MB delta: 3.0MB
+Rundown File Length: 98.5MB delta: 2.6MB
+Rundown File Length: 101.4MB delta: 2.9MB
+Rundown File Length: 104.8MB delta: 3.4MB
+Rundown File Length: 107.6MB delta: 2.8MB
+Rundown File Length: 110.6MB delta: 3.0MB
+Rundown File Length: 113.4MB delta: 2.8MB
+Rundown File Length: 116.5MB delta: 3.1MB
+Rundown File Length: 119.1MB delta: 2.6MB
+Rundown File Length: 121.8MB delta: 2.7MB
+Rundown File Length: 124.5MB delta: 2.7MB
+Rundown File Length: 127.5MB delta: 3.0MB
+Rundown File Length: 130.2MB delta: 2.8MB
+Rundown File Length: 133.2MB delta: 2.9MB
+Rundown File Length: 136.1MB delta: 2.9MB
+Rundown File Length: 139.0MB delta: 2.9MB
+Rundown File Length: 142.1MB delta: 3.1MB
+Rundown File Length: 145.0MB delta: 2.8MB
+Rundown File Length: 147.9MB delta: 2.9MB
+Rundown File Length: 150.9MB delta: 2.9MB
+Rundown File Length: 154.8MB delta: 3.9MB
+Rundown File Length: 158.6MB delta: 3.8MB
+Rundown File Length: 161.8MB delta: 3.2MB
+Rundown File Length: 164.3MB delta: 2.5MB
+Rundown File Length: 167.3MB delta: 3.0MB
+Rundown File Length: 171.0MB delta: 3.7MB
+Rundown File Length: 174.1MB delta: 3.1MB
+Rundown File Length: 177.3MB delta: 3.2MB
+Rundown File Length: 180.0MB delta: 2.8MB
+Rundown File Length: 183.2MB delta: 3.1MB
+Rundown File Length: 185.8MB delta: 2.6MB
+Rundown File Length: 188.7MB delta: 2.9MB
+Rundown File Length: 191.9MB delta: 3.1MB
+Rundown File Length: 194.1MB delta: 2.2MB
+Rundown File Length: 197.3MB delta: 3.1MB
+Rundown File Length: 200.0MB delta: 2.7MB
+Rundown File Length: 201.9MB delta: 1.9MB
+Rundown File Length: 203.6MB delta: 1.7MB
+Rundown File Length: 205.3MB delta: 1.8MB
+Rundown File Length: 207.6MB delta: 2.2MB
+Rundown File Length: 209.8MB delta: 2.3MB
+Rundown File Length: 212.5MB delta: 2.6MB
+Rundown File Length: 215.4MB delta: 2.9MB
+Rundown File Length: 218.0MB delta: 2.6MB
+Rundown File Length: 219.3MB delta: 1.2MB
+Rundown File Length: 219.9MB delta: 0.7MB
+Rundown File Length: 222.2MB delta: 2.2MB
+Rundown File Length: 224.6MB delta: 2.4MB
+Rundown File Length: 227.1MB delta: 2.5MB
+Rundown File Length: 229.5MB delta: 2.4MB
+Rundown File Length: 232.1MB delta: 2.6MB
+Rundown File Length: 234.9MB delta: 2.8MB
+Rundown File Length: 237.3MB delta: 2.4MB
+Rundown File Length: 240.0MB delta: 2.7MB
+Rundown File Length: 242.6MB delta: 2.6MB
+Rundown File Length: 245.2MB delta: 2.6MB
+Rundown File Length: 248.1MB delta: 2.8MB
+Rundown File Length: 250.7MB delta: 2.6MB
+Rundown File Length: 253.5MB delta: 2.8MB
+Rundown File Length: 256.9MB delta: 3.4MB
+Rundown File Length: 259.7MB delta: 2.8MB
+Rundown File Length: 262.3MB delta: 2.7MB
+Rundown File Length: 265.0MB delta: 2.7MB
+Rundown File Length: 267.4MB delta: 2.4MB
+Rundown File Length: 269.8MB delta: 2.4MB
+Rundown File Length: 272.2MB delta: 2.4MB
+Rundown File Length: 273.9MB delta: 1.7MB
+Rundown File Length: 275.8MB delta: 1.9MB
+Rundown File Length: 277.7MB delta: 1.9MB
+Rundown File Length: 279.6MB delta: 1.9MB
+Rundown File Length: 281.7MB delta: 2.0MB
+Rundown File Length: 283.4MB delta: 1.7MB
+Rundown File Length: 285.9MB delta: 2.5MB
+Rundown File Length: 288.2MB delta: 2.3MB
+Rundown File Length: 290.8MB delta: 2.6MB
+Rundown File Length: 293.1MB delta: 2.3MB
+Rundown File Length: 298.1MB delta: 5.0MB
+Rundown File Length: 298.1MB delta: 0.0MB
+Rundown file has stopped growing, assuming rundown complete.
+CLR Rundown took 103.428 sec.
+Heap events were active for this trace.
+Insuring .NET Allocation profiler not installed.
+[Merging data files to PerfViewData.etl.  Can take 10s of seconds... (can skip if data analyzed on same machine with PerfView)]
+WARNING NO _NT_SYMBOL_PATH set ...
+Symbol reader _NT_SYMBOL_PATH= {
+    D:\Agrin\AgrinServer\edsgsd\PerfView;
+    }
+This can be set using the File -> Set Symbol Path dialog on the Stack Viewer.
+Created SymbolReader with SymbolPath D:\Agrin\AgrinServer\edsgsd\PerfView
+Starting Merging of D:\Agrin\AgrinServer\edsgsd\PerfView\PerfViewData.etl
+Starting Generating NGEN pdbs for D:\Agrin\AgrinServer\edsgsd\PerfView\PerfViewData.etl
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB mscorlib.pdb GUID d154b391-e78a-4352-9cb7-4d428bc410bc Age 2 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\mscorlib.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB mscorlib.pdb GUID d154b391-e78a-4352-9cb7-4d428bc410bc Age 2 Version 
+Could not find IL PDB mscorlib.pdb Guid d154b391-e78a-4352-9cb7-4d428bc410bc Age 2.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\mscorlib\7a53e85a72080284c5b5cd703dd282cb\mscorlib.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\mscorlib\7a53e85a72080284c5b5cd703dd282cb\mscorlib.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\mscorlib\7a53e85a72080284c5b5cd703dd282cb\mscorlib.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\mscorlib.ni.pdb\7a53e85a72080284c5b5cd703dd282cb1\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\mscorlib.ni.pdb\7a53e85a72080284c5b5cd703dd282cb1\mscorlib.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB F:\binaries\Intermediate\env\hierarchyprovider.csproj_rn14lz5j\objr\x86\Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.pdb GUID 5b312197-20d1-41b2-b92b-97bed3fe1f94 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.pdb does not exist
+FindSymbolFilePath: Probed file location F:\binaries\Intermediate\env\hierarchyprovider.csproj_rn14lz5j\objr\x86\Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.pdb GUID 5b312197-20d1-41b2-b92b-97bed3fe1f94 Age 1 Version 
+Could not find IL PDB F:\binaries\Intermediate\env\hierarchyprovider.csproj_rn14lz5j\objr\x86\Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.pdb Guid 5b312197-20d1-41b2-b92b-97bed3fe1f94 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V6470bd71#\231aba629ebfc0171d1ed36ba780676e\Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V6470bd71#\231aba629ebfc0171d1ed36ba780676e\Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V6470bd71#\231aba629ebfc0171d1ed36ba780676e\Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.ni.pdb\231aba629ebfc0171d1ed36ba780676e1\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.ni.pdb\231aba629ebfc0171d1ed36ba780676e1\Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem.Implementation\Release\net46\Microsoft.VisualStudio.ProjectSystem.Implementation.pdb GUID 22856f9a-1866-4335-a18c-8f179095acbf Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.ProjectSystem.Implementation.pdb does not exist
+FindSymbolFilePath: Probed file location E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem.Implementation\Release\net46\Microsoft.VisualStudio.ProjectSystem.Implementation.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.ProjectSystem.Implementation.pdb GUID 22856f9a-1866-4335-a18c-8f179095acbf Age 1 Version 
+Could not find IL PDB E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem.Implementation\Release\net46\Microsoft.VisualStudio.ProjectSystem.Implementation.pdb Guid 22856f9a-1866-4335-a18c-8f179095acbf Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V4922f139#\d93c5ae5a958c7db056dca6711770c6b\Microsoft.VisualStudio.ProjectSystem.Implementation.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V4922f139#\d93c5ae5a958c7db056dca6711770c6b\Microsoft.VisualStudio.ProjectSystem.Implementation.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V4922f139#\d93c5ae5a958c7db056dca6711770c6b\Microsoft.VisualStudio.ProjectSystem.Implementation.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.ProjectSystem.Implementation.ni.pdb\d93c5ae5a958c7db056dca6711770c6b1\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.ProjectSystem.Implementation.ni.pdb\d93c5ae5a958c7db056dca6711770c6b1\Microsoft.VisualStudio.ProjectSystem.Implementation.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem.VS\Release\net46\Microsoft.VisualStudio.ProjectSystem.VS.pdb GUID 9cd0d84a-f836-4b24-b1a0-7623d783268e Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.ProjectSystem.VS.pdb does not exist
+FindSymbolFilePath: Probed file location E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem.VS\Release\net46\Microsoft.VisualStudio.ProjectSystem.VS.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.ProjectSystem.VS.pdb GUID 9cd0d84a-f836-4b24-b1a0-7623d783268e Age 1 Version 
+Could not find IL PDB E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem.VS\Release\net46\Microsoft.VisualStudio.ProjectSystem.VS.pdb Guid 9cd0d84a-f836-4b24-b1a0-7623d783268e Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vd21cd7ee#\46eed48a3ba772122a3c5e2d3d8cdf18\Microsoft.VisualStudio.ProjectSystem.VS.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vd21cd7ee#\46eed48a3ba772122a3c5e2d3d8cdf18\Microsoft.VisualStudio.ProjectSystem.VS.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vd21cd7ee#\46eed48a3ba772122a3c5e2d3d8cdf18\Microsoft.VisualStudio.ProjectSystem.VS.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.ProjectSystem.VS.ni.pdb\46eed48a3ba772122a3c5e2d3d8cdf181\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.ProjectSystem.VS.ni.pdb\46eed48a3ba772122a3c5e2d3d8cdf181\Microsoft.VisualStudio.ProjectSystem.VS.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem.VS.Implementation\Release\net46\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.pdb GUID 3154fe86-1313-4948-8d98-761e25ef562e Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.pdb does not exist
+FindSymbolFilePath: Probed file location E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem.VS.Implementation\Release\net46\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.ProjectSystem.VS.Implementation.pdb GUID 3154fe86-1313-4948-8d98-761e25ef562e Age 1 Version 
+Could not find IL PDB E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem.VS.Implementation\Release\net46\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.pdb Guid 3154fe86-1313-4948-8d98-761e25ef562e Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V15eb4492#\c51402058293e7dcc55a99531bfce2b2\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V15eb4492#\c51402058293e7dcc55a99531bfce2b2\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V15eb4492#\c51402058293e7dcc55a99531bfce2b2\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.ni.pdb\c51402058293e7dcc55a99531bfce2b21\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.ni.pdb\c51402058293e7dcc55a99531bfce2b21\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB E:\A\_work\82\s\bin\obj\Release\x86\Windows_NT\Microsoft.Build\Microsoft.Build.pdb GUID 1b478014-41f9-467e-a1a9-095dd00f8831 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.Build.pdb does not exist
+FindSymbolFilePath: Probed file location E:\A\_work\82\s\bin\obj\Release\x86\Windows_NT\Microsoft.Build\Microsoft.Build.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.Build.pdb GUID 1b478014-41f9-467e-a1a9-095dd00f8831 Age 1 Version 
+Could not find IL PDB E:\A\_work\82\s\bin\obj\Release\x86\Windows_NT\Microsoft.Build\Microsoft.Build.pdb Guid 1b478014-41f9-467e-a1a9-095dd00f8831 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Build\10e556efe1f05911e170c36fc364d958\Microsoft.Build.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Build\10e556efe1f05911e170c36fc364d958\Microsoft.Build.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Build\10e556efe1f05911e170c36fc364d958\Microsoft.Build.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.Build.ni.pdb\10e556efe1f05911e170c36fc364d9581\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.Build.ni.pdb\10e556efe1f05911e170c36fc364d9581\Microsoft.Build.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB E:\A\_work\82\s\bin\obj\Release\x86\Windows_NT\Microsoft.Build.Framework\Microsoft.Build.Framework.pdb GUID 3f87ab2c-738e-4603-b5d2-1403417eab01 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.Build.Framework.pdb does not exist
+FindSymbolFilePath: Probed file location E:\A\_work\82\s\bin\obj\Release\x86\Windows_NT\Microsoft.Build.Framework\Microsoft.Build.Framework.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.Build.Framework.pdb GUID 3f87ab2c-738e-4603-b5d2-1403417eab01 Age 1 Version 
+Could not find IL PDB E:\A\_work\82\s\bin\obj\Release\x86\Windows_NT\Microsoft.Build.Framework\Microsoft.Build.Framework.pdb Guid 3f87ab2c-738e-4603-b5d2-1403417eab01 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.B3325a29b#\96c535619c0e141a1567dbdb6fb2aee2\Microsoft.Build.Framework.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.B3325a29b#\96c535619c0e141a1567dbdb6fb2aee2\Microsoft.Build.Framework.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.B3325a29b#\96c535619c0e141a1567dbdb6fb2aee2\Microsoft.Build.Framework.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.Build.Framework.ni.pdb\96c535619c0e141a1567dbdb6fb2aee21\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.Build.Framework.ni.pdb\96c535619c0e141a1567dbdb6fb2aee21\Microsoft.Build.Framework.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB D:\A\_work\39\s\bin\obj\Windows_NT.AnyCPU.Release\System.Runtime.InteropServices.RuntimeInformation\net45\System.Runtime.InteropServices.RuntimeInformation.pdb GUID 74792978-67c8-44ab-87e4-6cd28ccd9f39 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\System.Runtime.InteropServices.RuntimeInformation.pdb does not exist
+FindSymbolFilePath: Probed file location D:\A\_work\39\s\bin\obj\Windows_NT.AnyCPU.Release\System.Runtime.InteropServices.RuntimeInformation\net45\System.Runtime.InteropServices.RuntimeInformation.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB System.Runtime.InteropServices.RuntimeInformation.pdb GUID 74792978-67c8-44ab-87e4-6cd28ccd9f39 Age 1 Version 
+Could not find IL PDB D:\A\_work\39\s\bin\obj\Windows_NT.AnyCPU.Release\System.Runtime.InteropServices.RuntimeInformation\net45\System.Runtime.InteropServices.RuntimeInformation.pdb Guid 74792978-67c8-44ab-87e4-6cd28ccd9f39 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Runt54187d77#\fb0bae16ac4a683faac057d31e31dac8\System.Runtime.InteropServices.RuntimeInformation.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Runt54187d77#\fb0bae16ac4a683faac057d31e31dac8\System.Runtime.InteropServices.RuntimeInformation.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Runt54187d77#\fb0bae16ac4a683faac057d31e31dac8\System.Runtime.InteropServices.RuntimeInformation.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\System.Runtime.InteropServices.RuntimeInformation.ni.pdb\fb0bae16ac4a683faac057d31e31dac81\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\System.Runtime.InteropServices.RuntimeInformation.ni.pdb\fb0bae16ac4a683faac057d31e31dac81\System.Runtime.InteropServices.RuntimeInformation.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB c:\b\4741\2186\src\intermediate\System.Threading.Tasks.Dataflow.csproj_1037d191\Release\System.Threading.Tasks.Dataflow.pdb GUID 83c1bbf6-d5ec-4445-8a64-20e8c4a9ded8 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\System.Threading.Tasks.Dataflow.pdb does not exist
+FindSymbolFilePath: Probed file location c:\b\4741\2186\src\intermediate\System.Threading.Tasks.Dataflow.csproj_1037d191\Release\System.Threading.Tasks.Dataflow.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB System.Threading.Tasks.Dataflow.pdb GUID 83c1bbf6-d5ec-4445-8a64-20e8c4a9ded8 Age 1 Version 
+Could not find IL PDB c:\b\4741\2186\src\intermediate\System.Threading.Tasks.Dataflow.csproj_1037d191\Release\System.Threading.Tasks.Dataflow.pdb Guid 83c1bbf6-d5ec-4445-8a64-20e8c4a9ded8 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Thre3435c1dc#\010be6f2a8878b3518164ab607cfca14\System.Threading.Tasks.Dataflow.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Thre3435c1dc#\010be6f2a8878b3518164ab607cfca14\System.Threading.Tasks.Dataflow.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Thre3435c1dc#\010be6f2a8878b3518164ab607cfca14\System.Threading.Tasks.Dataflow.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\System.Threading.Tasks.Dataflow.ni.pdb\010be6f2a8878b3518164ab607cfca141\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\System.Threading.Tasks.Dataflow.ni.pdb\010be6f2a8878b3518164ab607cfca141\System.Threading.Tasks.Dataflow.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem\Release\net46\Microsoft.VisualStudio.ProjectSystem.pdb GUID 925eaa26-d71f-4ea1-9aed-c6072f53f527 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.ProjectSystem.pdb does not exist
+FindSymbolFilePath: Probed file location E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem\Release\net46\Microsoft.VisualStudio.ProjectSystem.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.ProjectSystem.pdb GUID 925eaa26-d71f-4ea1-9aed-c6072f53f527 Age 1 Version 
+Could not find IL PDB E:\A\_work\30\s\obj\Microsoft.VisualStudio.ProjectSystem\Release\net46\Microsoft.VisualStudio.ProjectSystem.pdb Guid 925eaa26-d71f-4ea1-9aed-c6072f53f527 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vf3bd3225#\13b630fb18c5ea783dc9d8bb3fd36264\Microsoft.VisualStudio.ProjectSystem.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vf3bd3225#\13b630fb18c5ea783dc9d8bb3fd36264\Microsoft.VisualStudio.ProjectSystem.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vf3bd3225#\13b630fb18c5ea783dc9d8bb3fd36264\Microsoft.VisualStudio.ProjectSystem.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.ProjectSystem.ni.pdb\13b630fb18c5ea783dc9d8bb3fd362641\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.ProjectSystem.ni.pdb\13b630fb18c5ea783dc9d8bb3fd362641\Microsoft.VisualStudio.ProjectSystem.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB E:\A\_work\115\s\obj\Microsoft.VisualStudio.Composition\Release\net45\Microsoft.VisualStudio.Composition.pdb GUID 60035ae7-519a-4146-4977-590faef24ab1 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.Composition.pdb does not exist
+FindSymbolFilePath: Probed file location E:\A\_work\115\s\obj\Microsoft.VisualStudio.Composition\Release\net45\Microsoft.VisualStudio.Composition.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.Composition.pdb GUID 60035ae7-519a-4146-4977-590faef24ab1 Age 1 Version 
+Could not find IL PDB E:\A\_work\115\s\obj\Microsoft.VisualStudio.Composition\Release\net45\Microsoft.VisualStudio.Composition.pdb Guid 60035ae7-519a-4146-4977-590faef24ab1 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vfd40090d#\50d4797b32a858282f6b2cae91f896fe\Microsoft.VisualStudio.Composition.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vfd40090d#\50d4797b32a858282f6b2cae91f896fe\Microsoft.VisualStudio.Composition.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vfd40090d#\50d4797b32a858282f6b2cae91f896fe\Microsoft.VisualStudio.Composition.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Composition.ni.pdb\50d4797b32a858282f6b2cae91f896fe1\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Composition.ni.pdb\50d4797b32a858282f6b2cae91f896fe1\Microsoft.VisualStudio.Composition.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB F:\binaries\Intermediate\env\microsoft.visualstudio.commonide.csproj_2j_r9mkc\objr\x86\Microsoft.VisualStudio.CommonIDE.pdb GUID eca7a147-eaed-4ff1-912b-b42e697a234b Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.CommonIDE.pdb does not exist
+FindSymbolFilePath: Probed file location F:\binaries\Intermediate\env\microsoft.visualstudio.commonide.csproj_2j_r9mkc\objr\x86\Microsoft.VisualStudio.CommonIDE.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.CommonIDE.pdb GUID eca7a147-eaed-4ff1-912b-b42e697a234b Age 1 Version 
+Could not find IL PDB F:\binaries\Intermediate\env\microsoft.visualstudio.commonide.csproj_2j_r9mkc\objr\x86\Microsoft.VisualStudio.CommonIDE.pdb Guid eca7a147-eaed-4ff1-912b-b42e697a234b Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V7702e130#\cd88c15757387e69e585d622194a796c\Microsoft.VisualStudio.CommonIDE.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V7702e130#\cd88c15757387e69e585d622194a796c\Microsoft.VisualStudio.CommonIDE.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V7702e130#\cd88c15757387e69e585d622194a796c\Microsoft.VisualStudio.CommonIDE.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.CommonIDE.ni.pdb\cd88c15757387e69e585d622194a796c1\
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.CommonIDE.ni.pdb\cd88c15757387e69e585d622194a796c1\Microsoft.VisualStudio.CommonIDE.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB System.ComponentModel.Composition.pdb GUID 6dc592de-ef1d-4cfc-ae0e-352426e557d1 Age 2 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\System.ComponentModel.Composition.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB System.ComponentModel.Composition.pdb GUID 6dc592de-ef1d-4cfc-ae0e-352426e557d1 Age 2 Version 
+Could not find IL PDB System.ComponentModel.Composition.pdb Guid 6dc592de-ef1d-4cfc-ae0e-352426e557d1 Age 2.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Compba577418#\58a4bcb19995df488a6fe9ba800585c8\System.ComponentModel.Composition.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Compba577418#\58a4bcb19995df488a6fe9ba800585c8\System.ComponentModel.Composition.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Compba577418#\58a4bcb19995df488a6fe9ba800585c8\System.ComponentModel.Composition.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\System.ComponentModel.Composition.ni.pdb\58a4bcb19995df488a6fe9ba800585c81\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\System.ComponentModel.Composition.ni.pdb\58a4bcb19995df488a6fe9ba800585c81\System.ComponentModel.Composition.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB D:\A\_work\118\s\bin\obj\AnyOS.AnyCPU.Release\System.Collections.Immutable\System.Collections.Immutable.pdb GUID badc7441-ffd7-4f6d-b1fd-5f9d8c5bf683 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\System.Collections.Immutable.pdb does not exist
+FindSymbolFilePath: Probed file location D:\A\_work\118\s\bin\obj\AnyOS.AnyCPU.Release\System.Collections.Immutable\System.Collections.Immutable.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB System.Collections.Immutable.pdb GUID badc7441-ffd7-4f6d-b1fd-5f9d8c5bf683 Age 1 Version 
+Could not find IL PDB D:\A\_work\118\s\bin\obj\AnyOS.AnyCPU.Release\System.Collections.Immutable\System.Collections.Immutable.pdb Guid badc7441-ffd7-4f6d-b1fd-5f9d8c5bf683 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Coll4a4f96a7#\70dcf49c9a7a631751cd7e1a16fe0d03\System.Collections.Immutable.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Coll4a4f96a7#\70dcf49c9a7a631751cd7e1a16fe0d03\System.Collections.Immutable.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Coll4a4f96a7#\70dcf49c9a7a631751cd7e1a16fe0d03\System.Collections.Immutable.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\System.Collections.Immutable.ni.pdb\70dcf49c9a7a631751cd7e1a16fe0d031\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\System.Collections.Immutable.ni.pdb\70dcf49c9a7a631751cd7e1a16fe0d031\System.Collections.Immutable.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB F:\binaries\Intermediate\env\windowmanager.csproj_otllkcm_\objr\x86\Microsoft.VisualStudio.Platform.WindowManagement.pdb GUID b8dd8a9f-fe5e-4262-bcd6-955ca60b2d8c Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.Platform.WindowManagement.pdb does not exist
+FindSymbolFilePath: Probed file location F:\binaries\Intermediate\env\windowmanager.csproj_otllkcm_\objr\x86\Microsoft.VisualStudio.Platform.WindowManagement.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.Platform.WindowManagement.pdb GUID b8dd8a9f-fe5e-4262-bcd6-955ca60b2d8c Age 1 Version 
+Could not find IL PDB F:\binaries\Intermediate\env\windowmanager.csproj_otllkcm_\objr\x86\Microsoft.VisualStudio.Platform.WindowManagement.pdb Guid b8dd8a9f-fe5e-4262-bcd6-955ca60b2d8c Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vc38f2c7b#\dbc60feefbb6aa65f89a7d84b725f028\Microsoft.VisualStudio.Platform.WindowManagement.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vc38f2c7b#\dbc60feefbb6aa65f89a7d84b725f028\Microsoft.VisualStudio.Platform.WindowManagement.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vc38f2c7b#\dbc60feefbb6aa65f89a7d84b725f028\Microsoft.VisualStudio.Platform.WindowManagement.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Platform.WindowManagement.ni.pdb\dbc60feefbb6aa65f89a7d84b725f0281\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Platform.WindowManagement.ni.pdb\dbc60feefbb6aa65f89a7d84b725f0281\Microsoft.VisualStudio.Platform.WindowManagement.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB F:\binaries\Intermediate\vscommon\vsimages.csproj_xcvg_vc0\objr\x86\Microsoft.VisualStudio.ImageCatalog.pdb GUID 37633caa-f9f7-4617-ba94-b52ade08ca9c Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.ImageCatalog.pdb does not exist
+FindSymbolFilePath: Probed file location F:\binaries\Intermediate\vscommon\vsimages.csproj_xcvg_vc0\objr\x86\Microsoft.VisualStudio.ImageCatalog.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.ImageCatalog.pdb GUID 37633caa-f9f7-4617-ba94-b52ade08ca9c Age 1 Version 
+Could not find IL PDB F:\binaries\Intermediate\vscommon\vsimages.csproj_xcvg_vc0\objr\x86\Microsoft.VisualStudio.ImageCatalog.pdb Guid 37633caa-f9f7-4617-ba94-b52ade08ca9c Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V1748dfc1#\f39682a5556e131db12c63eca6712128\Microsoft.VisualStudio.ImageCatalog.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V1748dfc1#\f39682a5556e131db12c63eca6712128\Microsoft.VisualStudio.ImageCatalog.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V1748dfc1#\f39682a5556e131db12c63eca6712128\Microsoft.VisualStudio.ImageCatalog.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.ImageCatalog.ni.pdb\f39682a5556e131db12c63eca67121281\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.ImageCatalog.ni.pdb\f39682a5556e131db12c63eca67121281\Microsoft.VisualStudio.ImageCatalog.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB F:\binaries\Intermediate\env\microsoft.visualstudio.shell.csproj_f6z7_exo\objr\x86\Microsoft.VisualStudio.Shell.15.0.pdb GUID 17d170d3-4988-48d4-993d-fd2ba8f61f78 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.Shell.15.0.pdb does not exist
+FindSymbolFilePath: Probed file location F:\binaries\Intermediate\env\microsoft.visualstudio.shell.csproj_f6z7_exo\objr\x86\Microsoft.VisualStudio.Shell.15.0.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.Shell.15.0.pdb GUID 17d170d3-4988-48d4-993d-fd2ba8f61f78 Age 1 Version 
+Could not find IL PDB F:\binaries\Intermediate\env\microsoft.visualstudio.shell.csproj_f6z7_exo\objr\x86\Microsoft.VisualStudio.Shell.15.0.pdb Guid 17d170d3-4988-48d4-993d-fd2ba8f61f78 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vc1f51adf#\b3a4d8a5dfd3411fc3e7b8a1e130f416\Microsoft.VisualStudio.Shell.15.0.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vc1f51adf#\b3a4d8a5dfd3411fc3e7b8a1e130f416\Microsoft.VisualStudio.Shell.15.0.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vc1f51adf#\b3a4d8a5dfd3411fc3e7b8a1e130f416\Microsoft.VisualStudio.Shell.15.0.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Shell.15.0.ni.pdb\b3a4d8a5dfd3411fc3e7b8a1e130f4161\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Shell.15.0.ni.pdb\b3a4d8a5dfd3411fc3e7b8a1e130f4161\Microsoft.VisualStudio.Shell.15.0.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB System.Xml.pdb GUID 33c748e5-fb45-4899-bde4-baea47d0a167 Age 2 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\System.Xml.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB System.Xml.pdb GUID 33c748e5-fb45-4899-bde4-baea47d0a167 Age 2 Version 
+Could not find IL PDB System.Xml.pdb Guid 33c748e5-fb45-4899-bde4-baea47d0a167 Age 2.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Xml\f2a690c7f588336efbc341feb9c9822b\System.Xml.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Xml\f2a690c7f588336efbc341feb9c9822b\System.Xml.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Xml\f2a690c7f588336efbc341feb9c9822b\System.Xml.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\System.Xml.ni.pdb\f2a690c7f588336efbc341feb9c9822b1\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\System.Xml.ni.pdb\f2a690c7f588336efbc341feb9c9822b1\System.Xml.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB System.Xaml.pdb GUID e70ea715-82e8-45f3-931e-b9bf977cdbc8 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\System.Xaml.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB System.Xaml.pdb GUID e70ea715-82e8-45f3-931e-b9bf977cdbc8 Age 1 Version 
+Could not find IL PDB System.Xaml.pdb Guid e70ea715-82e8-45f3-931e-b9bf977cdbc8 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Xaml\2d3b5991006087c957c2a6e9ac38731f\System.Xaml.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Xaml\2d3b5991006087c957c2a6e9ac38731f\System.Xaml.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Xaml\2d3b5991006087c957c2a6e9ac38731f\System.Xaml.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\System.Xaml.ni.pdb\2d3b5991006087c957c2a6e9ac38731f1\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\System.Xaml.ni.pdb\2d3b5991006087c957c2a6e9ac38731f1\System.Xaml.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB PresentationCore.pdb GUID 106ad50b-ff37-4dcc-b50a-ff0058fe3d7a Age 2 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\PresentationCore.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB PresentationCore.pdb GUID 106ad50b-ff37-4dcc-b50a-ff0058fe3d7a Age 2 Version 
+Could not find IL PDB PresentationCore.pdb Guid 106ad50b-ff37-4dcc-b50a-ff0058fe3d7a Age 2.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\PresentationCore\cf851efebcbc398205d2cb2fc94f21ad\PresentationCore.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\PresentationCore\cf851efebcbc398205d2cb2fc94f21ad\PresentationCore.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\PresentationCore\cf851efebcbc398205d2cb2fc94f21ad\PresentationCore.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\PresentationCore.ni.pdb\cf851efebcbc398205d2cb2fc94f21ad1\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\PresentationCore.ni.pdb\cf851efebcbc398205d2cb2fc94f21ad1\PresentationCore.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB WindowsBase.pdb GUID 330af4c1-3d33-4759-b780-4b129ea8cbd3 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\WindowsBase.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB WindowsBase.pdb GUID 330af4c1-3d33-4759-b780-4b129ea8cbd3 Age 1 Version 
+Could not find IL PDB WindowsBase.pdb Guid 330af4c1-3d33-4759-b780-4b129ea8cbd3 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\WindowsBase\1ead9b6b726753cc8f0f6ec9f544f585\WindowsBase.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\WindowsBase\1ead9b6b726753cc8f0f6ec9f544f585\WindowsBase.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\WindowsBase\1ead9b6b726753cc8f0f6ec9f544f585\WindowsBase.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\WindowsBase.ni.pdb\1ead9b6b726753cc8f0f6ec9f544f5851\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\WindowsBase.ni.pdb\1ead9b6b726753cc8f0f6ec9f544f5851\WindowsBase.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB System.Core.pdb GUID 1a69c96a-272b-4f43-8da9-da2fc1c0dea3 Age 2 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\System.Core.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB System.Core.pdb GUID 1a69c96a-272b-4f43-8da9-da2fc1c0dea3 Age 2 Version 
+Could not find IL PDB System.Core.pdb Guid 1a69c96a-272b-4f43-8da9-da2fc1c0dea3 Age 2.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Core\95adebdc7528e7a8e4ae9685b1600f38\System.Core.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Core\95adebdc7528e7a8e4ae9685b1600f38\System.Core.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Core\95adebdc7528e7a8e4ae9685b1600f38\System.Core.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\System.Core.ni.pdb\95adebdc7528e7a8e4ae9685b1600f381\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\System.Core.ni.pdb\95adebdc7528e7a8e4ae9685b1600f381\System.Core.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB E:\A\_work\93\s\Telemetry\Net45\obj\Release\Microsoft.VisualStudio.Telemetry.pdb GUID 0336675f-9410-40fd-8927-897f2cd0c678 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.Telemetry.pdb does not exist
+FindSymbolFilePath: Probed file location E:\A\_work\93\s\Telemetry\Net45\obj\Release\Microsoft.VisualStudio.Telemetry.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.Telemetry.pdb GUID 0336675f-9410-40fd-8927-897f2cd0c678 Age 1 Version 
+Could not find IL PDB E:\A\_work\93\s\Telemetry\Net45\obj\Release\Microsoft.VisualStudio.Telemetry.pdb Guid 0336675f-9410-40fd-8927-897f2cd0c678 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vf87aed9a#\d18c349be447cd89d2fd4ebd82512926\Microsoft.VisualStudio.Telemetry.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vf87aed9a#\d18c349be447cd89d2fd4ebd82512926\Microsoft.VisualStudio.Telemetry.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vf87aed9a#\d18c349be447cd89d2fd4ebd82512926\Microsoft.VisualStudio.Telemetry.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Telemetry.ni.pdb\d18c349be447cd89d2fd4ebd825129261\
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Telemetry.ni.pdb\d18c349be447cd89d2fd4ebd825129261\Microsoft.VisualStudio.Telemetry.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB F:\binaries\Intermediate\env\uiinternal.csproj_vxmxerig\objr\x86\Microsoft.VisualStudio.Shell.UI.Internal.pdb GUID d3536304-a41d-408e-8aca-104ddf38506d Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.Shell.UI.Internal.pdb does not exist
+FindSymbolFilePath: Probed file location F:\binaries\Intermediate\env\uiinternal.csproj_vxmxerig\objr\x86\Microsoft.VisualStudio.Shell.UI.Internal.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.Shell.UI.Internal.pdb GUID d3536304-a41d-408e-8aca-104ddf38506d Age 1 Version 
+Could not find IL PDB F:\binaries\Intermediate\env\uiinternal.csproj_vxmxerig\objr\x86\Microsoft.VisualStudio.Shell.UI.Internal.pdb Guid d3536304-a41d-408e-8aca-104ddf38506d Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V412add50#\29ffa9e498142863532ab7eb38a0f8bb\Microsoft.VisualStudio.Shell.UI.Internal.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V412add50#\29ffa9e498142863532ab7eb38a0f8bb\Microsoft.VisualStudio.Shell.UI.Internal.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V412add50#\29ffa9e498142863532ab7eb38a0f8bb\Microsoft.VisualStudio.Shell.UI.Internal.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Shell.UI.Internal.ni.pdb\29ffa9e498142863532ab7eb38a0f8bb1\
+
+os*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Shell.UI.Internal.ni.pdb\29ffa9e498142863532ab7eb38a0f8bb1\Microsoft.VisualStudio.Shell.UI.Internal.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB F:\binaries\Intermediate\platform\utilities.csproj_s0cfj9bp\objr\x86\Microsoft.VisualStudio.Utilities.pdb GUID 3672f062-6078-4cf5-9665-3bbe40ae55dd Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.Utilities.pdb does not exist
+FindSymbolFilePath: Probed file location F:\binaries\Intermediate\platform\utilities.csproj_s0cfj9bp\objr\x86\Microsoft.VisualStudio.Utilities.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.Utilities.pdb GUID 3672f062-6078-4cf5-9665-3bbe40ae55dd Age 1 Version 
+Could not find IL PDB F:\binaries\Intermediate\platform\utilities.csproj_s0cfj9bp\objr\x86\Microsoft.VisualStudio.Utilities.pdb Guid 3672f062-6078-4cf5-9665-3bbe40ae55dd Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V32c79513#\1cddaabae0ed665bee0caec8fbbca3b3\Microsoft.VisualStudio.Utilities.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V32c79513#\1cddaabae0ed665bee0caec8fbbca3b3\Microsoft.VisualStudio.Utilities.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.V32c79513#\1cddaabae0ed665bee0caec8fbbca3b3\Microsoft.VisualStudio.Utilities.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Utilities.ni.pdb\1cddaabae0ed665bee0caec8fbbca3b31\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Utilities.ni.pdb\1cddaabae0ed665bee0caec8fbbca3b31\Microsoft.VisualStudio.Utilities.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB E:\A\_work\94\s\obj\Microsoft.VisualStudio.Threading\Release\net45\Microsoft.VisualStudio.Threading.pdb GUID 2b3a2f03-b217-4a03-b872-0131ce4b2e8c Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.Threading.pdb does not exist
+FindSymbolFilePath: Probed file location E:\A\_work\94\s\obj\Microsoft.VisualStudio.Threading\Release\net45\Microsoft.VisualStudio.Threading.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.Threading.pdb GUID 2b3a2f03-b217-4a03-b872-0131ce4b2e8c Age 1 Version 
+Could not find IL PDB E:\A\_work\94\s\obj\Microsoft.VisualStudio.Threading\Release\net45\Microsoft.VisualStudio.Threading.pdb Guid 2b3a2f03-b217-4a03-b872-0131ce4b2e8c Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vbeb7089b#\612c723e4a6df21a0b0bb20651eff5d7\Microsoft.VisualStudio.Threading.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vbeb7089b#\612c723e4a6df21a0b0bb20651eff5d7\Microsoft.VisualStudio.Threading.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vbeb7089b#\612c723e4a6df21a0b0bb20651eff5d7\Microsoft.VisualStudio.Threading.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Threading.ni.pdb\612c723e4a6df21a0b0bb20651eff5d71\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Threading.ni.pdb\612c723e4a6df21a0b0bb20651eff5d71\Microsoft.VisualStudio.Threading.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB E:\A\_work\53\s\obj\Microsoft.VisualStudio.Validation\Release\net45\Microsoft.VisualStudio.Validation.pdb GUID 357833f4-15c3-1415-0e85-fe23a0d497a0 Age 1 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\Microsoft.VisualStudio.Validation.pdb does not exist
+FindSymbolFilePath: Probed file location E:\A\_work\53\s\obj\Microsoft.VisualStudio.Validation\Release\net45\Microsoft.VisualStudio.Validation.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB Microsoft.VisualStudio.Validation.pdb GUID 357833f4-15c3-1415-0e85-fe23a0d497a0 Age 1 Version 
+Could not find IL PDB E:\A\_work\53\s\obj\Microsoft.VisualStudio.Validation\Release\net45\Microsoft.VisualStudio.Validation.pdb Guid 357833f4-15c3-1415-0e85-fe23a0d497a0 Age 1.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vd43b287e#\bc9dac09b97ecc19db56f6889c1aa11d\Microsoft.VisualStudio.Validation.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vd43b287e#\bc9dac09b97ecc19db56f6889c1aa11d\Microsoft.VisualStudio.Validation.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\Microsoft.Vd43b287e#\bc9dac09b97ecc19db56f6889c1aa11d\Microsoft.VisualStudio.Validation.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Validation.ni.pdb\bc9dac09b97ecc19db56f6889c1aa11d1\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\Microsoft.VisualStudio.Validation.ni.pdb\bc9dac09b97ecc19db56f6889c1aa11d1\Microsoft.VisualStudio.Validation.ni.pdb
+Checking for V4.5 for NGEN image C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe
+Got NGEN image file version number: 4.7.2556.0 built by: NET471REL1
+Is a V4.6 or beyond
+Is a V4.5 Runtime or beyond
+FindSymbolFilePath: *{ Locating PDB System.pdb GUID 7929c10a-60eb-457a-8185-e0227df64ad7 Age 2 Version 
+FindSymbolFilePath: Probed file location D:\Agrin\AgrinServer\edsgsd\PerfView\System.pdb does not exist
+FindSymbolFilePath: *} Failed to find PDB System.pdb GUID 7929c10a-60eb-457a-8185-e0227df64ad7 Age 2 Version 
+Could not find IL PDB System.pdb Guid 7929c10a-60eb-457a-8185-e0227df64ad7 Age 2.
+Path has a AUX file in NIC: C:\Windows\assembly\NativeImages_v4.0.30319_32\System\dd89797400d103abfcfdd7e6c1829dd1\System.ni.dll
+set COMPLUS_NGenEnableCreatePdb=1
+set PATH=%PATH%;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+set _NT_SYMBOL_PATH=D:\Agrin\AgrinServer\edsgsd\PerfView
+*** NGEN  CREATEPDB cmdline: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\ngen.exe createpdb "C:\Windows\assembly\NativeImages_v4.0.30319_32\System\dd89797400d103abfcfdd7e6c1829dd1\System.ni.dll" "C:\Users\ASUS\AppData\Local\Temp\symbols" 
+
+Microsoft (R) CLR Native Image Generator - Version 4.7.2556.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+Successfully generated PDB for native assembly 'C:\Windows\assembly\NativeImages_v4.0.30319_32\System\dd89797400d103abfcfdd7e6c1829dd1\System.ni.dll'.
+PDB generated in directory C:\Users\ASUS\AppData\Local\Temp\symbols\System.ni.pdb\dd89797400d103abfcfdd7e6c1829dd11\
+
+
+*** NGEN CREATEPDB returns: 0
+Found NGEN pdb C:\Users\ASUS\AppData\Local\Temp\symbols\System.ni.pdb\dd89797400d103abfcfdd7e6c1829dd11\System.ni.pdb
+Generating NGEN Pdbs took 33.7 sec
+Merging took 77.1 sec
+Moving D:\Agrin\AgrinServer\edsgsd\PerfView\PerfViewData.etl.new to D:\Agrin\AgrinServer\edsgsd\PerfView\PerfViewData.etl
+Deleting temp file
+Merge took 77.195 sec.
+Merge output file D:\Agrin\AgrinServer\edsgsd\PerfView\PerfViewData.etl
+[Zipping ETL file D:\Agrin\AgrinServer\edsgsd\PerfView\PerfViewData.etl]
+[Writing 28 PDBS to Zip file]
+ZIP generation took 27.708 sec
+ZIP output file D:\Agrin\AgrinServer\edsgsd\PerfView\PerfViewData.etl.zip
+Stop Completed at 4/27/2018 1:26:14 PM
+[DONE 13:26:14 SUCCESS: PerfView /RestartingToElevelate:collect /MinSecForTrigger:0 /KernelEvents:ThreadTime /NoGui /Zip:True Collect]

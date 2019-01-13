@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Agrin.Server.DataBase.Models.Relations
 {
+    /// <summary>
+    /// direct user folders
+    /// </summary>
     public class DirectFolderToUserRelationInfo
     {
         public int UserId { get; set; }

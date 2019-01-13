@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using UltraStreamGo;
 
 namespace Agrin.Download.Mixers
 {
@@ -49,18 +50,18 @@ namespace Agrin.Download.Mixers
                 }
                 else
                     find.Path = file;
-                if (!(find.IsComplete == IsCompleteEnum.Comeplete || find.IsComplete == IsCompleteEnum.Reverce) && !System.IO.File.Exists(file))
+                if (!(find.IsComplete == IsCompleteEnum.Comeplete || find.IsComplete == IsCompleteEnum.Reverce) && !CrossFileInfo.Current.Exists(file))
                     throw new Exception("mixer file not found"+ file);
-                if (find.IsComplete == IsCompleteEnum.Comeplete && !System.IO.File.Exists(currentMixer.FullAddress))
+                if (find.IsComplete == IsCompleteEnum.Comeplete && !CrossFileInfo.Current.Exists(currentMixer.FullAddress))
                     throw new Exception("complete file moved or deleted!" + currentMixer.FullAddress);
-                if (System.IO.File.Exists(file) && find.IsComplete == IsCompleteEnum.None)
+                if (CrossFileInfo.Current.Exists(file) && find.IsComplete == IsCompleteEnum.None)
                 {
                     find.Lenght = new System.IO.FileInfo(file).Length;
                 }
                 mainLen += find.Lenght;
             }
             Size = mainLen;
-            if (System.IO.File.Exists(currentMixer.FullAddress))
+            if (CrossFileInfo.Current.Exists(currentMixer.FullAddress))
             {
                 MixedSize = new System.IO.FileInfo(currentMixer.FullAddress).Length;
             }
@@ -76,11 +77,11 @@ namespace Agrin.Download.Mixers
             {
                 if (isCanceled)
                     return;
-                if (System.IO.File.Exists(file.Path))
+                if (CrossFileInfo.Current.Exists(file.Path))
                     size += new System.IO.FileInfo(file.Path).Length;
             }
 
-            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
             {
                 if (isCanceled)
                     return;
@@ -97,7 +98,7 @@ namespace Agrin.Download.Mixers
             if (isCanceled)
                 return;
             MixedSize = 0;
-            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName, newSecurityFileName: (newPath) => CurrentMixer.SecurityAddress = newPath))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName, newSecurityFileName: (newPath) => CurrentMixer.SecurityAddress = newPath))
             {
                 if (isCanceled)
                     return;
@@ -109,7 +110,7 @@ namespace Agrin.Download.Mixers
                     if (file.IsComplete == IsCompleteEnum.Comeplete)
                         continue;
                     long currentMixed = MixedSize;
-                    using (var copystream = IOHelperBase.OpenFileStreamForWrite(file.Path, System.IO.FileMode.Open))
+                    using (var copystream = IOHelperBase.Current.OpenFileStreamForWrite(file.Path, System.IO.FileMode.Open))
                     {
                         if (isCanceled)
                             return;
@@ -154,8 +155,8 @@ namespace Agrin.Download.Mixers
                     return;
                 foreach (var file in Files)
                 {
-                    if (System.IO.File.Exists(file.Path))
-                        IOHelperBase.DeleteFile(file.Path);
+                    if (CrossFileInfo.Current.Exists(file.Path))
+                        CrossFileInfo.Current.Delete(file.Path);
                 }
             }
             catch (Exception ex)
@@ -170,7 +171,7 @@ namespace Agrin.Download.Mixers
         {
             if (isCanceled)
                 return;
-            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
             {
                 if (isCanceled)
                     return;

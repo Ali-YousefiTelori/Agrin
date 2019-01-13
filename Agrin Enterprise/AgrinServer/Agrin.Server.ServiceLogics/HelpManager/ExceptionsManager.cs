@@ -7,6 +7,7 @@ using SignalGo.Shared.DataTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Agrin.Server.ServiceLogics.HelpManager
 {
@@ -23,7 +24,7 @@ namespace Agrin.Server.ServiceLogics.HelpManager
         {
             using (AgrinContext context = new AgrinContext(false))
             {
-                IQueryable<ExceptionInfo> query = context.ExceptionInfoes.AsNoTracking().AsQueryable();
+                IQueryable<ExceptionInfo> query = context.Exceptions.AsNoTracking().AsQueryable();
                 ExceptionInfo find = query.FirstOrDefault(x => x.ErrorCode == errorCode);
                 if (find == null)
                     return MessageType.NotFound;
@@ -35,7 +36,7 @@ namespace Agrin.Server.ServiceLogics.HelpManager
         {
             using (AgrinContext context = new AgrinContext(false))
             {
-                IQueryable<ExceptionInfo> query = context.ExceptionInfoes.AsNoTracking().AsQueryable();
+                IQueryable<ExceptionInfo> query = context.Exceptions.AsNoTracking().AsQueryable();
                 ExceptionInfo find = query.FirstOrDefault(x => x.HttpErrorCode == errorCode);
                 if (find == null)
                     return MessageType.NotFound;
@@ -44,13 +45,16 @@ namespace Agrin.Server.ServiceLogics.HelpManager
         }
 
         [AgrinSecurityPermission(IsNormalUser = true)]
-        public MessageContract AddRequestIdeaInfo(RequestIdeaInfo requestExceptionInfo)
+        public async Task<MessageContract> AddRequestIdeaInfo(RequestIdeaInfo requestExceptionInfo, int? fileId)
         {
+            var userId = CurrentUserInfo.UserId;
             using (AgrinContext context = new AgrinContext(false))
             {
-                if (requestExceptionInfo.HttpErrorCode.HasValue && context.RequestIdeaInfoes.Any(x => x.HttpErrorCode == requestExceptionInfo.HttpErrorCode))
+                if (fileId.HasValue && !await context.Files.AnyAsync(x => x.Id == fileId && x.UserId == userId))
+                    return MessageType.AccessDenied;
+                else if (requestExceptionInfo.HttpErrorCode.HasValue && await context.RequestIdeas.AnyAsync(x => x.HttpErrorCode == requestExceptionInfo.HttpErrorCode))
                     return MessageType.Duplicate;
-                else if (context.RequestIdeaInfoes
+                else if (context.RequestIdeas
                     .Any(x => x.ErrorMessage == requestExceptionInfo.ErrorMessage))
                     return MessageType.Duplicate;
                 requestExceptionInfo.CreatedDateTime = DateTime.Now;
@@ -59,8 +63,8 @@ namespace Agrin.Server.ServiceLogics.HelpManager
 
                 requestExceptionInfo.UserId = CurrentUserInfo.UserId;
 
-                context.RequestIdeaInfoes.Add(requestExceptionInfo);
-                context.SaveChanges();
+                await context.RequestIdeas.AddAsync(requestExceptionInfo);
+                await context.SaveChangesAsync();
                 return MessageType.Success;
             }
         }
@@ -70,7 +74,7 @@ namespace Agrin.Server.ServiceLogics.HelpManager
         {
             using (AgrinContext context = new AgrinContext(false))
             {
-                var query = context.RequestIdeaInfoes.Select(x => new
+                var query = context.RequestIdeas.Select(x => new
                 {
                     RequestIdeaInfo = x,
                     LikesCount = x.LikeInfoes.Count,

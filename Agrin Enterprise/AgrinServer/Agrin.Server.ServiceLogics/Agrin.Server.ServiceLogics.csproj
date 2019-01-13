@@ -146,7 +146,8 @@
     <Compile Include="Logics\StorageLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StorageManager\FileManager.cs" />
-    <Compile Include="StorageManager\PostStorageManager.cs" />
+    <Compile Include="Streams\PostStorageManager.cs" />
+    <Compile Include="StoreServices\VisitCardService.cs" />
     <Compile Include="Streams\FileStreamManager.cs" />
     <Compile Include="UserManager\LikesAndCommentsService.cs" />
     <Compile Include="UserManager\PostService.cs" />

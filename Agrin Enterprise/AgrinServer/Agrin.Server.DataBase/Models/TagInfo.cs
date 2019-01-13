@@ -10,6 +10,7 @@ namespace Agrin.Server.DataBase.Models
 {
     /// <summary>
     /// category tags
+    /// this is not user custom post tags
     /// </summary>
     public class TagInfo
     {
@@ -21,9 +22,9 @@ namespace Agrin.Server.DataBase.Models
         /// <summary>
         /// title of post category
         /// </summary>
+        [StringLength(30)]
         public string Title { get; set; }
 
-        public virtual ICollection<PostCategoryTagRelationInfo> PostCategoryTagRelationInfoes { get; set; }
         public virtual ICollection<PostTagRelationInfo> PostTagRelationInfoes { get; set; }
     }
 }

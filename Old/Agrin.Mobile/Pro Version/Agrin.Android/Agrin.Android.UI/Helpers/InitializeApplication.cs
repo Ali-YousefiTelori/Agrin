@@ -22,6 +22,7 @@ using Agrin.BaseViewModels;
 using Agrin.IO.Helper;
 using Agrin.HardWare;
 using Agrin.Log;
+using Agrin.IO.Streams;
 
 namespace Agrin.Helpers
 {
@@ -490,10 +491,15 @@ namespace Agrin.Helpers
         static object lockObj = new object();
         //public static int MaxNotifyID = 569000;
         //static int nooooo = 6546464;
-        public static bool Run(Context currentActivity)
+        public static bool Run(ContextWrapper currentActivity)
         {
+            IOHelperBase.Current = new IOHelper() { Activity = currentActivity };
             if (string.IsNullOrEmpty(Agrin.Log.AutoLogger.ApplicationDirectory))
                 Agrin.Log.AutoLogger.ApplicationDirectory = System.IO.Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.RootDirectory.Path).Path, "AgrinData");
+            StreamCross.OpenFile = (path, fileMode, fileAccess) =>
+            {
+                return new AndroidStreamCross(path, fileMode, fileAccess);
+            };
             //var nMgr = (NotificationManager)currentActivity.GetSystemService(Context.NotificationService);
             //var builder = new Notification.Builder(currentActivity).SetContentTitle("title").SetContentText(Inited.ToString()).SetSmallIcon(Resource.Drawable.smallIcon);
             //try
@@ -728,70 +734,70 @@ namespace Agrin.Helpers
 
                 }
                 //storage access framework
-                IOHelper.OpenFileStreamForWriteAction = (fileAddress, fileName, fileMode, newAddressAction, link) =>
-                {
-                    if (fileAddress.StartsWith("content://"))
-                    {
-                        //StringBuilder bulder = new StringBuilder();
-                        try
-                        {
-                            //bulder.AppendLine("child == null");
-                            //bulder.AppendLine("fileAddress : " + fileAddress ?? "null");
-                            //bulder.AppendLine("fileName : " + fileName ?? "null");
+                //IOHelperBase.Current.OpenFileStreamForWriteAction = (fileAddress, fileName, fileMode, newAddressAction, link) =>
+                //{
+                //    if (fileAddress.StartsWith("content://"))
+                //    {
+                //        //StringBuilder bulder = new StringBuilder();
+                //        try
+                //        {
+                //            //bulder.AppendLine("child == null");
+                //            //bulder.AppendLine("fileAddress : " + fileAddress ?? "null");
+                //            //bulder.AppendLine("fileName : " + fileName ?? "null");
 
-                            //var linkInfo = link as LinkInfo;
-                            Android.Net.Uri fileUri = null;
-                            //if (linkInfo != null && string.IsNullOrEmpty(linkInfo.PathInfo.SecurityPath))
-                            //{
-                            //    //InitializeApplication.GoException("null linkInfo.PathInfo.SecurityPath" + bulder.ToString());
-                            //    return null;
-                            //}
+                //            //var linkInfo = link as LinkInfo;
+                //            Android.Net.Uri fileUri = null;
+                //            //if (linkInfo != null && string.IsNullOrEmpty(linkInfo.PathInfo.SecurityPath))
+                //            //{
+                //            //    //InitializeApplication.GoException("null linkInfo.PathInfo.SecurityPath" + bulder.ToString());
+                //            //    return null;
+                //            //}
 
-                            if (!string.IsNullOrEmpty(fileName))
-                            {
-                                Android.Net.Uri childUri = null;
-                                Android.Net.Uri path = Android.Net.Uri.Parse(fileAddress);
-                                if (ViewsUtility.GetApiVersion() >= 21)
-                                {
-                                    var treedocId = Android.Provider.DocumentsContract.GetTreeDocumentId(path);
-                                    Android.Net.Uri docUri = Android.Provider.DocumentsContract.BuildDocumentUriUsingTree(path, treedocId);
-                                    childUri = Android.Provider.DocumentsContract.CreateDocument(currentActivity.ContentResolver, docUri, ViewsUtility.GetMimeType(fileName), fileName);
-                                    if (childUri == null)
-                                    {
-                                        throw new Exception("Could not create file! Please change save address...");
-                                    }
-                                }
-                                else
-                                {
-                                    throw new Exception("Could not create file! Please change save address...");
-                                    var id = Android.Provider.DocumentsContract.GetDocumentId(path);
-                                    //Android.Provider.
-                                    //return new Agrin.Streams.AndroidStreamWriter(new Java.IO.FileOutputStream(realPath));
-                                    var aq = currentActivity.ContentResolver.AcquireContentProviderClient(Android.Provider.ContactsContract.Authority);
+                //            if (!string.IsNullOrEmpty(fileName))
+                //            {
+                //                Android.Net.Uri childUri = null;
+                //                Android.Net.Uri path = Android.Net.Uri.Parse(fileAddress);
+                //                if (ViewsUtility.GetApiVersion() >= 21)
+                //                {
+                //                    var treedocId = Android.Provider.DocumentsContract.GetTreeDocumentId(path);
+                //                    Android.Net.Uri docUri = Android.Provider.DocumentsContract.BuildDocumentUriUsingTree(path, treedocId);
+                //                    childUri = Android.Provider.DocumentsContract.CreateDocument(currentActivity.ContentResolver, docUri, ViewsUtility.GetMimeType(fileName), fileName);
+                //                    if (childUri == null)
+                //                    {
+                //                        throw new Exception("Could not create file! Please change save address...");
+                //                    }
+                //                }
+                //                else
+                //                {
+                //                    throw new Exception("Could not create file! Please change save address...");
+                //                    var id = Android.Provider.DocumentsContract.GetDocumentId(path);
+                //                    //Android.Provider.
+                //                    //return new Agrin.Streams.AndroidStreamWriter(new Java.IO.FileOutputStream(realPath));
+                //                    var aq = currentActivity.ContentResolver.AcquireContentProviderClient(Android.Provider.ContactsContract.Authority);
 
-                                    childUri = FileUtils.createDocumentWithFlags(aq, id, ViewsUtility.GetMimeType(fileName), fileName, 0);
-                                    //Android.Net.Uri docUri = Android.Provider.DocumentsContract.BuildDocumentUri("com.example.documentsprovider.authority", id);
-                                    //childUri = docUri;
-                                }
-                                newAddressAction?.Invoke(childUri.ToString());
-                                fileUri = childUri;
-                            }
-                            else
-                                fileUri = Android.Net.Uri.Parse(fileAddress);
-                            ParcelFileDescriptor pfd = currentActivity.ContentResolver.OpenFileDescriptor(fileUri, "w");
-                            var fileD = pfd.FileDescriptor;
-                            Java.IO.FileOutputStream fileOutputStream = new Java.IO.FileOutputStream(fileD);
-                            //InitializeApplication.GoException("OK-o : " + bulder.ToString());
+                //                    childUri = FileUtils.createDocumentWithFlags(aq, id, ViewsUtility.GetMimeType(fileName), fileName, 0);
+                //                    //Android.Net.Uri docUri = Android.Provider.DocumentsContract.BuildDocumentUri("com.example.documentsprovider.authority", id);
+                //                    //childUri = docUri;
+                //                }
+                //                newAddressAction?.Invoke(childUri.ToString());
+                //                fileUri = childUri;
+                //            }
+                //            else
+                //                fileUri = Android.Net.Uri.Parse(fileAddress);
+                //            ParcelFileDescriptor pfd = currentActivity.ContentResolver.OpenFileDescriptor(fileUri, "w");
+                //            var fileD = pfd.FileDescriptor;
+                //            Java.IO.FileOutputStream fileOutputStream = new Java.IO.FileOutputStream(fileD);
+                //            //InitializeApplication.GoException("OK-o : " + bulder.ToString());
 
-                            return new Agrin.Streams.AndroidStreamWriter(fileOutputStream) { FileDescriptor = fileD, ParcelFileDescriptor = pfd };
-                        }
-                        catch (Exception ex)
-                        {
-                            GoException(ex);
-                        }
-                    }
-                    return null;
-                };
+                //            return new Agrin.Streams.AndroidStreamWriter(fileOutputStream) { FileDescriptor = fileD, ParcelFileDescriptor = pfd };
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            GoException(ex);
+                //        }
+                //    }
+                //    return null;
+                //};
 
                 if (Agrin.Download.Data.ApplicationServiceData.Current != null && Agrin.Download.Data.ApplicationServiceData.Current.IsPlayLinks != null)
                 {

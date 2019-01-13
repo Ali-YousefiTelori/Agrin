@@ -65,20 +65,20 @@ namespace Agrin.IO
                     return icons[extension];
                 string iconDirectories = Path.Combine(Agrin.IO.Helper.MPath.CurrentUserAppDirectory, "ExtIcons");
                 if (!Directory.Exists(iconDirectories))
-                    IOHelper.CreateDirectory(iconDirectories);
+                    CrossDirectoryInfo.Current.CreateDirectory(iconDirectories);
                 string fileName = Path.Combine(iconDirectories, extension + ".png");
                 if (System.IO.File.Exists(fileName))
                 {
                     FileInfo file = new FileInfo(fileName);
                     if (file.Length < 1024 * 1024 * 1)
                     {
-                        return IOHelper.ReadAllBytes(fileName);
+                        return IOHelperBase.Current.ReadAllBytes(fileName);
                     }
                 }
                 var icon = Framesoft.Helper.FileManagerHelper.GetIconByFileExtention(extension);
                 if (icon.Data != null && icon.Data.Length > 0)
                 {
-                    IOHelper.WriteAllBytes(fileName, icon.Data);
+                    IOHelperBase.Current.WriteAllBytes(fileName, icon.Data);
                     icons.Add(extension, icon.Data);
                 }
                 return icon.Data;

@@ -16,7 +16,7 @@ namespace Agrin.IO.File
 
         public void CreateFile(int length)
         {
-            using (var stream = IOHelper.OpenFileStreamForWrite("d:\\text.apk", FileMode.Create, FileAccess.ReadWrite))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite("d:\\text.apk", FileMode.Create, FileAccess.ReadWrite))
             {
                 for (int i = 0; i < length; i++)
                 {
@@ -29,7 +29,7 @@ namespace Agrin.IO.File
         public void ReadFile(int length)
         {
             List<int> items = new List<int>();
-            using (var stream = IOHelper.OpenFileStreamForRead("d:\\text.apk", FileMode.Open, FileAccess.ReadWrite))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForRead("d:\\text.apk", FileMode.Open, FileAccess.ReadWrite))
             {
                 while (stream.Position != stream.Length)
                 {

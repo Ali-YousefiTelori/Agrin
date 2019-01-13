@@ -1,18 +1,14 @@
 ﻿using Agrin.Server.DataBase.Models.Relations;
-using SignalGo;
 using SignalGo.Shared.DataTypes;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Agrin.Server.DataBase.Models
 {
     /// <summary>
     /// category of post
+    /// like, کاربردی و موسیقی و فیلم و کتاب و نرم افزار
     /// </summary>
     [CustomDataExchanger("PostCategoryTagInfoes",
           ExchangeType = CustomDataExchangerType.Ignore, LimitationMode = LimitExchangeType.Both)]
@@ -24,18 +20,17 @@ namespace Agrin.Server.DataBase.Models
         [Key]
         public int Id { get; set; }
         /// <summary>
-        /// title of post category
+        /// title of post category like music,film,application
         /// </summary>
-        public string Title { get; set; }
-        ///// <summary>
-        ///// parent of this category
-        ///// </summary>
-        //public int? ParentCategoryId { get; set; }
-
-        //[ForeignKey("ParentCategoryId")]
-        //public virtual PostCategoryInfo ParentCategoryInfo { get; set; }
-
-        public virtual ICollection<PostCategoryTagRelationInfo> PostCategoryTagRelationInfoes { get; set; }
+        public int LanguageKeyId { get; set; }
+        /// <summary>
+        /// all of the sub categories of post category
+        /// this is many to many relation
+        /// </summary>
+        public virtual ICollection<PostCategorySubCategoryRelationInfo> PostCategorySubCategoryRelationInfoes { get; set; }
         public virtual ICollection<PostInfo> Posts { get; set; }
+
+        [ForeignKey("LanguageKeyId")]
+        public LanguageKeyInfo LanguageKeyInfo { get; set; }
     }
 }

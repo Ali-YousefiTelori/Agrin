@@ -26,7 +26,7 @@ namespace Agrin.Download.Web.Connections.ShareSite
                 {
                     if (isDispose)
                         return false;
-                    _saveStream = IOHelper.OpenFileStreamForWrite(ParentLinkWebRequest.SaveFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                    _saveStream = IOHelperBase.Current.OpenFileStreamForWrite(ParentLinkWebRequest.SaveFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
                 }
                 if (isDispose)
                     return false;

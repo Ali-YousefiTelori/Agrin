@@ -102,7 +102,7 @@ namespace Agrin.IO.Mixer
         {
             try
             {
-                IOHelper.DeleteFile(CurrentMixer.MixerBackupPath);
+                IOHelperBase.Current.Delete(CurrentMixer.MixerBackupPath);
             }
             catch (Exception ex)
             {
@@ -110,7 +110,7 @@ namespace Agrin.IO.Mixer
             }
             try
             {
-                IOHelper.DeleteFile(CurrentMixer.MixerPath);
+                IOHelperBase.Current.Delete(CurrentMixer.MixerPath);
             }
             catch (Exception ex)
             {

@@ -69,7 +69,7 @@ namespace Agrin.Download.Web.Connections
             {
                 if (isDispose)
                     return false;
-                _saveStream = IOHelper.OpenFileStreamForWrite(ParentLinkWebRequest.SaveFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                _saveStream = IOHelperBase.Current.OpenFileStreamForWrite(ParentLinkWebRequest.SaveFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
                 //fix stop on 99% downloading...
                 if (_saveStream.Length > 10)
                     _saveStream.SetLength(_saveStream.Length - 10);

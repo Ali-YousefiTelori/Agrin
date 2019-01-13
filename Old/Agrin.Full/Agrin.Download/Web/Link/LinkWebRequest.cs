@@ -239,7 +239,7 @@ namespace Agrin.Download.Web.Link
                 if (_SaveFileName == null)
                     _SaveFileName = System.IO.Path.Combine(Parent.PathInfo.ConnectionsSavedAddress, ConnectionId.ToString() + ".AT");
                 if (!Directory.Exists(Path.GetDirectoryName(_SaveFileName)))
-                    IOHelper.CreateDirectory(Path.GetDirectoryName(_SaveFileName));
+                    CrossDirectoryInfo.Current.CreateDirectory(Path.GetDirectoryName(_SaveFileName));
                 return _SaveFileName;
             }
             set { _SaveFileName = value; OnPropertyChanged("SaveFileName"); }

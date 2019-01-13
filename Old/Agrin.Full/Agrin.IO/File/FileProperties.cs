@@ -8,7 +8,7 @@ namespace Agrin.IO.File
 {
     public static class FileProperties
     {
-#if (!MobileApp && !XamarinApp)
+#if (!MobileApp && !XamarinApp && !__ANDROID__)
         [StructLayout(LayoutKind.Sequential)]
         struct SHFILEINFO
         {

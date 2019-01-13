@@ -45,7 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Github\MVVMGo\MvvmGo\MvvmGo\MvvmGo.csproj" />
+    <ProjectReference Include="..\..\..\..\Github\MVVMGo\MvvmGo\MvvmGo.csproj" />
     <ProjectReference Include="..\Agrin.Log\Agrin.Log.csproj" />
     <ProjectReference Include="..\Agrin.Models\Agrin.Models.csproj" />
   </ItemGroup>

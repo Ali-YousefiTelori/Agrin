@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json.Linq;
 
 namespace YoutubeExtractor
 {
@@ -30,28 +30,42 @@ namespace YoutubeExtractor
 
             if (queries.ContainsKey(SignatureQuery))
             {
-                string encryptedSignature = queries[SignatureQuery];
-
-                string decrypted;
-
+                bool isNeedDecrypt = true;
                 try
                 {
-                    decrypted = GetDecipheredSignature(videoInfo.HtmlPlayerVersion, encryptedSignature);
+                    WebRequest request = WebRequest.Create(videoInfo.DownloadUrl);
+                    request.GetResponse().Close();
+                    isNeedDecrypt = false;
                 }
-
                 catch (Exception ex)
                 {
-                    throw new YoutubeParseException("Could not decipher signature", ex);
+                    isNeedDecrypt = true;
                 }
+                if (isNeedDecrypt)
+                {
+                    string encryptedSignature = queries[SignatureQuery];
 
-                videoInfo.DownloadUrl = HttpHelper.ReplaceQueryStringParameter(videoInfo.DownloadUrl, SignatureQuery, decrypted);
-                videoInfo.RequiresDecryption = false;
+                    string decrypted;
+
+                    try
+                    {
+                        decrypted = GetDecipheredSignature(videoInfo.HtmlPlayerVersion, encryptedSignature);
+                    }
+
+                    catch (Exception ex)
+                    {
+                        throw new YoutubeParseException("Could not decipher signature", ex);
+                    }
+
+                    videoInfo.DownloadUrl = HttpHelper.ReplaceQueryStringParameter(videoInfo.DownloadUrl, SignatureQuery, decrypted);
+                    videoInfo.RequiresDecryption = false;
+                }
             }
         }
 
         public static VideoInfo GetVideoInfoByFormatCode(List<VideoInfo> items, int formatCode)
         {
-            foreach (var item in items)
+            foreach (VideoInfo item in items)
             {
                 if (item.FormatCode == formatCode)
                     return item;
@@ -107,7 +121,7 @@ namespace YoutubeExtractor
 
             try
             {
-                var json = LoadJson(videoUrl);
+                JObject json = LoadJson(videoUrl);
 
                 string videoTitle = GetVideoTitle(json);
 
@@ -239,7 +253,7 @@ namespace YoutubeExtractor
             // bugfix: adaptive_fmts is missing in some videos, use url_encoded_fmt_stream_map instead
             if (streamMap == null)
             {
-              streamMap = json["args"]["url_encoded_fmt_stream_map"];
+                streamMap = json["args"]["url_encoded_fmt_stream_map"];
             }
 
             return streamMap.ToString();
@@ -252,7 +266,7 @@ namespace YoutubeExtractor
 
         private static string GetHtml5PlayerVersion(JObject json)
         {
-            var regex = new Regex(@"player(.+?).js");
+            Regex regex = new Regex(@"player(.+?).js");
 
             string js = json["assets"]["js"].ToString();
 
@@ -275,7 +289,7 @@ namespace YoutubeExtractor
 
         private static IEnumerable<VideoInfo> GetVideoInfos(IEnumerable<ExtractionInfo> extractionInfos, string videoTitle)
         {
-            var downLoadInfos = new List<VideoInfo>();
+            List<VideoInfo> downLoadInfos = new List<VideoInfo>();
 
             foreach (ExtractionInfo extractionInfo in extractionInfos)
             {
@@ -332,7 +346,7 @@ namespace YoutubeExtractor
                 throw new VideoNotAvailableException();
             }
 
-            var dataRegex = new Regex(@"ytplayer\.config\s*=\s*(\{.+?\});", RegexOptions.Multiline);
+            Regex dataRegex = new Regex(@"ytplayer\.config\s*=\s*(\{.+?\});", RegexOptions.Multiline);
 
             string extractedJson = dataRegex.Match(pageSource).Result("$1");
 

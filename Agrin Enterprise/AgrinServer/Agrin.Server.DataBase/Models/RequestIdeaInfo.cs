@@ -113,8 +113,8 @@ namespace Agrin.Server.DataBase.Models
 
         public virtual ICollection<CommentInfo> CommentInfoes { get; set; }
         public virtual ICollection<LikeInfo> LikeInfoes { get; set; }
+        public virtual ICollection<FileInfo> FileInfoes { get; set; }
 
-        
         [NotMapped]
         public int CommentsCount { get; set; }
         [NotMapped]

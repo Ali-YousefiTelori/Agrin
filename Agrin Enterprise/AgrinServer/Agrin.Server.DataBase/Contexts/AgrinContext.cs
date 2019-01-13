@@ -41,7 +41,7 @@ namespace Agrin.Server.DataBase.Contexts
             //local
             //optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
             //server
-            optionsBuilder.UseSqlServer("Data Source=frameapp.ir,4565\\SQLEXPRESS;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
+            optionsBuilder.UseSqlServer("Data Source=frameapp.ir,4566\\.;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -58,7 +58,30 @@ namespace Agrin.Server.DataBase.Contexts
             modelBuilder.Entity<DirectFolderInfo>().HasIndex(e => e.Name).IsUnique();
             modelBuilder.Entity<UserInfo>().HasIndex(e => e.UserName).IsUnique();
             modelBuilder.Entity<DirectFileToUserRelationInfo>().HasKey(x => new { x.UserId, x.DirectFileId });
-            modelBuilder.Entity<PostCategoryTagRelationInfo>().HasKey(x => new { x.TagId, x.PostCategoryId });
+            modelBuilder.Entity<PostCategorySubCategoryRelationInfo>(entity =>
+            {
+                entity.HasKey(x => new { x.PostSubCategoryId, x.PostCategoryId });
+                entity.HasOne(d => d.PostCategoryInfo)
+                   .WithMany(p => p.PostCategorySubCategoryRelationInfoes)
+                   .HasForeignKey(d => d.PostCategoryId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(d => d.PostSubCategoryInfo)
+                 .WithMany(p => p.PostCategorySubCategoryRelationInfoes)
+                 .HasForeignKey(d => d.PostSubCategoryId).OnDelete(DeleteBehavior.Restrict);
+            });
+            modelBuilder.Entity<LanguageKeyInfo>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.HasOne(d => d.LanguageInfo)
+                   .WithMany(p => p.LanguageKeyInfoes)
+                   .OnDelete(DeleteBehavior.Restrict);
+            });
+            modelBuilder.Entity<PostCategoryInfo>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.HasOne(d => d.LanguageKeyInfo)
+                   .WithMany(p => p.PostCategoryInfoes)
+                   .OnDelete(DeleteBehavior.Restrict);
+            });
             modelBuilder.Entity<PostTagRelationInfo>().HasKey(x => new { x.TagId, x.PostId });
             modelBuilder.Entity<DirectFolderToUserRelationInfo>().HasKey(x => new { x.UserId, x.DirectFolderId });
 
@@ -82,6 +105,7 @@ namespace Agrin.Server.DataBase.Contexts
             //    .HasForeignKey(e => e.FromProfileId).WillCascadeOnDelete(false);
             base.OnModelCreating(modelBuilder);
         }
+
         /// <summary>
         /// ساخت مدل دیتابیسی
         /// </summary>
@@ -108,83 +132,103 @@ namespace Agrin.Server.DataBase.Contexts
         /// <summary>
         /// جدول کاربران
         /// </summary>
-        public DbSet<UserInfo> UserInfoes { get; set; }
+        public DbSet<UserInfo> Users { get; set; }
         /// <summary>
         /// جدول پست ها
         /// </summary>
-        public DbSet<PostInfo> PostInfoes { get; set; }
+        public DbSet<PostInfo> Posts { get; set; }
         /// <summary>
         /// table of post categories
         /// </summary>
-        public DbSet<PostCategoryInfo> PostCategoryInfoes { get; set; }
+        public DbSet<PostCategoryInfo> PostCategories { get; set; }
         /// <summary>
         /// پست های ویدئویی
         /// </summary>
-        public DbSet<PostVideoInfo> PostVideoInfoes { get; set; }
+        public DbSet<PostVideoInfo> PostVideoes { get; set; }
         /// <summary>
         /// پست های موسیقی
         /// </summary>
-        public DbSet<PostSoundInfo> PostSoundInfoes { get; set; }
+        public DbSet<PostSoundInfo> PostSounds { get; set; }
         /// <summary>
         /// جدول تگ ها و زیر مجموعه های یک موضوع
         /// هر موضوع میتواند چندین زیر مجموعه داشته باشد و هر زیر مجموعه میتواند در چندین موضوع باشد
         /// </summary>
-        public DbSet<TagInfo> TagInfoes { get; set; }
-        /// <summary>
-        /// relation of tag and post
-        /// </summary>
-        public DbSet<PostCategoryTagRelationInfo> PostCategoryTagRelationInfoes { get; set; }
+        public DbSet<TagInfo> Tags { get; set; }
         /// <summary>
         /// relation of post tags
         /// </summary>
-        public DbSet<PostTagRelationInfo> PostTagRelationInfoes { get; set; }
+        public DbSet<PostTagRelationInfo> PostTagRelations { get; set; }
         /// <summary>
         /// user sessions for login or access
         /// </summary>
-        public DbSet<UserSessionInfo> UserSessionInfoes { get; set; }
+        public DbSet<UserSessionInfo> UserSessions { get; set; }
         /// <summary>
         /// direct file
         /// </summary>
-        public DbSet<DirectFileInfo> DirectFileInfoes { get; set; }
+        public DbSet<DirectFileInfo> DirectFiles { get; set; }
         /// <summary>
         /// direct folder
         /// </summary>
-        public DbSet<DirectFolderInfo> DirectFolderInfoes { get; set; }
+        public DbSet<DirectFolderInfo> DirectFolders { get; set; }
         /// <summary>
         /// user credit
         /// </summary>
-        public DbSet<UserCreditInfo> UserCreditInfoes { get; set; }
+        public DbSet<UserCreditInfo> UserCredits { get; set; }
         /// <summary>
         /// user folders
         /// </summary>
-        public DbSet<DirectFolderToUserRelationInfo> DirectFolderToUserRelationInfoes { get; set; }
+        public DbSet<DirectFolderToUserRelationInfo> DirectFolderToUserRelations { get; set; }
         /// <summary>
         /// user files
         /// </summary>
-        public DbSet<DirectFileToUserRelationInfo> DirectFileToUserRelationInfoes { get; set; }
+        public DbSet<DirectFileToUserRelationInfo> DirectFileToUserRelations { get; set; }
         /// <summary>
         /// agrin server infoes
         /// </summary>
-        public DbSet<ServerInfo> ServerInfoes { get; set; }
+        public DbSet<ServerInfo> Servers { get; set; }
         /// <summary>
         /// exception info is helpfull for users to know how to fix problems
         /// </summary>
-        public DbSet<ExceptionInfo> ExceptionInfoes { get; set; }
+        public DbSet<ExceptionInfo> Exceptions { get; set; }
         /// <summary>
         /// users request to add this exception to new verison of app
         /// </summary>
-        public DbSet<RequestIdeaInfo> RequestIdeaInfoes { get; set; }
+        public DbSet<RequestIdeaInfo> RequestIdeas { get; set; }
         /// <summary>
         /// hash for confirm
         /// </summary>
-        public DbSet<UserConfirmHashInfo> UserConfirmHashInfoes { get; set; }
+        public DbSet<UserConfirmHashInfo> UserConfirmHashes { get; set; }
         /// <summary>
         /// likes of user
         /// </summary>
-        public DbSet<LikeInfo> LikeInfoes { get; set; }
+        public DbSet<LikeInfo> Likes { get; set; }
         /// <summary>
         /// comment infoes
         /// </summary>
-        public DbSet<CommentInfo> CommentInfoes { get; set; }
+        public DbSet<CommentInfo> Comments { get; set; }
+        /// <summary>
+        /// language info
+        /// </summary>
+        public DbSet<LanguageInfo> Languages { get; set; }
+        /// <summary>
+        /// language keys
+        /// </summary>
+        public DbSet<LanguageKeyInfo> LanguageKeys { get; set; }
+        /// <summary>
+        /// sub category of post categories
+        /// </summary>
+        public DbSet<PostSubCategoryInfo> PostSubCategories { get; set; }
+        /// <summary>
+        /// role accesses of users
+        /// </summary>
+        public DbSet<UserRoleInfo> UserRoles { get; set; }
+        /// <summary>
+        /// visit card infoes
+        /// </summary>
+        public DbSet<VisitCardInfo> VisitCards { get; set; }
+        /// <summary>
+        /// file infoes
+        /// </summary>
+        public DbSet<FileInfo> Files { get; set; }
     }
 }

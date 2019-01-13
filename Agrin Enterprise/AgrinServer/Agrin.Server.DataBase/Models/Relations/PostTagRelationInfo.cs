@@ -8,9 +8,18 @@ using System.Threading.Tasks;
 
 namespace Agrin.Server.DataBase.Models.Relations
 {
+    /// <summary>
+    /// what posts has what tags
+    /// </summary>
     public class PostTagRelationInfo
     {
+        /// <summary>
+        /// post id
+        /// </summary>
         public int PostId { get; set; }
+        /// <summary>
+        /// tag id
+        /// </summary>
         public int TagId { get; set; }
 
         [ForeignKey("PostId")]

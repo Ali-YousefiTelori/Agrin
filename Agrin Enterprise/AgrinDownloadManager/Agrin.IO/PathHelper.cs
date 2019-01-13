@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using UltraStreamGo;
 
 namespace Agrin.IO
 {
@@ -71,12 +72,12 @@ namespace Agrin.IO
             _ApplicationTemporaryPath = applicationTemporaryPath;
             _DownloadsPath = downloadsPath;
 
-            if (!Directory.Exists(applicationBasePath))
-                Directory.CreateDirectory(applicationBasePath);
-            if (!Directory.Exists(applicationTemporaryPath))
-                Directory.CreateDirectory(applicationTemporaryPath);
-            if (!Directory.Exists(downloadsPath))
-                Directory.CreateDirectory(downloadsPath);
+            if (!CrossDirectoryInfo.Current.Exists(applicationBasePath))
+                CrossDirectoryInfo.Current.CreateDirectory(applicationBasePath);
+            if (!CrossDirectoryInfo.Current.Exists(applicationTemporaryPath))
+                CrossDirectoryInfo.Current.CreateDirectory(applicationTemporaryPath);
+            if (!CrossDirectoryInfo.Current.Exists(downloadsPath))
+                CrossDirectoryInfo.Current.CreateDirectory(downloadsPath);
         }
 
         /// <summary>
@@ -90,8 +91,8 @@ namespace Agrin.IO
                 return path;
             try
             {
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
+                if (!CrossDirectoryInfo.Current.Exists(path))
+                    CrossDirectoryInfo.Current.CreateDirectory(path);
             }
             catch (Exception ex)
             {
@@ -306,11 +307,6 @@ namespace Agrin.IO
             if (Path.IsPathRooted(path1) && Path.IsPathRooted(path2))
                 return Path.GetFullPath(path1).Equals(Path.GetFullPath(path2));
             return false;
-        }
-
-        public static bool FileExist(string filename)
-        {
-            return System.IO.File.Exists(filename);
         }
     }
 }

@@ -83,7 +83,7 @@ namespace Agrin.Download.CoreModels.Link
             //{
             //    if (File.Exists(errorsFileName))
             //    {
-            //        using (var reader = new StreamReader(IOHelperBase.OpenFileStreamForRead(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
+            //        using (var reader = new StreamReader(IOHelperBase.Current.OpenFileStreamForRead(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
             //        {
             //            var oldItems = Newtonsoft.Json.JsonConvert.DeserializeObject<List<long>>(reader.ReadToEnd());
             //            if (oldItems != null)
@@ -100,7 +100,7 @@ namespace Agrin.Download.CoreModels.Link
 
             //try
             //{
-            //    using (var writer = IOHelperBase.OpenFileStreamForWrite(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite).GetStream())
+            //    using (var writer = IOHelperBase.Current.OpenFileStreamForWrite(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite).GetStream())
             //    {
             //        var serialized = Newtonsoft.Json.JsonConvert.SerializeObject(items);
             //        var bytes = Encoding.ASCII.GetBytes(serialized);

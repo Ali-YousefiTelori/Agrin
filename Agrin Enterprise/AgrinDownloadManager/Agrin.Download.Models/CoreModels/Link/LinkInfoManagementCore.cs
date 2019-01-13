@@ -23,6 +23,7 @@ namespace Agrin.Download.CoreModels.Link
         ConcurrentList<LinkAddressInfo> _MultiLinkAddresses;
         volatile bool _IsLimit = false;
         volatile LinkInfoShort _LinkInfo;
+        volatile string _LastExceptionText = "خالی";
 
         /// <summary>
         /// parent of link info
@@ -41,7 +42,21 @@ namespace Agrin.Download.CoreModels.Link
             private set
             {
                 _LastException = value;
-                OnPropertyChanged("LastException");
+                OnPropertyChanged(nameof(LastException));
+                OnPropertyChanged(nameof(LastExceptionText));
+            }
+        }
+
+        public string LastExceptionText
+        {
+            get
+            {
+                return _LastExceptionText;
+            }
+            set
+            {
+                _LastExceptionText = value;
+                OnPropertyChanged(nameof(LastExceptionText));
             }
         }
 
@@ -88,6 +103,7 @@ namespace Agrin.Download.CoreModels.Link
         public void AddError(Exception error)
         {
             LinkInfoAddErrorAction?.Invoke(LinkInfo.Id, error);
+            LastExceptionText = error.Message;
             //try
             //{
             //    //Logger.WriteLine("AddError", error);
@@ -113,7 +129,7 @@ namespace Agrin.Download.CoreModels.Link
 
             //    //    try
             //    //    {
-            //    //        using (var writer = IOHelperBase.OpenFileStreamForWrite(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite).GetStream())
+            //    //        using (var writer = IOHelperBase.Current.OpenFileStreamForWrite(errorsFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite).GetStream())
             //    //        {
             //    //            var serialized = Newtonsoft.Json.JsonConvert.SerializeObject(items);
             //    //            var bytes = Encoding.UTF8.GetBytes(serialized);
@@ -154,7 +170,7 @@ namespace Agrin.Download.CoreModels.Link
 
         //            try
         //            {
-        //                using (var reader = new StreamReader(IOHelperBase.OpenFileStreamForRead(fName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
+        //                using (var reader = new StreamReader(IOHelperBase.Current.OpenFileStreamForRead(fName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
         //                {
         //                    var oldItems = Newtonsoft.Json.JsonConvert.DeserializeObject<List<AgrinCustomWebException>>(reader.ReadToEnd());
         //                    items.AddRange(oldItems);

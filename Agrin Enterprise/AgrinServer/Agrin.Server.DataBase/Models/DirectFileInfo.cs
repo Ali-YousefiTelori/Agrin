@@ -18,6 +18,8 @@ namespace Agrin.Server.DataBase.Models
         public long Id { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public int ServerId { get; set; }
+        public Guid Password { get; set; }
+
         /// <summary>
         /// در صورتی که تکمیل نشده بودند بعد از یک مدت طولانی از روی دیسک پاک شوند
         /// </summary>

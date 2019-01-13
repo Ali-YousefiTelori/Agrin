@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using UltraStreamGo;
 
 namespace Agrin.Download.CoreModels.Link
 {
@@ -300,11 +301,14 @@ namespace Agrin.Download.CoreModels.Link
 
         void GenerateBindConnections()
         {
-            foreach (var item in Connections)
+            AsyncActions.RunOnUI(() =>
             {
-                if (!_BindConnections.Contains(item))
-                    _BindConnections.Add(item);
-            }
+                foreach (var item in Connections)
+                {
+                    if (!_BindConnections.Contains(item))
+                        _BindConnections.Add(item);
+                }
+            });
         }
 
         /// <summary>
@@ -604,7 +608,7 @@ namespace Agrin.Download.CoreModels.Link
                             foreach (var file in Connections)
                             {
 
-                                if (System.IO.File.Exists(file.SaveConnectionFileName))
+                                if (CrossFileInfo.Current.Exists(file.SaveConnectionFileName))
                                 {
                                     mainLen += new System.IO.FileInfo(file.SaveConnectionFileName).Length;
                                 }
@@ -616,9 +620,9 @@ namespace Agrin.Download.CoreModels.Link
 
                         if (mixerInfo == null)
                         {
-                            if (string.IsNullOrEmpty(linkInfoShort.PathInfo.SecurityDirectorySavePath) && IOHelperBase.FileExists(linkInfoShort.PathInfo.FullSaveAddress))
+                            if (string.IsNullOrEmpty(linkInfoShort.PathInfo.SecurityDirectorySavePath) && CrossFileInfo.Current.Exists(linkInfoShort.PathInfo.FullSaveAddress))
                             {
-                                using (var fs = IOHelperBase.OpenFileStreamForWrite(linkInfoShort.PathInfo.DirectorySavePath, System.IO.FileMode.OpenOrCreate, fileName: linkInfoShort.PathInfo.FileName))
+                                using (var fs = IOHelperBase.Current.OpenFileStreamForWrite(linkInfoShort.PathInfo.DirectorySavePath, System.IO.FileMode.OpenOrCreate, fileName: linkInfoShort.PathInfo.FileName))
                                 {
                                     fs.SetLength(0);
                                     fs.Flush();
