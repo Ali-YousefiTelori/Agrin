@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Net;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Web;
-using Agrin.LinkExtractor;
+﻿using Agrin.IO.Strings;
 using Agrin.LinkExtractor.RadioJavan;
-using Agrin.IO.Strings;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Reflection;
 using YoutubeExtractor;
 
 namespace UnitTestAgrin.Link
@@ -42,11 +41,11 @@ namespace UnitTestAgrin.Link
                     }
                 }
                 //"http://framesoft.s29.rapidbaz.com/premium/2ee59d16318af2a14520d37709e32128/554cb842/s29.us./697059/My.Moms.New.Boyfriend.2008.DVDSCR.XviD-VoMiT.part3.rar");
-                var uri = new Uri(Decodings.UrlDecode("http://framesoft.dl.rapidbaz.com/I2qJ./%282%29+Dreamworld+-+Leo+Rojas+-+El+Condor+Pasa.mp4"));
+                Uri uri = new Uri(Decodings.UrlDecode("http://framesoft.dl.rapidbaz.com/I2qJ./%282%29+Dreamworld+-+Leo+Rojas+-+El+Condor+Pasa.mp4"));
                 //string uri = ;
                 // while (true)
                 //{
-                var _request = (HttpWebRequest)WebRequest.Create(uri);
+                HttpWebRequest _request = (HttpWebRequest)WebRequest.Create(uri);
                 _request.UserAgent = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)";
                 //_request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
                 //_request.ServicePoint.ConnectionLimit = 2;
@@ -69,7 +68,7 @@ namespace UnitTestAgrin.Link
                 //_request.ServicePoint.ConnectionLimit = int.MaxValue;
                 //_request.CookieContainer = new CookieContainer();
                 _request.AllowAutoRedirect = true;
-                var response = _request.GetResponse();
+                WebResponse response = _request.GetResponse();
                 //uri = response.Headers["location"];
 
                 //}
@@ -95,9 +94,9 @@ namespace UnitTestAgrin.Link
             {
                 // string link = "http://dl.asramusic125.org/persian%20full%20video/Yas/Yas%20-%20Az%20Chi%20Begam%20%28%20AsraMusic%20%29.mp4";
                 //string link = "http://free2.iranfilmdl.net/dl/9d5fbfe7b98782d2754a10f4741495d6/5532946f/tohi/Movie/1392/10/Bezan.Bahador/Bezan.Bahador.2010_Iran-Film.rar";
-                string link = "https://www.youtube.com/watch?v=vqAK8jKKI5A";
-                var pp = Assembly.GetExecutingAssembly().Location;
-                var videos = DownloadUrlResolver.GetDownloadUrls(link);
+                string link = "https://www.youtube.com/watch?v=gfkTfcpWqAY";
+                string pp = Assembly.GetExecutingAssembly().Location;
+                IEnumerable<VideoInfo> videos = DownloadUrlResolver.GetDownloadUrls(link);
                 //WebClient client = new WebClient();
 
                 //client.Headers.Add("Range", "Range: bytes=500-999");
@@ -105,18 +104,18 @@ namespace UnitTestAgrin.Link
 
                 //byte[] bytes3 = new byte[1024];
                 //var readCount3 = stream1.Read(bytes3, 0, bytes3.Length);
-                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(link);
-                request.UserAgent = "com.google.android.youtube/10.14.56(Linux; U; Android 4.2.2; fa_IR_LNum; MediaPad X1 7.0 Build/HuaweiMediaPad) gzip";
+                //System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(videos.First().DownloadUrl);
+                //request.UserAgent = "com.google.android.youtube/10.14.56(Linux; U; Android 4.2.2; fa_IR_LNum; MediaPad X1 7.0 Build/HuaweiMediaPad) gzip";
 
-                var response = request.GetResponse();
-                var stream = response.GetResponseStream();
+                WebResponse response = request.GetResponse();
+                System.IO.Stream stream = response.GetResponseStream();
 
 
                 byte[] bytes = new byte[1024];
-                var readCount = stream.Read(bytes, 0, bytes.Length);
+                int readCount = stream.Read(bytes, 0, bytes.Length);
 
-                var headers = response.Headers;
+                WebHeaderCollection headers = response.Headers;
 
                 //request = (HttpWebRequest)HttpWebRequest.Create(link);
                 //request.AddRange(0);
@@ -127,7 +126,7 @@ namespace UnitTestAgrin.Link
 
                 //var headers2 = response.Headers;
             }
-            catch
+            catch (Exception ex)
             {
 
             }
@@ -138,10 +137,10 @@ namespace UnitTestAgrin.Link
         {
             try
             {
-                var link = "https://m.radiojavan.com/mobile/mp3/Ali-Azimi-Ahange-Shoari"; //"https://www.radiojavan.com/mp3s/mp3/Magico-Mar";
+                string link = "https://m.radiojavan.com/mobile/mp3/Ali-Azimi-Ahange-Shoari"; //"https://www.radiojavan.com/mp3s/mp3/Magico-Mar";
                 if (RadioJavanFindDownloadLink.IsRadioJavanLink(link))
                 {
-                    var find = RadioJavanFindDownloadLink.FindLinkFromSite(link, WebRequest.GetSystemWebProxy());
+                    RadioJavanLinkInfo find = RadioJavanFindDownloadLink.FindLinkFromSite(link, WebRequest.GetSystemWebProxy());
                 }
             }
             catch// (Exception ex)
@@ -155,7 +154,7 @@ namespace UnitTestAgrin.Link
 
     public static class HttpWebRequestExtensions
     {
-        static string[] RestrictedHeaders = new string[] {
+        private static readonly string[] RestrictedHeaders = new string[] {
             "Accept",
             "Connection",
             "Content-Length",
@@ -171,8 +170,7 @@ namespace UnitTestAgrin.Link
             "Transfer-Encoding",
             "User-Agent"
         };
-
-        static Dictionary<string, PropertyInfo> HeaderProperties = new Dictionary<string, PropertyInfo>(StringComparer.OrdinalIgnoreCase);
+        private static Dictionary<string, PropertyInfo> HeaderProperties = new Dictionary<string, PropertyInfo>(StringComparer.OrdinalIgnoreCase);
 
         static HttpWebRequestExtensions()
         {

@@ -2,15 +2,13 @@
 using Agrin.Server.DataBase.Models;
 using Agrin.Server.DataBase.Models.Relations;
 using Agrin.Server.Models;
-using Agrin.Server.ServiceLogics.Controllers;
 using SignalGo.Server.DataTypes;
 using SignalGo.Server.Models;
 using SignalGo.Shared.DataTypes;
-using SignalGo.Shared.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Agrin.Server.ServiceLogics.StorageManager
 {
@@ -18,7 +16,21 @@ namespace Agrin.Server.ServiceLogics.StorageManager
     [ServiceContract("FileManager", ServiceType.OneWayService)]
     public class FileManager
     {
-        public MessageContract<long> CreateEmptyFile()
+        /// <summary>
+        /// create an empty direct file
+        /// </summary>
+        /// <returns></returns>
+        public MessageContract<long> CreateEmptyDirectFile()
+        {
+            int userId = OperationContext<UserInfo>.CurrentSetting.Id;
+            return CreateEmptyDirectFile(userId);
+        }
+
+        /// <summary>
+        /// create an empty file
+        /// </summary>
+        /// <returns></returns>
+        public Task<MessageContract<long>> CreateEmptyFile()
         {
             int userId = OperationContext<UserInfo>.CurrentSetting.Id;
             return CreateEmptyFile(userId);
@@ -30,7 +42,7 @@ namespace Agrin.Server.ServiceLogics.StorageManager
         /// <param name="userId"></param>
         /// <returns></returns>
         [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.214.125" })]
-        public MessageContract<long> CreateEmptyFile(int userId)
+        public MessageContract<long> CreateEmptyDirectFile(int userId)
         {
             using (AgrinContext context = new AgrinContext())
             {
@@ -44,13 +56,32 @@ namespace Agrin.Server.ServiceLogics.StorageManager
                               UserId = userId,
                          }
                     },
-                    ServerId = context.ServerInfoes.FirstOrDefault().Id,
+                    Password = Guid.NewGuid(),
+                    ServerId = context.Servers.FirstOrDefault().Id,
                     IsComplete = false,
                     CreatedDateTime = DateTime.Now
                 };
-                context.DirectFileInfoes.Add(fileInfo);
+                context.DirectFiles.Add(fileInfo);
                 context.SaveChanges();
                 return fileInfo.Id.Success();
+            }
+        }
+
+        [ClientLimitation(AllowAccessList = new string[] { "", "::1", "localhost", "127.0.0.1", "94.130.214.125" })]
+        public async Task<MessageContract<long>> CreateEmptyFile(int userId)
+        {
+            using (AgrinContext context = new AgrinContext())
+            {
+                FileInfo fileInfo = new FileInfo()
+                {
+                    ServerId = context.Servers.FirstOrDefault().Id,
+                    CreatedDateTime = DateTime.Now,
+                    Password = Guid.NewGuid(),
+                    Type = FileType.Data,
+                };
+                await context.Files.AddAsync(fileInfo);
+                await context.SaveChangesAsync();
+                return fileInfo.Id;
             }
         }
 
@@ -69,12 +100,12 @@ namespace Agrin.Server.ServiceLogics.StorageManager
             {
                 //20 mb
                 int BistMB = 1024 * 1024 * 20;
-                UserInfo user = context.UserInfoes.FirstOrDefault(x => x.Id == userId);
+                UserInfo user = context.Users.FirstOrDefault(x => x.Id == userId);
                 if (fileSize > BistMB && user.RoamUploadSize < fileSize)
                 {
                     return MessageType.StorageFull;
                 }
-                DirectFileInfo file = context.DirectFileInfoes.FirstOrDefault(x => x.Id == fileId);
+                DirectFileInfo file = context.DirectFiles.FirstOrDefault(x => x.Id == fileId);
                 file.IsComplete = true;
                 if (fileSize > BistMB)
                 {

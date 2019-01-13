@@ -19,7 +19,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
         {
             using (AgrinContext context = new AgrinContext())
             {
-                UserInfo user = context.UserSessionInfoes.Where(x => x.FirstKey == firstKey && x.SecondKey == secondKey && x.IsActive).Select(x => x.UserInfo).FirstOrDefault();
+                UserInfo user = context.UserSessions.Where(x => x.FirstKey == firstKey && x.SecondKey == secondKey && x.IsActive).Select(x => x.UserInfo).FirstOrDefault();
                 if (user == null)
                     return MessageType.UsernameOrPasswordIncorrect;
                 else if (user.Status != UserStatus.Confirm)
@@ -40,7 +40,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
                 else if (!userInfo.UserName.IsNumberValudate())
                     return MessageType.DataIsNotValid;
 
-                UserInfo find = context.UserInfoes.FirstOrDefault(x => x.UserName == userInfo.UserName);
+                UserInfo find = context.Users.FirstOrDefault(x => x.UserName == userInfo.UserName);
                 if (find != null)
                 {
                     UserExtension.AddConfirmSMS(find.UserName, find.Id);
@@ -48,11 +48,13 @@ namespace Agrin.Server.ServiceLogics.Authentication
                 }
                 else
                 {
-                    find = new UserInfo();
-                    find.Credit = 0;
-                    find.Status = UserStatus.JustRegistered;
-                    find.CreatedDateTime = DateTime.Now;
-                    find.UserName = userInfo.UserName;
+                    find = new UserInfo
+                    {
+                        Credit = 0,
+                        Status = UserStatus.JustRegistered,
+                        CreatedDateTime = DateTime.Now,
+                        UserName = userInfo.UserName
+                    };
                     if (userInfo.UserName.Length >= 8)
                     {
                         var aStringBuilder = new StringBuilder(userInfo.UserName);
@@ -62,7 +64,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
                     }
                 }
 
-                context.UserInfoes.Add(find);
+                context.Users.Add(find);
                 context.SaveChanges();
                 UserExtension.AddConfirmSMS(find.UserName, find.Id);
                 return find.Id.Success();
@@ -74,18 +76,18 @@ namespace Agrin.Server.ServiceLogics.Authentication
         {
             using (AgrinContext context = new AgrinContext())
             {
-                UserInfo find = context.UserInfoes.FirstOrDefault(x => x.Id == userId);
+                UserInfo find = context.Users.FirstOrDefault(x => x.Id == userId);
                 if (find == null)
                     return MessageType.NotFound;
                 else if (find.Status == UserStatus.Blocked)
                     return MessageType.AccessDenied;
 
-                UserConfirmHashInfo confirm = context.UserConfirmHashInfoes.FirstOrDefault(x => x.UserId == userId && x.RandomNumber == randomNumber && !x.IsUsed);
+                UserConfirmHashInfo confirm = context.UserConfirmHashes.FirstOrDefault(x => x.UserId == userId && x.RandomNumber == randomNumber && !x.IsUsed);
                 if (confirm == null)
                     return MessageType.CodeNotExist;
                 confirm.IsUsed = true;
                 find.Status = UserStatus.Confirm;
-                UserSessionInfo finndSession = context.UserSessionInfoes.FirstOrDefault(x => x.UserId == userId &&
+                UserSessionInfo finndSession = context.UserSessions.FirstOrDefault(x => x.UserId == userId &&
                 x.OsName == userSessionInfo.OsName &&
                 x.OsVersionName == userSessionInfo.OsVersionName &&
                 x.OsVersionNumber == userSessionInfo.OsVersionNumber);
@@ -103,7 +105,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
                         OsVersionName = userSessionInfo.OsVersionName,
                         OsVersionNumber = userSessionInfo.OsVersionNumber
                     };
-                    context.UserSessionInfoes.Add(finndSession);
+                    context.UserSessions.Add(finndSession);
                     context.SaveChanges();
                 }
 
@@ -116,7 +118,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
         {
             using (AgrinContext context = new AgrinContext())
             {
-                UserSessionInfo find = context.UserSessionInfoes.FirstOrDefault(x => x.Id == userSessionInfo.Id && x.UserId == CurrentUserInfo.UserId);
+                UserSessionInfo find = context.UserSessions.FirstOrDefault(x => x.Id == userSessionInfo.Id && x.UserId == CurrentUserInfo.UserId);
                 if (find == null)
                     return MessageType.AccessDenied;
                 find.OsName = userSessionInfo.OsName;

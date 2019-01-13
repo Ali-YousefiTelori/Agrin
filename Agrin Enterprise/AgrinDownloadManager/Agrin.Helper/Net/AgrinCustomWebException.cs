@@ -30,6 +30,13 @@ namespace Agrin.Helper.Net
         public DateTime CreatedDateTime { get; set; }
         public List<object> OtherData { get; set; }
         public int Count { get; set; } = 1;
+
+        public override string ToString()
+        {
+            if (ExceptionData != null)
+                return ExceptionData.Message;
+            return "نامشخص";
+        }
     }
 
     public static class WebErrorDescription

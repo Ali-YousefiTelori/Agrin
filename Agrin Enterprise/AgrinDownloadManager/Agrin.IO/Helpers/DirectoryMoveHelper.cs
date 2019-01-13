@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using UltraStreamGo;
 
 namespace Agrin.IO.Helpers
 {
@@ -11,7 +12,7 @@ namespace Agrin.IO.Helpers
     {
         public DirectoryMoveHelper(string source, string target)
         {
-            FileCount = Directory.GetFiles(source, "*", SearchOption.AllDirectories).Length;
+            FileCount = CrossDirectoryInfo.Current.GetFiles(source, "*", SearchOption.AllDirectories).Length;
             _sourceDir = source;
             _targetDir = target;
         }
@@ -62,19 +63,19 @@ namespace Agrin.IO.Helpers
             foreach (var item in deletedDirectory)
             {
                 if (item.Item1 != null)
-                    Directory.CreateDirectory(item.Item1);
+                    CrossDirectoryInfo.Current.CreateDirectory(item.Item1);
             }
             foreach (var item in movedItems)
             {
                 if (item.Item3)
-                    System.IO.File.Copy(item.Item2, item.Item1);
+                    CrossFileInfo.Current.Copy(item.Item2, item.Item1);
                 else
-                    System.IO.File.Move(item.Item2, item.Item1);
+                    CrossFileInfo.Current.Move(item.Item2, item.Item1);
             }
             foreach (var item in deletedDirectory)
             {
-                if (!item.Item3 && Directory.Exists(item.Item2))
-                    Directory.Delete(item.Item2, true);
+                if (!item.Item3 && CrossDirectoryInfo.Current.Exists(item.Item2))
+                    CrossDirectoryInfo.Current.Delete(item.Item2, true);
             }
         }
 
@@ -83,38 +84,38 @@ namespace Agrin.IO.Helpers
 
         void MoveDir(string sourceFolder, string destFolder, ref int position)
         {
-            bool existDir = Directory.Exists(destFolder);
+            bool existDir = CrossDirectoryInfo.Current.Exists(destFolder);
             Tuple<string, string, bool> tuple = new Tuple<string, string, bool>(null, destFolder, existDir);
             if (!existDir)
-                Directory.CreateDirectory(destFolder);
+                CrossDirectoryInfo.Current.CreateDirectory(destFolder);
             deletedDirectory.Add(tuple);
 
             // Get Files & Copy
-            string[] files = Directory.GetFiles(sourceFolder);
+            string[] files = CrossDirectoryInfo.Current.GetFiles(sourceFolder);
             foreach (string file in files)
             {
                 string name = Path.GetFileName(file);
 
                 // ADD Unique File Name Check to Below!!!!
                 string dest = Path.Combine(destFolder, name);
-                bool exist = System.IO.File.Exists(dest);
+                bool exist = CrossFileInfo.Current.Exists(dest);
                 if (exist)
-                    System.IO.File.Delete(dest);
-                System.IO.File.Move(file, dest);
+                    CrossFileInfo.Current.Delete(dest);
+                CrossFileInfo.Current.Move(file, dest);
                 movedItems.Add(new Tuple<string, string, bool>(file, dest, exist));
                 position++;
                 MovedAction?.Invoke(file, dest, position);
             }
 
             // Get dirs recursively and copy files
-            string[] folders = Directory.GetDirectories(sourceFolder);
+            string[] folders = CrossDirectoryInfo.Current.GetDirectories(sourceFolder);
             foreach (string folder in folders)
             {
                 string name = Path.GetFileName(folder);
                 string dest = Path.Combine(destFolder, name);
                 MoveDir(folder, dest, ref position);
             }
-            Directory.Delete(sourceFolder, true);
+            CrossDirectoryInfo.Current.Delete(sourceFolder, true);
             deletedDirectory.Remove(tuple);
             tuple = new Tuple<string, string, bool>(sourceFolder, destFolder, existDir);
             deletedDirectory.Add(tuple);

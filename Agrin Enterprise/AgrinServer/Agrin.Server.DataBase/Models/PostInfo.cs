@@ -90,7 +90,7 @@ namespace Agrin.Server.DataBase.Models
         [ForeignKey("UserId")]
         public virtual UserInfo UserInfo { get; set; }
 
-        public virtual ICollection<PostFileInfo> FileInfoes { get; set; }
+        public virtual ICollection<FileInfo> FileInfoes { get; set; }
 
         public virtual ICollection<PostTagRelationInfo> PostTagRelationInfoes { get; set; }
 

@@ -13,7 +13,7 @@ namespace Agrin.Data.Code
         public static void LunchCSCode(string site, string typeName, string methosName)
         {
 
-#if(MobileApp)
+#if(MobileApp || __ANDROID__)
 
 #else
             var provider = CSharpCodeProvider.CreateProvider("c#");

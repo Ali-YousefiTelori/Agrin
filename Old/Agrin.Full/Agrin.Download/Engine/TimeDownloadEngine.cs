@@ -243,7 +243,7 @@ namespace Agrin.Download.Engine
         {
             if (ApplicationSetting.Current.NoCheckLastVersion && ApplicationSetting.Current.NoGetApplicationMessage && !userManual)
                 return;
-#if (MobileApp)
+#if (MobileApp || __ANDROID__)
             string uri = "http://framesoft.ir/GetUpdate/Android";
 
 #elif XamarinApp

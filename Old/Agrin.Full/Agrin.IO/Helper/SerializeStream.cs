@@ -7,6 +7,7 @@ using System.Xml;
 using System.Security.Cryptography;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Agrin.IO.Streams;
 
 namespace Agrin.IO.Helper
 {
@@ -100,7 +101,7 @@ namespace Agrin.IO.Helper
         //{
         //    using (MemoryStream mstream = new MemoryStream(XmlByteSerializer<T>(value)))
         //    {
-        //        using (var compress = IOHelper.OpenFileStreamForWrite(fileName, FileMode.Create))
+        //        using (var compress = IOHelperBase.Current.OpenFileStreamForWrite(fileName, FileMode.Create))
         //        {
         //            using (System.IO.Compression.GZipStream fs = new System.IO.Compression.GZipStream(compress.GetStream(), System.IO.Compression.CompressionMode.Compress))
         //            {
@@ -115,7 +116,7 @@ namespace Agrin.IO.Helper
 
         //public static T OpenXmlByteSerializerByFile<T>(string fileName, T value)
         //{
-        //    using (var compress = IOHelper.OpenFileStreamForRead(fileName, FileMode.Open))
+        //    using (var compress = IOHelperBase.Current.OpenFileStreamForRead(fileName, FileMode.Open))
         //    {
         //        using (System.IO.Compression.GZipStream fs = new System.IO.Compression.GZipStream(compress, System.IO.Compression.CompressionMode.Decompress))
         //        {
@@ -155,7 +156,7 @@ namespace Agrin.IO.Helper
 
             //using (MemoryStream mstream = Serialize(value))
             //{
-            //    using (var compress = IOHelper.OpenFileStreamForWrite(fileName, FileMode.Create))
+            //    using (var compress = IOHelperBase.Current.OpenFileStreamForWrite(fileName, FileMode.Create))
             //    {
             //        using (System.IO.Compression.GZipStream fs = new System.IO.Compression.GZipStream(compress.GetStream(), System.IO.Compression.CompressionMode.Compress))
             //        {
@@ -185,10 +186,10 @@ namespace Agrin.IO.Helper
                 {
 
                 }
-                using (var compress = IOHelper.OpenFileStreamForRead(fileName, FileMode.Open))
+                using (var compress = IOHelperBase.Current.OpenFileStreamForRead(fileName, FileMode.Open))
                 {
                     if (compress.Length > 0)
-                        using (System.IO.Compression.GZipStream fs = new System.IO.Compression.GZipStream(compress, System.IO.Compression.CompressionMode.Decompress))
+                        using (System.IO.Compression.GZipStream fs = new System.IO.Compression.GZipStream(new NormalStream(compress), System.IO.Compression.CompressionMode.Decompress))
                         {
                             using (MemoryStream stream = new MemoryStream())
                             {

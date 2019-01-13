@@ -252,7 +252,7 @@ namespace Agrin.Download.Manager
                 return;
             foreach (var item in cons)
             {
-                IOHelper.DeleteFile(item.SaveFileName);
+                IOHelperBase.Current.Delete(item.SaveFileName);
                 item.DownloadedSize = 0;
             }
             for (int i = 1; i < cons.Count; i++)

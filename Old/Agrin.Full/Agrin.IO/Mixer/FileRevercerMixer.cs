@@ -69,7 +69,7 @@ namespace Agrin.IO.Mixer
                     size += new System.IO.FileInfo(file.Path).Length;
             }
 
-            using (var stream = IOHelper.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
             {
                 if (size + stream.Length > Size)
                 {
@@ -82,7 +82,7 @@ namespace Agrin.IO.Mixer
         public void ReverceCreateFile()
         {
             MixedSize = 0;
-            using (var stream = IOHelper.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
             {
                 stream.Seek(0, System.IO.SeekOrigin.End);
                 foreach (var file in Files.Reverse<FileConnection>())
@@ -90,7 +90,7 @@ namespace Agrin.IO.Mixer
                     if (file.IsComplete == IsCompleteEnum.Comeplete)
                         continue;
                     long currentMixed = MixedSize;
-                    using (var copystream = IOHelper.OpenFileStreamForWrite(file.Path, System.IO.FileMode.Open))
+                    using (var copystream = IOHelperBase.Current.OpenFileStreamForWrite(file.Path, System.IO.FileMode.Open))
                     {
                         int len = 1024 * 1024 * 2;
                         byte[] read = new byte[len];
@@ -130,7 +130,7 @@ namespace Agrin.IO.Mixer
                 foreach (var file in Files)
                 {
                     if (System.IO.File.Exists(file.Path))
-                        IOHelper.DeleteFile(file.Path);
+                        IOHelperBase.Current.Delete(file.Path);
                 }
             }
             catch (Exception ex)
@@ -143,7 +143,7 @@ namespace Agrin.IO.Mixer
 
         public void ReverceFileData()
         {
-            using (var stream = IOHelper.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
             {
                 CurrentMixer.MixedCompletedLen = MixedSize = Size / 2;
                 CurrentMixer.Status = MixerStatusEnum.Revercing;

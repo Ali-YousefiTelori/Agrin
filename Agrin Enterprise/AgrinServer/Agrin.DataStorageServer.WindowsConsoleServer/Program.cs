@@ -6,18 +6,12 @@ using AgrinMainServer.OneWayServices;
 using SignalGo.Server.ServiceManager;
 using SignalGo.Shared;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Agrin.DataStorageServer.WindowsConsoleServer
 {
-    class Program
+    internal class Program
     {
-
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             try
             {
@@ -51,7 +45,7 @@ namespace Agrin.DataStorageServer.WindowsConsoleServer
                 provider.Start("http://localhost:1397/AgringServices/SignalGo");
                 provider.RegisterServerService<LinkUploadManager>();
                 provider.RegisterServerService<LinkDownloadManager>();
-                provider.ErrorHandlingFunction = (ex,type,method) =>
+                provider.ErrorHandlingFunction = (ex, type, method, client) =>
                 {
                     return new MessageContract() { IsSuccess = false, Message = "server Exception", Error = MessageType.ServerException };
                 };

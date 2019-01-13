@@ -33,14 +33,14 @@ namespace Agrin.IO.Mixer
         public void CreateFile()
         {
             MixedSize = 0;
-            using (var stream = IOHelper.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
             {
                 stream.SetLength(0);
                 stream.Seek(0, System.IO.SeekOrigin.Begin);
                 foreach (var file in Files)
                 {
                     long currentMixed = MixedSize;
-                    using (var copystream = IOHelper.OpenFileStreamForRead(file.Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                    using (var copystream = IOHelperBase.Current.OpenFileStreamForRead(file.Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
                     {
                         int len = 1024 * 1024 * 2;
                         byte[] read = new byte[len];
@@ -61,7 +61,7 @@ namespace Agrin.IO.Mixer
             {
                 foreach (var file in Files)
                 {
-                    IOHelper.DeleteFile(file.Path);
+                    IOHelperBase.Current.Delete(file.Path);
                 }
             }
             catch (Exception ex)

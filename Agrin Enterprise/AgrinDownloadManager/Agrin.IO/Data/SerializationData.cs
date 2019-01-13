@@ -14,7 +14,7 @@ namespace Agrin.IO.Data
             if (string.IsNullOrEmpty(path))
                 return;
             var json = JsonConvert.SerializeObject(data, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore, NullValueHandling = NullValueHandling.Ignore });
-            using (var stream = IOHelperBase.OpenFileStreamForWrite(path, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(path, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite))
             {
                var bytes=  Encoding.UTF8.GetBytes(json);
                 stream.Write(bytes, 0, bytes.Length);

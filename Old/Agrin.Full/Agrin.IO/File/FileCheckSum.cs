@@ -1,4 +1,5 @@
 ﻿using Agrin.IO.Helper;
+using Agrin.IO.Streams;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -107,13 +108,13 @@ namespace Agrin.IO.File
             {
                 FileCheckSumData data = new FileCheckSumData() { ReadBufferCount = checkSize };
                 List<CheckSumItem> items = new List<CheckSumItem>();
-                using (var stream = IOHelper.OpenFileStreamForRead(fileName, FileMode.Open, FileAccess.Read))
+                using (var stream = IOHelperBase.Current.OpenFileStreamForRead(fileName, FileMode.Open, FileAccess.Read))
                 {
                     while (stream.Position != stream.Length)
                     {
                         CheckSumItem checkSum = new CheckSumItem();
                         checkSum.StartPosition = stream.Position;
-                        var bytes = GetBytesPerBuffer(stream, checkSize);
+                        var bytes = GetBytesPerBuffer(new NormalStream(stream), checkSize);
                         checkSum.EndPosition = stream.Position == stream.Length ? stream.Length : checkSum.StartPosition + checkSize;
                         checkSum.Hash = GetMD5(bytes);
                         items.Add(checkSum);
@@ -135,10 +136,10 @@ namespace Agrin.IO.File
         {
             try
             {
-                using (var stream = IOHelper.OpenFileStreamForRead(fileName, FileMode.Open, FileAccess.Read))
+                using (var stream = IOHelperBase.Current.OpenFileStreamForRead(fileName, FileMode.Open, FileAccess.Read))
                 {
                     stream.Seek(position, SeekOrigin.Begin);
-                    var bytes = GetBytesPerBuffer(stream, lenght);
+                    var bytes = GetBytesPerBuffer(new NormalStream(stream), lenght);
                     return bytes.ToList();
                 }
             }

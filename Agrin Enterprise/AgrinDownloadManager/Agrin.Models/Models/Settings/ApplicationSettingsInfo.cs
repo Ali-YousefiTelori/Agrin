@@ -1,9 +1,11 @@
-﻿using Agrin.Log;
+﻿using Agrin.IO.Helpers;
+using Agrin.Log;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using UltraStreamGo;
 
 namespace Agrin.Models.Settings
 {
@@ -77,8 +79,8 @@ namespace Agrin.Models.Settings
             {
                 SettingSavePath = directoryPath;
                 var path = Path.Combine(directoryPath, "settings.json");
-                if (File.Exists(path))
-                    Current = Newtonsoft.Json.JsonConvert.DeserializeObject<ApplicationSettingsInfo>(File.ReadAllText(path, Encoding.UTF8));
+                if (CrossFileInfo.Current.Exists(path))
+                    Current = Newtonsoft.Json.JsonConvert.DeserializeObject<ApplicationSettingsInfo>(CrossFileInfo.Current.ReadAllText(path, Encoding.UTF8));
             }
             catch (Exception ex)
             {
@@ -91,7 +93,7 @@ namespace Agrin.Models.Settings
         /// </summary>
         public static void Save()
         {
-            File.WriteAllText(Path.Combine(SettingSavePath, "settings.json"), Newtonsoft.Json.JsonConvert.SerializeObject(Current), Encoding.UTF8);
+            CrossFileInfo.Current.WriteAllText(Path.Combine(SettingSavePath, "settings.json"), Newtonsoft.Json.JsonConvert.SerializeObject(Current), Encoding.UTF8);
         }
     }
 }

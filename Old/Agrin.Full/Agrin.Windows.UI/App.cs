@@ -1,5 +1,7 @@
 ﻿using Agrin.BaseViewModels.Link;
 using Agrin.Helper.ComponentModel;
+using Agrin.IO.Helper;
+using Agrin.IO.Streams;
 using Agrin.Log;
 using Agrin.ViewModels.Windows;
 using Agrin.Windows.UI.ViewModels.Lists;
@@ -131,6 +133,11 @@ namespace Agrin.Windows.UI
             AppDomain.CurrentDomain.UnhandledException += application.CurrentDomain_UnhandledException;
             System.Threading.Tasks.TaskScheduler.UnobservedTaskException += application.TaskScheduler_UnobservedTaskException;
             Application.Current.DispatcherUnhandledException += application.Current_DispatcherUnhandledException;
+            IOHelperBase.Current = new IOHelperBase();
+            StreamCross.OpenFile = new Func<string, FileMode, FileAccess, IStreamWriter>((path, mode, access) =>
+            {
+                return new IO.Streams.StreamWriter(IOHelperBase.Current.Open(path, mode, access));
+            });
             LoadingWindow loadingWindow = null;
             object lockOBJ = new object();
             bool loaded = false;

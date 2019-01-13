@@ -65,7 +65,7 @@ namespace Agrin.Download.Helper
             report.Files = new List<LinkInfoReportFile>();
             foreach (var item in linkInfo.Connections.ToArray())
             {
-                using (var copystream = IOHelper.OpenFileStreamForRead(item.SaveFileName, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite))
+                using (var copystream = IOHelperBase.Current.OpenFileStreamForRead(item.SaveFileName, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite))
                 {
                     report.Files.Add(new LinkInfoReportFile() { FileName = item.SaveFileName, Lenght = copystream.Length });
                 }
@@ -85,11 +85,11 @@ namespace Agrin.Download.Helper
             string path = Path.Combine(MPath.SaveDataPath, linkInfo.PathInfo.Id.ToString());
             if (!System.IO.Directory.Exists(path))
             {
-                IOHelper.CreateDirectory(path);
+                CrossDirectoryInfo.Current.CreateDirectory(path);
                 foreach (var file in report.Files)
                 {
                     string fileN = Path.Combine(path, Path.GetFileName(file.FileName));
-                    using (var copystream = IOHelper.OpenFileStreamForWrite(fileN, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite))
+                    using (var copystream = IOHelperBase.Current.OpenFileStreamForWrite(fileN, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite))
                     {
                         copystream.SetLength(file.Lenght);
                     }

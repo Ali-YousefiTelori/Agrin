@@ -10,7 +10,7 @@ using Agrin.Helper.Collections;
 using Agrin.Helper.ComponentModel;
 using Agrin.IO.Helper;
 using Agrin.Log;
-#if (!MobileApp && !XamarinApp)
+#if (!MobileApp && !XamarinApp && !__ANDROID__)
 using Agrin.Network.Models;
 #endif
 using System;
@@ -230,7 +230,7 @@ namespace Agrin.Download.Data
                 }
                 ChangeState(LoadingStateEnum.LoadAppServiceData);
                 LoadAppServiceData();
-#if (!MobileApp && !XamarinApp)
+#if (!MobileApp && !XamarinApp && !__ANDROID__)
                 ChangeState(LoadingStateEnum.LoadNetworkProxySettings);
                 LoadNetworkProxySettings();
 #endif
@@ -547,7 +547,7 @@ namespace Agrin.Download.Data
                 ApplicationServiceData.Current.IsPlayLinks.AddRange(list);
             }
         }
-#if (!MobileApp && !XamarinApp)
+#if (!MobileApp && !XamarinApp && !__ANDROID__)
         static void LoadNetworkProxySettings()
         {
             try
@@ -764,7 +764,7 @@ namespace Agrin.Download.Data
                     try
                     {
                         if (File.Exists(lastAddress))
-                            IOHelper.FileMove(lastAddress, newAddress);
+                            IOHelperBase.Current.Move(lastAddress, newAddress);
                     }
                     catch
                     {

@@ -84,7 +84,6 @@ namespace Agrin.Server.DataBase.Models
         /// <summary>
         /// created date time
         /// </summary>
-        //[DateTimeKind(DateTimeKind.Local)]
         public DateTime CreatedDateTime { get; set; }
 
         public virtual ICollection<PostInfo> PostInfoes { get; set; }
@@ -96,12 +95,34 @@ namespace Agrin.Server.DataBase.Models
         /// تمامی هزینه های کاربر
         /// </summary>
         public virtual ICollection<UserCreditInfo> ToUserCreditInfoes { get; set; }
-
+        /// <summary>
+        /// direct file infoes
+        /// </summary>
         public virtual ICollection<DirectFileToUserRelationInfo> DirectFileToUserRelationInfoes { get; set; }
+        /// <summary>
+        /// directfolder infoes
+        /// </summary>
         public virtual ICollection<DirectFolderToUserRelationInfo> DirectFolderToUserRelationInfoes { get; set; }
+        /// <summary>
+        /// sessions of user info, user can login with those sessions
+        /// </summary>
         public virtual ICollection<UserSessionInfo> UserSessionInfoes { get; set; }
+        /// <summary>
+        /// user confirm hashes for register and confirm phone number
+        /// </summary>
         public virtual ICollection<UserConfirmHashInfo> UserConfirmHashInfoes { get; set; }
+        /// <summary>
+        /// user likes
+        /// </summary>
         public virtual ICollection<LikeInfo> LikeInfoes { get; set; }
+        /// <summary>
+        /// user Acceses
+        /// </summary>
+        public virtual ICollection<UserRoleInfo> UserRoles { get; set; }
+        /// <summary>
+        /// files of users like error logs
+        /// </summary>
+        public virtual ICollection<FileInfo> Files { get; set; }
         
     }
 }

@@ -175,7 +175,7 @@ namespace Agrin.BaseViewModels.Lists
 
         public virtual DateTime GetDateTimeForAddTask()
         {
-#if (MobileApp)
+#if (MobileApp || __ANDROID__)
             return new DateTime(AddDateYear, AddDateMonth, AddDateDay, AddTimeHours, AddTimeMinutes, 0);
 #else
             return new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, AddTimeHours, AddTimeMinutes, 0);
@@ -184,7 +184,7 @@ namespace Agrin.BaseViewModels.Lists
 
         public virtual DateTime GetDateTimeForStopTask()
         {
-#if (MobileApp)
+#if (MobileApp || __ANDROID__)
             return new DateTime(AddDateYear, AddDateMonth, AddDateDay, StopTimeHours, StopTimeMinutes, 0);
 #else
             return new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, StopTimeHours, StopTimeMinutes, 0);
@@ -216,7 +216,7 @@ namespace Agrin.BaseViewModels.Lists
                     //dt = dt.AddHours(-dt.Hour);
                     //dt = dt.AddMinutes(AddTimeMinutes);
                     //dt = dt.AddHours(AddTimeHours);
-#if (!MobileApp)
+#if (!MobileApp && !__ANDROID__)
                     if (dt < DateTime.Now)
                         dt = dt.AddDays(1);
 #endif
@@ -258,7 +258,7 @@ namespace Agrin.BaseViewModels.Lists
             else
             {
                 dt = GetDateTimeForStopTask();
-#if (!MobileApp)
+#if (!MobileApp && !__ANDROID__)
                 if (dt < DateTime.Now)
                     dt = dt.AddDays(1);
 #endif

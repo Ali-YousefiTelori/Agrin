@@ -2,7 +2,7 @@
 using Agrin.BaseViewModels.Models;
 using Agrin.Helper.Collections;
 using Agrin.Helper.ComponentModel;
-#if (!MobileApp && !XamarinApp)
+#if (!MobileApp && !XamarinApp && !__ANDROID__)
 using Agrin.Network;
 using System;
 using System.Collections.Generic;

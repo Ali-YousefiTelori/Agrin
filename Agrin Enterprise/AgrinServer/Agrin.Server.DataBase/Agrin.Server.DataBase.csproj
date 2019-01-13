@@ -260,61 +260,17 @@
     <Compile Include="Attributes\ForeignKey.cs" />
     <Compile Include="Attributes\Key.cs" />
     <Compile Include="Contexts\AgrinContext.cs" />
-    <Compile Include="Migrations\20180518204643_initial.cs" />
-    <Compile Include="Migrations\20180518204643_initial.designer.cs">
-      <DependentUpon>20180518204643_initial.cs</DependentUpon>
+    <Compile Include="Migrations\20190113180150_initial.cs" />
+    <Compile Include="Migrations\20190113180150_initial.designer.cs">
+      <DependentUpon>20190113180150_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20180518204929_newData.cs" />
-    <Compile Include="Migrations\20180518204929_newData.designer.cs">
-      <DependentUpon>20180518204929_newData.cs</DependentUpon>
+    <Compile Include="Migrations\20190113180338_newupdate.cs" />
+    <Compile Include="Migrations\20190113180338_newupdate.designer.cs">
+      <DependentUpon>20190113180338_newupdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20180521182908_telegram.cs" />
-    <Compile Include="Migrations\20180521182908_telegram.designer.cs">
-      <DependentUpon>20180521182908_telegram.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180522134526_uniq.cs" />
-    <Compile Include="Migrations\20180522134526_uniq.designer.cs">
-      <DependentUpon>20180522134526_uniq.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180522204104_updatefileinfotable.cs" />
-    <Compile Include="Migrations\20180522204104_updatefileinfotable.designer.cs">
-      <DependentUpon>20180522204104_updatefileinfotable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180529161556_creditandserverid.cs" />
-    <Compile Include="Migrations\20180529161556_creditandserverid.designer.cs">
-      <DependentUpon>20180529161556_creditandserverid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180529172347_serverid.cs" />
-    <Compile Include="Migrations\20180529172347_serverid.designer.cs">
-      <DependentUpon>20180529172347_serverid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180803105936_registermodels.cs" />
-    <Compile Include="Migrations\20180803105936_registermodels.designer.cs">
-      <DependentUpon>20180803105936_registermodels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180901104513_idea.cs" />
-    <Compile Include="Migrations\20180901104513_idea.designer.cs">
-      <DependentUpon>20180901104513_idea.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180901113345_renamefield.cs" />
-    <Compile Include="Migrations\20180901113345_renamefield.designer.cs">
-      <DependentUpon>20180901113345_renamefield.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180905165522_likesandcomments.cs" />
-    <Compile Include="Migrations\20180905165522_likesandcomments.designer.cs">
-      <DependentUpon>20180905165522_likesandcomments.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180910155813_commentText.cs" />
-    <Compile Include="Migrations\20180910155813_commentText.designer.cs">
-      <DependentUpon>20180910155813_commentText.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180914093124_devicename.cs" />
-    <Compile Include="Migrations\20180914093124_devicename.designer.cs">
-      <DependentUpon>20180914093124_devicename.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180927164943_fixtelegramidbug.cs" />
-    <Compile Include="Migrations\20180927164943_fixtelegramidbug.designer.cs">
-      <DependentUpon>20180927164943_fixtelegramidbug.cs</DependentUpon>
+    <Compile Include="Migrations\20190113211937_filepass.cs" />
+    <Compile Include="Migrations\20190113211937_filepass.designer.cs">
+      <DependentUpon>20190113211937_filepass.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AgrinServerContextModelSnapshot.cs" />
     <Compile Include="Models\CommentInfo.cs" />
@@ -322,15 +278,18 @@
     <Compile Include="Models\DirectFolderInfo.cs" />
     <Compile Include="Models\DirectLinkInfo.cs" />
     <Compile Include="Models\ExceptionInfo.cs" />
+    <Compile Include="Models\LanguageInfo.cs" />
+    <Compile Include="Models\LanguageKeyInfo.cs" />
     <Compile Include="Models\LikeInfo.cs" />
     <Compile Include="Models\PostCategoryInfo.cs" />
-    <Compile Include="Models\PostFileInfo.cs" />
+    <Compile Include="Models\FileInfo.cs" />
     <Compile Include="Models\PostInfo.cs" />
     <Compile Include="Models\PostSoundInfo.cs" />
+    <Compile Include="Models\PostSubCategoryInfo.cs" />
     <Compile Include="Models\PostVideoInfo.cs" />
     <Compile Include="Models\Relations\DirectFileToUserRelationInfo.cs" />
     <Compile Include="Models\Relations\DirectFolderToUserRelationInfo.cs" />
-    <Compile Include="Models\Relations\PostCategoryTagRelationInfo.cs" />
+    <Compile Include="Models\Relations\PostCategorySubCategoryRelationInfo.cs" />
     <Compile Include="Models\Relations\PostTagRelationInfo.cs" />
     <Compile Include="Models\RequestIdeaInfo.cs" />
     <Compile Include="Models\ServerInfo.cs" />
@@ -338,7 +297,9 @@
     <Compile Include="Models\UserConfirmHashInfo.cs" />
     <Compile Include="Models\UserCreditInfo.cs" />
     <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\UserRoleInfo.cs" />
     <Compile Include="Models\UserSessionInfo.cs" />
+    <Compile Include="Models\VisitCardInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

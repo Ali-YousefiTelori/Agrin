@@ -4,6 +4,7 @@ using Agrin.Download.Web;
 using Agrin.Download.Web.Link;
 using Agrin.IO.File;
 using Agrin.IO.Helper;
+using Agrin.IO.Streams;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -106,7 +107,7 @@ namespace Agrin.Download.Engine.Repairer
                 var checkValue = LinkChecker.CheckAddressContentSupportRange(new Uri(address), authentication, (len) => fileLength = len);
                 if (checkValue == LinkaddressCheckMode.True)
                 {
-                    using (var fStream = IOHelper.OpenFileStreamForWrite(downloadedFileName, FileMode.Open, FileAccess.ReadWrite))
+                    using (var fStream = IOHelperBase.Current.OpenFileStreamForWrite(downloadedFileName, FileMode.Open, FileAccess.ReadWrite))
                     {
                         if (fStream.Length != fileLength)
                             fStream.SetLength(fileLength);
@@ -118,7 +119,7 @@ namespace Agrin.Download.Engine.Repairer
                         string sName = Path.GetFileNameWithoutExtension(backUpCompleteAddress);
                         sName = Path.Combine(MPath.RepairSaveDataPath, sName);
                         if (!Directory.Exists(sName))
-                            IOHelper.CreateDirectory(sName);
+                            CrossDirectoryInfo.Current.CreateDirectory(sName);
                         var download = DownloadCheckSums(sName, sums, address, authentication);
                         var repaired = StartFileRepair(downloadedFileName, sums);
                         msg = "OK";
@@ -188,7 +189,7 @@ namespace Agrin.Download.Engine.Repairer
                 {
                     if (fileLength == 0)
                         return "مشکلی در ترمیم پیش آمده است لطفا بعدا مجددا تلاش نمایید";
-                    using (var fStream = IOHelper.OpenFileStreamForWrite(downloadedFileName, FileMode.Open, FileAccess.ReadWrite))
+                    using (var fStream = IOHelperBase.Current.OpenFileStreamForWrite(downloadedFileName, FileMode.Open, FileAccess.ReadWrite))
                     {
                         if (fStream.Length != fileLength)
                             fStream.SetLength(fileLength);
@@ -198,7 +199,7 @@ namespace Agrin.Download.Engine.Repairer
                     string sName = Path.GetFileNameWithoutExtension(backUpCompleteAddress);
                     sName = Path.Combine(MPath.RepairSaveDataPath, sName);
                     if (!Directory.Exists(sName))
-                        IOHelper.CreateDirectory(sName);
+                        CrossDirectoryInfo.Current.CreateDirectory(sName);
                     var download = DownloadCheckSums(sName, fixChecksums, address, authentication);
                     var repaired = StartFileRepair(downloadedFileName, fixChecksums);
                     msg = "OK";
@@ -232,7 +233,7 @@ namespace Agrin.Download.Engine.Repairer
         public static List<long> FindConnectionProblems(LinkInfoSerialize linkInfo, string downloadedFileName, string[] authentication)
         {
             List<long> positions = new List<long>();
-            using (var fStream = IOHelper.OpenFileStreamForRead(downloadedFileName, FileMode.Open, FileAccess.ReadWrite))
+            using (var fStream = IOHelperBase.Current.OpenFileStreamForRead(downloadedFileName, FileMode.Open, FileAccess.ReadWrite))
             {
                 int positionI = 1, count = linkInfo.DownloadingProperty.DownloadRangePositions.Count;
                 foreach (var CPosition in linkInfo.DownloadingProperty.DownloadRangePositions)
@@ -240,7 +241,7 @@ namespace Agrin.Download.Engine.Repairer
                     var newPosition = CPosition - 1024;
                     fStream.Seek(newPosition, SeekOrigin.Begin);
                     int countRead = 2048;
-                    byte[] readBytes = FileCheckSum.GetBytesPerBuffer(fStream, countRead);
+                    byte[] readBytes = FileCheckSum.GetBytesPerBuffer(new NormalStream(fStream), countRead);
 
                     var _request = CreateHttpWebRequest(linkInfo.PathInfo.Address, authentication);
                     _request.AddRange(newPosition);
@@ -269,7 +270,7 @@ namespace Agrin.Download.Engine.Repairer
         public static List<CheckSumItem> FindPositionOfProblems(List<long> positions, LinkInfoSerialize linkInfo, string downloadedFileName, string[] authentication)
         {
             List<CheckSumItem> checkSumPositions = new List<CheckSumItem>();
-            using (var fStream = IOHelper.OpenFileStreamForRead(downloadedFileName, FileMode.Open, FileAccess.ReadWrite))
+            using (var fStream = IOHelperBase.Current.OpenFileStreamForRead(downloadedFileName, FileMode.Open, FileAccess.ReadWrite))
             {
                 int positionI = 1, count = positions.Count;
                 Func<long, CheckSumItem> checkSumExistLast = (val) =>
@@ -321,7 +322,7 @@ namespace Agrin.Download.Engine.Repairer
                     var newPosition = getNewPosition();
                     fStream.Seek(newPosition, SeekOrigin.Begin);
                     int countRead = 1024 * 10;
-                    byte[] readBytes = FileCheckSum.GetBytesPerBuffer(fStream, countRead);
+                    byte[] readBytes = FileCheckSum.GetBytesPerBuffer(new NormalStream(fStream), countRead);
 
                     var _request = CreateHttpWebRequest(linkInfo.PathInfo.Address, authentication);
                     _request.AddRange(newPosition);
@@ -362,7 +363,7 @@ namespace Agrin.Download.Engine.Repairer
             {
                 string fileName = Path.Combine(savePath, positionI + ".fix");
                 ParentLinkWebRequest.FileName = fileName;
-                using (var _saveStream = IOHelper.OpenFileStreamForWrite(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                using (var _saveStream = IOHelperBase.Current.OpenFileStreamForWrite(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
                     if (_saveStream.Length == ParentLinkWebRequest.Size)
                     {
@@ -432,16 +433,16 @@ namespace Agrin.Download.Engine.Repairer
 
         public static bool StartFileRepair(string errorFileName, List<CheckSumItem> checkSums)
         {
-            using (var _saveStream = IOHelper.OpenFileStreamForWrite(errorFileName, FileMode.Open, FileAccess.ReadWrite))
+            using (var _saveStream = IOHelperBase.Current.OpenFileStreamForWrite(errorFileName, FileMode.Open, FileAccess.ReadWrite))
             {
                 foreach (var item in checkSums)
                 {
-                    using (var _checkSumStream = IOHelper.OpenFileStreamForRead(item.FileName, FileMode.Open, FileAccess.ReadWrite))
+                    using (var _checkSumStream = IOHelperBase.Current.OpenFileStreamForRead(item.FileName, FileMode.Open, FileAccess.ReadWrite))
                     {
                         _saveStream.Seek(item.StartPosition, SeekOrigin.Begin);
                         while (_checkSumStream.Position != _checkSumStream.Length)
                         {
-                            var bytes = FileCheckSum.GetBytesPerBuffer(_checkSumStream, 1024 * 1024);
+                            var bytes = FileCheckSum.GetBytesPerBuffer(new NormalStream(_checkSumStream), 1024 * 1024);
                             _saveStream.Write(bytes, 0, bytes.Length);
                             if (LinkRepairerProcessAction != null)
                                 LinkRepairerProcessAction(_checkSumStream.Position, _checkSumStream.Length, LinkRepairerState.DownloadingProblems);
@@ -452,7 +453,7 @@ namespace Agrin.Download.Engine.Repairer
             try
             {
                 foreach (var item in checkSums)
-                    IOHelper.DeleteFile(item.FileName);
+                    IOHelperBase.Current.Delete(item.FileName);
             }
             catch
             {

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UltraStreamGo;
 
 namespace Agrin.Download.Mixers
 {
@@ -69,11 +70,11 @@ namespace Agrin.Download.Mixers
                 }
                 else
                     find.Path = file;
-                if (!(find.IsComplete == IsCompleteEnum.Comeplete) && !System.IO.File.Exists(file))
+                if (!(find.IsComplete == IsCompleteEnum.Comeplete) && !CrossFileInfo.Current.Exists(file))
                     throw new Exception("mixer file not found");
-                if (find.IsComplete == IsCompleteEnum.Comeplete && !System.IO.File.Exists(currentMixer.FullAddress))
+                if (find.IsComplete == IsCompleteEnum.Comeplete && !CrossFileInfo.Current.Exists(currentMixer.FullAddress))
                     throw new Exception("complete file moved or deleted! "+ currentMixer.FullAddress);
-                if (System.IO.File.Exists(file) && find.IsComplete == IsCompleteEnum.None)
+                if (CrossFileInfo.Current.Exists(file) && find.IsComplete == IsCompleteEnum.None)
                 {
                     find.Lenght = new System.IO.FileInfo(file).Length;
                     mainLen += find.Lenght;
@@ -82,7 +83,7 @@ namespace Agrin.Download.Mixers
                     mainLen += find.Lenght;
             }
             Size = mainLen;
-            if (System.IO.File.Exists(currentMixer.FullAddress))
+            if (CrossFileInfo.Current.Exists(currentMixer.FullAddress))
             {
                 MixedSize = new System.IO.FileInfo(currentMixer.FullAddress).Length;
             }
@@ -95,7 +96,7 @@ namespace Agrin.Download.Mixers
             MixerInfo.SaveAction(CurrentMixer);
             //try
             //{
-            //    IOHelperBase.DeleteFile(CurrentMixer.MixerBackupPath);
+            //    IOHelperBase.Current.DeleteFile(CurrentMixer.MixerBackupPath);
             //}
             //catch (Exception ex)
             //{
@@ -103,7 +104,7 @@ namespace Agrin.Download.Mixers
             //}
             //try
             //{
-            //    IOHelperBase.DeleteFile(CurrentMixer.MixerPath);
+            //    IOHelperBase.Current.DeleteFile(CurrentMixer.MixerPath);
             //}
             //catch (Exception ex)
             //{

@@ -39,7 +39,7 @@ namespace Agrin.IO.Mixer
                     break;
                 }
             }
-            using (var stream = IOHelper.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
             {
                 stream.SetLength(resumeSize);
             }
@@ -47,7 +47,7 @@ namespace Agrin.IO.Mixer
 
         public void CreateFile()
         {
-            using (var stream = IOHelper.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName))
             {
                 stream.Seek(0, System.IO.SeekOrigin.End);
                 foreach (var file in Files)
@@ -55,7 +55,7 @@ namespace Agrin.IO.Mixer
                     if (file.IsComplete == IsCompleteEnum.Comeplete)
                         continue;
                     long currentMixed = MixedSize;
-                    using (var copystream = IOHelper.OpenFileStreamForRead(file.Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                    using (var copystream = IOHelperBase.Current.OpenFileStreamForRead(file.Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
                     {
                         int len = 1024 * 1024 * 2;
                         byte[] read = new byte[len];
@@ -72,7 +72,7 @@ namespace Agrin.IO.Mixer
                     CurrentMixer.SaveToFile();
                     try
                     {
-                        IOHelper.DeleteFile(file.Path);
+                        IOHelperBase.Current.Delete(file.Path);
                     }
                     catch (Exception ex)
                     {

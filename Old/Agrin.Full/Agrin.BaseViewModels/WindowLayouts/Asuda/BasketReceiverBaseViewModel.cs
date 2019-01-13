@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-#if (!MobileApp && !XamarinApp)
+#if (!MobileApp && !XamarinApp && !__ANDROID__)
 
 namespace Agrin.BaseViewModels.WindowLayouts.Asuda
 {

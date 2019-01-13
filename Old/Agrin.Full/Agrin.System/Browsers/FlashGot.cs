@@ -51,7 +51,7 @@ namespace Agrin.OS.Browsers
 
         static void CreatePrefs(string appStartUp, string strFolder)
         {
-            List<string> lines = IOHelper.ReadAllLines(strFolder + "\\prefs.js", Encoding.UTF8).ToList();
+            List<string> lines = IOHelperBase.Current.ReadAllLines(strFolder + "\\prefs.js", Encoding.UTF8).ToList();
             List<string> writeLines = new List<string>();
             Dictionary<string, string> editLines = new Dictionary<string, string>() { 
             { "\"flashgot.custom\"", "\"Agrin Download Manager\"" } ,
@@ -89,7 +89,7 @@ namespace Agrin.OS.Browsers
             {
                 writeLines.Insert(index, "user_pref(" + key.Key + ", " + key.Value + ");");
             }
-            IOHelper.WriteAllLines(strFolder + "\\prefs.js", writeLines.ToArray(), Encoding.UTF8);
+            IOHelperBase.Current.WriteAllLines(strFolder + "\\prefs.js", writeLines.ToArray(), Encoding.UTF8);
         }
     }
 }

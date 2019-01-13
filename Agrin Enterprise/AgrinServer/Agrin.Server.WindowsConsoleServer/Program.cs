@@ -31,7 +31,7 @@ namespace Agrin.Server.WindowsConsoleServer
                 {
                     context.Database.EnsureCreated();
                     context.Database.Migrate();
-                    context.UserInfoes.FirstOrDefault();
+                    context.Users.FirstOrDefault();
                     Console.WriteLine("databse OK");
                 }
                 
@@ -56,7 +56,7 @@ namespace Agrin.Server.WindowsConsoleServer
                 //logger.Initialize();
                 provider.Start("http://localhost:80/AgringServices/SignalGo", new List<System.Reflection.Assembly>() { typeof(PostService).Assembly });
 
-                provider.ErrorHandlingFunction = (ex, type, method) =>
+                provider.ErrorHandlingFunction = (ex, type, method,client) =>
                 {
                     return new MessageContract() { IsSuccess = false, Message = "server Exception", Error = MessageType.ServerException };
                 };

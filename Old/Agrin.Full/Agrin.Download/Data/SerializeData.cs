@@ -9,7 +9,7 @@ using Agrin.Helper.Collections;
 using Agrin.Helper.ComponentModel;
 using Agrin.IO.Helper;
 using Agrin.Log;
-#if (!MobileApp && !XamarinApp)
+#if (!MobileApp && !XamarinApp && !__ANDROID__)
 using Agrin.Network.Models;
 #endif
 using System;
@@ -163,7 +163,7 @@ namespace Agrin.Download.Data
             //    Agrin.Log.AutoLogger.LogError(error, "SaveAppServiceDataToFile");
             //});
         }
-#if (!MobileApp && !XamarinApp)
+#if (!MobileApp && !XamarinApp && !__ANDROID__)
         public static void SaveNetworkProxySettingsFile()
         {
             VirtualSaveToFile(NetworkProxySettingsVirtualSaver, SaveNetworkProxySettings);
@@ -409,7 +409,7 @@ namespace Agrin.Download.Data
             SerializeStream.SaveSerializeStream(System.IO.Path.Combine(Agrin.IO.Helper.MPath.CurrentUserAppDirectory, "AppServiceData_BackUp.agn"), ApplicationServiceData.Current);
         }
 
-#if (!MobileApp && !XamarinApp)
+#if (!MobileApp && !XamarinApp && !__ANDROID__)
         static void SaveNetworkProxySettings()
         {
             string fileName = System.IO.Path.Combine(Agrin.IO.Helper.MPath.CurrentUserAppDirectory, "NetworkProxySettings.agn");

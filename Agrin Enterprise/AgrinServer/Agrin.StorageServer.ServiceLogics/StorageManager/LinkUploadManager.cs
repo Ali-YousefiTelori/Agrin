@@ -25,7 +25,7 @@ namespace Agrin.StorageServer.ServiceLogics.StorageManager
                     Stream stream = streamInfo.Stream;
                     StreamIdentifierFileUploadResult result = await streamIdentifier.StartUpload(streamInfo.Data, stream, 0, streamInfo.Length, async (position) =>
                     {
-                        await streamInfo.SetPositionFlush(position);
+                        await streamInfo.SetPositionFlushAsync(position);
                     });
                     if (result != StreamIdentifierFileUploadResult.Success)
                     {

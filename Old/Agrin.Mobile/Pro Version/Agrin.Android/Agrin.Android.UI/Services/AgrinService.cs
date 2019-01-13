@@ -88,7 +88,7 @@ namespace Agrin.Services
             base.OnLowMemory();
         }
 
-        public static Context CuurentContext = null;
+        public static ContextWrapper CuurentContext = null;
         public static bool MustRunApp { get; set; }
         public static bool MustInitializeUI { get; set; }
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
@@ -107,17 +107,18 @@ namespace Agrin.Services
                     This = this;
                     //stockServiceIntent = new Intent("agrin.android.agrinservice");
                     //stockReceiver = new StockReceiver();
-                    if (this.ApplicationContext != null)
-                        CuurentContext = this.ApplicationContext;
-                    else
-                    {
-                        if (this.BaseContext != null)
-                            CuurentContext = this.BaseContext;
-                        else
-                        {
-                            CuurentContext = this.CreatePackageContext("Agrin.Android", PackageContextFlags.IgnoreSecurity);
-                        }
-                    }
+                    CuurentContext = this;
+                    //if (this.ApplicationContext != null)
+                    //    CuurentContext = this.ApplicationContext;
+                    //else
+                    //{
+                    //    if (this.BaseContext != null)
+                    //        CuurentContext = this.BaseContext;
+                    //    else
+                    //    {
+                    //        CuurentContext = this.CreatePackageContext("Agrin.Android", PackageContextFlags.IgnoreSecurity);
+                    //    }
+                    //}
 
                     if (CuurentContext == null)
                         InitializeApplication.GoException("CuurentContext == null");

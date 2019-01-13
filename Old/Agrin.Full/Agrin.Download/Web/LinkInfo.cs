@@ -1186,7 +1186,7 @@ namespace Agrin.Download.Web
             long size = 0;
             foreach (var item in Connections.ToArray())
             {
-                using (var copystream = IOHelper.OpenFileStreamForWrite(item.SaveFileName, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite))
+                using (var copystream = IOHelperBase.Current.OpenFileStreamForWrite(item.SaveFileName, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite))
                 {
                     if (item.EndPosition > DownloadingProperty.Size)
                     {
@@ -1216,7 +1216,7 @@ namespace Agrin.Download.Web
                     DownloadingProperty.State = ConnectionState.CopyingFile;
                     //تغییر برای بخش سکیوریتی اندروید
                     if (string.IsNullOrEmpty(PathInfo.SecurityPath) && !System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(PathInfo.FullAddressFileName)))
-                        IOHelper.CreateDirectory(System.IO.Path.GetDirectoryName(PathInfo.FullAddressFileName));
+                        CrossDirectoryInfo.Current.CreateDirectory(System.IO.Path.GetDirectoryName(PathInfo.FullAddressFileName));
 
                     foreach (var item in Connections.ToArray())
                     {
@@ -1239,7 +1239,7 @@ namespace Agrin.Download.Web
                     {
                         if (System.IO.File.Exists(PathInfo.FullAddressFileName))
                         {
-                            using (var fs = Agrin.IO.Helper.IOHelper.OpenFileStreamForWrite(PathInfo.SavePath, System.IO.FileMode.OpenOrCreate, fileName: PathInfo.FileName))
+                            using (var fs = Agrin.IO.Helper.IOHelperBase.Current.OpenFileStreamForWrite(PathInfo.SavePath, System.IO.FileMode.OpenOrCreate, fileName: PathInfo.FileName))
                             {
                                 fs.SetLength(0);
                             }
@@ -1276,12 +1276,12 @@ namespace Agrin.Download.Web
                     mixer.Start(mixerInfo);
                     fileLen = mixer.Size;
                     //long fileLen = 0;
-                    //using (var stream = IOHelper.OpenFileStreamForWrite(PathInfo.FullAddressFileName, System.IO.FileMode.Create, fileName: string.IsNullOrEmpty(PathInfo.SecurityFileSavePath) ? PathInfo.FileName : null, newSecurityFileName: (x) => { PathInfo.SecurityFileSavePath = x; SaveThisLink(true); }, data: this))
+                    //using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(PathInfo.FullAddressFileName, System.IO.FileMode.Create, fileName: string.IsNullOrEmpty(PathInfo.SecurityFileSavePath) ? PathInfo.FileName : null, newSecurityFileName: (x) => { PathInfo.SecurityFileSavePath = x; SaveThisLink(true); }, data: this))
                     //{
                     //    long fileSize = 0;
                     //    foreach (var item in Connections)
                     //    {
-                    //        using (var copystream = IOHelper.OpenFileStreamForRead(item.SaveFileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                    //        using (var copystream = IOHelperBase.Current.OpenFileStreamForRead(item.SaveFileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
                     //        {
                     //            fileSize += copystream.Length;
                     //        }
@@ -1290,7 +1290,7 @@ namespace Agrin.Download.Web
                     //    stream.Seek(0, System.IO.SeekOrigin.Begin);
                     //    foreach (LinkWebRequest item in LinkHelper.SortByPosition(Connections))
                     //    {
-                    //        using (var copystream = IOHelper.OpenFileStreamForRead(item.SaveFileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                    //        using (var copystream = IOHelperBase.Current.OpenFileStreamForRead(item.SaveFileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
                     //        {
                     //            int len = 1024 * 1024 * 2;
                     //            byte[] read = new byte[len];
@@ -1306,7 +1306,7 @@ namespace Agrin.Download.Web
                     //        {
                     //            try
                     //            {
-                    //                IOHelper.DeleteFile(item.SaveFileName);
+                    //                IOHelperBase.Current.DeleteFile(item.SaveFileName);
                     //            }
                     //            catch (Exception e)
                     //            {
@@ -1353,7 +1353,7 @@ namespace Agrin.Download.Web
                     DownloadingProperty.ErrorAction?.Invoke();
                 }
             }
-#if (MobileApp)
+#if (MobileApp || __ANDROID__ )
             GC.Collect();
 #else
 
@@ -1367,7 +1367,7 @@ namespace Agrin.Download.Web
         {
             try
             {
-                IOHelper.DeleteDirectory(PathInfo.ConnectionsSavedAddress, true);
+                CrossDirectoryInfo.Current.Delete(PathInfo.ConnectionsSavedAddress, true);
             }
             catch (Exception er)
             {

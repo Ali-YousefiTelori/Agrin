@@ -23,7 +23,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
         {
             using (var context = new AgrinContext(false))
             {
-                if (context.UserSessionInfoes.Any(x => x.FirstKey == firstKey && x.SecondKey == secondKey && x.IsActive && x.UserInfo.DirectFileToUserRelationInfoes.Any(y => y.DirectFileId == directFileId && y.AccessType == DataBase.Models.Relations.DirectFileFolderAccessType.Creator)))
+                if (context.UserSessions.Any(x => x.FirstKey == firstKey && x.SecondKey == secondKey && x.IsActive && x.UserInfo.DirectFileToUserRelationInfoes.Any(y => y.DirectFileId == directFileId && y.AccessType == DataBase.Models.Relations.DirectFileFolderAccessType.Creator)))
                     return MessageType.Success;
                 return MessageType.SessionAccessDenied;
             }
@@ -34,7 +34,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
         {
             using (var context = new AgrinContext(false))
             {
-                var find = context.UserInfoes.Where(x => x.TelegramUserId == telegramUserId).FirstOrDefault();
+                var find = context.Users.Where(x => x.TelegramUserId == telegramUserId).FirstOrDefault();
                 return find.Success();
             }
         }
@@ -44,7 +44,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
         {
             using (var context = new AgrinContext(false))
             {
-                var find = context.UserInfoes.Where(x => x.UserName == userName).FirstOrDefault();
+                var find = context.Users.Where(x => x.UserName == userName).FirstOrDefault();
                 return find.Success();
             }
         }
@@ -54,7 +54,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
         {
             using (var context = new AgrinContext())
             {
-                var find = context.UserInfoes.FirstOrDefault(x => x.Id == userId);
+                var find = context.Users.FirstOrDefault(x => x.Id == userId);
                 find.TelegramUserId = telegramUserId;
                 context.SaveChanges();
                 return MessageType.Success;
@@ -67,7 +67,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
             using (var context = new AgrinContext())
             {
                 userInfo.CreatedDateTime = DateTime.Now;
-                context.UserInfoes.Add(userInfo);
+                context.Users.Add(userInfo);
                 context.SaveChanges();
                 return userInfo.Success();
             }

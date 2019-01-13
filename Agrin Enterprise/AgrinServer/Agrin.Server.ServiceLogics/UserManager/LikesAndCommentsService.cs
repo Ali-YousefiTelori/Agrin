@@ -27,9 +27,9 @@ namespace Agrin.Server.ServiceLogics.UserManager
             {
                 if (isLike)
                 {
-                    if (!context.LikeInfoes.Any(x => x.UserId == CurrentUserInfo.UserId && x.RequestIdeaId == requestIdeaId))
+                    if (!context.Likes.Any(x => x.UserId == CurrentUserInfo.UserId && x.RequestIdeaId == requestIdeaId))
                     {
-                        context.LikeInfoes.Add(new LikeInfo()
+                        context.Likes.Add(new LikeInfo()
                         {
                             RequestIdeaId = requestIdeaId,
                             UserId = CurrentUserInfo.UserId
@@ -39,9 +39,9 @@ namespace Agrin.Server.ServiceLogics.UserManager
                 }
                 else
                 {
-                    if (context.LikeInfoes.Any(x => x.UserId == CurrentUserInfo.UserId && x.RequestIdeaId == requestIdeaId))
+                    if (context.Likes.Any(x => x.UserId == CurrentUserInfo.UserId && x.RequestIdeaId == requestIdeaId))
                     {
-                        context.LikeInfoes.RemoveRange(from x in context.LikeInfoes where x.UserId == CurrentUserInfo.UserId && x.RequestIdeaId == requestIdeaId select x);
+                        context.Likes.RemoveRange(from x in context.Likes where x.UserId == CurrentUserInfo.UserId && x.RequestIdeaId == requestIdeaId select x);
                         context.SaveChanges();
                     }
                 }
@@ -61,7 +61,7 @@ namespace Agrin.Server.ServiceLogics.UserManager
             {
                 commentInfo.UserId = CurrentUserInfo.UserId;
                 commentInfo.CreatedDateTime = DateTime.Now;
-                context.CommentInfoes.Add(commentInfo);
+                context.Comments.Add(commentInfo);
                 context.SaveChanges();
                 return MessageType.Success;
             }
@@ -76,7 +76,7 @@ namespace Agrin.Server.ServiceLogics.UserManager
         {
             using (AgrinContext context = new AgrinContext(false))
             {
-                IQueryable<CommentInfo> query = context.CommentInfoes.Where(x => x.RequestIdeaId == filterInfo.Id).Include(x => x.UserInfo).AsNoTracking().AsQueryable();
+                IQueryable<CommentInfo> query = context.Comments.Where(x => x.RequestIdeaId == filterInfo.Id).Include(x => x.UserInfo).AsNoTracking().AsQueryable();
 
                 return query.SelectPage(x => x.CreatedDateTime, true, filterInfo.Index, filterInfo.Length).Success();
             }

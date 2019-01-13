@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UltraStreamGo;
 
 namespace Agrin.Download.Mixers
 {
@@ -37,7 +38,7 @@ namespace Agrin.Download.Mixers
             if (isCanceled)
                 return;
             MixedSize = 0;
-            using (var stream = IOHelperBase.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName, newSecurityFileName: (newPath) => CurrentMixer.SecurityAddress = newPath))
+            using (var stream = IOHelperBase.Current.OpenFileStreamForWrite(CurrentMixer.FilePath, System.IO.FileMode.OpenOrCreate, fileName: CurrentMixer.FileName, newSecurityFileName: (newPath) => CurrentMixer.SecurityAddress = newPath))
             {
                 if (isCanceled)
                     return;
@@ -47,7 +48,7 @@ namespace Agrin.Download.Mixers
                 foreach (var file in Files)
                 {
                     long currentMixed = MixedSize;
-                    using (var copystream = IOHelperBase.OpenFileStreamForRead(file.Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                    using (var copystream = IOHelperBase.Current.OpenFileStreamForRead(file.Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
                     {
                         int len = 1024 * 1024 * 2;
                         byte[] read = new byte[len];
@@ -76,7 +77,7 @@ namespace Agrin.Download.Mixers
                     return;
                 foreach (var file in Files)
                 {
-                    IOHelperBase.DeleteFile(file.Path);
+                    CrossFileInfo.Current.Delete(file.Path);
                 }
             }
             catch (Exception ex)

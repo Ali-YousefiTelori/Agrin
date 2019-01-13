@@ -1,7 +1,7 @@
 ﻿using Agrin.Download.Responses;
 using Agrin.Download.Web;
 using Agrin.Helper.ComponentModel;
-#if (!MobileApp && !XamarinApp)
+#if (!MobileApp && !XamarinApp && !__ANDROID__)
 using Agrin.Network;
 using System;
 using System.Collections.Generic;
