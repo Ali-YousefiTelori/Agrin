@@ -10,7 +10,7 @@ using Agrin.Helper.Collections;
 using Agrin.Helper.ComponentModel;
 using Agrin.IO.Helper;
 using Agrin.Log;
-#if (!MobileApp && !XamarinApp && !__ANDROID__)
+#if (!MobileApp && !XamarinApp && !__ANDROID__ && !AndroidDebug && !AndroidRelease)
 using Agrin.Network.Models;
 #endif
 using System;
@@ -547,7 +547,7 @@ namespace Agrin.Download.Data
                 ApplicationServiceData.Current.IsPlayLinks.AddRange(list);
             }
         }
-#if (!MobileApp && !XamarinApp && !__ANDROID__)
+#if (!MobileApp && !XamarinApp && !__ANDROID__ && !AndroidDebug && !AndroidRelease)
         static void LoadNetworkProxySettings()
         {
             try

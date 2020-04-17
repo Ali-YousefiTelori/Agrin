@@ -63,7 +63,7 @@ namespace Agrin.Server.ServiceLogics.StorageManager
                 };
                 context.DirectFiles.Add(fileInfo);
                 context.SaveChanges();
-                return fileInfo.Id.Success();
+                return fileInfo.Id;
             }
         }
 

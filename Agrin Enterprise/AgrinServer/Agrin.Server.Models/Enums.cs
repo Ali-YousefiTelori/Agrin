@@ -26,6 +26,7 @@ namespace Agrin.Server.Models
         IsNotConfirm = 15,
         AccessDenied = 16,
         CodeNotExist = 17,
-        DataIsNotValid = 18
+        DataIsNotValid = 18,
+        ValidationsError = 19
     }
 }

@@ -90,7 +90,7 @@
       <Project>{257C2DE8-223C-4B5C-A36C-CF87E183601B}</Project>
       <Name>LiteDB</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Github\MVVMGo\MvvmGo\MvvmGo\MvvmGo.csproj">
+    <ProjectReference Include="..\..\..\..\Github\MVVMGo\MvvmGo\MvvmGo.csproj">
       <Project>{9d38c00c-b80d-478a-b151-9bc1bf891ffd}</Project>
       <Name>MvvmGo</Name>
     </ProjectReference>
@@ -114,9 +114,9 @@
       <Project>{2d83571b-aade-4f6c-b7e7-62aadbb52729}</Project>
       <Name>Agrin.DebugSystem</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Agrin.Download.Models\Agrin.Download.Models.csproj">
+    <ProjectReference Include="..\Agrin.Download.Models\Agrin.Download.csproj">
       <Project>{4539f9d8-d4c2-47c8-a7ad-21f4a39a1fb7}</Project>
-      <Name>Agrin.Download.Models</Name>
+      <Name>Agrin.Download</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.Foundation\Agrin.Foundation.csproj">
       <Project>{783fbbb4-cdd4-4a9d-a8ab-57fbc5bf04de}</Project>

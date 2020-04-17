@@ -40,9 +40,11 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.1.11\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.1.11\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,16 +55,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Agrin.Component\Agrin.Component.csproj">
       <Project>{a33682af-3571-443a-85fd-42fda2ea3b3a}</Project>
       <Name>Agrin.Component</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Agrin.Download.Models\Agrin.Download.Models.csproj">
+    <ProjectReference Include="..\Agrin.Download.Models\Agrin.Download.csproj">
       <Project>{4539f9d8-d4c2-47c8-a7ad-21f4a39a1fb7}</Project>
-      <Name>Agrin.Download.Models</Name>
+      <Name>Agrin.Download</Name>
     </ProjectReference>
     <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj">
       <Project>{5ef58a1f-368f-40f9-b68a-cde14e68fa7d}</Project>
@@ -76,6 +75,9 @@
       <Project>{e2018fd5-df00-48a2-a588-dabf5d92e0c8}</Project>
       <Name>Agrin.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

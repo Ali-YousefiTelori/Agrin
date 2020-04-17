@@ -49,9 +49,25 @@
     <Compile Include="Filters\FilterPostInfo.cs" />
     <Compile Include="MessageContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidationResultInfo.cs" />
+    <Compile Include="Validations\AutoGenerateGuidAttribute.cs" />
+    <Compile Include="Validations\CreatedDateTimeDefaultAttribute.cs" />
+    <Compile Include="Validations\EmailAddressValidator.cs" />
+    <Compile Include="Validations\EmailValidationAttribute.cs" />
+    <Compile Include="Validations\EmptyValidationAttribute.cs" />
+    <Compile Include="Validations\FilterBaseInfoValidationAttribute.cs" />
+    <Compile Include="Validations\IsNumberValidationRuleAttribute.cs" />
+    <Compile Include="Validations\NullValidationAttribute.cs" />
+    <Compile Include="Validations\TextLengthValidationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\SignalGo\Github\SignalGo-full-net\SignalGo.Shared\SignalGo.Shared.csproj">
+      <Project>{78d8601b-e331-47b7-a4a8-46b7460d82a4}</Project>
+      <Name>SignalGo.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

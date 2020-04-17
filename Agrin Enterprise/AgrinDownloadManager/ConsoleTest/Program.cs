@@ -93,7 +93,7 @@ namespace ConsoleTest
             {
                 try
                 {
-                    if (IOHelperBase.FileExists(target.SaveConnectionFileName))
+                    if (IOHelperBase.Current.FileExists(target.SaveConnectionFileName))
                     {
                         using (var stream = IOHelperBase.OpenFileStreamForRead(target.SaveConnectionFileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
                             target.DownloadedSize = stream.Length;

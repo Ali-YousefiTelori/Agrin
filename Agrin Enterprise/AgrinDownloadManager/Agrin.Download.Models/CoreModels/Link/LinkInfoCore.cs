@@ -898,7 +898,7 @@ namespace Agrin.Download.CoreModels.Link
                 isStopping = true;
                 if (Connections.Count(x => x.CanStop) > 0)
                 {
-                    foreach (var item in Connections.Where(x => x.CanStop).Take(((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.GetConcurrentConnectionCount()))
+                    foreach (var item in Connections.Where(x => x.CanStop))//.Take(((ShortModels.Link.LinkInfoShort)this).LinkInfoDownloadCore.GetConcurrentConnectionCount())
                     {
                         item.Stop();
                     }

@@ -88,25 +88,31 @@ namespace YoutubeExtractor
 
         private static string ApplyOperation(string cipher, string op)
         {
-            switch (op[0])
+            try
             {
-                case 'r':
-                    return new string(cipher.ToCharArray().Reverse().ToArray());
+                switch (op[0])
+                {
+                    case 'r':
+                        return new string(cipher.ToCharArray().Reverse().ToArray());
 
-                case 'w':
-                    {
-                        int index = GetOpIndex(op);
-                        return SwapFirstChar(cipher, index);
-                    }
+                    case 'w':
+                        {
+                            int index = GetOpIndex(op);
+                            return SwapFirstChar(cipher, index);
+                        }
 
-                case 's':
-                    {
-                        int index = GetOpIndex(op);
-                        return cipher.Substring(index);
-                    }
-
-                default:
-                    throw new NotImplementedException("Couldn't find cipher operation.");
+                    case 's':
+                        {
+                            int index = GetOpIndex(op);
+                            return cipher.Substring(index);
+                        }
+                    default:
+                        throw new NotImplementedException("Couldn't find cipher operation.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return new string(cipher.ToCharArray().Reverse().ToArray());
             }
         }
 
@@ -135,8 +141,16 @@ namespace YoutubeExtractor
         private static string SwapFirstChar(string cipher, int index)
         {
             var builder = new StringBuilder(cipher);
-            builder[0] = cipher[index];
-            builder[index] = cipher[0];
+            try
+            {
+                builder[0] = cipher[index];
+                builder[index] = cipher[0];
+            }
+            catch (Exception ex)
+            {
+
+            }
+          
 
             return builder.ToString();
         }
