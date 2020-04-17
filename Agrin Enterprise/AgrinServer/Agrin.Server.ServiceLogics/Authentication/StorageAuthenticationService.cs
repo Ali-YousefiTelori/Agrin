@@ -35,7 +35,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
             using (var context = new AgrinContext(false))
             {
                 var find = context.Users.Where(x => x.TelegramUserId == telegramUserId).FirstOrDefault();
-                return find.Success();
+                return find;
             }
         }
 
@@ -45,7 +45,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
             using (var context = new AgrinContext(false))
             {
                 var find = context.Users.Where(x => x.UserName == userName).FirstOrDefault();
-                return find.Success();
+                return find;
             }
         }
 
@@ -69,7 +69,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
                 userInfo.CreatedDateTime = DateTime.Now;
                 context.Users.Add(userInfo);
                 context.SaveChanges();
-                return userInfo.Success();
+                return userInfo;
             }
         }
 

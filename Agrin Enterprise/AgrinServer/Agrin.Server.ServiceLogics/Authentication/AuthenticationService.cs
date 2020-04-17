@@ -25,7 +25,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
                 else if (user.Status != UserStatus.Confirm)
                     return MessageType.IsNotConfirm;
                 OperationContext<CurrentUserInfo>.CurrentSetting = new CurrentUserInfo() { UserInfo = user, IsNormalUser = true, IsAdmin = false };
-                return user.Success();
+                return user;
             }
         }
 
@@ -44,7 +44,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
                 if (find != null)
                 {
                     UserExtension.AddConfirmSMS(find.UserName, find.Id);
-                    return find.Id.Success();
+                    return find.Id;
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
                 context.Users.Add(find);
                 context.SaveChanges();
                 UserExtension.AddConfirmSMS(find.UserName, find.Id);
-                return find.Id.Success();
+                return find.Id;
             }
         }
 
@@ -109,7 +109,7 @@ namespace Agrin.Server.ServiceLogics.Authentication
                     context.SaveChanges();
                 }
 
-                return finndSession.Success();
+                return finndSession;
             }
         }
 

@@ -385,7 +385,12 @@ namespace Agrin.Services
             isStarted = true;
 
             Notification notification = null;
-            if ((int)Android.OS.Build.VERSION.SdkInt < 11)
+            if ((int)Build.VERSION.SdkInt >= 26)
+            {
+                var channelId = CreateNotificationChannel("download_service_Agrin2", "Agrin Download Notification");
+                notification = new Notification.Builder(this, channelId).Build();
+            }
+            else if ((int)Android.OS.Build.VERSION.SdkInt < 11)
             {
                 notification = new Notification(Resource.Drawable.smallIcon, ViewsUtility.FindTextLanguage(this, "AgrinDownloadManager_Language"), DateTime.Now.Ticks);
                 Intent notificationIntent = new Intent(this, typeof(MainActivity));
@@ -414,6 +419,15 @@ namespace Agrin.Services
                 // = builder.Build(); // available from API level 11 and onwards
             }
             StartForeground(1, notification);
+        }
+
+        private string CreateNotificationChannel(string channelId, string channelName)
+        {
+            NotificationChannel chan = new NotificationChannel(channelId, channelName, NotificationManager.ImportanceNone);
+            chan.LockscreenVisibility = NotificationVisibility.Private;
+            NotificationManager service = GetSystemService(Context.NotificationService) as NotificationManager;
+            service.CreateNotificationChannel(chan);
+            return channelId;
         }
 
         public bool CanScreeenOnWhenIsInQueue()

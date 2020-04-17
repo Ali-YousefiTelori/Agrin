@@ -1,6 +1,6 @@
 ﻿using Agrin.Helper.Collections;
 using Agrin.Helper.ComponentModel;
-#if (!MobileApp && !XamarinApp && !__ANDROID__)
+#if (!MobileApp && !XamarinApp && !__ANDROID__ && !AndroidDebug && !AndroidRelease)
 using Agrin.Network.Models;
 using System;
 using System.Collections.Generic;

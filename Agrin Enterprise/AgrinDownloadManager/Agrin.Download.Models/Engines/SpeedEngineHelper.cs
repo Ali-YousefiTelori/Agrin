@@ -37,59 +37,66 @@ namespace Agrin.Download.Engines
             {
                 while (true)
                 {
-                    List<ShortModels.Link.LinkInfoShort> items = ListOfLinks.Where(x => x.IsDownloading || x.IsCopyingFile).Select(x => x.AsShort()).ToList();
-                    bool isPause = items.Count == 0;
-                    foreach (ShortModels.Link.LinkInfoShort linkInfo in items)
+                    try
                     {
-                        if (linkInfo.PreviousDownloadedSize > 0)
-                            linkInfo.AvarageDownloadedSizePerSecound.Put(linkInfo.DownloadedSize - linkInfo.PreviousDownloadedSize);
-
-                        if (linkInfo.AvarageDownloadedSizePerSecound.Count != 0)
+                        List<ShortModels.Link.LinkInfoShort> items = ListOfLinks.Where(x => x.IsDownloading || x.IsCopyingFile).Select(x => x.AsShort()).ToList();
+                        bool isPause = items.Count == 0;
+                        foreach (ShortModels.Link.LinkInfoShort linkInfo in items)
                         {
-                            double avarage = linkInfo.AvarageDownloadedSizePerSecound.Read().Average();
-                            linkInfo.DownloadedSizePerSecound = (long)avarage;
-                            if (avarage > 0)
-                            {
-                                if (linkInfo.Size < 0)
-                                    linkInfo.TimeRemaining = null;
-                                else
-                                    linkInfo.TimeRemaining = new TimeSpan(0, 0, (int)((linkInfo.Size - linkInfo.DownloadedSize) / avarage));
-                            }
-                        }
+                            if (linkInfo.PreviousDownloadedSize > 0)
+                                linkInfo.AvarageDownloadedSizePerSecound.Put(linkInfo.DownloadedSize - linkInfo.PreviousDownloadedSize);
 
-                        linkInfo.PreviousDownloadedSize = linkInfo.DownloadedSize;
-                        if (linkInfo.IsDownloading)
-                        {
-                            foreach (LinkInfoRequestCore connection in linkInfo.Connections.ToArray())
+                            if (linkInfo.AvarageDownloadedSizePerSecound.Count != 0)
                             {
-                                if (connection.CanPlay || connection.IsDownloading)
+                                double avarage = linkInfo.AvarageDownloadedSizePerSecound.Read().Average();
+                                linkInfo.DownloadedSizePerSecound = (long)avarage;
+                                if (avarage > 0)
                                 {
-                                    if (connection.LastReadDateTime.AddSeconds(connection.LastReadDuration) < DateTime.Now)
+                                    if (linkInfo.Size < 0)
+                                        linkInfo.TimeRemaining = null;
+                                    else
+                                        linkInfo.TimeRemaining = new TimeSpan(0, 0, (int)((linkInfo.Size - linkInfo.DownloadedSize) / avarage));
+                                }
+                            }
+
+                            linkInfo.PreviousDownloadedSize = linkInfo.DownloadedSize;
+                            if (linkInfo.IsDownloading)
+                            {
+                                foreach (LinkInfoRequestCore connection in linkInfo.Connections.ToArray())
+                                {
+                                    if (connection.CanPlay || connection.IsDownloading)
                                     {
-                                        try
+                                        if (connection.LastReadDateTime.AddSeconds(connection.LastReadDuration) < DateTime.Now)
                                         {
-                                            bool canBreak = false;
-                                            linkInfo.RunInLock(() =>
+                                            try
                                             {
-                                                canBreak = linkInfo.isStopping || linkInfo.IsManualStop || linkInfo.CanPlay;
-                                            });
-                                            if (canBreak)
-                                                break;
-                                            connection.LastReadDuration += 10;
-                                            connection.Stop();
-                                            connection.Play();
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            AutoLogger.LogError(ex, "try to recconect");
+                                                bool canBreak = false;
+                                                linkInfo.RunInLock(() =>
+                                                {
+                                                    canBreak = linkInfo.isStopping || linkInfo.IsManualStop;
+                                                });
+                                                if (canBreak)
+                                                    break;
+                                                connection.LastReadDuration += 10;
+                                                connection.Stop();
+                                                connection.Play();
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                AutoLogger.LogError(ex, "try to recconect");
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
+                        if (!isPause)
+                            TickCalculatedAction?.Invoke();
                     }
-                    if (!isPause)
-                        TickCalculatedAction?.Invoke();
+                    catch (Exception ex)
+                    {
+                        AutoLogger.LogError(ex, "SpeedEngineHelper");
+                    }
                     await Task.Delay(1000);
                     //if (IsPause)
                     //{

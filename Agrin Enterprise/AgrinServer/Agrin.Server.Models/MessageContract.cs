@@ -1,12 +1,17 @@
-﻿namespace Agrin.Server.Models
+﻿using System.Collections.Generic;
+
+namespace Agrin.Server.Models
 {
 
     public class MessageContract
     {
-        public object Data { get; set; }
         public string Message { get; set; }
         public MessageType Error { get; set; }
         public bool IsSuccess { get; set; }
+        /// <summary>
+        /// وقتی مقادیر ارسال شده توسط کاربر صحیح نباشد
+        /// </summary>
+        public List<ValidationResultInfo> ValidationErrors { get; set; }
 
         public static implicit operator MessageContract(MessageType errorMessage)
         {
@@ -21,12 +26,9 @@
         }
     }
 
-    public class MessageContract<T>
+    public class MessageContract<T> : MessageContract
     {
         public T Data { get; set; }
-        public string Message { get; set; }
-        public MessageType Error { get; set; }
-        public bool IsSuccess { get; set; }
 
         public static implicit operator MessageContract<T>(MessageType errorMessage)
         {
@@ -44,33 +46,5 @@
         {
             return new MessageContract<T>() { IsSuccess = true, Data = data };
         }
-    }
-
-    /// <summary>
-    /// اکستنشن های پیام
-    /// </summary>
-    public static class MessageContractExtension
-    {
-        /// <summary>
-        /// تبدیل یک کلاس به پیام تایید شده
-        /// </summary>
-        /// <typeparam name="T">نوع دیتای مورد نظر</typeparam>
-        /// <param name="data">دیتای مورد نظر</param>
-        /// <returns></returns>
-        public static MessageContract<T> Success<T>(this T data)
-        {
-            return new MessageContract<T>() { IsSuccess = true, Data = data };
-        }
-
-        /// <summary>
-        /// تبدیل یک آبجکت به یک پیام تایید شده
-        /// </summary>
-        /// <param name="data">دیتای مورد نظر</param>
-        /// <returns></returns>
-        public static MessageContract Success(this object data)
-        {
-            return new MessageContract() { IsSuccess = true, Data = data };
-        }
-
     }
 }

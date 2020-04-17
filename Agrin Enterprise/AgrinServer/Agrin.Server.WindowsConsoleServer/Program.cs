@@ -4,6 +4,7 @@ using Agrin.Server.ServiceLogics;
 using Microsoft.EntityFrameworkCore;
 using SignalGo.Client;
 using SignalGo.Server.ServiceManager;
+using SignalGo.Shared.DataTypes;
 using SMSService.OneWayServices;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace Agrin.Server.WindowsConsoleServer
                     context.Users.FirstOrDefault();
                     Console.WriteLine("databse OK");
                 }
-                
+
                 StreamIdentifier.DefaultFolderPath = Path.Combine(AgrinConfigInformation.Current.FileStoragePath, "Files");
 
                 SMSSenderController.Current = new SMSSenderController(AgrinConfigInformation.Current.SMSSenderDomain, AgrinConfigInformation.Current.SMSSenderPort);
@@ -56,11 +57,25 @@ namespace Agrin.Server.WindowsConsoleServer
                 //logger.Initialize();
                 provider.Start("http://localhost:80/AgringServices/SignalGo", new List<System.Reflection.Assembly>() { typeof(PostService).Assembly });
 
-                provider.ErrorHandlingFunction = (ex, type, method,client) =>
+                provider.ErrorHandlingFunction = (ex, type, method, client) =>
                 {
-                    return new MessageContract() { IsSuccess = false, Message = "server Exception", Error = MessageType.ServerException };
+                    return new MessageContract() { IsSuccess = false, Message = "server Exception: " + Environment.NewLine + ex.ToString(), Error = MessageType.ServerException };
                 };
 
+                provider.ValidationResultHandlingFunction = (validations, service, method) =>
+                {
+                    MessageContract result = new MessageContract()
+                    {
+                        Error = MessageType.ValidationsError
+                    };
+                    result.ValidationErrors = new List<ValidationResultInfo>();
+                    foreach (BaseValidationRuleInfoAttribute item in validations)
+                    {
+                        result.ValidationErrors.Add((ValidationResultInfo)BaseValidationRuleInfoAttribute.GetErrorValue(item));
+                    }
+
+                    return result;
+                };
                 provider.ProviderSetting.IsEnabledDataExchanger = true;
                 provider.ProviderSetting.IsEnabledReferenceResolver = true;
                 provider.ProviderSetting.IsEnabledReferenceResolverForArray = true;
@@ -92,8 +107,8 @@ namespace Agrin.Server.WindowsConsoleServer
                 while (true)
                 {
                     await Task.Delay(1000);
-                    var current = provider.ServerDataProvider.GetConnectedCount();
-                    var newValue = current - old;
+                    int current = provider.ServerDataProvider.GetConnectedCount();
+                    int newValue = current - old;
                     old = current;
                     Console.WriteLine($"{newValue} Request Per Second");
                 }

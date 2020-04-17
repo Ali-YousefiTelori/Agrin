@@ -1,11 +1,10 @@
-﻿using SignalGo.Shared.DataTypes;
+﻿using Agrin.Server.Models.Validations;
+using SignalGo.Shared.DataTypes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Agrin.Server.DataBase.Models
 {
@@ -83,9 +82,17 @@ namespace Agrin.Server.DataBase.Models
         /// status of idea
         /// </summary>
         public RequestIdeaStatus Status { get; set; }
-
+        /// <summary>
+        /// title of request
+        /// </summary>
+        [DisplayName("تیتر")]
+        [TextLengthValidation(4, 100)]
         public string Title { get; set; }
-
+        /// <summary>
+        /// message of request
+        /// </summary>
+        [DisplayName("متن")]
+        [TextLengthValidation(5, 5000)]
         public string Message { get; set; }
 
         #region exception description

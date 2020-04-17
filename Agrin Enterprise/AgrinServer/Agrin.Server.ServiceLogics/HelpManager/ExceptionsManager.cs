@@ -2,6 +2,7 @@
 using Agrin.Server.DataBase.Models;
 using Agrin.Server.Models;
 using Agrin.Server.Models.Filters;
+using Agrin.Server.Models.Validations;
 using Microsoft.EntityFrameworkCore;
 using SignalGo.Shared.DataTypes;
 using System;
@@ -28,7 +29,7 @@ namespace Agrin.Server.ServiceLogics.HelpManager
                 ExceptionInfo find = query.FirstOrDefault(x => x.ErrorCode == errorCode);
                 if (find == null)
                     return MessageType.NotFound;
-                return find.Success();
+                return find;
             }
         }
 
@@ -40,12 +41,12 @@ namespace Agrin.Server.ServiceLogics.HelpManager
                 ExceptionInfo find = query.FirstOrDefault(x => x.HttpErrorCode == errorCode);
                 if (find == null)
                     return MessageType.NotFound;
-                return find.Success();
+                return find;
             }
         }
 
         [AgrinSecurityPermission(IsNormalUser = true)]
-        public async Task<MessageContract> AddRequestIdeaInfo(RequestIdeaInfo requestExceptionInfo, int? fileId)
+        public async Task<MessageContract> AddRequestIdeaInfo([EmptyValidation]RequestIdeaInfo requestExceptionInfo, int? fileId)
         {
             var userId = CurrentUserInfo.UserId;
             using (AgrinContext context = new AgrinContext(false))
@@ -54,7 +55,7 @@ namespace Agrin.Server.ServiceLogics.HelpManager
                     return MessageType.AccessDenied;
                 else if (requestExceptionInfo.HttpErrorCode.HasValue && await context.RequestIdeas.AnyAsync(x => x.HttpErrorCode == requestExceptionInfo.HttpErrorCode))
                     return MessageType.Duplicate;
-                else if (context.RequestIdeas
+                else if (!string.IsNullOrEmpty(requestExceptionInfo.ErrorMessage) && context.RequestIdeas
                     .Any(x => x.ErrorMessage == requestExceptionInfo.ErrorMessage))
                     return MessageType.Duplicate;
                 requestExceptionInfo.CreatedDateTime = DateTime.Now;
@@ -70,7 +71,7 @@ namespace Agrin.Server.ServiceLogics.HelpManager
         }
 
         [AgrinSecurityPermission(IsNormalUser = true)]
-        public MessageContract<List<RequestIdeaInfo>> FilterRequestIdeaInfoes(FilterBaseInfo filterInfo)
+        public MessageContract<List<RequestIdeaInfo>> FilterRequestIdeaInfoes([FilterBaseInfoValidation]FilterBaseInfo filterInfo)
         {
             using (AgrinContext context = new AgrinContext(false))
             {
@@ -90,7 +91,7 @@ namespace Agrin.Server.ServiceLogics.HelpManager
                     x.RequestIdeaInfo.IsLiked = x.IsLiked;
 
                 });
-                return result.Select(x => x.RequestIdeaInfo).ToList().Success();
+                return result.Select(x => x.RequestIdeaInfo).ToList();
             }
         }
     }

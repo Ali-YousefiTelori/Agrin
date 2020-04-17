@@ -78,7 +78,7 @@ namespace Agrin.Server.ServiceLogics.UserManager
             {
                 IQueryable<CommentInfo> query = context.Comments.Where(x => x.RequestIdeaId == filterInfo.Id).Include(x => x.UserInfo).AsNoTracking().AsQueryable();
 
-                return query.SelectPage(x => x.CreatedDateTime, true, filterInfo.Index, filterInfo.Length).Success();
+                return query.SelectPage(x => x.CreatedDateTime, true, filterInfo.Index, filterInfo.Length);
             }
         }
     }

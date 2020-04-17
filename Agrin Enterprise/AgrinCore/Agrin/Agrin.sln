@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgrinCore", "AgrinCore\AgrinCore.csproj", "{967F22E5-3F25-4308-AD73-5DD8F7593C4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{BB6C5691-E4F9-4532-A28A-6B0846AB7BAD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C77B69E7-F051-4A1A-98F3-172668727288}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterfaces", "UserInterfaces", "{2A883434-602C-4757-A8EE-E036968DA78B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{967F22E5-3F25-4308-AD73-5DD8F7593C4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967F22E5-3F25-4308-AD73-5DD8F7593C4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967F22E5-3F25-4308-AD73-5DD8F7593C4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967F22E5-3F25-4308-AD73-5DD8F7593C4E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{967F22E5-3F25-4308-AD73-5DD8F7593C4E} = {BB6C5691-E4F9-4532-A28A-6B0846AB7BAD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5B3DF5B-997B-40A9-881F-7E23036E12EB}
+	EndGlobalSection
+EndGlobal

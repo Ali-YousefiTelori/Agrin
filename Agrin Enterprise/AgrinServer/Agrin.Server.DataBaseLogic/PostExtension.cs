@@ -21,7 +21,7 @@ namespace Agrin.Server.DataBaseLogic
 
             using (AgrinContext context = new AgrinContext(false))
             {
-                return context.Posts.AsNoTracking().SelectPage(x => x.CreatedDateTime, false, index, length).ToList().Success();
+                return context.Posts.AsNoTracking().SelectPage(x => x.CreatedDateTime, false, index, length).ToList();
             }
         }
 
@@ -61,9 +61,9 @@ namespace Agrin.Server.DataBaseLogic
                 if (filterPostInfo.StartDateTime.HasValue && filterPostInfo.EndDateTime.HasValue)
                     query = query.Where(x => x.CreatedDateTime <= filterPostInfo.EndDateTime.Value && x.CreatedDateTime >= filterPostInfo.StartDateTime.Value);
                 if (query.IsOrdered())
-                    return query.SelectPage(filterPostInfo.Index, filterPostInfo.Length).ToList().Success();
+                    return query.SelectPage(filterPostInfo.Index, filterPostInfo.Length).ToList();
                 else
-                    return query.SelectPage(x => x.CreatedDateTime, false, filterPostInfo.Index, filterPostInfo.Length).ToList().Success();
+                    return query.SelectPage(x => x.CreatedDateTime, false, filterPostInfo.Index, filterPostInfo.Length).ToList();
             }
         }
 
@@ -71,7 +71,7 @@ namespace Agrin.Server.DataBaseLogic
         {
             using (AgrinContext context = new AgrinContext(false))
             {
-                return context.PostCategories.AsNoTracking().SelectPage(filterBaseInfo.Index, filterBaseInfo.Length).ToList().Success();
+                return context.PostCategories.AsNoTracking().SelectPage(filterBaseInfo.Index, filterBaseInfo.Length).ToList();
             }
         }
 
@@ -105,7 +105,7 @@ namespace Agrin.Server.DataBaseLogic
                     //Title = "برترین ها",
                     Posts = context.Posts.Include(x => x.FileInfoes).Include(x => x.PostMusicInfo).Include(x => x.PostVideoInfo).Include(x => x.PostTagRelationInfoes).OrderByDescending(p => p.ViewCount).Take(5).ToList()//sort by likes
                 });
-                return result.Success();
+                return result;
             }
         }
     }
