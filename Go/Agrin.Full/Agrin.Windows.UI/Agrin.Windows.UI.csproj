@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+    <ApplicationIcon>Project1.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Project1.ico" />
+    <None Remove="Resources\Fonts\aliyekan.ttf" />
+    <None Remove="Resources\Images\AgrinLogo.png" />
+    <None Remove="Resources\Images\AgrinLogo2.png" />
+    <None Remove="Resources\Images\AgrinNotifyIcon.png" />
+    <None Remove="Resources\Images\bevelEffectForLogin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="MergedResources.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MergedResources.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agrin.About\Agrin.About.csproj" />
+    <ProjectReference Include="..\Agrin.BaseViewModels\Agrin.BaseViewModels.csproj" />
+    <ProjectReference Include="..\Agrin.Data\Agrin.Data.csproj" />
+    <ProjectReference Include="..\Agrin.Download\Agrin.Download.csproj" />
+    <ProjectReference Include="..\Agrin.Drawing\Agrin.Drawing.csproj" />
+    <ProjectReference Include="..\Agrin.Framesoft\Agrin.Framesoft.csproj" />
+    <ProjectReference Include="..\Agrin.Helper\Agrin.Helper.csproj" />
+    <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj" />
+    <ProjectReference Include="..\Agrin.LinkExtractor\Agrin.LinkExtractor.csproj" />
+    <ProjectReference Include="..\Agrin.Log\Agrin.Log.csproj" />
+    <ProjectReference Include="..\Agrin.Network\Agrin.Network.csproj" />
+    <ProjectReference Include="..\Agrin.NotifyIcon\Agrin.NotifyIcon.csproj" />
+    <ProjectReference Include="..\Agrin.System\Agrin.OS.csproj" />
+    <ProjectReference Include="..\Agrin.ViewModels\Agrin.ViewModels.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Project1.ico" />
+    <Resource Include="Resources\Fonts\aliyekan.ttf" />
+    <Resource Include="Resources\Images\AgrinLogo.png" />
+    <Resource Include="Resources\Images\AgrinLogo2.png" />
+    <Resource Include="Resources\Images\AgrinNotifyIcon.png" />
+    <Resource Include="Resources\Images\bevelEffectForLogin.png" />
+  </ItemGroup>
+</Project>

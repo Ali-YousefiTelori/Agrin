@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agrin.Data\Agrin.Data.csproj" />
+    <ProjectReference Include="..\Agrin.Framesoft\Agrin.Framesoft.csproj" />
+    <ProjectReference Include="..\Agrin.Helper\Agrin.Helper.csproj" />
+    <ProjectReference Include="..\Agrin.Log\Agrin.Log.csproj" />
+    <ProjectReference Include="..\Agrin.Network\Agrin.Network.csproj" />
+  </ItemGroup>
+</Project>

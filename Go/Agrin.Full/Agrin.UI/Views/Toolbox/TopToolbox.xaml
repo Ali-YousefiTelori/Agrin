@@ -1,0 +1,136 @@
+﻿<ContentPresenter x:Class="Agrin.UI.Views.Toolbox.TopToolbox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="300" FlowDirection="{DynamicResource RightToLeftStyle}" >
+    <ContentPresenter.Resources>
+        <Style x:Key="{x:Type RadioButton}" TargetType="{x:Type RadioButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="Foreground" Value="{DynamicResource DarkBlue_ApplicationColors}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Border x:Name="Border" BorderThickness="1" BorderBrush="{DynamicResource WhiteBorder_ApplicationColors}" Background="{DynamicResource DarkBlue_ApplicationColors}">
+                                    <Grid>
+                                        <!--<Ellipse x:Name="Border" StrokeThickness="1">
+                                            <Ellipse.Stroke>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="{DynamicResource BorderLightColor}" Offset="0" />
+                                                    <GradientStop Color="{DynamicResource BorderDarkColor}" Offset="1" />
+                                                </LinearGradientBrush>
+                                            </Ellipse.Stroke>
+                                            <Ellipse.Fill>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="{DynamicResource ControlLightColor}" />
+                                                            <GradientStop Color="{DynamicResource ControlMediumColor}" Offset="1.0" />
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Ellipse x:Name="CheckMark" Margin="4" Visibility="Collapsed">
+                                            <Ellipse.Fill>
+                                                <SolidColorBrush Color="{DynamicResource GlyphColor}" />
+                                            </Ellipse.Fill>
+                                        </Ellipse>-->
+                                        <ContentPresenter RecognizesAccessKey="True" Margin="2" Content="{TemplateBinding Content}"/>
+                                    </Grid>
+                                </Border>
+                            </BulletDecorator.Bullet>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background)" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource Blue_ApplicationColors}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                        <!--<Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMouseOverColor}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>-->
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background)" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource DarkBlue_ApplicationColors}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                        <!--<Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlPressedColor}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>-->
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <!--<Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlLightColor}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Shape.Stroke).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#40000000" />
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Shape.Stroke).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#40000000" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>-->
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <!--<Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="lblContent">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource Blue_ApplicationColors}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>-->
+                                        <!--<Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="CheckMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>-->
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked" />
+                                    <VisualState x:Name="Indeterminate" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </BulletDecorator>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource Blue_ApplicationColors}">
+
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ContentPresenter.Resources>
+    <ContentPresenter.Content>
+        <StackPanel Orientation="Horizontal">
+            <RadioButton x:Name="rdoQueue" Checked="rdo_Checked" Width="35" FlowDirection="LeftToRight" Visibility="Collapsed">
+                <Control Template="{DynamicResource Queues_TemplateStyle}">
+
+                </Control>
+            </RadioButton>
+            <RadioButton x:Name="rdoGroup" Checked="rdo_Checked" Width="35" FlowDirection="LeftToRight" IsChecked="True" >
+                <Control Template="{DynamicResource Groups_TemplateStyle}">
+
+                </Control>
+            </RadioButton>
+            <RadioButton x:Name="rdoNone" Checked="rdo_Checked" Margin="5,0,0,0" Width="35" FlowDirection="LeftToRight">
+                <Control Template="{DynamicResource NoSelect_TemplateStyle}">
+
+                </Control>
+            </RadioButton>
+        </StackPanel>
+    </ContentPresenter.Content>
+</ContentPresenter>

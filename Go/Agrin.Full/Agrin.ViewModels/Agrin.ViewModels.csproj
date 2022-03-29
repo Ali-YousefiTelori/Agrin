@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agrin.About\Agrin.About.csproj" />
+    <ProjectReference Include="..\Agrin.BaseViewModels\Agrin.BaseViewModels.csproj" />
+    <ProjectReference Include="..\Agrin.Download\Agrin.Download.csproj" />
+    <ProjectReference Include="..\Agrin.Helper\Agrin.Helper.csproj" />
+    <ProjectReference Include="..\Agrin.IO\Agrin.IO.csproj" />
+    <ProjectReference Include="..\Agrin.System\Agrin.OS.csproj" />
+  </ItemGroup>
+</Project>
