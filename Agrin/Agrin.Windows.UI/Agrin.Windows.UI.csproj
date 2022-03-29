@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Agrin.Windows.UI</RootNamespace>
     <AssemblyName>Agrin.Windows.UI</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -39,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,15 +50,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Project1.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MobileApp|AnyCPU'">
     <OutputPath>bin\MobileApp\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'XamarinApp|AnyCPU'">
     <OutputPath>bin\XamarinApp\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -85,8 +90,9 @@
     <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -444,7 +450,7 @@
       <Project>{9a5a2db0-ef90-423d-8dd6-43db93039971}</Project>
       <Name>Agrin.UI.ViewModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Github\MVVMGo\MvvmGo\MvvmGo\MvvmGo.csproj">
+    <ProjectReference Include="..\..\..\Github\MVVMGo\MvvmGo\MvvmGo.csproj">
       <Project>{c12d8e48-d08f-4b7e-bd32-9599a138561d}</Project>
       <Name>MvvmGo</Name>
     </ProjectReference>
@@ -460,7 +466,7 @@
       <Project>{a33682af-3571-443a-85fd-42fda2ea3b3a}</Project>
       <Name>Agrin.Component</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Download.Models\Agrin.Download.Models.csproj">
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Download.Models\Agrin.Download.csproj">
       <Project>{4539f9d8-d4c2-47c8-a7ad-21f4a39a1fb7}</Project>
       <Name>Agrin.Download.Models</Name>
     </ProjectReference>
@@ -487,6 +493,10 @@
     <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Models\Agrin.Models.csproj">
       <Project>{e2018fd5-df00-48a2-a588-dabf5d92e0c8}</Project>
       <Name>Agrin.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.NotifyIcon\Agrin.NotifyIcon.csproj">
+      <Project>{7ac63864-7638-41c4-969c-d3197ef2bed9}</Project>
+      <Name>Agrin.NotifyIcon</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Shared\Agrin.Shared.csproj">
       <Project>{a9bfad91-746a-4524-bc32-73e47234c4e8}</Project>

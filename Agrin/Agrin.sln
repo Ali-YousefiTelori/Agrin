@@ -1,35 +1,35 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.Desktop", "Agrin.Desktop\Agrin.Desktop.csproj", "{AD0F0C2F-45F2-49E0-9FA0-E1F2C63A68DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Checksum", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Checksum\Agrin.Checksum.csproj", "{7AE5F3B1-C702-4EBC-BD71-6D34A77450E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.Checksum", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Checksum\Agrin.Checksum.csproj", "{7AE5F3B1-C702-4EBC-BD71-6D34A77450E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Client.DataBase", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Client.DataBase\Agrin.Client.DataBase.csproj", "{7142B851-2734-44F7-B527-87F55BD43803}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.Client.DataBase", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Client.DataBase\Agrin.Client.DataBase.csproj", "{7142B851-2734-44F7-B527-87F55BD43803}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Component", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Component\Agrin.Component.csproj", "{A33682AF-3571-443A-85FD-42FDA2EA3B3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.Component", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Component\Agrin.Component.csproj", "{A33682AF-3571-443A-85FD-42FDA2EA3B3A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{CA30B446-8319-4B04-A503-C490F2BA0641}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Download.Models", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Download.Models\Agrin.Download.Models.csproj", "{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.Download", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Download.Models\Agrin.Download.csproj", "{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Foundation", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Foundation\Agrin.Foundation.csproj", "{783FBBB4-CDD4-4A9D-A8AB-57FBC5BF04DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.Foundation", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Foundation\Agrin.Foundation.csproj", "{783FBBB4-CDD4-4A9D-A8AB-57FBC5BF04DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Helper", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Helper\Agrin.Helper.csproj", "{71BD502B-8B04-42E8-A64F-A20C286C46F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.Helper", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Helper\Agrin.Helper.csproj", "{71BD502B-8B04-42E8-A64F-A20C286C46F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.IO", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.IO\Agrin.IO.csproj", "{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.IO", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.IO\Agrin.IO.csproj", "{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.LinkExtractor", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.LinkExtractor\Agrin.LinkExtractor.csproj", "{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.LinkExtractor", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.LinkExtractor\Agrin.LinkExtractor.csproj", "{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Log", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Log\Agrin.Log.csproj", "{48C97C2D-E494-470B-9CEF-4770DB0DE45D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.Log", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Log\Agrin.Log.csproj", "{48C97C2D-E494-470B-9CEF-4770DB0DE45D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Models", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Models\Agrin.Models.csproj", "{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.Models", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Models\Agrin.Models.csproj", "{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Shared", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Shared\Agrin.Shared.csproj", "{A9BFAD91-746A-4524-BC32-73E47234C4E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Web", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Web\Agrin.Web.csproj", "{83D0A53E-35BA-4E55-949A-67C831BCF36E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.Web", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.Web\Agrin.Web.csproj", "{83D0A53E-35BA-4E55-949A-67C831BCF36E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{CD4EB371-537C-4D2C-ADC6-B64294BBB5DC}"
 EndProject
@@ -37,9 +37,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.Windows.UI", "Agrin.W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI-Logic", "UI-Logic", "{C3B27E45-CDBB-4FF8-868C-9315317B49A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.UI.ViewModels", "..\..\Agrin.UI\Agrin.UI.ViewModels\Agrin.UI.ViewModels.csproj", "{9A5A2DB0-EF90-423D-8DD6-43DB93039971}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agrin.UI.ViewModels", "..\..\Agrin.UI\Agrin.UI.ViewModels\Agrin.UI.ViewModels.csproj", "{9A5A2DB0-EF90-423D-8DD6-43DB93039971}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmGo", "..\..\Github\MVVMGo\MvvmGo\MvvmGo\MvvmGo.csproj", "{C12D8E48-D08F-4B7E-BD32-9599A138561D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmGo", "..\..\Github\MVVMGo\MvvmGo\MvvmGo.csproj", "{C12D8E48-D08F-4B7E-BD32-9599A138561D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agrin.NotifyIcon", "..\Agrin Enterprise\AgrinDownloadManager\Agrin.NotifyIcon\Agrin.NotifyIcon.csproj", "{7AC63864-7638-41C4-969C-D3197EF2BED9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,24 +91,24 @@ Global
 		{7142B851-2734-44F7-B527-87F55BD43803}.XamarinApp|Any CPU.Build.0 = Release|Any CPU
 		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileApp|Any CPU.ActiveCfg = MobileRelease|Any CPU
-		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileApp|Any CPU.Build.0 = MobileRelease|Any CPU
-		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileDebug|Any CPU.ActiveCfg = MobileDebug|Any CPU
-		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileDebug|Any CPU.Build.0 = MobileDebug|Any CPU
-		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileRelease|Any CPU.ActiveCfg = MobileRelease|Any CPU
-		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileRelease|Any CPU.Build.0 = MobileRelease|Any CPU
+		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileApp|Any CPU.ActiveCfg = Release|Any CPU
+		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileApp|Any CPU.Build.0 = Release|Any CPU
+		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileDebug|Any CPU.Build.0 = Debug|Any CPU
+		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.MobileRelease|Any CPU.Build.0 = Release|Any CPU
 		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.XamarinApp|Any CPU.ActiveCfg = Release|Any CPU
 		{A33682AF-3571-443A-85FD-42FDA2EA3B3A}.XamarinApp|Any CPU.Build.0 = Release|Any CPU
 		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileApp|Any CPU.ActiveCfg = MobileRelease|Any CPU
-		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileApp|Any CPU.Build.0 = MobileRelease|Any CPU
-		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileDebug|Any CPU.ActiveCfg = MobileDebug|Any CPU
-		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileDebug|Any CPU.Build.0 = MobileDebug|Any CPU
-		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileRelease|Any CPU.ActiveCfg = MobileRelease|Any CPU
-		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileRelease|Any CPU.Build.0 = MobileRelease|Any CPU
+		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileApp|Any CPU.ActiveCfg = Release|Any CPU
+		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileApp|Any CPU.Build.0 = Release|Any CPU
+		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileDebug|Any CPU.Build.0 = Debug|Any CPU
+		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.MobileRelease|Any CPU.Build.0 = Release|Any CPU
 		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4539F9D8-D4C2-47C8-A7AD-21F4A39A1FB7}.XamarinApp|Any CPU.ActiveCfg = Release|Any CPU
@@ -137,24 +139,24 @@ Global
 		{71BD502B-8B04-42E8-A64F-A20C286C46F6}.XamarinApp|Any CPU.Build.0 = Release|Any CPU
 		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileApp|Any CPU.ActiveCfg = MobileRelease|Any CPU
-		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileApp|Any CPU.Build.0 = MobileRelease|Any CPU
-		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileDebug|Any CPU.ActiveCfg = MobileDebug|Any CPU
-		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileDebug|Any CPU.Build.0 = MobileDebug|Any CPU
-		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileRelease|Any CPU.ActiveCfg = MobileRelease|Any CPU
-		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileRelease|Any CPU.Build.0 = MobileRelease|Any CPU
+		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileApp|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileApp|Any CPU.Build.0 = Release|Any CPU
+		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileDebug|Any CPU.Build.0 = Debug|Any CPU
+		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.MobileRelease|Any CPU.Build.0 = Release|Any CPU
 		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.XamarinApp|Any CPU.ActiveCfg = Release|Any CPU
 		{5EF58A1F-368F-40F9-B68A-CDE14E68FA7D}.XamarinApp|Any CPU.Build.0 = Release|Any CPU
 		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileApp|Any CPU.ActiveCfg = MobileRelease|Any CPU
-		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileApp|Any CPU.Build.0 = MobileRelease|Any CPU
-		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileDebug|Any CPU.ActiveCfg = MobileDebug|Any CPU
-		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileDebug|Any CPU.Build.0 = MobileDebug|Any CPU
-		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileRelease|Any CPU.ActiveCfg = MobileRelease|Any CPU
-		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileRelease|Any CPU.Build.0 = MobileRelease|Any CPU
+		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileApp|Any CPU.ActiveCfg = Release|Any CPU
+		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileApp|Any CPU.Build.0 = Release|Any CPU
+		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileDebug|Any CPU.Build.0 = Debug|Any CPU
+		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.MobileRelease|Any CPU.Build.0 = Release|Any CPU
 		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{387D5E23-4FCC-4B98-A85D-BDBCC7FB6C8E}.XamarinApp|Any CPU.ActiveCfg = Release|Any CPU
@@ -173,12 +175,12 @@ Global
 		{48C97C2D-E494-470B-9CEF-4770DB0DE45D}.XamarinApp|Any CPU.Build.0 = Release|Any CPU
 		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileApp|Any CPU.ActiveCfg = MobileRelease|Any CPU
-		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileApp|Any CPU.Build.0 = MobileRelease|Any CPU
-		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileDebug|Any CPU.ActiveCfg = MobileDebug|Any CPU
-		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileDebug|Any CPU.Build.0 = MobileDebug|Any CPU
-		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileRelease|Any CPU.ActiveCfg = MobileRelease|Any CPU
-		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileRelease|Any CPU.Build.0 = MobileRelease|Any CPU
+		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileApp|Any CPU.ActiveCfg = Release|Any CPU
+		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileApp|Any CPU.Build.0 = Release|Any CPU
+		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileDebug|Any CPU.Build.0 = Debug|Any CPU
+		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.MobileRelease|Any CPU.Build.0 = Release|Any CPU
 		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E2018FD5-DF00-48A2-A588-DABF5D92E0C8}.XamarinApp|Any CPU.ActiveCfg = Release|Any CPU
@@ -243,6 +245,18 @@ Global
 		{C12D8E48-D08F-4B7E-BD32-9599A138561D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C12D8E48-D08F-4B7E-BD32-9599A138561D}.XamarinApp|Any CPU.ActiveCfg = Release|Any CPU
 		{C12D8E48-D08F-4B7E-BD32-9599A138561D}.XamarinApp|Any CPU.Build.0 = Release|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.MobileApp|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.MobileApp|Any CPU.Build.0 = Release|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.MobileDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.MobileDebug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.MobileRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.MobileRelease|Any CPU.Build.0 = Release|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.XamarinApp|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC63864-7638-41C4-969C-D3197EF2BED9}.XamarinApp|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -264,6 +278,7 @@ Global
 		{87266981-07E9-4D29-B07C-D186D9DC4122} = {CD4EB371-537C-4D2C-ADC6-B64294BBB5DC}
 		{9A5A2DB0-EF90-423D-8DD6-43DB93039971} = {C3B27E45-CDBB-4FF8-868C-9315317B49A7}
 		{C12D8E48-D08F-4B7E-BD32-9599A138561D} = {C3B27E45-CDBB-4FF8-868C-9315317B49A7}
+		{7AC63864-7638-41C4-969C-D3197EF2BED9} = {CA30B446-8319-4B04-A503-C490F2BA0641}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4506E471-EB87-41DA-BEB4-6C59E6BF8F49}

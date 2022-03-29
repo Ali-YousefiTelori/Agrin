@@ -21,12 +21,13 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.6.1" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.6.1" />
     <PackageReference Include="NSubsys" Version="0.7.0-build20180604-0047" />
+    <PackageReference Include="System.ObjectModel" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Checksum\Agrin.Checksum.csproj" />
     <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Client.DataBase\Agrin.Client.DataBase.csproj" />
     <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Component\Agrin.Component.csproj" />
-    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Download.Models\Agrin.Download.Models.csproj" />
+    <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Download.Models\Agrin.Download.csproj" />
     <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Foundation\Agrin.Foundation.csproj" />
     <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.Helper\Agrin.Helper.csproj" />
     <ProjectReference Include="..\..\Agrin Enterprise\AgrinDownloadManager\Agrin.IO\Agrin.IO.csproj" />
