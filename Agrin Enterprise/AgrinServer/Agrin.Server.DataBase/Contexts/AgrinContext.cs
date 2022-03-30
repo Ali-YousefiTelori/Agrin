@@ -39,9 +39,7 @@ namespace Agrin.Server.DataBase.Contexts
             string current = AppDomain.CurrentDomain.BaseDirectory;
             System.AppDomain.CurrentDomain.SetData("DataDirectory", current);
             //local
-            //optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
-            //server
-            optionsBuilder.UseSqlServer("Data Source=frameapp.ir,4566\\.;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=QRNVMLzXSaqpm5dvsd^%$#@@%8er6unmkcS54DVherewd&^*156");
+            optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;initial catalog=AgrinServer;Integrated Security=False;User ID=agrinuser;Password=.");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
