@@ -1,8 +1,7 @@
 # Agrin
 Agrin download manager
 
-Agrin is powerfull download manager wrote with c# (WPF for desktop and Xamarin for mobile).
-
+Agrin is a powerful download manager written with c# (WPF for desktop and Xamarin for mobile).
 
 
 ## Donate bitcoin to Ali-Yousefi:
